@@ -1,0 +1,643 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch11-for-loops/ch11.html
+     Chapter 11: For Loops
+     6 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 11</div>
+    <h1 class="chapter-header__title">For Loops</h1>
+    <p class="chapter-header__subtitle">
+      The <code>for</code> loop compresses three things — initialize, test, update — into one
+      compact line. When you know exactly how many times something should repeat, <code>for</code>
+      is cleaner and harder to get wrong than <code>while</code>. This chapter covers every pattern
+      you will use in real programs.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">6 Topics</span>
+      <span class="chapter-badge">for · nested · scope · vs while · off-by-one</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — FOR LOOP STRUCTURE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch11-forloop" id="topic-ch11-forloop">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">The <code>for</code> Loop — Init, Condition, Update</h2>
+      <span class="topic__status-badge" id="badge-ch11-forloop">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch11-forloop-1">
+      <p class="step-label" data-step-num="1">Run this. Everything the loop needs is on one line — observe what each part controls.</p>
+      <div id="compiler-ch11-forloop-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch11-forloop-2">
+      <div id="iq-ch11-forloop"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch11-forloop-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">for loops consolidate three control parts into one line</h3>
+        <p>A <code>for</code> loop header contains three semicolon-separated parts: <strong>initializer</strong> (runs once before the loop starts), <strong>condition</strong> (checked before each iteration — loop exits when false), and <strong>update</strong> (runs after each iteration).</p>
+        <p>The body executes between the condition check and the update. So the order per iteration is: check condition → run body → run update → check condition → ...</p>
+        <p>Any of the three parts can be left empty — but the two semicolons must always remain. An empty condition is treated as always-true, which is how <code>for(;;)</code> creates an infinite loop.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">for Loop Structure</span></div>
+        <div class="syntax-card__code">for (initializer; condition; update) {
+    /* body: runs while condition is true */
+}
+
+/* Concrete example — count 1 to 5 */
+for (int i = 1; i <= 5; i++) {
+    printf("%d\n", i);
+}
+
+/* Equivalent while loop — same behavior */
+int i = 1;          /* initializer */
+while (i <= 5) {    /* condition */
+    printf("%d\n", i);
+    i++;            /* update */
+}</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">for and while are interchangeable — choose based on what you know</div>
+          <div class="callout__body">Use <code>for</code> when you know the exact number of iterations up front. Use <code>while</code> when you loop until an unknown condition changes. The behavior is identical — only the code organization differs.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch11-forloop-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch11-forloop-4">
+      <div id="compiler-ch11-forloop-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch11-forloop-5">
+      <div id="compiler-ch11-forloop-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch11-forloop-6">
+      <div id="compiler-ch11-forloop-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch11-forloop-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Processing a fixed-size collection</div>
+        <p class="realworld-card__text">for loops are the standard way to iterate through arrays and process each element in order — the exact count is known, so for is the natural choice.</p>
+        <pre>int scores[5] = {88, 72, 95, 61, 84};
+int total = 0;
+
+for (int i = 0; i &lt; 5; i++) {
+    total += scores[i];
+}
+
+printf("Average: %d\n", total / 5);  /* 80 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch11-forloop">📋 Start Assessment — The for Loop</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch11-forloop" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch11-forloop">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch11-forloop">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch11-forloop">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch11-forloop">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch11-forloop"><div id="quiz-ch11-forloop-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch11-forloop"><div id="quiz-ch11-forloop-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch11-forloop"><div id="practice-ch11-forloop"></div></div>
+        <div class="assessment-section" id="tab-debug-ch11-forloop"><div id="compiler-ch11-forloop-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — FOR WITH ARRAYS (PREVIEW)
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch11-arrays" id="topic-ch11-arrays">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title"><code>for</code> with Arrays — Iterating Indexed Data</h2>
+      <span class="topic__status-badge" id="badge-ch11-arrays">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch11-arrays-1">
+      <p class="step-label" data-step-num="1">Run this. The for loop index directly addresses each array element.</p>
+      <div id="compiler-ch11-arrays-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch11-arrays-2">
+      <div id="iq-ch11-arrays"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch11-arrays-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Arrays are indexed from 0 — the for loop counter maps directly to each element</h3>
+        <p>An array declared as <code>int nums[5]</code> has five elements at indices <strong>0, 1, 2, 3, 4</strong>. The loop <code>for (int i = 0; i &lt; 5; i++)</code> generates exactly those index values, making <code>nums[i]</code> access each element in order.</p>
+        <p>The condition <code>i &lt; 5</code> (strictly less than) ensures the last index accessed is 4, not 5. Index 5 does not exist and accessing it is undefined behavior in C — the program may crash or silently corrupt memory.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Array Iteration Pattern</span></div>
+        <div class="syntax-card__code">int nums[5] = {10, 20, 30, 40, 50};
+
+/* Standard iteration: i starts at 0, < size (not <=) */
+for (int i = 0; i &lt; 5; i++) {
+    printf("nums[%d] = %d\n", i, nums[i]);
+}
+
+/* Common operations */
+int sum = 0;
+for (int i = 0; i &lt; 5; i++) sum += nums[i];
+printf("Sum: %d\n", sum);  /* 150 */
+
+/* Find max */
+int max = nums[0];
+for (int i = 1; i &lt; 5; i++) {
+    if (nums[i] > max) max = nums[i];
+}
+printf("Max: %d\n", max);  /* 50 */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">i &lt; size vs i &lt;= size — This Matters</div>
+          <div class="callout__body">For an array of size N, valid indices are <strong>0 through N−1</strong>. Use <code>i &lt; N</code> as the condition (strictly less than). Using <code>i &lt;= N</code> accesses one element beyond the array — C will not stop you, and the result is a bug that may crash the program or corrupt data.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch11-arrays-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch11-arrays-4">
+      <div id="compiler-ch11-arrays-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch11-arrays-5">
+      <div id="compiler-ch11-arrays-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch11-arrays-6">
+      <div id="compiler-ch11-arrays-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch11-arrays-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Grading system — averaging an array</div>
+        <p class="realworld-card__text">Every grading or scoring system loops over a fixed-size array to compute totals, averages, and pass/fail counts — an exact-count scenario where for shines.</p>
+        <pre>int grades[6] = {78, 92, 55, 88, 73, 61};
+int sum = 0, pass = 0;
+
+for (int i = 0; i &lt; 6; i++) {
+    sum += grades[i];
+    if (grades[i] >= 75) pass++;
+}
+
+printf("Average: %d\n", sum / 6);     /* 74 */
+printf("Passing: %d/6\n", pass);      /* 4/6 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch11-arrays">📋 Start Assessment — for with Arrays</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch11-arrays" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch11-arrays">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch11-arrays">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch11-arrays">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch11-arrays">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch11-arrays"><div id="quiz-ch11-arrays-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch11-arrays"><div id="quiz-ch11-arrays-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch11-arrays"><div id="practice-ch11-arrays"></div></div>
+        <div class="assessment-section" id="tab-debug-ch11-arrays"><div id="compiler-ch11-arrays-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — NESTED FOR LOOPS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch11-nested" id="topic-ch11-nested">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Nested <code>for</code> Loops — Rows and Columns</h2>
+      <span class="topic__status-badge" id="badge-ch11-nested">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch11-nested-1">
+      <p class="step-label" data-step-num="1">Run this. The inner loop completes fully for every single outer iteration.</p>
+      <div id="compiler-ch11-nested-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch11-nested-2">
+      <div id="iq-ch11-nested"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch11-nested-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Nested for loops — inner resets automatically, outer does not</h3>
+        <p>Unlike nested <code>while</code> loops where you must manually reset the inner counter, nested <code>for</code> loops reset the inner counter automatically because the initializer is part of the loop header and runs fresh at the top of every outer iteration.</p>
+        <p>This is why nested <code>for</code> loops are preferred for grid operations — there is no risk of forgetting to reset the inner counter and ending up with a loop that only runs during the first outer pass.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Nested for — Grid Pattern</span></div>
+        <div class="syntax-card__code">/* 3 rows × 4 columns — inner i resets to 0 each outer j pass */
+for (int row = 1; row &lt;= 3; row++) {
+    for (int col = 1; col &lt;= 4; col++) {
+        printf("%2d ", row * col);   /* multiplication table cell */
+    }
+    printf("\n");
+}
+/*  1  2  3  4
+    2  4  6  8
+    3  6  9 12 */
+
+/* Triangle pattern */
+for (int i = 1; i &lt;= 5; i++) {
+    for (int j = 1; j &lt;= i; j++) {
+        printf("* ");
+    }
+    printf("\n");
+}</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Use Different Variable Names in Each Level</div>
+          <div class="callout__body">Always use distinct variable names for each nesting level — <code>i</code> and <code>j</code>, or <code>row</code> and <code>col</code>, never <code>i</code> and <code>i</code>. Reusing the same name in a nested loop creates a scope error or shadowing bug depending on your compiler.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch11-nested-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch11-nested-4">
+      <div id="compiler-ch11-nested-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch11-nested-5">
+      <div id="compiler-ch11-nested-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch11-nested-6">
+      <div id="compiler-ch11-nested-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch11-nested-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 2D array traversal with nested for</div>
+        <p class="realworld-card__text">Nested for loops are how every matrix, spreadsheet, pixel grid, and game board is processed — two indices, two loops, one clean structure.</p>
+        <pre>int matrix[3][3] = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+
+for (int r = 0; r &lt; 3; r++) {
+    for (int c = 0; c &lt; 3; c++) {
+        printf("%3d", matrix[r][c]);
+    }
+    printf("\n");
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch11-nested">📋 Start Assessment — Nested for Loops</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch11-nested" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch11-nested">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch11-nested">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch11-nested">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch11-nested">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch11-nested"><div id="quiz-ch11-nested-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch11-nested"><div id="quiz-ch11-nested-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch11-nested"><div id="practice-ch11-nested"></div></div>
+        <div class="assessment-section" id="tab-debug-ch11-nested"><div id="compiler-ch11-nested-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — LOOP VARIABLE SCOPE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch11-scope" id="topic-ch11-scope">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Loop Variable Scope — Where <code>i</code> Lives and Dies</h2>
+      <span class="topic__status-badge" id="badge-ch11-scope">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch11-scope-1">
+      <p class="step-label" data-step-num="1">Run this and observe where i is accessible vs where it causes an error.</p>
+      <div id="compiler-ch11-scope-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch11-scope-2">
+      <div id="iq-ch11-scope"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch11-scope-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">A variable declared in the for header only exists inside that for loop</h3>
+        <p>When you write <code>for (int i = 0; ...)</code>, the variable <code>i</code> is declared inside the for loop's scope. It exists during the loop and is destroyed when the loop ends. Any code after the closing brace cannot access it — this is a compile error in C99 and later.</p>
+        <p>If you need the counter value after the loop ends — for example, to know which index caused a break — declare the counter <strong>before</strong> the for loop instead of inside the initializer. Both forms are valid C.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Scope: Inside vs Outside Declaration</span></div>
+        <div class="syntax-card__code">/* Scope limited to loop — preferred when you don't need i after */
+for (int i = 0; i &lt; 5; i++) {
+    printf("%d\n", i);   /* i accessible here */
+}
+/* printf("%d", i);  <-- compile error: i does not exist here */
+
+/* Declared before loop — i survives after */
+int j;
+for (j = 0; j &lt; 5; j++) {
+    printf("%d\n", j);
+}
+printf("Final j: %d\n", j);  /* j is 5 here */
+
+/* Useful when break exits early and you need the stopping index */
+int target = -1;
+int arr[5] = {4, 8, 1, 9, 3};
+for (int k = 0; k &lt; 5; k++) {
+    if (arr[k] == 9) { target = k; break; }
+}
+printf("Found at index: %d\n", target);  /* 3 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch11-scope-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch11-scope-4">
+      <div id="compiler-ch11-scope-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch11-scope-5">
+      <div id="compiler-ch11-scope-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch11-scope-6">
+      <div id="compiler-ch11-scope-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch11-scope-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Searching an array — needing the index after break</div>
+        <p class="realworld-card__text">When a for loop searches for a value and breaks early, the stopping index must survive the loop to be useful — declare the counter before the loop in this pattern.</p>
+        <pre>int scores[5] = {68, 45, 92, 77, 83};
+int first_fail = -1;
+int i;
+
+for (i = 0; i &lt; 5; i++) {
+    if (scores[i] &lt; 50) {
+        first_fail = i;
+        break;
+    }
+}
+
+if (first_fail >= 0)
+    printf("First fail at index %d\n", first_fail);
+else
+    printf("All passed\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch11-scope">📋 Start Assessment — Loop Variable Scope</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch11-scope" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch11-scope">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch11-scope">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch11-scope">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch11-scope">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch11-scope"><div id="quiz-ch11-scope-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch11-scope"><div id="quiz-ch11-scope-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch11-scope"><div id="practice-ch11-scope"></div></div>
+        <div class="assessment-section" id="tab-debug-ch11-scope"><div id="compiler-ch11-scope-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — FOR VS WHILE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch11-vwhile" id="topic-ch11-vwhile">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title"><code>for</code> vs <code>while</code> — Choosing the Right Loop</h2>
+      <span class="topic__status-badge" id="badge-ch11-vwhile">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch11-vwhile-1">
+      <p class="step-label" data-step-num="1">Both loops below print 1 to 5. Run both — output is identical. Observe what differs in the code structure.</p>
+      <div id="compiler-ch11-vwhile-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch11-vwhile-2">
+      <div id="iq-ch11-vwhile"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch11-vwhile-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">for when you know the count — while when you loop until something changes</h3>
+        <p><code>for</code> is best when the number of iterations is known before the loop starts — processing 10 items, counting to 100, iterating an array. The counter setup is compact and self-contained in one line.</p>
+        <p><code>while</code> is best when the loop continues based on a changing condition that is not obviously a fixed count — reading until end-of-file, looping until a user types "quit", retrying until success. The condition is the point of focus, not the counter.</p>
+        <p>Both are interchangeable and any for loop can be rewritten as while and vice versa. Choosing correctly makes the intent of the code obvious to anyone reading it.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Decision Guide</span></div>
+        <div class="syntax-card__code">/* Use for — count is known */
+for (int i = 0; i &lt; 10; i++) { /* process 10 items */ }
+
+/* Use while — condition-driven, count unknown */
+while (!done) { /* keep going until something signals stop */ }
+while (value != 0) { /* until a sentinel value appears */ }
+while (attempts &lt; max_retries) { /* retry logic */ }
+
+/* Either works — prefer for for clarity here */
+for (int i = 1; i &lt;= 100; i++) sum += i;
+
+/* Only while makes sense here — no natural counter */
+int x = 1024;
+while (x > 1) { x /= 2; }   /* halve until x reaches 1 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch11-vwhile-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch11-vwhile-4">
+      <div id="compiler-ch11-vwhile-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch11-vwhile-5">
+      <div id="compiler-ch11-vwhile-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch11-vwhile-6">
+      <div id="compiler-ch11-vwhile-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch11-vwhile-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Fibonacci — for when count is known, while when it isn't</div>
+        <p class="realworld-card__text">Generating the first N Fibonacci numbers is a for loop. Finding the first Fibonacci number over 1000 is a while loop — the count is unknown in advance.</p>
+        <pre>/* First 8 Fibonacci numbers — count known: use for */
+int a = 0, b = 1;
+for (int i = 0; i &lt; 8; i++) {
+    printf("%d ", a);
+    int t = a + b; a = b; b = t;
+}
+printf("\n");
+
+/* First Fibonacci over 1000 — count unknown: use while */
+a = 0; b = 1;
+while (a &lt;= 1000) { int t = a+b; a = b; b = t; }
+printf("First over 1000: %d\n", a);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch11-vwhile">📋 Start Assessment — for vs while</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch11-vwhile" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch11-vwhile">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch11-vwhile">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch11-vwhile">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch11-vwhile">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch11-vwhile"><div id="quiz-ch11-vwhile-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch11-vwhile"><div id="quiz-ch11-vwhile-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch11-vwhile"><div id="practice-ch11-vwhile"></div></div>
+        <div class="assessment-section" id="tab-debug-ch11-vwhile"><div id="compiler-ch11-vwhile-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — OFF-BY-ONE ERRORS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch11-offbyone" id="topic-ch11-offbyone">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title">Off-by-One Errors — The Most Common Loop Bug</h2>
+      <span class="topic__status-badge" id="badge-ch11-offbyone">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch11-offbyone-1">
+      <p class="step-label" data-step-num="1">Run this. Count how many numbers print from each loop and compare the conditions.</p>
+      <div id="compiler-ch11-offbyone-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch11-offbyone-2">
+      <div id="iq-ch11-offbyone"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch11-offbyone-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Off-by-one: the loop runs one too many or one too few times</h3>
+        <p>An <em>off-by-one error</em> occurs when you use <code>&lt;</code> where you meant <code>&lt;=</code>, or start at 0 when you meant 1, or vice versa. The result is a loop that runs exactly one iteration too many or too few — and the bug is subtle because the output looks almost right.</p>
+        <p>The clearest way to avoid it: state what you want in English, then map directly to code. "Process elements at indices 0 through 4" → <code>i = 0; i &lt; 5</code>. "Print numbers 1 through 10" → <code>i = 1; i &lt;= 10</code>. The condition should read like the English description.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Off-by-One Patterns — Right vs Wrong</span></div>
+        <div class="syntax-card__code">/* Want: print 1 through 5 */
+for (int i = 1; i &lt;= 5; i++)  { printf("%d ", i); } /* CORRECT: 1 2 3 4 5 */
+for (int i = 1; i &lt;  5; i++)  { printf("%d ", i); } /* WRONG:   1 2 3 4   (misses 5) */
+for (int i = 0; i &lt;= 5; i++)  { printf("%d ", i); } /* WRONG:   0 1 2 3 4 5 (extra 0) */
+
+/* Want: access array[5] — indices 0 to 4 */
+int arr[5];
+for (int i = 0; i &lt; 5;  i++) { arr[i] = i; } /* CORRECT */
+for (int i = 0; i &lt;= 5; i++) { arr[i] = i; } /* WRONG — accesses arr[5], out of bounds */
+for (int i = 1; i &lt;= 5; i++) { arr[i] = i; } /* WRONG — misses arr[0], corrupts arr[5] */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">C Does Not Protect You from Out-of-Bounds Array Access</div>
+          <div class="callout__body">If <code>i &lt;= 5</code> accesses index 5 on a size-5 array, C will not throw an error. The program reads or writes memory it does not own. The result is undefined — sometimes a crash, sometimes silent corruption of unrelated data.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch11-offbyone-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch11-offbyone-4">
+      <div id="compiler-ch11-offbyone-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch11-offbyone-5">
+      <div id="compiler-ch11-offbyone-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch11-offbyone-6">
+      <div id="compiler-ch11-offbyone-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch11-offbyone-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Fence post problem — counting intervals vs posts</div>
+        <p class="realworld-card__text">Off-by-one errors appear everywhere: date ranges, page numbers, array bounds. The mental model is the fence post problem — N sections need N+1 posts. Always ask: am I counting items or boundaries?</p>
+        <pre>/* Print N lines — easy to get wrong */
+int N = 5;
+
+/* Wrong: prints N-1 lines */
+for (int i = 0; i &lt; N - 1; i++) printf("Line %d\n", i + 1);
+
+/* Correct: prints exactly N lines */
+for (int i = 0; i &lt; N; i++) printf("Line %d\n", i + 1);
+
+/* Also correct: reads like the requirement */
+for (int i = 1; i &lt;= N; i++) printf("Line %d\n", i);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch11-offbyone">📋 Start Assessment — Off-by-One Errors</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch11-offbyone" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch11-offbyone">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch11-offbyone">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch11-offbyone">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch11-offbyone">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch11-offbyone"><div id="quiz-ch11-offbyone-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch11-offbyone"><div id="quiz-ch11-offbyone-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch11-offbyone"><div id="practice-ch11-offbyone"></div></div>
+        <div class="assessment-section" id="tab-debug-ch11-offbyone"><div id="compiler-ch11-offbyone-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 11 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch11-mastery" id="topic-ch11-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 11 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply every for loop concept from Chapter 11 in one program.</p>
+      <div id="compiler-ch11-mastery"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER COMPLETE (hidden until mastery passes) -->
+  <div id="ch11-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 11 Complete</div>
+      <p class="chapter-complete__message">You can write for loops in every pattern — counting, iterating arrays, nesting for grids, and choosing the right loop for the job. Chapter 12 covers break and continue in detail, giving you fine-grained control over what each loop iteration does.</p>
+      <button class="btn-continue" id="ch11-next-btn">Start Chapter 12 — Break &amp; Continue →</button>
+    </div>
+  </div>
+
+</div>

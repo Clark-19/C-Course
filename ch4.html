@@ -1,0 +1,411 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch4-comments/ch4.html
+     Chapter 4: Comments
+     4 topics · Full 7-step active learning structure per topic
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 4</div>
+    <h1 class="chapter-header__title">Comments</h1>
+    <p class="chapter-header__subtitle">
+      Comments are the parts of your code the compiler never sees.
+      They are how you communicate with the next person who reads your program — including future you.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">4 Topics</span>
+      <span class="chapter-badge">// · /* */ · commenting out · best practice</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — SINGLE-LINE COMMENTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch4-singleline" id="topic-ch4-singleline">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">Single-Line Comments — <code>//</code></h2>
+      <span class="topic__status-badge" id="badge-ch4-singleline">✅ Complete</span>
+    </div>
+
+    <!-- Step 1 — CODE FIRST -->
+    <div class="step step--visible" data-step="1" id="step-ch4-singleline-1">
+      <p class="step-label" data-step-num="1">Compile and run this — count how many lines of text actually appear in the output.</p>
+      <div id="compiler-ch4-singleline-explore"></div>
+    </div>
+
+    <!-- Step 2 — INSTANT QUESTION -->
+    <div class="step step--visible" data-step="2" id="step-ch4-singleline-2">
+      <div id="iq-ch4-singleline"></div>
+    </div>
+
+    <!-- Step 3 — MICRO-EXPLANATION -->
+    <div class="step step--visible" data-step="3" id="step-ch4-singleline-3">
+      <div class="explanation-card">
+        <p>A <strong>single-line comment</strong> starts with <code>//</code> and ends at the end of that line. Everything after <code>//</code> on that line is completely ignored by the compiler.</p>
+        <p>Comments exist for humans — to explain what the code does, why a decision was made, or to leave a note. They have <em>zero</em> effect on output, speed, or compiled size.</p>
+        <p>You can put a comment on its own line, or after code on the same line. Both are valid.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Single-Line Comment</span></div>
+        <div class="syntax-card__code">// This entire line is a comment
+
+int age = 20;  // comment after code — also valid
+
+// The compiler never sees anything after //
+printf("Hello\n");  // this line still runs</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Common Mistake — Commenting the wrong part</div>
+          <div class="callout__body"><code>printf("Hi"); // printf("Bye");</code> — only the second printf is commented. The first still runs. The <code>//</code> does not go backward — it only affects everything after it on that line.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch4-singleline-3-continue">Got it — continue →</button>
+    </div>
+
+    <!-- Step 4 — GUIDED PRACTICE -->
+    <div class="step step--visible" data-step="4" id="step-ch4-singleline-4">
+      <div id="compiler-ch4-singleline-modify"></div>
+    </div>
+
+    <!-- Step 5 — FILL-IN-THE-BLANK -->
+    <div class="step step--visible" data-step="5" id="step-ch4-singleline-5">
+      <div id="compiler-ch4-singleline-fill"></div>
+    </div>
+
+    <!-- Step 6 — INDEPENDENT BUILD -->
+    <div class="step step--visible" data-step="6" id="step-ch4-singleline-6">
+      <div id="compiler-ch4-singleline-build"></div>
+    </div>
+
+    <!-- Step 7 — REAL-WORLD SNAP -->
+    <div class="step step--visible" data-step="7" id="step-ch4-singleline-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Comments in production code</div>
+        <p class="realworld-card__text">Real codebases comment <em>why</em>, not <em>what</em> — the code already shows what. Good comments explain decisions that are not obvious from reading the code.</p>
+        <pre>// Use int, not char, to safely hold EOF (-1)
+int c = getchar();
+
+// Linux kernel: this loop avoids a race condition during boot
+while (!cpu_ready()) { cpu_relax(); }</pre>
+      </div>
+    </div>
+
+    <!-- Assessment Block -->
+    <div class="assessment-block" data-topic="ch4-singleline">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Single-Line Comments</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch4-singleline">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch4-singleline">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch4-singleline">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch4-singleline">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch4-singleline"><div id="quiz-ch4-singleline-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch4-singleline"><div id="quiz-ch4-singleline-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch4-singleline"><div id="quiz-ch4-singleline-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch4-singleline"><div id="compiler-ch4-singleline-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — MULTI-LINE COMMENTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch4-multiline" id="topic-ch4-multiline">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Multi-Line Comments — <code>/* */</code></h2>
+      <span class="topic__status-badge" id="badge-ch4-multiline">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch4-multiline-1">
+      <p class="step-label" data-step-num="1">Run this — the program has 10 lines in main but only two printf calls. What prints?</p>
+      <div id="compiler-ch4-multiline-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch4-multiline-2">
+      <div id="iq-ch4-multiline"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch4-multiline-3">
+      <div class="explanation-card">
+        <p>A <strong>multi-line comment</strong> opens with <code>/*</code> and closes with <code>*/</code>. Everything between those two markers is ignored by the compiler — including newlines, blank lines, and code.</p>
+        <p>Multi-line comments cannot be nested. If you write <code>/* outer /* inner */ end */</code>, the compiler sees the first <code>*/</code> and closes the comment — the text after it is not a comment and will likely cause an error.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Multi-Line Comment</span></div>
+        <div class="syntax-card__code">/* This is a single-line use of block comment syntax */
+
+/*
+ * Multi-line block comment.
+ * The * at the start of each line is just a style convention.
+ * The compiler only cares about the opening slash-star
+ * and the closing star-slash.
+ */
+
+/* First comment */ /* Second comment */  // two on one line: valid</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Critical Mistake — Forgetting the closing <code>*/</code></div>
+          <div class="callout__body">If you open <code>/*</code> and never close it, the compiler treats everything after it — including your actual code — as a comment. Your program will fail to compile. Always pair <code>/*</code> with <code>*/</code>.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch4-multiline-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch4-multiline-4">
+      <div id="compiler-ch4-multiline-modify"></div>
+    </div>
+
+    <div class="step step--visible" data-step="5" id="step-ch4-multiline-5">
+      <div id="compiler-ch4-multiline-fill"></div>
+    </div>
+
+    <div class="step step--visible" data-step="6" id="step-ch4-multiline-6">
+      <div id="compiler-ch4-multiline-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch4-multiline-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Block comments for function documentation</div>
+        <p class="realworld-card__text">In real C code, multi-line comments document function behavior, parameters, and return values — especially in header files and library APIs.</p>
+        <pre>/*
+ * calculate_bmi - Computes Body Mass Index
+ * @weight_kg: weight in kilograms
+ * @height_m:  height in meters
+ * Returns: BMI as a double (weight / height^2)
+ */
+double calculate_bmi(double weight_kg, double height_m);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-block" data-topic="ch4-multiline">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Multi-Line Comments</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch4-multiline">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch4-multiline">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch4-multiline">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch4-multiline"><div id="quiz-ch4-multiline-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch4-multiline"><div id="quiz-ch4-multiline-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch4-multiline"><div id="compiler-ch4-multiline-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — COMMENTS IN PRACTICE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch4-practice" id="topic-ch4-practice">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Comments in Practice — When and How</h2>
+      <span class="topic__status-badge" id="badge-ch4-practice">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch4-practice-1">
+      <p class="step-label" data-step-num="1">Run this well-commented program. Then read the comments — notice what each one explains and why.</p>
+      <div id="compiler-ch4-practice-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch4-practice-2">
+      <div id="iq-ch4-practice"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch4-practice-3">
+      <div class="explanation-card">
+        <p>Good comments explain <em>why</em> — not <em>what</em>. The code already shows what it does. Comments answer questions the code cannot: why this approach, why this value, why this order.</p>
+        <p>Bad comment: <code>i++; // increment i</code> — redundant, adds no information. Good comment: <code>i += 2; // step by 2 to skip even indices</code> — explains the non-obvious choice.</p>
+        <p>Comment quantity rule: too few comments leaves the next reader confused. Too many comments makes the code hard to read. Comment at decision points, not every line.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Where Comments Add Value</span></div>
+        <div class="syntax-card__code">/* 1. BEFORE FUNCTIONS — explain purpose, parameters, return */
+/* 2. BEFORE COMPLEX LOGIC — explain the algorithm */
+/* 3. ON CONSTANTS — explain what the magic number means */
+/* 4. ON WORKAROUNDS — explain why a normal approach failed */
+
+#define MAX_RETRY 3      // retry limit before giving up
+#define TAX_RATE  0.12   // 12% sales tax (updated 2024)
+
+// Use abs() to handle negative temperatures correctly
+float temp_diff = abs(temp_a - temp_b);</div>
+      </div>
+      <button class="btn-continue" id="step-ch4-practice-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch4-practice-4">
+      <div id="compiler-ch4-practice-modify"></div>
+    </div>
+
+    <div class="step step--visible" data-step="5" id="step-ch4-practice-5">
+      <div id="compiler-ch4-practice-fill"></div>
+    </div>
+
+    <div class="step step--visible" data-step="6" id="step-ch4-practice-6">
+      <div id="compiler-ch4-practice-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch4-practice-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Comments in the Linux kernel</div>
+        <p class="realworld-card__text">The Linux kernel has millions of lines of C code. It uses a strict comment style — block comments document every exported function, single-line comments explain non-obvious decisions inline.</p>
+        <pre>/*
+ * This is a common optimisation trick: the compiler can
+ * generate better code if it knows when a branch is unlikely.
+ */
+if (unlikely(error)) {
+    handle_error();
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-block" data-topic="ch4-practice">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Comments in Practice</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"      data-topic="ch4-practice">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch4-practice">Coding Practice <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch4-practice"><div id="quiz-ch4-practice-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch4-practice"><div id="practice-ch4-practice"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — COMMENTING OUT CODE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch4-commentout" id="topic-ch4-commentout">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Commenting Out Code — Temporarily Disabling Lines</h2>
+      <span class="topic__status-badge" id="badge-ch4-commentout">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch4-commentout-1">
+      <p class="step-label" data-step-num="1">Run this program. It prints three lines. Now comment out line 5 (the second printf) and run again — what changes?</p>
+      <div id="compiler-ch4-commentout-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch4-commentout-2">
+      <div id="iq-ch4-commentout"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch4-commentout-3">
+      <div class="explanation-card">
+        <p><strong>Commenting out code</strong> means putting <code>//</code> or <code>/* */</code> around lines you want to temporarily disable without deleting them. The compiler skips them; you can restore them by removing the comment markers.</p>
+        <p>This is invaluable for debugging — comment out a block to see if removing it fixes a bug. Or use it to test one version of code while keeping the old version nearby.</p>
+        <p>Use <code>//</code> for single lines. Use <code>/* */</code> to disable an entire block at once. When you use <code>/* */</code> to comment out a block, watch for any <code>*/</code> sequences already inside that code — they would end your comment early.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Commenting Out — Patterns</span></div>
+        <div class="syntax-card__code">// Comment out a single line:
+// printf("This line is disabled\n");
+
+// Comment out a block with /* */:
+/*
+printf("Line A\n");
+printf("Line B\n");
+printf("Line C\n");
+*/
+
+// Keep old code nearby while testing new code:
+// int result = old_method(x);  // old approach
+int result = new_method(x);     // new approach</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Debugging Pattern</div>
+          <div class="callout__body">Comment out sections of code one at a time to narrow down where a bug is. If commenting out a block makes the bug disappear, you found your section. This is called <em>binary search debugging</em>.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch4-commentout-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch4-commentout-4">
+      <div id="compiler-ch4-commentout-modify"></div>
+    </div>
+
+    <div class="step step--visible" data-step="5" id="step-ch4-commentout-5">
+      <div id="compiler-ch4-commentout-fill"></div>
+    </div>
+
+    <div class="step step--visible" data-step="6" id="step-ch4-commentout-6">
+      <div id="compiler-ch4-commentout-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch4-commentout-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Comment-out in real debugging</div>
+        <p class="realworld-card__text">Every programmer comments out code during debugging. It is one of the fastest ways to isolate a problem without losing your work.</p>
+        <pre>/* Temporarily disabled — causes crash when input is empty
+if (process_input(buf)) {
+    write_output(buf);
+}
+*/
+// Use safe fallback while investigating:
+write_output("[empty]");</pre>
+      </div>
+    </div>
+
+    <!-- Full Assessment Block for Topic 4 -->
+    <div class="assessment-block" data-topic="ch4-commentout">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Commenting Out Code</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch4-commentout">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch4-commentout">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch4-commentout">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch4-commentout">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch4-commentout"><div id="quiz-ch4-commentout-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch4-commentout"><div id="quiz-ch4-commentout-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch4-commentout"><div id="practice-ch4-commentout"></div></div>
+        <div class="assessment-section" id="tab-debug-ch4-commentout"><div id="compiler-ch4-commentout-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 4 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch4-mastery" id="topic-ch4-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 4 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply all comment styles in one program.</p>
+      <div id="compiler-ch4-mastery"></div>
+    </div>
+  </section>
+
+  <!-- Chapter complete -->
+  <div id="ch4-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 4 Complete</div>
+      <p class="chapter-complete__message">You now know how to document your code — one of the most overlooked skills in programming. Chapter 5 covers operators: arithmetic, assignment, increment, and precedence.</p>
+      <button class="btn-continue" id="ch4-next-btn">Start Chapter 5 — Operators →</button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,1191 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch17-structs-enums/ch17.html
+     Chapter 17: Structs & Enums
+     11 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 17</div>
+    <h1 class="chapter-header__title">Structs &amp; Enums</h1>
+    <p class="chapter-header__subtitle">
+      C gives you primitive types — int, float, char. Structs let you invent your own types.
+      A <code>Student</code>, a <code>Point</code>, a <code>Color</code> — any grouping of related data
+      becomes a first-class type you can declare, copy, and pass around like a built-in.
+      Enums make your code read like English instead of magic numbers. Together, these two tools
+      are how real C programs organize complex data.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">11 Topics</span>
+      <span class="chapter-badge">struct · . · -> · typedef · enum · union</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — WHAT IS A STRUCT?
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-struct" id="topic-ch17-struct">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">What Is a Struct?</h2>
+      <span class="topic__status-badge" id="badge-ch17-struct">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-struct-1">
+      <p class="step-label" data-step-num="1">Run this. A struct groups related variables under one name — compile it and observe the output.</p>
+      <div id="compiler-ch17-struct-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-struct-2">
+      <div id="iq-ch17-struct"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-struct-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">A struct is a custom type that groups related variables into a single unit</h3>
+        <p>Without structs, a student record needs separate variables: <code>char name[50]</code>, <code>int age</code>, <code>float grade</code> — all unconnected. A <strong>struct</strong> bundles them: one <code>Student s</code> variable holds all three. The struct <em>definition</em> describes the shape; the struct <em>variable</em> is the actual data.</p>
+        <p>Structs don't allocate memory. The <code>struct Student { ... };</code> definition is just a blueprint. Memory is only allocated when you declare a variable: <code>struct Student s;</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Struct Definition &amp; Declaration</span></div>
+        <div class="syntax-card__code">/* Step 1: define the shape (no memory yet) */
+struct Student {
+    char name[50];   /* member 1 */
+    int  age;        /* member 2 */
+    float grade;     /* member 3 */
+};                   /* semicolon required after closing brace */
+
+/* Step 2: declare a variable of that type */
+struct Student s;    /* now memory is allocated */
+
+/* Or combine both steps */
+struct Student s2 = {"Alice", 20, 92.5};</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Missing the semicolon after <code>}</code> is the most common struct bug</div>
+          <div class="callout__body"><code>struct Student { int age; }</code> without the final <code>;</code> causes a cryptic compiler error on the next line. Every struct definition ends with <code>};</code> — the semicolon is part of the statement.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-struct-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-struct-4">
+      <div id="compiler-ch17-struct-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-struct-5">
+      <div id="compiler-ch17-struct-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-struct-6">
+      <div id="compiler-ch17-struct-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-struct-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Every C graphics library, game engine, and networking stack uses structs to represent entities — a <code>Point</code>, a <code>Packet</code>, a <code>Vertex</code>. They are the foundation of every custom data type in C.</p>
+        <pre>/* OpenGL-style point struct */
+struct Vec3 {
+    float x, y, z;
+};
+
+struct Vec3 position = {1.0f, 0.0f, -5.0f};
+struct Vec3 camera   = {0.0f, 1.0f,  0.0f};</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-struct">📋 Start Assessment — What Is a Struct?</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-struct" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-struct">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-struct">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-struct">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-struct">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-struct"><div id="quiz-ch17-struct-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-struct"><div id="quiz-ch17-struct-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-struct"><div id="practice-ch17-struct"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-struct"><div id="compiler-ch17-struct-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — DECLARING AND INITIALIZING STRUCTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-declare" id="topic-ch17-declare">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Declaring and Initializing Structs</h2>
+      <span class="topic__status-badge" id="badge-ch17-declare">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-declare-1">
+      <p class="step-label" data-step-num="1">Run this. Three ways to initialize a struct — compile and see all three produce output.</p>
+      <div id="compiler-ch17-declare-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-declare-2">
+      <div id="iq-ch17-declare"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-declare-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Three ways to put values into a struct — each has its place</h3>
+        <p><strong>Initializer list</strong> <code>= {"Alice", 20, 92.5}</code> sets all members at declaration time, in order. <strong>Member-by-member assignment</strong> sets each field individually after declaration — useful when values come from user input or calculations. <strong>Designated initializers</strong> (C99+) use <code>.member = value</code> syntax and can appear in any order.</p>
+        <p>Uninitialized struct members contain garbage values — the same rule as any uninitialized variable. Always initialize before reading.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Three Initialization Styles</span></div>
+        <div class="syntax-card__code">struct Point { int x; int y; };
+
+/* 1. Initializer list — position-based, must match member order */
+struct Point a = {3, 7};
+
+/* 2. Member-by-member — can set in any order, any time */
+struct Point b;
+b.x = 10;
+b.y = 20;
+
+/* 3. Designated initializer (C99) — named, any order */
+struct Point c = { .y = 5, .x = 1 };
+
+/* 4. Struct assignment — copies all members at once */
+struct Point d = a;   /* d.x = 3, d.y = 7 */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Struct assignment copies the entire value</div>
+          <div class="callout__body"><code>struct Point d = a;</code> copies every member from <code>a</code> into <code>d</code>. They are independent after that — changing <code>d.x</code> does not affect <code>a.x</code>. This is unlike arrays, which cannot be assigned this way.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-declare-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-declare-4">
+      <div id="compiler-ch17-declare-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-declare-5">
+      <div id="compiler-ch17-declare-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-declare-6">
+      <div id="compiler-ch17-declare-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-declare-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Designated initializers are essential in embedded C where you want to set only certain fields and leave others at zero — common for hardware register structs with many fields.</p>
+        <pre>/* Only configure what you need — the rest default to 0 */
+struct UARTConfig cfg = {
+    .baud_rate = 115200,
+    .parity    = NONE
+    /* .stop_bits, .flow_control stay 0 */
+};</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-declare">📋 Start Assessment — Declaring &amp; Initializing</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-declare" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-declare">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-declare">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-declare">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-declare">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-declare"><div id="quiz-ch17-declare-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-declare"><div id="quiz-ch17-declare-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-declare"><div id="practice-ch17-declare"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-declare"><div id="compiler-ch17-declare-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — ACCESSING MEMBERS WITH . OPERATOR
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-access" id="topic-ch17-access">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Accessing Members — the <code>.</code> Operator</h2>
+      <span class="topic__status-badge" id="badge-ch17-access">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-access-1">
+      <p class="step-label" data-step-num="1">Run this. The dot operator reads and writes individual members — observe both get and set patterns.</p>
+      <div id="compiler-ch17-access-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-access-2">
+      <div id="iq-ch17-access"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-access-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">The dot operator gives you direct access to any member of a struct variable</h3>
+        <p><code>variable.member</code> works both for reading and writing. <code>s.age</code> reads the age field. <code>s.age = 21</code> updates it. The dot is the bridge between the struct variable and its individual pieces of data.</p>
+        <p>Members are independent — updating <code>s.grade</code> has no effect on <code>s.name</code> or <code>s.age</code>. Each member behaves exactly like the variable type it is declared as inside the struct.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Dot Operator — Read and Write</span></div>
+        <div class="syntax-card__code">struct Student {
+    char name[50];
+    int  age;
+    float grade;
+};
+
+struct Student s = {"Bob", 19, 88.0};
+
+/* READ — use in expressions */
+printf("%s\n", s.name);     /* Bob    */
+printf("%d\n", s.age);      /* 19     */
+printf("%.1f\n", s.grade);  /* 88.0   */
+
+/* WRITE — assign like any variable */
+s.age   = 20;
+s.grade = 95.5;
+
+/* Use in arithmetic */
+s.grade = s.grade + 5.0;    /* 100.5  */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">You cannot assign a string to a char array member with <code>=</code></div>
+          <div class="callout__body"><code>s.name = "Alice";</code> is illegal because arrays cannot be assigned. Use <code>strcpy(s.name, "Alice");</code> from <code>&lt;string.h&gt;</code> instead. You can only use <code>=</code> for string members during initialization: <code>struct Student s = {"Alice", 20, 90.0};</code></div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-access-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-access-4">
+      <div id="compiler-ch17-access-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-access-5">
+      <div id="compiler-ch17-access-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-access-6">
+      <div id="compiler-ch17-access-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-access-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">The dot operator is used constantly in C programs — reading config fields, updating state, passing parts of a struct to functions. It is the primary way to interact with custom data types.</p>
+        <pre>struct Config {
+    int   width;
+    int   height;
+    float scale;
+};
+
+struct Config cfg = {1920, 1080, 1.0f};
+cfg.scale = 2.0f;   /* hi-DPI mode */
+
+int pixels = cfg.width * cfg.height;
+printf("%d total pixels\n", pixels);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-access">📋 Start Assessment — The Dot Operator</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-access" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-access">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-access">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-access">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-access">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-access"><div id="quiz-ch17-access-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-access"><div id="quiz-ch17-access-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-access"><div id="practice-ch17-access"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-access"><div id="compiler-ch17-access-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — NESTED STRUCTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-nested" id="topic-ch17-nested">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Nested Structs</h2>
+      <span class="topic__status-badge" id="badge-ch17-nested">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-nested-1">
+      <p class="step-label" data-step-num="1">Run this. A struct can contain another struct as a member — compile and follow the dot chain.</p>
+      <div id="compiler-ch17-nested-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-nested-2">
+      <div id="iq-ch17-nested"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-nested-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Structs can contain other structs — access the inner members with chained dots</h3>
+        <p>If a struct member is itself a struct, you chain the dot operator: <code>student.address.city</code>. Each dot steps one level deeper into the nested structure. There is no limit to nesting depth, but more than two or three levels usually signals a design problem.</p>
+        <p>Nested structs are useful when a sub-concept has its own coherent identity. An <code>Address</code> makes sense as its own struct — it has street, city, zip — and then a <code>Student</code> has an <code>address</code> member of type <code>struct Address</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Nested Struct Access</span></div>
+        <div class="syntax-card__code">struct Date {
+    int day;
+    int month;
+    int year;
+};
+
+struct Student {
+    char name[50];
+    struct Date dob;   /* nested: Date inside Student */
+};
+
+struct Student s;
+strcpy(s.name, "Ana");
+s.dob.day   = 15;     /* dot chain: s → dob → day   */
+s.dob.month = 8;
+s.dob.year  = 2003;
+
+printf("%s born: %d/%d/%d\n",
+       s.name, s.dob.day, s.dob.month, s.dob.year);</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Nested struct initialization with nested braces</div>
+          <div class="callout__body"><code>struct Student s = {"Ana", {15, 8, 2003}};</code> — the outer braces hold the Student initializer, and the inner braces hold the Date initializer. Each nested struct gets its own set of braces in the initializer list.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-nested-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-nested-4">
+      <div id="compiler-ch17-nested-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-nested-5">
+      <div id="compiler-ch17-nested-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-nested-6">
+      <div id="compiler-ch17-nested-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-nested-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Nested structs appear in every network and file format library. A TCP packet struct contains an IP header struct, which contains a source and destination address struct — each level represents a distinct abstraction.</p>
+        <pre>struct IPAddr  { unsigned char bytes[4]; };
+struct IPHeader {
+    struct IPAddr src;
+    struct IPAddr dst;
+    int           ttl;
+};
+/* Access: packet.header.src.bytes[0] */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-nested">📋 Start Assessment — Nested Structs</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-nested" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-nested">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-nested">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-nested">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-nested">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-nested"><div id="quiz-ch17-nested-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-nested"><div id="quiz-ch17-nested-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-nested"><div id="practice-ch17-nested"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-nested"><div id="compiler-ch17-nested-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — ARRAYS OF STRUCTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-array" id="topic-ch17-array">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">Arrays of Structs</h2>
+      <span class="topic__status-badge" id="badge-ch17-array">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-array-1">
+      <p class="step-label" data-step-num="1">Run this. An array where each element is a complete struct — compile and see the loop iterate over records.</p>
+      <div id="compiler-ch17-array-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-array-2">
+      <div id="iq-ch17-array"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-array-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">An array of structs stores multiple records — index with <code>[i]</code>, then access members with <code>.</code></h3>
+        <p>Declare like any array: <code>struct Student roster[30];</code> gives you 30 Student slots. Access a specific record by index first: <code>roster[0]</code> is the first Student. Then dot into it: <code>roster[0].grade</code> is that student's grade.</p>
+        <p>You can initialize an array of structs at declaration: each element gets its own <code>{ }</code> initializer separated by commas. Looping with <code>for</code> over an array of structs is one of the most common C patterns for working with collections of records.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Array of Structs — Declare, Initialize, Loop</span></div>
+        <div class="syntax-card__code">struct Student {
+    char  name[30];
+    float grade;
+};
+
+/* Initialize all at once */
+struct Student class[3] = {
+    {"Alice", 92.0},
+    {"Bob",   78.5},
+    {"Carol", 88.0}
+};
+
+/* Loop and access */
+for (int i = 0; i &lt; 3; i++) {
+    printf("%s: %.1f\n", class[i].name, class[i].grade);
+}
+
+/* Access one specific member */
+class[1].grade = 80.0;   /* update Bob's grade */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">The pattern is: <code>array[index].member</code></div>
+          <div class="callout__body"><code>roster[i].grade</code> — index into the array first to pick which record, then dot to pick which field. Never <code>roster.grade[i]</code> — that is not valid syntax and does not mean what you think.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-array-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-array-4">
+      <div id="compiler-ch17-array-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-array-5">
+      <div id="compiler-ch17-array-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-array-6">
+      <div id="compiler-ch17-array-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-array-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Database-less record management in embedded systems and simple utilities typically uses arrays of structs — a fixed-size contact book, a sensor log, a configuration table.</p>
+        <pre>struct Contact {
+    char  name[50];
+    char  phone[15];
+};
+
+struct Contact book[100];
+int count = 0;
+
+/* Add a contact */
+strcpy(book[count].name,  "Ana Reyes");
+strcpy(book[count].phone, "09171234567");
+count++;</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-array">📋 Start Assessment — Arrays of Structs</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-array" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-array">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-array">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-array">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-array">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-array"><div id="quiz-ch17-array-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-array"><div id="quiz-ch17-array-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-array"><div id="practice-ch17-array"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-array"><div id="compiler-ch17-array-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — POINTERS TO STRUCTS AND -> OPERATOR
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-ptr" id="topic-ch17-ptr">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title">Pointers to Structs — the <code>-&gt;</code> Operator</h2>
+      <span class="topic__status-badge" id="badge-ch17-ptr">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-ptr-1">
+      <p class="step-label" data-step-num="1">Run this. When you have a pointer to a struct, <code>-&gt;</code> is the access operator — compile and observe both <code>.</code> and <code>-&gt;</code> in action.</p>
+      <div id="compiler-ch17-ptr-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-ptr-2">
+      <div id="iq-ch17-ptr"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-ptr-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Use <code>.</code> for struct variables; use <code>-&gt;</code> for pointers to structs</h3>
+        <p>When you have a pointer <code>struct Student *p</code>, accessing members requires dereferencing first: <code>(*p).age</code>. The <strong>arrow operator</strong> <code>p-&gt;age</code> is shorthand for exactly that — dereference the pointer, then access the member. They are identical in meaning, but <code>-&gt;</code> is cleaner and what every C programmer uses.</p>
+        <p>The rule is simple: <strong>variable <code>→</code> dot</strong>, <strong>pointer <code>→</code> arrow</strong>. Mixing them up — using <code>.</code> on a pointer — causes a compiler error.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Dot vs Arrow — The Complete Rule</span></div>
+        <div class="syntax-card__code">struct Student {
+    char name[50];
+    int  age;
+};
+
+struct Student  s   = {"Dan", 22};   /* a variable */
+struct Student *p   = &amp;s;            /* a pointer  */
+
+/* dot — only for direct variables */
+printf("%s\n", s.name);    /* "Dan" */
+
+/* arrow — for pointers (shorthand for (*p).name) */
+printf("%s\n", p-&gt;name);   /* "Dan" — same result */
+
+/* WRITE through pointer */
+p-&gt;age = 23;               /* modifies s.age too — same memory */
+printf("%d\n", s.age);     /* 23 */
+
+/* These are identical */
+(*p).age = 24;             /* long form */
+p-&gt;age   = 24;             /* short form — always prefer this */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Using <code>.</code> on a pointer is a compiler error</div>
+          <div class="callout__body"><code>p.age</code> when <code>p</code> is <code>struct Student *p</code> will not compile. The compiler tells you the left-hand side must be a struct, not a pointer. Use <code>p-&gt;age</code>. The compiler error is actually helpful here — it forces the right syntax.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-ptr-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-ptr-4">
+      <div id="compiler-ch17-ptr-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-ptr-5">
+      <div id="compiler-ch17-ptr-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-ptr-6">
+      <div id="compiler-ch17-ptr-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-ptr-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Linked lists — one of the most important data structures — are built entirely on struct pointers and the arrow operator. Every node points to the next node, and <code>-&gt;</code> is how you traverse the chain.</p>
+        <pre>struct Node {
+    int         value;
+    struct Node *next;
+};
+
+struct Node *current = head;
+while (current != NULL) {
+    printf("%d\n", current-&gt;value);
+    current = current-&gt;next;
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-ptr">📋 Start Assessment — Pointers to Structs</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-ptr" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-ptr">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-ptr">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-ptr">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-ptr">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-ptr"><div id="quiz-ch17-ptr-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-ptr"><div id="quiz-ch17-ptr-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-ptr"><div id="practice-ch17-ptr"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-ptr"><div id="compiler-ch17-ptr-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 7 — PASSING STRUCTS TO FUNCTIONS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-fn" id="topic-ch17-fn">
+    <div class="topic__header">
+      <span class="topic__number">Topic 7</span>
+      <h2 class="topic__title">Passing Structs to Functions</h2>
+      <span class="topic__status-badge" id="badge-ch17-fn">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-fn-1">
+      <p class="step-label" data-step-num="1">Run this. A struct passed by value is copied — changes inside the function don't affect the original. Compile and verify.</p>
+      <div id="compiler-ch17-fn-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-fn-2">
+      <div id="iq-ch17-fn"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-fn-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Structs pass by value (copy) — use a pointer parameter to modify the original</h3>
+        <p>Passing <code>struct Student s</code> to a function copies the entire struct. The function gets its own independent copy. Changes inside the function are invisible to the caller. This is correct when you want read-only access — but for large structs, copying is wasteful in memory and time.</p>
+        <p>Pass a pointer <code>struct Student *s</code> to let the function modify the original. Inside the function, use <code>s-&gt;member</code> to access fields. This is also more efficient — only the address (8 bytes) is copied, not the entire struct.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Pass by Value vs Pass by Pointer</span></div>
+        <div class="syntax-card__code">struct Student { char name[50]; float grade; };
+
+/* Pass by VALUE — caller's struct unchanged */
+void printStudent(struct Student s) {
+    printf("%s: %.1f\n", s.name, s.grade);
+    s.grade = 0;   /* only changes the local copy */
+}
+
+/* Pass by POINTER — can modify the original */
+void applyBonus(struct Student *s, float bonus) {
+    s-&gt;grade += bonus;   /* modifies caller's struct */
+}
+
+/* Return a struct by value */
+struct Student makeStudent(char *name, float grade) {
+    struct Student s;
+    strcpy(s.name, name);
+    s.grade = grade;
+    return s;             /* entire struct is returned */
+}</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Prefer pointer parameters for structs larger than a few bytes</div>
+          <div class="callout__body">Copying a struct with 10 fields is expensive if done thousands of times. Use <code>const struct Student *s</code> when you want pointer efficiency but don't need to modify: the <code>const</code> prevents accidental writes while avoiding the copy.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-fn-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-fn-4">
+      <div id="compiler-ch17-fn-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-fn-5">
+      <div id="compiler-ch17-fn-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-fn-6">
+      <div id="compiler-ch17-fn-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-fn-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Functions that build and return structs — called factory functions — are a clean pattern for creating records. Rather than initializing a struct manually each time, you call a function that returns a ready-to-use value.</p>
+        <pre>struct Vec2 makeVec2(float x, float y) {
+    struct Vec2 v = {x, y};
+    return v;
+}
+
+float magnitude(const struct Vec2 *v) {
+    return sqrt(v-&gt;x * v-&gt;x + v-&gt;y * v-&gt;y);
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-fn">📋 Start Assessment — Structs &amp; Functions</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-fn" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-fn">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-fn">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-fn">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-fn">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-fn"><div id="quiz-ch17-fn-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-fn"><div id="quiz-ch17-fn-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-fn"><div id="practice-ch17-fn"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-fn"><div id="compiler-ch17-fn-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 8 — TYPEDEF FOR CLEANER STRUCT NAMES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-typedef" id="topic-ch17-typedef">
+    <div class="topic__header">
+      <span class="topic__number">Topic 8</span>
+      <h2 class="topic__title"><code>typedef</code> — Cleaner Struct Names</h2>
+      <span class="topic__status-badge" id="badge-ch17-typedef">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-typedef-1">
+      <p class="step-label" data-step-num="1">Run this. With <code>typedef</code>, <code>struct Student</code> becomes just <code>Student</code> — compile and compare both declaration styles.</p>
+      <div id="compiler-ch17-typedef-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-typedef-2">
+      <div id="iq-ch17-typedef"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-typedef-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>typedef</code> creates a new name for an existing type — commonly used to drop the <code>struct</code> keyword</h3>
+        <p><code>typedef struct Student Student;</code> creates an alias so you can write <code>Student s;</code> instead of <code>struct Student s;</code>. Both refer to the same thing — <code>typedef</code> just creates a shorter alias. The most common pattern combines the struct definition and typedef in one block.</p>
+        <p><code>typedef</code> works for any type, not just structs — you can alias <code>int</code> to <code>Integer</code> or <code>unsigned char</code> to <code>Byte</code>. For structs it is especially valuable because it removes the repetitive <code>struct</code> keyword from every usage.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">typedef Patterns</span></div>
+        <div class="syntax-card__code">/* Pattern 1: define then typedef separately */
+struct Student { char name[50]; int age; };
+typedef struct Student Student;
+
+/* Pattern 2: combine in one statement (most common) */
+typedef struct {
+    char  name[50];
+    int   age;
+    float grade;
+} Student;    /* Student is now the type name */
+
+/* Usage — no more 'struct' keyword needed */
+Student s = {"Eva", 21, 94.0};
+Student *p = &amp;s;
+
+/* Works in function parameters too */
+void print(Student s) {
+    printf("%s\n", s.name);
+}
+void update(Student *s, float grade) {
+    s-&gt;grade = grade;
+}</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">The anonymous struct pattern is the standard in modern C code</div>
+          <div class="callout__body">Most C code you will encounter uses <code>typedef struct { ... } TypeName;</code> with no tag inside the struct keyword. The tag is only needed when the struct refers to itself (like a linked list node: <code>typedef struct Node { int v; struct Node *next; } Node;</code>).</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-typedef-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-typedef-4">
+      <div id="compiler-ch17-typedef-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-typedef-5">
+      <div id="compiler-ch17-typedef-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-typedef-6">
+      <div id="compiler-ch17-typedef-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-typedef-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text"><code>typedef</code> for primitive types is common in cross-platform C to guarantee fixed sizes — <code>int</code> can be 16 or 32 bits depending on the system, but <code>int32_t</code> (defined via typedef in <code>&lt;stdint.h&gt;</code>) is always exactly 32 bits.</p>
+        <pre>#include &lt;stdint.h&gt;
+
+/* These are defined in stdint.h via typedef */
+typedef unsigned char  uint8_t;   /* always 8 bits  */
+typedef unsigned int   uint32_t;  /* always 32 bits */
+
+uint32_t sensor_reading = 0xDEADBEEF;</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-typedef">📋 Start Assessment — typedef</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-typedef" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-typedef">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-typedef">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-typedef">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-typedef">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-typedef"><div id="quiz-ch17-typedef-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-typedef"><div id="quiz-ch17-typedef-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-typedef"><div id="practice-ch17-typedef"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-typedef"><div id="compiler-ch17-typedef-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 9 — ENUMS — NAMED INTEGER CONSTANTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-enum" id="topic-ch17-enum">
+    <div class="topic__header">
+      <span class="topic__number">Topic 9</span>
+      <h2 class="topic__title">Enums — Named Integer Constants</h2>
+      <span class="topic__status-badge" id="badge-ch17-enum">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-enum-1">
+      <p class="step-label" data-step-num="1">Run this. An enum gives integer constants readable names — compile and see what value each name maps to.</p>
+      <div id="compiler-ch17-enum-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-enum-2">
+      <div id="iq-ch17-enum"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-enum-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">An enum is a set of named integer constants — it replaces magic numbers with meaningful names</h3>
+        <p>Without enums, you might write <code>if (day == 1)</code> — and later wonder: is Monday 1 or 0? An <strong>enum</strong> names these values: <code>MONDAY</code>, <code>TUESDAY</code>, etc. The compiler assigns integers starting from 0 automatically, or you can assign values manually. Using the names makes the code self-documenting.</p>
+        <p>Enum values are just <code>int</code> constants. C doesn't enforce type safety on them — you can assign any integer to an enum variable. But the named constants make intent clear to every person reading the code.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Enum Declaration and Values</span></div>
+        <div class="syntax-card__code">/* Basic enum — auto-numbered from 0 */
+enum Day {
+    MON,    /* = 0 */
+    TUE,    /* = 1 */
+    WED,    /* = 2 */
+    THU,    /* = 3 */
+    FRI,    /* = 4 */
+    SAT,    /* = 5 */
+    SUN     /* = 6 */
+};
+
+/* Use as a variable type */
+enum Day today = WED;
+printf("%d\n", today);    /* prints 2 */
+
+/* Custom starting value */
+enum Status {
+    OK      = 200,
+    NOT_FOUND = 404,
+    ERROR   = 500
+};
+
+enum Status code = OK;
+printf("%d\n", code);     /* prints 200 */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Enum constants are global — they don't need the enum name as a prefix</div>
+          <div class="callout__body">Write <code>enum Day d = MON;</code>, not <code>d = Day.MON</code>. The constant <code>MON</code> is visible everywhere once the enum is defined. This differs from languages like Java or C++ where you qualify with the type name. It also means two enums cannot share a constant name in the same scope.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-enum-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-enum-4">
+      <div id="compiler-ch17-enum-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-enum-5">
+      <div id="compiler-ch17-enum-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-enum-6">
+      <div id="compiler-ch17-enum-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-enum-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Enums are everywhere in C system headers — file open modes, socket types, signal numbers. They replace inscrutable integer constants with names that make the code read like a specification.</p>
+        <pre>/* From a real embedded project */
+enum PinState { LOW = 0, HIGH = 1 };
+enum PinMode  { INPUT, OUTPUT, INPUT_PULLUP };
+
+void digitalWrite(int pin, enum PinState state);
+void pinMode(int pin, enum PinMode mode);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-enum">📋 Start Assessment — Enums</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-enum" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-enum">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-enum">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-enum">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-enum">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-enum"><div id="quiz-ch17-enum-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-enum"><div id="quiz-ch17-enum-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-enum"><div id="practice-ch17-enum"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-enum"><div id="compiler-ch17-enum-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 10 — USING ENUMS FOR STATE AND FLAGS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-enumuse" id="topic-ch17-enumuse">
+    <div class="topic__header">
+      <span class="topic__number">Topic 10</span>
+      <h2 class="topic__title">Using Enums for State and Flags</h2>
+      <span class="topic__status-badge" id="badge-ch17-enumuse">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-enumuse-1">
+      <p class="step-label" data-step-num="1">Run this. Enums pair naturally with switch — compile and see state-based output driven by enum values.</p>
+      <div id="compiler-ch17-enumuse-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-enumuse-2">
+      <div id="iq-ch17-enumuse"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-enumuse-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Enums model state machines and option sets — switch makes the logic readable</h3>
+        <p>The most common enum pattern is a <strong>state machine</strong> — a variable holds the current state, and a switch statement decides what to do based on it. The combination of enum + switch is cleaner than chains of <code>if/else if</code> with raw integers because each case label is named, not numbered.</p>
+        <p>Enums can also represent <strong>flags</strong> by assigning power-of-two values (<code>1, 2, 4, 8</code>) — multiple flags can then be combined with bitwise OR and tested with bitwise AND. This is an advanced pattern used in file permissions, UI option sets, and protocol fields.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Enum + Switch State Machine</span></div>
+        <div class="syntax-card__code">typedef enum {
+    IDLE,
+    RUNNING,
+    PAUSED,
+    STOPPED
+} State;
+
+State current = IDLE;
+
+void describe(State s) {
+    switch (s) {
+        case IDLE:    printf("Waiting for input\n");  break;
+        case RUNNING: printf("Processing...\n");      break;
+        case PAUSED:  printf("Paused — resume?\n");   break;
+        case STOPPED: printf("Done.\n");              break;
+    }
+}
+
+describe(current);          /* Waiting for input */
+current = RUNNING;
+describe(current);          /* Processing...     */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Using enum in switch also enables compiler warnings for unhandled cases</div>
+          <div class="callout__body">When you switch on an enum and miss a case, many compilers warn: <em>"enumeration value 'PAUSED' not handled in switch."</em> This is a safety net — the compiler forces you to handle every possible state. That warning disappears when you add a <code>default</code> case, so only use <code>default</code> when you genuinely don't care about the rest.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-enumuse-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-enumuse-4">
+      <div id="compiler-ch17-enumuse-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-enumuse-5">
+      <div id="compiler-ch17-enumuse-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-enumuse-6">
+      <div id="compiler-ch17-enumuse-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-enumuse-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Traffic light controllers, vending machine logic, game character AI, network connection handling — all are implemented as state machines. The enum gives each state a name; the switch determines what happens in each state.</p>
+        <pre>typedef enum { RED, YELLOW, GREEN } Light;
+
+Light next(Light current) {
+    switch (current) {
+        case RED:    return GREEN;
+        case GREEN:  return YELLOW;
+        case YELLOW: return RED;
+    }
+    return RED;
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-enumuse">📋 Start Assessment — Enums for State &amp; Flags</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-enumuse" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-enumuse">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-enumuse">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-enumuse">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-enumuse">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-enumuse"><div id="quiz-ch17-enumuse-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-enumuse"><div id="quiz-ch17-enumuse-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-enumuse"><div id="practice-ch17-enumuse"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-enumuse"><div id="compiler-ch17-enumuse-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 11 — UNIONS — SHARED MEMORY
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-union" id="topic-ch17-union">
+    <div class="topic__header">
+      <span class="topic__number">Topic 11</span>
+      <h2 class="topic__title">Unions — Shared Memory</h2>
+      <span class="topic__status-badge" id="badge-ch17-union">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch17-union-1">
+      <p class="step-label" data-step-num="1">Run this. A union stores one value at a time in shared memory — compile and see how writing one member overwrites the others.</p>
+      <div id="compiler-ch17-union-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch17-union-2">
+      <div id="iq-ch17-union"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch17-union-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">A union allocates one block of memory shared by all members — only one member is valid at a time</h3>
+        <p>A <strong>union</strong> looks like a struct — same syntax, same member access — but all members share the same memory location. The union is only as large as its largest member. Writing to <code>u.i</code> overwrites the bytes used by <code>u.f</code>. Reading <code>u.f</code> after writing <code>u.i</code> gives undefined behavior — it's the caller's responsibility to track which member is active.</p>
+        <p>Unions are used for memory-efficient variants (a value that could be int or float), byte-level access to multi-byte data, and protocol parsing where the same bytes might be interpreted as different types.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Union Declaration and Size</span></div>
+        <div class="syntax-card__code">union Data {
+    int   i;      /* 4 bytes */
+    float f;      /* 4 bytes */
+    char  c;      /* 1 byte  */
+};
+/* sizeof(union Data) == 4 — largest member size */
+
+union Data u;
+
+u.i = 42;
+printf("%d\n",   u.i);   /* valid: 42 */
+/* u.f is now garbage — same bytes, wrong interpretation */
+
+u.f = 3.14f;
+printf("%.2f\n", u.f);   /* valid: 3.14 */
+/* u.i is now garbage */
+
+/* vs struct: each member has its own memory */
+/* sizeof(struct Data with same members) == 9+ */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Reading the wrong union member gives garbage — C won't warn you</div>
+          <div class="callout__body">Write <code>u.i = 5</code> then read <code>u.f</code> — you get whatever 5 looks like as a float bit pattern, which is not 5.0. The C standard calls this undefined behavior. In practice, use an enum tag alongside a union (a "tagged union") to track which member is currently valid.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch17-union-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch17-union-4">
+      <div id="compiler-ch17-union-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch17-union-5">
+      <div id="compiler-ch17-union-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch17-union-6">
+      <div id="compiler-ch17-union-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch17-union-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Tagged unions — a union paired with an enum tag — are the C idiom for variant types. JSON parsers, scripting language interpreters, and compiler AST nodes all use this pattern to represent a value that can be one of several different types.</p>
+        <pre>typedef enum { INT_VAL, FLOAT_VAL, STR_VAL } ValType;
+
+typedef struct {
+    ValType type;
+    union {
+        int   i;
+        float f;
+        char *s;
+    } data;
+} Value;
+
+Value v;
+v.type   = INT_VAL;
+v.data.i = 42;
+
+if (v.type == INT_VAL) printf("%d\n", v.data.i);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch17-union">📋 Start Assessment — Unions</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch17-union" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch17-union">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch17-union">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch17-union">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch17-union">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch17-union"><div id="quiz-ch17-union-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch17-union"><div id="quiz-ch17-union-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch17-union"><div id="practice-ch17-union"></div></div>
+        <div class="assessment-section" id="tab-debug-ch17-union"><div id="compiler-ch17-union-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 17 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch17-mastery" id="topic-ch17-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 17 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply every concept from Chapter 17 in one complete program — structs, typedef, enum, arrays of structs, and pointer access.</p>
+      <div id="compiler-ch17-mastery"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER COMPLETE -->
+  <div id="ch17-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 17 Complete</div>
+      <p class="chapter-complete__message">
+        You can define structs, initialize them, access members with <code>.</code> and <code>-&gt;</code>,
+        nest structs, build arrays of structs, pass them to functions, alias types with <code>typedef</code>,
+        name constants with <code>enum</code>, and understand how unions share memory.
+        These are the tools professional C programmers use to organize complex programs.
+        Chapter 18 goes lower — dynamic memory, file handling, and preprocessor macros.
+      </p>
+      <button class="btn-continue" id="ch17-next-btn">Start Chapter 18 — Memory, Files &amp; Macros →</button>
+    </div>
+  </div>
+
+</div>

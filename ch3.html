@@ -1,0 +1,652 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch3-input-output/ch3.html
+     Chapter 3: Input and Output
+     8 topics · Full 7-step active learning structure per topic
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 3</div>
+    <h1 class="chapter-header__title">Input &amp; Output</h1>
+    <p class="chapter-header__subtitle">
+      <code>printf()</code> and <code>scanf()</code> are your two primary tools for communicating with the user.
+      This chapter teaches you to control output with precision — width, padding, alignment — and to read data back in.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">8 Topics</span>
+      <span class="chapter-badge">printf · scanf · format specifiers · getchar</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — printf() BASICS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch3-printf" id="topic-ch3-printf">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title"><code>printf()</code> — Sending Output to the Screen</h2>
+      <span class="topic__status-badge" id="badge-ch3-printf">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch3-printf-1">
+      <p class="step-label" data-step-num="1">Compile and run this — printf() is how C talks to you. See every detail it can produce.</p>
+      <div id="compiler-ch3-printf-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch3-printf-2">
+      <div id="iq-ch3-printf"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch3-printf-3">
+      <div class="explanation-card">
+        <p><strong>printf()</strong> — "print formatted" — sends text to the screen. Everything inside the double quotes is printed exactly, <em>except</em> format specifiers (starting with <code>%</code>) and escape sequences (starting with <code>\</code>).</p>
+        <p>The format string and the variables to substitute are separated by commas inside the parentheses. Each <code>%d</code>, <code>%f</code>, <code>%c</code> in the string gets replaced by the next variable in the list.</p>
+        <p>Every printf() call requires <code>#include &lt;stdio.h&gt;</code> — that header is what makes the function available.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">printf() Anatomy</span></div>
+        <div class="syntax-card__code">printf( "format string",  var1,  var2, ... );
+           ↑                   ↑      ↑
+     required:            variables substituted
+     always a string      for each %specifier</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Escape Sequences</div>
+          <div class="callout__body"><code>\n</code> = new line &nbsp;·&nbsp; <code>\t</code> = tab &nbsp;·&nbsp; <code>\\</code> = backslash &nbsp;·&nbsp; <code>\"</code> = double quote &nbsp;·&nbsp; <code>%%</code> = literal percent sign</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch3-printf-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch3-printf-4">
+      <div id="compiler-ch3-printf-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch3-printf-5">
+      <div id="compiler-ch3-printf-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch3-printf-6">
+      <div id="compiler-ch3-printf-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch3-printf-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 printf() in every real C program</div>
+        <p class="realworld-card__text">Every C program uses printf() for output — from "Hello, World!" to diagnostic logs in operating systems. printf() is the Swiss army knife of C output.</p>
+        <pre>printf("Error: file not found (code %d)\n", error_code);
+printf("[%02d:%02d:%02d] Server started\n", h, m, s);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch3-printf">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — printf() Basics</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch3-printf">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch3-printf">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch3-printf">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch3-printf"><div id="quiz-ch3-printf-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch3-printf"><div id="quiz-ch3-printf-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch3-printf"><div id="compiler-ch3-printf-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — FORMAT SPECIFIERS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch3-format" id="topic-ch3-format">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Format Specifiers — <code>%d %f %c %s %ld %lf</code></h2>
+      <span class="topic__status-badge" id="badge-ch3-format">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch3-format-1">
+      <p class="step-label" data-step-num="1">Run this — six different format specifiers, one for each common type.</p>
+      <div id="compiler-ch3-format-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch3-format-2">
+      <div id="iq-ch3-format"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch3-format-3">
+      <div class="explanation-card">
+        <p>A <strong>format specifier</strong> is a placeholder in the printf() string that gets replaced by a variable's value. The specifier must match the variable's type — using the wrong one gives incorrect output or undefined behavior.</p>
+        <p>The six essential specifiers: <code>%d</code> (int), <code>%f</code> (float/double), <code>%c</code> (char), <code>%s</code> (string/char array), <code>%ld</code> (long), <code>%lf</code> (double in scanf — in printf %f works for both).</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Format Specifier Reference</span></div>
+        <div class="syntax-card__code">%d   → int             (decimal integer)
+%ld  → long            (long integer)
+%lld → long long       (long long integer)
+%f   → float/double    (floating-point, default 6 decimal places)
+%lf  → double (scanf)  (use %f in printf — same result)
+%c   → char            (single character)
+%s   → char array      (string / null-terminated array)
+%u   → unsigned int    (unsigned decimal)
+%p   → pointer         (memory address, hex format)</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Common Mistake — Type Mismatch</div>
+          <div class="callout__body">Using <code>%d</code> for a float or <code>%f</code> for an int produces garbage output. The specifier must match the variable's actual type. <code>int score = 85; printf("%f", score);</code> — do not do this.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch3-format-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch3-format-4">
+      <div id="compiler-ch3-format-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch3-format-5">
+      <div id="compiler-ch3-format-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch3-format-6">
+      <div id="compiler-ch3-format-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch3-format-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Mixed types in a single printf()</div>
+        <p class="realworld-card__text">Real programs print many types at once. A student record, a sensor reading, an error message — all mix specifiers in one printf().</p>
+        <pre>printf("Student %d: %s  GPA: %.2f  Grade: %c\n",
+       id, name, gpa, letter_grade);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch3-format">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Format Specifiers</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch3-format">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch3-format">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch3-format">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch3-format">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch3-format"><div id="quiz-ch3-format-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch3-format"><div id="quiz-ch3-format-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch3-format"><div id="quiz-ch3-format-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch3-format"><div id="compiler-ch3-format-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — FORMAT SPECIFIER MODIFIERS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch3-modifiers" id="topic-ch3-modifiers">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Format Modifiers — Width, Precision, Padding</h2>
+      <span class="topic__status-badge" id="badge-ch3-modifiers">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch3-modifiers-1">
+      <p class="step-label" data-step-num="1">Run this — the same values, formatted with different widths and precision. Look at how alignment changes.</p>
+      <div id="compiler-ch3-modifiers-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch3-modifiers-2">
+      <div id="iq-ch3-modifiers"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch3-modifiers-3">
+      <div class="explanation-card">
+        <p>Format modifiers go <em>between</em> the <code>%</code> and the type letter. <strong>Width</strong> sets the minimum number of characters printed — values pad with spaces on the left. <strong>Precision</strong> (.n) controls decimal places for floats or max characters for strings.</p>
+        <p>A <code>-</code> flag left-aligns instead of right-aligning. A <code>0</code> flag pads with zeros instead of spaces. These tools build aligned tables and formatted reports.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Modifier Syntax</span></div>
+        <div class="syntax-card__code">%[flags][width][.precision]type
+
+%10d     → right-align int in 10-char field
+%-10d    → left-align int in 10-char field
+%010d    → pad int with zeros (0000000042)
+%.2f     → float with exactly 2 decimal places
+%8.2f    → 8-wide field, 2 decimal places
+%-8.2f   → left-aligned, 8-wide, 2 decimals</div>
+      </div>
+      <button class="btn-continue" id="step-ch3-modifiers-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch3-modifiers-4">
+      <div id="compiler-ch3-modifiers-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch3-modifiers-5">
+      <div id="compiler-ch3-modifiers-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch3-modifiers-6">
+      <div id="compiler-ch3-modifiers-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch3-modifiers-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Formatted tables in reports</div>
+        <p class="realworld-card__text">Alignment modifiers build readable tables without any external library. Student grade reports, financial summaries, server logs — all use width modifiers.</p>
+        <pre>printf("%-15s %5s %8s\n", "Name", "Grade", "Score");
+printf("%-15s %5c %8.2f\n", "Alice", 'A', 97.5);
+printf("%-15s %5c %8.2f\n", "Bob", 'B', 83.1);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch3-modifiers">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Format Modifiers</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch3-modifiers">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch3-modifiers">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch3-modifiers">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch3-modifiers">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch3-modifiers"><div id="quiz-ch3-modifiers-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch3-modifiers"><div id="quiz-ch3-modifiers-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch3-modifiers"><div id="practice-ch3-modifiers"></div></div>
+        <div class="assessment-section" id="tab-debug-ch3-modifiers"><div id="compiler-ch3-modifiers-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — scanf() READING INPUT
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch3-scanf" id="topic-ch3-scanf">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title"><code>scanf()</code> — Reading User Input</h2>
+      <span class="topic__status-badge" id="badge-ch3-scanf">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch3-scanf-1">
+      <p class="step-label" data-step-num="1">Run this — scanf() reads input. The editor pre-fills the input below the compiler. See how the value gets into your variable.</p>
+      <div id="compiler-ch3-scanf-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch3-scanf-2">
+      <div id="iq-ch3-scanf"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch3-scanf-3">
+      <div class="explanation-card">
+        <p><strong>scanf()</strong> reads formatted input and stores it in variables. The critical difference from printf(): <code>scanf()</code> needs the <em>address</em> of each variable — you must pass <code>&amp;variable</code>, not just <code>variable</code>.</p>
+        <p>The <code>&amp;</code> (address-of) operator gives scanf() the memory location where it should write the input. Without it, scanf() writes to a random memory location — a serious bug.</p>
+        <p>Use the same format specifiers as printf(): <code>%d</code> for int, <code>%f</code> for float, <code>%lf</code> for double, <code>%c</code> for char.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">scanf() Anatomy</span></div>
+        <div class="syntax-card__code">scanf( "%d",  &number );
+        ↑       ↑
+  format str   &variable (& is mandatory!)
+
+/* Reading different types */
+int age;      scanf("%d",  &age);
+float price;  scanf("%f",  &price);
+double lat;   scanf("%lf", &lat);  /* note: %lf for double in scanf */
+char ch;      scanf(" %c", &ch);   /* note: space before %c */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Critical Mistake — Forgetting &amp;</div>
+          <div class="callout__body"><code>scanf("%d", number);</code> — WRONG. Without <code>&amp;</code>, scanf() crashes or corrupts memory. Always: <code>scanf("%d", &amp;number);</code></div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch3-scanf-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch3-scanf-4">
+      <div id="compiler-ch3-scanf-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch3-scanf-5">
+      <div id="compiler-ch3-scanf-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch3-scanf-6">
+      <div id="compiler-ch3-scanf-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch3-scanf-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 scanf() in real programs</div>
+        <p class="realworld-card__text">Every interactive C program uses scanf(). A calculator reads two numbers. A login screen reads a username. An ATM reads an account number.</p>
+        <pre>int account_number;
+float withdrawal;
+printf("Account: "); scanf("%d", &account_number);
+printf("Amount:  "); scanf("%f", &withdrawal);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch3-scanf">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — scanf()</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"   data-topic="ch3-scanf">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch3-scanf">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch3-scanf">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch3-scanf"><div id="quiz-ch3-scanf-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch3-scanf"><div id="quiz-ch3-scanf-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch3-scanf"><div id="compiler-ch3-scanf-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — scanf() WITH MULTIPLE INPUTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch3-multi" id="topic-ch3-multi">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title"><code>scanf()</code> with Multiple Inputs</h2>
+      <span class="topic__status-badge" id="badge-ch3-multi">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch3-multi-1">
+      <p class="step-label" data-step-num="1">Run this — one scanf() can read multiple values at once. The input is pre-filled for you.</p>
+      <div id="compiler-ch3-multi-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch3-multi-2">
+      <div id="iq-ch3-multi"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch3-multi-3">
+      <div class="explanation-card">
+        <p>One <code>scanf()</code> can read multiple values by listing multiple format specifiers and their corresponding <code>&amp;variable</code> pairs. The input values must be separated by whitespace (spaces, tabs, or newlines) — scanf() skips whitespace between values.</p>
+        <p>Or use separate scanf() calls — one per variable. Both approaches work. Separate calls are easier to read and debug, especially for beginners.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Multiple Input Patterns</span></div>
+        <div class="syntax-card__code">/* Option 1: one scanf, multiple values */
+scanf("%d %d %f", &a, &b, &price);
+/* Input: 10 20 9.99  (space-separated) */
+
+/* Option 2: separate scanf calls — clearer */
+scanf("%d", &a);
+scanf("%d", &b);
+scanf("%f", &price);
+/* Each call waits for one value on its own line */</div>
+      </div>
+      <button class="btn-continue" id="step-ch3-multi-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch3-multi-4">
+      <div id="compiler-ch3-multi-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch3-multi-5">
+      <div id="compiler-ch3-multi-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch3-multi-6">
+      <div id="compiler-ch3-multi-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch3-multi-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Reading a date from input</div>
+        <p class="realworld-card__text">Programs that read structured input (dates, coordinates, dimensions) use multi-value scanf() frequently.</p>
+        <pre>int day, month, year;
+printf("Enter date (dd mm yyyy): ");
+scanf("%d %d %d", &day, &month, &year);
+printf("Date: %02d/%02d/%04d\n", day, month, year);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch3-multi">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Multiple Inputs</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"   data-topic="ch3-multi">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch3-multi">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch3-multi"><div id="quiz-ch3-multi-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch3-multi"><div id="compiler-ch3-multi-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — INPUT BUFFER AND \n ISSUES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch3-buffer" id="topic-ch3-buffer">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title">Input Buffer — The Most Common scanf() Trap</h2>
+      <span class="topic__status-badge" id="badge-ch3-buffer">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch3-buffer-1">
+      <p class="step-label" data-step-num="1">Run this — notice why reading a char after an int causes a skip. This is the #1 scanf() bug in beginner C programs.</p>
+      <div id="compiler-ch3-buffer-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch3-buffer-2">
+      <div id="iq-ch3-buffer"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch3-buffer-3">
+      <div class="explanation-card">
+        <p>When you press Enter after typing a number, the <code>\n</code> (newline) stays in the input buffer. The next <code>scanf("%c", &ch)</code> immediately reads that leftover <code>\n</code> instead of waiting for your input.</p>
+        <p>The fix is simple: add a <strong>space before %c</strong> in the format string: <code>scanf(" %c", &amp;ch)</code>. The space tells scanf() to skip all whitespace (including the leftover newline) before reading the character.</p>
+        <p>An alternative fix is <code>getchar()</code> to consume the leftover newline before the char scanf().</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">The Buffer Fix</span></div>
+        <div class="syntax-card__code">int age;
+char grade;
+
+scanf("%d", &age);       /* reads number, leaves \n in buffer */
+scanf(" %c", &grade);    /* CORRECT: space skips leftover \n  */
+/* NOT: scanf("%c", &grade); — would read the \n, not a letter */
+
+/* Alternative fix using getchar() */
+scanf("%d", &age);
+getchar();               /* consumes the leftover \n */
+scanf("%c", &grade);</div>
+      </div>
+      <button class="btn-continue" id="step-ch3-buffer-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch3-buffer-4">
+      <div id="compiler-ch3-buffer-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch3-buffer-5">
+      <div id="compiler-ch3-buffer-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch3-buffer-6">
+      <div id="compiler-ch3-buffer-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch3-buffer-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 The buffer bug costs hours of debugging</div>
+        <p class="realworld-card__text">Every C programmer has spent hours on this bug at least once. Knowing about it and knowing the fix saves you that frustration permanently.</p>
+        <pre>/* Pattern to always remember: */
+int score;
+char letter_grade;
+scanf("%d", &score);
+scanf(" %c", &letter_grade); /* the space is the fix */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch3-buffer">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Input Buffer</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"   data-topic="ch3-buffer">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch3-buffer">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch3-buffer"><div id="quiz-ch3-buffer-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch3-buffer"><div id="compiler-ch3-buffer-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 7 — getchar() AND putchar()
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch3-getchar" id="topic-ch3-getchar">
+    <div class="topic__header">
+      <span class="topic__number">Topic 7</span>
+      <h2 class="topic__title"><code>getchar()</code> and <code>putchar()</code></h2>
+      <span class="topic__status-badge" id="badge-ch3-getchar">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch3-getchar-1">
+      <p class="step-label" data-step-num="1">Run this — getchar() and putchar() work one character at a time. See what they do.</p>
+      <div id="compiler-ch3-getchar-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch3-getchar-2">
+      <div id="iq-ch3-getchar"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch3-getchar-3">
+      <div class="explanation-card">
+        <p><strong>getchar()</strong> reads exactly one character from input — including spaces and newlines. It returns an <code>int</code> (not char) so it can also return <code>EOF</code> when input ends. <strong>putchar()</strong> prints exactly one character to output.</p>
+        <p>These functions are faster than printf/scanf for single-character I/O and are essential for reading characters in loops — processing input one character at a time until EOF.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">getchar() / putchar()</span></div>
+        <div class="syntax-card__code">int c = getchar();  /* reads one char, returns int */
+putchar(c);         /* prints one char */
+putchar('\n');      /* prints newline */
+
+/* Loop: process every character until Enter */
+int ch;
+while ((ch = getchar()) != '\n') {
+    putchar(ch);   /* echo each character back */
+}</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Why int, not char?</div>
+          <div class="callout__body">getchar() returns <code>int</code> because it must be able to return <code>EOF</code> (typically -1), which cannot fit in a <code>char</code>. Always store the result of getchar() in an <code>int</code>.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch3-getchar-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch3-getchar-4">
+      <div id="compiler-ch3-getchar-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch3-getchar-5">
+      <div id="compiler-ch3-getchar-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch3-getchar-6">
+      <div id="compiler-ch3-getchar-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch3-getchar-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 getchar() for input processing</div>
+        <p class="realworld-card__text">The classic C idiom for processing a line of input character-by-character is built on getchar(). It appears in text processors, parsers, and compilers.</p>
+        <pre>int c;
+int count = 0;
+while ((c = getchar()) != '\n' && c != EOF) {
+    count++;  /* count characters on the line */
+}
+printf("You typed %d characters\n", count);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch3-getchar">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — getchar() / putchar()</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch3-getchar">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch3-getchar">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch3-getchar">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch3-getchar"><div id="quiz-ch3-getchar-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch3-getchar"><div id="quiz-ch3-getchar-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch3-getchar"><div id="compiler-ch3-getchar-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 8 — FORMATTED OUTPUT — ALIGNING COLUMNS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch3-columns" id="topic-ch3-columns">
+    <div class="topic__header">
+      <span class="topic__number">Topic 8</span>
+      <h2 class="topic__title">Formatted Output — Aligning Columns</h2>
+      <span class="topic__status-badge" id="badge-ch3-columns">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch3-columns-1">
+      <p class="step-label" data-step-num="1">Run this — a properly aligned table built entirely with printf() modifiers.</p>
+      <div id="compiler-ch3-columns-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch3-columns-2">
+      <div id="iq-ch3-columns"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch3-columns-3">
+      <div class="explanation-card">
+        <p>Column alignment combines width (<code>%10d</code>), left-align (<code>%-10s</code>), and precision (<code>%8.2f</code>) across multiple printf() calls. The key principle: <em>every row uses the same format string</em>, so the columns automatically line up.</p>
+        <p>The header row and data rows must use identical widths — change one and the whole table shifts. Print a separator line with <code>printf("%.40s\n", "---...");</code> or a loop of dashes.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Column Alignment Pattern</span></div>
+        <div class="syntax-card__code">/* Define column widths once at the top */
+printf("%-15s %5s %10s\n", "Name", "Grade", "Score");
+printf("%-15s %5s %10s\n", "----------", "-----", "----------");
+printf("%-15s %5c %10.2f\n", "Alice Tan", 'A', 97.5);
+printf("%-15s %5c %10.2f\n", "Bob Cruz", 'B', 83.1);
+/* Output:
+   Name            Grade      Score
+   ----------      -----  ---------
+   Alice Tan           A      97.50
+   Bob Cruz            B      83.10 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch3-columns-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch3-columns-4">
+      <div id="compiler-ch3-columns-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch3-columns-5">
+      <div id="compiler-ch3-columns-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch3-columns-6">
+      <div id="compiler-ch3-columns-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch3-columns-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Column tables in real systems</div>
+        <p class="realworld-card__text">System tools like <code>ls -l</code>, <code>ps aux</code>, and <code>top</code> are all built using exactly this technique — fixed-width printf() columns.</p>
+        <pre>printf("%-8s %6s %8s %s\n", "USER", "PID", "MEM%", "COMMAND");
+printf("%-8s %6d %7.1f%% %s\n", "root", 1, 0.5, "systemd");
+printf("%-8s %6d %7.1f%% %s\n", "student", 1042, 2.3, "main");</pre>
+      </div>
+    </div>
+
+    <!-- Chapter 3 Assessment Block -->
+    <div class="assessment-block" data-topic="ch3-columns">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Column Formatting</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch3-columns">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch3-columns">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch3-columns">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch3-columns">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch3-columns"><div id="quiz-ch3-columns-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch3-columns"><div id="quiz-ch3-columns-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch3-columns"><div id="practice-ch3-columns"></div></div>
+        <div class="assessment-section" id="tab-debug-ch3-columns"><div id="compiler-ch3-columns-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 3 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch3-mastery" id="topic-ch3-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 3 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply everything from Chapter 3 in one program.</p>
+      <div id="compiler-ch3-mastery"></div>
+    </div>
+  </section>
+
+  <!-- Chapter complete -->
+  <div id="ch3-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 3 Complete</div>
+      <p class="chapter-complete__message">You can now control output with precision and read input from the user. Chapter 4 covers comments — the shortest chapter, but one every programmer needs to know.</p>
+      <button class="btn-continue" id="ch3-next-btn">Start Chapter 4 — Comments →</button>
+    </div>
+  </div>
+
+</div>

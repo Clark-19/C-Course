@@ -1,0 +1,997 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch16-pointers/ch16.html
+     Chapter 16: Pointers
+     11 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 16</div>
+    <h1 class="chapter-header__title">Pointers</h1>
+    <p class="chapter-header__subtitle">
+      A pointer is a variable that stores a memory address. That one sentence unlocks
+      everything powerful in C — dynamic memory, passing by reference, array manipulation,
+      data structures, and system-level programming. Every C programmer encounters pointers constantly.
+      This chapter makes them concrete, visual, and manageable.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">11 Topics</span>
+      <span class="chapter-badge">& · * · NULL · arithmetic · arrays · pass-by-ref</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — WHAT IS A POINTER?
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-what" id="topic-ch16-what">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">What is a Pointer?</h2>
+      <span class="topic__status-badge" id="badge-ch16-what">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-what-1">
+      <p class="step-label" data-step-num="1">Run this. A pointer holds a memory address — print both the address and the value at that address.</p>
+      <div id="compiler-ch16-what-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-what-2"><div id="iq-ch16-what"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-what-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">A pointer is a variable that stores a memory address — not a value, a location</h3>
+        <p>Every variable in C lives at a specific address in memory. A <strong>pointer</strong> is a variable whose value is one of those addresses. While an <code>int x = 5</code> stores the number 5, a pointer <code>int *p = &amp;x</code> stores the address where x lives in memory — like a mailing address vs the person who lives there.</p>
+        <p>Pointers are typed: <code>int *p</code> is a pointer to an int. The type tells the compiler how large the value at that address is and how to interpret the bytes stored there.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Memory Mental Model</span></div>
+        <div class="syntax-card__code">/* Memory has addresses like street numbers */
+int x = 42;     /* x lives at address, say, 0x7fff1000 */
+                /* contents at 0x7fff1000: 42            */
+
+int *p = &amp;x;   /* p stores the ADDRESS 0x7fff1000      */
+                /* p's own address might be 0x7fff1008   */
+
+/* Two different things: */
+printf("%p\n", (void*)p);  /* the address stored IN p */
+printf("%d\n", *p);        /* the value AT that address = 42 */
+
+/* Analogy:
+   p    = a piece of paper with an address written on it
+   *p   = going to that address and reading what is there
+   &amp;x   = looking up x's address in the phone book */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Pointers are just integers that happen to be addresses</div>
+          <div class="callout__body">On a 64-bit system, all pointers are 8 bytes regardless of what they point to. A pointer to int, char, or double is the same size — it is always just an address. The type determines how the computer interprets the memory at that address.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch16-what-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-what-4"><div id="compiler-ch16-what-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-what-5"><div id="compiler-ch16-what-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-what-6"><div id="compiler-ch16-what-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-what-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Where pointers appear in real C code</div>
+        <p class="realworld-card__text">Pointers appear in function parameters, array operations, string handling, and dynamic memory. Understanding addresses is the foundation for all of these.</p>
+        <pre>char name[] = "Alice";
+char *p = name;        /* p points to name[0] */
+printf("%s\n", p);     /* p works like the array name */
+
+int arr[5] = {1,2,3,4,5};
+int *ip = arr;         /* points to arr[0] */
+printf("%d\n", *(ip+2)); /* reads arr[2] = 3 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-what">📋 Start Assessment — What is a Pointer?</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-what" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-what">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-what">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-what">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-what">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-what"><div id="quiz-ch16-what-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-what"><div id="quiz-ch16-what-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-what"><div id="practice-ch16-what"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-what"><div id="compiler-ch16-what-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — DECLARING A POINTER
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-declare" id="topic-ch16-declare">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Declaring a Pointer — <code>int *ptr</code></h2>
+      <span class="topic__status-badge" id="badge-ch16-declare">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-declare-1">
+      <p class="step-label" data-step-num="1">Run this. Declaration syntax — the * in the declaration is NOT dereference, it is type syntax.</p>
+      <div id="compiler-ch16-declare-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-declare-2"><div id="iq-ch16-declare"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-declare-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>int *p</code> declares p as a pointer-to-int — the * is part of the type, not an operator</h3>
+        <p>The declaration <code>int *p</code> reads as "p is a pointer to int." The <code>*</code> in the declaration is type syntax — it is not the dereference operator. It means: "the thing at the address p holds is an int." The variable <code>p</code> itself always stores an address (typically 8 bytes on 64-bit systems).</p>
+        <p>Different base types require matching pointer types: <code>char *cp</code> points to a char, <code>float *fp</code> to a float. Mixing types — using a <code>char*</code> to read an <code>int</code> — produces undefined behavior (with the exception of <code>void*</code> which is a generic pointer to anything).</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Pointer Declaration Patterns</span></div>
+        <div class="syntax-card__code">/* type *name — pointer to type */
+int    *ip;   /* pointer to int    */
+char   *cp;   /* pointer to char   */
+float  *fp;   /* pointer to float  */
+double *dp;   /* pointer to double */
+
+/* Declaration with initialization */
+int x = 10;
+int *p = &amp;x;   /* p initialized to address of x */
+
+/* COMMON MISTAKE: declaring two pointers */
+int *a, b;    /* a is int*, b is PLAIN int (not a pointer!) */
+int *a, *b;   /* both are pointers — write * before each name */
+
+/* void* — generic pointer, points to anything */
+void *vp = &amp;x;   /* valid but cannot dereference directly */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">int *a, b — only a is a pointer, b is a plain int</div>
+          <div class="callout__body">The <code>*</code> binds to the variable name, not the type. In <code>int *a, b</code>, <code>a</code> is a pointer but <code>b</code> is a plain int. To declare two pointers: <code>int *a, *b;</code> — write the <code>*</code> before each name.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch16-declare-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-declare-4"><div id="compiler-ch16-declare-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-declare-5"><div id="compiler-ch16-declare-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-declare-6"><div id="compiler-ch16-declare-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-declare-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Function parameters as pointers</div>
+        <p class="realworld-card__text">Function parameters that are pointers appear everywhere in C — the type tells the compiler what to expect at the address.</p>
+        <pre>void process(int *data, int size) {
+    /* data is a pointer to int — used like an array */
+    for (int i = 0; i &lt; size; i++)
+        printf("%d ", data[i]);
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-declare">📋 Start Assessment — Declaring Pointers</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-declare" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-declare">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-declare">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-declare">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-declare">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-declare"><div id="quiz-ch16-declare-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-declare"><div id="quiz-ch16-declare-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-declare"><div id="practice-ch16-declare"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-declare"><div id="compiler-ch16-declare-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — ADDRESS-OF OPERATOR &
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-addressof" id="topic-ch16-addressof">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Address-of Operator <code>&amp;</code> — Getting a Variable's Address</h2>
+      <span class="topic__status-badge" id="badge-ch16-addressof">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-addressof-1">
+      <p class="step-label" data-step-num="1">Run this. &amp; returns the address where a variable lives in memory.</p>
+      <div id="compiler-ch16-addressof-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-addressof-2"><div id="iq-ch16-addressof"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-addressof-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>&amp;x</code> produces the memory address where x is stored</h3>
+        <p>The unary <code>&amp;</code> operator (address-of) applied to any variable returns a pointer — the memory address where that variable lives. <code>&amp;x</code> produces a value of type <code>int*</code> if x is an int. This address is what you store in a pointer variable.</p>
+        <p>Every variable has an address. Even pointer variables have addresses (<code>&amp;p</code> gives the address of the pointer itself — a pointer to a pointer, <code>int**</code>). You cannot take the address of a literal or expression that is not stored in memory: <code>&amp;42</code> is a compile error.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">&amp; — Address-of in Practice</span></div>
+        <div class="syntax-card__code">int  x = 10;
+char c = 'A';
+float f = 3.14;
+
+/* &amp;variable → pointer to that variable */
+int   *px = &amp;x;   /* px holds address of x */
+char  *pc = &amp;c;   /* pc holds address of c */
+float *pf = &amp;f;   /* pf holds address of f */
+
+/* Addresses vary each run — but relationships hold */
+printf("x at  %p\n", (void*)&amp;x);
+printf("px = %p\n",  (void*)px);
+/* Both print the same address */
+
+/* Each variable is adjacent in memory (usually) */
+int a=1, b=2, c2=3;
+printf("&amp;a=%p &amp;b=%p\n", (void*)&amp;a, (void*)&amp;b);
+/* b's address is typically 4 bytes above a's */
+
+/* &amp; used in scanf — you have used it already! */
+/* scanf("%d", &amp;x) passes the address of x
+   so scanf can write the read value into x */</div>
+      </div>
+      <button class="btn-continue" id="step-ch16-addressof-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-addressof-4"><div id="compiler-ch16-addressof-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-addressof-5"><div id="compiler-ch16-addressof-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-addressof-6"><div id="compiler-ch16-addressof-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-addressof-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 scanf uses &amp; — you have used pointers from the start</div>
+        <p class="realworld-card__text">Every scanf call passes an address. scanf needs to write into the caller's variable — passing the address gives scanf a way to reach it from inside the function.</p>
+        <pre>int age;
+scanf("%d", &amp;age);   /* &amp;age = address of age variable */
+/* scanf writes the parsed integer to that address */
+printf("You entered: %d\n", age);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-addressof">📋 Start Assessment — Address-of &amp;</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-addressof" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-addressof">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-addressof">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-addressof">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-addressof">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-addressof"><div id="quiz-ch16-addressof-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-addressof"><div id="quiz-ch16-addressof-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-addressof"><div id="practice-ch16-addressof"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-addressof"><div id="compiler-ch16-addressof-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — DEREFERENCE OPERATOR *
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-deref" id="topic-ch16-deref">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Dereference Operator <code>*</code> — Reading and Writing Through a Pointer</h2>
+      <span class="topic__status-badge" id="badge-ch16-deref">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-deref-1">
+      <p class="step-label" data-step-num="1">Run this. *p reads the value at the address stored in p — and writes to it too.</p>
+      <div id="compiler-ch16-deref-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-deref-2"><div id="iq-ch16-deref"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-deref-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>*p</code> means "go to the address stored in p and read or write what is there"</h3>
+        <p>The unary <code>*</code> operator (dereference or indirection) on a pointer gives you the value at the address the pointer holds. <code>*p = 99</code> writes 99 to the variable p points to. <code>int x = *p</code> reads the value at p's address into x. Both operations affect the actual variable at that address — not a copy.</p>
+        <p>This is what makes pointers powerful: you can pass an address to a function, and the function uses <code>*ptr</code> to directly modify the caller's variable. The function has a <em>reference</em> to the original, not a copy.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">* — Dereference Read and Write</span></div>
+        <div class="syntax-card__code">int x = 5;
+int *p = &amp;x;    /* p points to x */
+
+/* Read through pointer */
+printf("%d\n", *p);   /* 5 — value at address stored in p */
+
+/* Write through pointer */
+*p = 99;
+printf("%d\n", x);    /* 99 — x was modified via *p */
+
+/* * in different contexts — same character, different meaning */
+int *q;       /* declaration: q is pointer-to-int */
+*q = 10;      /* dereference: write 10 to address in q */
+int r = *q;   /* dereference: read value at q's address */
+
+/* Double dereference (pointer to pointer) */
+int **pp = &amp;p;
+printf("%d\n", **pp);  /* deref pp→p, deref p→x = 99 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch16-deref-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-deref-4"><div id="compiler-ch16-deref-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-deref-5"><div id="compiler-ch16-deref-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-deref-6"><div id="compiler-ch16-deref-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-deref-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Writing through a pointer modifies the original</div>
+        <p class="realworld-card__text">Dereferencing to write is how functions modify caller variables — give the function an address, it writes through the pointer to the original storage.</p>
+        <pre>void setToZero(int *p) {
+    *p = 0;     /* modifies the variable at address p */
+}
+
+int score = 100;
+setToZero(&amp;score);
+printf("%d\n", score);   /* 0 — actually modified */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-deref">📋 Start Assessment — Dereference *</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-deref" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-deref">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-deref">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-deref">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-deref">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-deref"><div id="quiz-ch16-deref-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-deref"><div id="quiz-ch16-deref-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-deref"><div id="practice-ch16-deref"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-deref"><div id="compiler-ch16-deref-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — POINTER & VARIABLE RELATIONSHIP
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-relationship" id="topic-ch16-relationship">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">Pointer &amp; Variable Relationship — How They Stay in Sync</h2>
+      <span class="topic__status-badge" id="badge-ch16-relationship">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-relationship-1">
+      <p class="step-label" data-step-num="1">Run this. Changes via the variable and changes via the pointer affect the same memory — always in sync.</p>
+      <div id="compiler-ch16-relationship-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-relationship-2"><div id="iq-ch16-relationship"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-relationship-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">The pointer and variable share the same memory cell — changes through either are immediately visible through both</h3>
+        <p>When <code>p</code> points to <code>x</code>, there is only ONE value in memory. Whether you read it as <code>x</code> or <code>*p</code> makes no difference — they are different names for the same byte(s). Modifying <code>x = 99</code> is visible as <code>*p == 99</code> immediately. Modifying <code>*p = 77</code> is visible as <code>x == 77</code> immediately. There is no copy involved.</p>
+        <p>You can point multiple pointers at the same variable, and all of them will see every change. This is called <em>aliasing</em> — two names for the same storage. It is powerful but requires careful thinking about who changes what and when.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Single Value, Multiple Names</span></div>
+        <div class="syntax-card__code">int x = 10;
+int *p = &amp;x;   /* p and x share the same memory cell */
+int *q = &amp;x;   /* q also points to x — three aliases */
+
+x = 20;         /* visible as *p==20 and *q==20 */
+*p = 30;        /* visible as x==30 and *q==30 */
+*q = 40;        /* visible as x==40 and *p==40 */
+
+printf("x=%d *p=%d *q=%d\n", x, *p, *q);
+/* all print 40 — same cell */
+
+/* p stores address, not value — changing what p points to */
+int y = 99;
+p = &amp;y;         /* now p points to y, not x */
+printf("x=%d *p=%d\n", x, *p);
+/* x unchanged (10 was last... actually 40); *p = y = 99 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch16-relationship-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-relationship-4"><div id="compiler-ch16-relationship-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-relationship-5"><div id="compiler-ch16-relationship-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-relationship-6"><div id="compiler-ch16-relationship-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-relationship-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Two views of the same counter</div>
+        <p class="realworld-card__text">In data structures and OS code, a pointer to a value is passed around so multiple components can observe and update the same counter or status field without copying.</p>
+        <pre>int requests = 0;
+int *counter = &amp;requests;
+
+/* Both increment the same variable */
+requests++;          /* view A */
+(*counter)++;        /* view B */
+printf("%d\n", requests);   /* 2 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-relationship">📋 Start Assessment — Pointer &amp; Variable Relationship</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-relationship" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-relationship">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-relationship">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-relationship">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-relationship">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-relationship"><div id="quiz-ch16-relationship-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-relationship"><div id="quiz-ch16-relationship-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-relationship"><div id="practice-ch16-relationship"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-relationship"><div id="compiler-ch16-relationship-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — NULL POINTER
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-null" id="topic-ch16-null">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title">NULL Pointer — The Safe "Points to Nothing" Value</h2>
+      <span class="topic__status-badge" id="badge-ch16-null">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-null-1">
+      <p class="step-label" data-step-num="1">Run this. NULL is the safe "no address" value — always check before dereferencing.</p>
+      <div id="compiler-ch16-null-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-null-2"><div id="iq-ch16-null"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-null-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">NULL is address 0 — a conventionally invalid address that means "this pointer points to nothing"</h3>
+        <p><code>NULL</code> (defined in <code>stddef.h</code> and most standard headers) is the null pointer constant — address 0. No real object is stored at address 0 on any real operating system, so NULL serves as a sentinel value meaning "uninitialized" or "no target." Functions that return a pointer return NULL to signal failure.</p>
+        <p>Dereferencing a NULL pointer (<code>*p</code> when <code>p == NULL</code>) is always a program crash (segmentation fault). Before using a pointer you received from elsewhere, always check <code>if (p != NULL)</code>. Initialize pointers to NULL when not yet assigned — better to crash predictably than to dereference garbage.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">NULL — Safe Pointer Patterns</span></div>
+        <div class="syntax-card__code">#include &lt;stdio.h&gt;
+
+/* Initialize to NULL when you don't have a target yet */
+int *p = NULL;
+
+/* Safe check before use */
+if (p != NULL) {
+    printf("%d\n", *p);    /* safe to dereference */
+} else {
+    printf("p is NULL — no target\n");
+}
+
+/* Functions returning NULL to signal failure */
+int arr[5] = {1,2,3,4,5};
+int *found = NULL;
+for (int i = 0; i &lt; 5; i++) {
+    if (arr[i] == 3) { found = &amp;arr[i]; break; }
+}
+if (found != NULL) printf("Found: %d\n", *found);
+else               printf("Not found\n");
+
+/* NULL in boolean context */
+if (!p) printf("p is NULL\n");   /* !NULL is true */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Dereferencing NULL always crashes — check before dereferencing any pointer from outside</div>
+          <div class="callout__body">If a pointer was set by a function, returned from malloc, or passed as a parameter, treat it as potentially NULL until verified. <code>if (ptr != NULL)</code> before <code>*ptr</code> is not optional — it is required defensive programming.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch16-null-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-null-4"><div id="compiler-ch16-null-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-null-5"><div id="compiler-ch16-null-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-null-6"><div id="compiler-ch16-null-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-null-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 NULL as a search result sentinel</div>
+        <p class="realworld-card__text">Returning NULL from a search function cleanly communicates "not found" — the caller checks NULL before dereferencing, avoiding crashes.</p>
+        <pre>int *findFirst(int arr[], int n, int target) {
+    for (int i = 0; i &lt; n; i++)
+        if (arr[i] == target) return &amp;arr[i];
+    return NULL;   /* not found */
+}
+
+int data[] = {3,7,2,9};
+int *result = findFirst(data, 4, 9);
+if (result != NULL) printf("Found: %d\n", *result);
+else                printf("Not found\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-null">📋 Start Assessment — NULL Pointer</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-null" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-null">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-null">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-null">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-null">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-null"><div id="quiz-ch16-null-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-null"><div id="quiz-ch16-null-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-null"><div id="practice-ch16-null"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-null"><div id="compiler-ch16-null-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 7 — POINTER ARITHMETIC
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-arithmetic" id="topic-ch16-arithmetic">
+    <div class="topic__header">
+      <span class="topic__number">Topic 7</span>
+      <h2 class="topic__title">Pointer Arithmetic — Moving Through Memory</h2>
+      <span class="topic__status-badge" id="badge-ch16-arithmetic">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-arithmetic-1">
+      <p class="step-label" data-step-num="1">Run this. Adding 1 to an int pointer advances by 4 bytes — one int forward, not one byte.</p>
+      <div id="compiler-ch16-arithmetic-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-arithmetic-2"><div id="iq-ch16-arithmetic"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-arithmetic-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Pointer arithmetic scales by the pointed-to type — p+1 advances by sizeof(*p) bytes</h3>
+        <p>When you add an integer to a pointer, C automatically scales by the size of the type: <code>int *p; p+1</code> advances the address by <code>sizeof(int)</code> bytes (usually 4). This means <code>p+1</code> points to the next int in memory, not the next byte. This is why pointer arithmetic works naturally with arrays — elements are adjacent and correctly sized.</p>
+        <p>Valid operations: <code>p + n</code> (advance n elements), <code>p - n</code> (retreat n elements), <code>p++</code>/<code>p--</code> (advance/retreat one element), <code>p1 - p2</code> (difference in element count between two pointers). You can also compare pointers with <code>&lt;</code>, <code>==</code>, etc. when they point into the same array.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Pointer Arithmetic — Element Steps</span></div>
+        <div class="syntax-card__code">int arr[5] = {10,20,30,40,50};
+int *p = arr;            /* p points to arr[0] */
+
+printf("%d\n", *p);      /* 10 — arr[0] */
+printf("%d\n", *(p+1));  /* 20 — arr[1] (advance 4 bytes) */
+printf("%d\n", *(p+4));  /* 50 — arr[4] */
+
+p++;                     /* p now points to arr[1] */
+printf("%d\n", *p);      /* 20 */
+
+/* Pointer difference — how many elements apart? */
+int *start = arr;
+int *end   = arr + 5;    /* one past last */
+printf("%td elements\n", end - start);  /* 5 */
+
+/* arr[i] == *(arr + i) — always equivalent */
+printf("%d == %d\n", arr[2], *(arr + 2));  /* 30 == 30 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch16-arithmetic-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-arithmetic-4"><div id="compiler-ch16-arithmetic-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-arithmetic-5"><div id="compiler-ch16-arithmetic-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-arithmetic-6"><div id="compiler-ch16-arithmetic-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-arithmetic-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 String traversal via pointer arithmetic</div>
+        <p class="realworld-card__text">String processing in C often uses a pointer that walks forward through the string one character at a time — the same pattern as iterating an array.</p>
+        <pre>char *s = "Hello, World!";
+char *p = s;
+
+while (*p != '\0') {
+    if (*p == 'o') printf("o at offset %td\n", p - s);
+    p++;   /* advance one char forward */
+}
+/* output: o at offset 4, o at offset 8 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-arithmetic">📋 Start Assessment — Pointer Arithmetic</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-arithmetic" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-arithmetic">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-arithmetic">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-arithmetic">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-arithmetic">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-arithmetic"><div id="quiz-ch16-arithmetic-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-arithmetic"><div id="quiz-ch16-arithmetic-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-arithmetic"><div id="practice-ch16-arithmetic"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-arithmetic"><div id="compiler-ch16-arithmetic-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 8 — POINTERS & ARRAYS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-arrays" id="topic-ch16-arrays">
+    <div class="topic__header">
+      <span class="topic__number">Topic 8</span>
+      <h2 class="topic__title">Pointers &amp; Arrays — Two Sides of the Same Coin</h2>
+      <span class="topic__status-badge" id="badge-ch16-arrays">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-arrays-1">
+      <p class="step-label" data-step-num="1">Run this. arr and &arr[0] are the same thing — both give you a pointer to the first element.</p>
+      <div id="compiler-ch16-arrays-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-arrays-2"><div id="iq-ch16-arrays"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-arrays-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">An array name decays to a pointer to its first element — arr[i] and *(arr+i) are identical</h3>
+        <p>When you use an array name in most expressions, it <strong>decays</strong> to a pointer to its first element. <code>arr</code> and <code>&amp;arr[0]</code> are the same address. Because of this, <code>arr[i]</code> is defined as <code>*(arr + i)</code> — bracket notation is just syntactic sugar for pointer arithmetic plus dereference.</p>
+        <p>When an array is passed to a function, it decays to a pointer — the function receives a pointer to the first element, not a copy of the array. This is why the function can modify the original array and why you must pass the size separately (the function cannot compute it from a pointer alone).</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Array-Pointer Equivalence</span></div>
+        <div class="syntax-card__code">int arr[5] = {10,20,30,40,50};
+
+/* These are identical: */
+arr[2]         /* bracket notation */
+*(arr + 2)     /* pointer arithmetic + dereference */
+*(2 + arr)     /* addition is commutative! */
+2[arr]         /* even this works (curiosity, not style) */
+
+/* All print 30 */
+printf("%d %d\n", arr[2], *(arr+2));
+
+/* Passing to a function — decays to pointer */
+void print(int *p, int n) {  /* int *p and int p[] equivalent */
+    for (int i = 0; i &lt; n; i++) printf("%d ", p[i]);
+}
+print(arr, 5);   /* arr decays to &amp;arr[0] */
+
+/* sizeof difference — array vs pointer */
+printf("array: %zu\n", sizeof(arr));       /* 20 bytes */
+int *p = arr;
+printf("pointer: %zu\n", sizeof(p));       /* 8 bytes (address size) */</div>
+      </div>
+      <button class="btn-continue" id="step-ch16-arrays-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-arrays-4"><div id="compiler-ch16-arrays-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-arrays-5"><div id="compiler-ch16-arrays-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-arrays-6"><div id="compiler-ch16-arrays-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-arrays-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Functions that modify arrays — pass by pointer, modify directly</div>
+        <p class="realworld-card__text">Passing an array to a function gives the function a pointer to the original. Changes inside the function immediately affect the caller's array — no return value needed.</p>
+        <pre>void doubleAll(int *arr, int n) {
+    for (int i = 0; i &lt; n; i++) arr[i] *= 2;
+}
+
+int data[] = {1,2,3,4,5};
+doubleAll(data, 5);
+/* data is now {2,4,6,8,10} — modified in place */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-arrays">📋 Start Assessment — Pointers &amp; Arrays</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-arrays" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-arrays">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-arrays">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-arrays">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-arrays">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-arrays"><div id="quiz-ch16-arrays-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-arrays"><div id="quiz-ch16-arrays-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-arrays"><div id="practice-ch16-arrays"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-arrays"><div id="compiler-ch16-arrays-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 9 — PASSING POINTERS TO FUNCTIONS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-funcs" id="topic-ch16-funcs">
+    <div class="topic__header">
+      <span class="topic__number">Topic 9</span>
+      <h2 class="topic__title">Passing Pointers to Functions — Pass by Reference</h2>
+      <span class="topic__status-badge" id="badge-ch16-funcs">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-funcs-1">
+      <p class="step-label" data-step-num="1">Run this. Pass the address — the function can read AND write the caller's variable through the pointer.</p>
+      <div id="compiler-ch16-funcs-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-funcs-2"><div id="iq-ch16-funcs"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-funcs-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Pass &amp;x to give a function write access to x — simulating pass-by-reference</h3>
+        <p>C only has pass-by-value — functions receive copies. But by passing the <em>address</em> of a variable, you give the function a way to reach the original through pointer dereference. Inside the function, <code>*ptr = value</code> writes to the caller's variable. This pattern is called <strong>simulated pass-by-reference</strong>.</p>
+        <p>This is how multiple return values work in C: instead of returning two values, the function takes two pointer parameters and writes both results through them. It is also how <code>scanf</code> writes user input back to the caller's variables.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Pass by Pointer — Two Return Values</span></div>
+        <div class="syntax-card__code">/* Function computes both quotient and remainder */
+void divmod(int a, int b, int *quot, int *rem) {
+    *quot = a / b;   /* write to caller's quot variable */
+    *rem  = a % b;   /* write to caller's rem variable */
+}
+
+int q, r;
+divmod(17, 5, &amp;q, &amp;r);   /* pass addresses */
+printf("%d / %d = %d remainder %d\n", 17, 5, q, r);
+/* 17 / 5 = 3 remainder 2 */
+
+/* Swap — the classic pass-by-pointer example */
+void swap(int *a, int *b) {
+    int temp = *a; *a = *b; *b = temp;
+}
+
+int x = 10, y = 20;
+swap(&amp;x, &amp;y);   /* pass addresses */
+printf("%d %d\n", x, y);   /* 20 10 — actually swapped */</div>
+      </div>
+      <button class="btn-continue" id="step-ch16-funcs-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-funcs-4"><div id="compiler-ch16-funcs-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-funcs-5"><div id="compiler-ch16-funcs-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-funcs-6"><div id="compiler-ch16-funcs-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-funcs-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 min and max in one pass</div>
+        <p class="realworld-card__text">Computing both minimum and maximum of an array in a single pass returns two values — pointer parameters make this clean.</p>
+        <pre>void minmax(int *arr, int n, int *mn, int *mx) {
+    *mn = *mx = arr[0];
+    for (int i = 1; i &lt; n; i++) {
+        if (arr[i] &lt; *mn) *mn = arr[i];
+        if (arr[i] > *mx) *mx = arr[i];
+    }
+}
+
+int data[] = {3,7,1,9,4};
+int lo, hi;
+minmax(data, 5, &amp;lo, &amp;hi);
+printf("Min:%d Max:%d\n", lo, hi);  /* Min:1 Max:9 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-funcs">📋 Start Assessment — Passing Pointers to Functions</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-funcs" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-funcs">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-funcs">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-funcs">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-funcs">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-funcs"><div id="quiz-ch16-funcs-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-funcs"><div id="quiz-ch16-funcs-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-funcs"><div id="practice-ch16-funcs"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-funcs"><div id="compiler-ch16-funcs-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 10 — MODIFYING CALLER VALUES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-modify" id="topic-ch16-modify">
+    <div class="topic__header">
+      <span class="topic__number">Topic 10</span>
+      <h2 class="topic__title">Modifying Caller Values — The Swap Pattern and Beyond</h2>
+      <span class="topic__status-badge" id="badge-ch16-modify">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-modify-1">
+      <p class="step-label" data-step-num="1">Run this. Contrast by-value (no change) with by-pointer (changes original).</p>
+      <div id="compiler-ch16-modify-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-modify-2"><div id="iq-ch16-modify"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-modify-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Pass the address to modify; pass the value to read — know which one you need</h3>
+        <p>The core decision when writing a function: does the caller need the variable changed, or does it just need the value processed? Pass the value (<code>int n</code>) when the function only reads — simpler, safer, no accidental modification. Pass the address (<code>int *p</code>) when the function must modify the caller's variable.</p>
+        <p>Using <code>const int *p</code> (pointer to const int) is a middle ground: the function gets a pointer for efficiency (avoiding copy for large data) but the <code>const</code> prevents the function from modifying the value. This is the standard pattern for read-only pointer parameters.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Value vs Pointer Parameter — Decision Guide</span></div>
+        <div class="syntax-card__code">/* Read only — pass value */
+int square(int n) { return n * n; }
+
+/* Read only large data — pass const pointer */
+int sumArr(const int *arr, int n) {
+    int s = 0;
+    for (int i = 0; i &lt; n; i++) s += arr[i];
+    /* arr[i] = 0;  ERROR — const prevents modification */
+    return s;
+}
+
+/* Modify caller's variable — pass pointer */
+void increment(int *p) { (*p)++; }
+void clamp(int *p, int lo, int hi) {
+    if (*p &lt; lo) *p = lo;
+    if (*p > hi) *p = hi;
+}
+
+int x = 5;
+increment(&amp;x);   /* x = 6 */
+clamp(&amp;x, 0, 4); /* x = 4 */
+printf("%d\n", x);  /* 4 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch16-modify-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-modify-4"><div id="compiler-ch16-modify-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-modify-5"><div id="compiler-ch16-modify-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-modify-6"><div id="compiler-ch16-modify-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-modify-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 In-place sorting — swap uses pointer parameters</div>
+        <p class="realworld-card__text">Every sorting algorithm needs to swap elements. A swap function requires pointer parameters to actually exchange two values in the caller's array.</p>
+        <pre>void swap(int *a, int *b) {
+    int t = *a; *a = *b; *b = t;
+}
+
+int arr[] = {5,3,1,4,2};
+/* Simple selection sort */
+for (int i = 0; i &lt; 4; i++)
+    for (int j = i+1; j &lt; 5; j++)
+        if (arr[j] &lt; arr[i]) swap(&amp;arr[i], &amp;arr[j]);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-modify">📋 Start Assessment — Modifying Caller Values</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-modify" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-modify">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-modify">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-modify">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-modify">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-modify"><div id="quiz-ch16-modify-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-modify"><div id="quiz-ch16-modify-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-modify"><div id="practice-ch16-modify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-modify"><div id="compiler-ch16-modify-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 11 — COMMON POINTER MISTAKES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-mistakes" id="topic-ch16-mistakes">
+    <div class="topic__header">
+      <span class="topic__number">Topic 11</span>
+      <h2 class="topic__title">Common Pointer Mistakes — The Bugs That Crash Programs</h2>
+      <span class="topic__status-badge" id="badge-ch16-mistakes">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch16-mistakes-1">
+      <p class="step-label" data-step-num="1">Run this. These are the four bugs that corrupt memory or crash programs — recognize each one.</p>
+      <div id="compiler-ch16-mistakes-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch16-mistakes-2"><div id="iq-ch16-mistakes"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch16-mistakes-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">The four pointer bugs that crash or corrupt every C program eventually</h3>
+        <p><strong>1. Uninitialized pointer dereference</strong> — <code>int *p; *p = 5;</code> — p holds garbage, writing to garbage address corrupts memory or crashes.</p>
+        <p><strong>2. NULL pointer dereference</strong> — <code>int *p = NULL; *p = 5;</code> — dereferencing NULL is always a crash (segfault).</p>
+        <p><strong>3. Dangling pointer</strong> — pointer to a variable that no longer exists (returned address of a local variable, or freed memory). Using it is undefined behavior.</p>
+        <p><strong>4. Missing &amp; in function call</strong> — passing <code>x</code> instead of <code>&amp;x</code> to a function expecting a pointer makes the function treat the value as an address — garbage.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Four Pointer Bug Patterns</span></div>
+        <div class="syntax-card__code">/* BUG 1: Uninitialized — p holds garbage address */
+int *p;
+/* *p = 5;  → CRASH or silent corruption */
+int x = 0; p = &amp;x;  /* FIX: initialize before use */
+
+/* BUG 2: NULL dereference */
+int *q = NULL;
+/* *q = 5;  → CRASH (segfault) */
+if (q != NULL) *q = 5;  /* FIX: check before deref */
+
+/* BUG 3: Dangling pointer — local var gone */
+int *bad() {
+    int local = 42;
+    return &amp;local;  /* local is destroyed at return! */
+}   /* FIX: never return address of local variable */
+
+/* BUG 4: Missing &amp; — value passed as address */
+void setTo10(int *p) { *p = 10; }
+int n = 5;
+/* setTo10(n);   → n's VALUE used as address → CRASH */
+setTo10(&amp;n);    /* FIX: pass the ADDRESS */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Always initialize pointers — uninitialized is worse than NULL</div>
+          <div class="callout__body">An uninitialized pointer holds a random garbage address. Accessing it may succeed silently (hitting valid memory you happen to own) or crash unpredictably. NULL is better — it always crashes on access, making the bug obvious. Set every pointer to NULL if not immediately initialized.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch16-mistakes-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch16-mistakes-4"><div id="compiler-ch16-mistakes-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch16-mistakes-5"><div id="compiler-ch16-mistakes-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch16-mistakes-6"><div id="compiler-ch16-mistakes-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch16-mistakes-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Safe pointer usage checklist</div>
+        <p class="realworld-card__text">Before using any pointer, run through this mental checklist — it prevents the four bugs above in almost all cases.</p>
+        <pre>/* Safe pointer checklist:
+   ✓ Is it initialized? (not garbage)
+   ✓ Is it non-NULL? (check before deref)
+   ✓ Does the target still exist? (no dangling)
+   ✓ Is the type correct? (right pointer type)
+   ✓ Is the index in bounds? (for pointer+n)
+*/
+
+int val = 42;
+int *p = &amp;val;              /* initialized */
+if (p != NULL) *p += 1;     /* NULL-checked */
+printf("%d\n", val);         /* 43 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch16-mistakes">📋 Start Assessment — Common Pointer Mistakes</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch16-mistakes" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch16-mistakes">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch16-mistakes">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch16-mistakes">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch16-mistakes">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch16-mistakes"><div id="quiz-ch16-mistakes-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch16-mistakes"><div id="quiz-ch16-mistakes-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch16-mistakes"><div id="practice-ch16-mistakes"></div></div>
+        <div class="assessment-section" id="tab-debug-ch16-mistakes"><div id="compiler-ch16-mistakes-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 16 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch16-mastery" id="topic-ch16-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 16 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply every pointer concept from this chapter in one complete program.</p>
+      <div id="compiler-ch16-mastery"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER COMPLETE -->
+  <div id="ch16-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 16 Complete</div>
+      <p class="chapter-complete__message">
+        You understand pointers — the <code>&amp;</code> operator, <code>*</code> dereference, NULL safety,
+        arithmetic, the array-pointer equivalence, and pass-by-pointer for modifying caller values.
+        Pointers are the foundation of every advanced C concept. Chapter 17 builds on this with
+        structs and enums — grouping related data into custom types.
+      </p>
+      <button class="btn-continue" id="ch16-next-btn">Start Chapter 17 — Structs &amp; Enums →</button>
+    </div>
+  </div>
+
+</div>

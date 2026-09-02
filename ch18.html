@@ -1,0 +1,456 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch18-memory-files-macros/ch18.html
+     Chapter 18: Memory, Files & Macros
+     4 topics · 7-step structure · Modal popup assessments
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 18</div>
+    <h1 class="chapter-header__title">Memory, Files &amp; Macros</h1>
+    <p class="chapter-header__subtitle">
+      So far, every variable you've declared lives on the stack — fixed size, automatic lifetime.
+      This chapter goes lower: heap allocation lets you create data whose size you decide at runtime.
+      File I/O persists data beyond the program's lifetime. Macros let the preprocessor rewrite
+      your code before compilation. These three tools open up everything C programs do in the real world.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">4 Topics</span>
+      <span class="chapter-badge">malloc · fopen · #define · #ifdef</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — DYNAMIC MEMORY (malloc, calloc, free)
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch18-malloc" id="topic-ch18-malloc">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">Dynamic Memory — <code>malloc</code>, <code>calloc</code>, <code>free</code></h2>
+      <span class="topic__status-badge" id="badge-ch18-malloc">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch18-malloc-1">
+      <p class="step-label" data-step-num="1">Run this. <code>malloc</code> allocates memory on the heap at runtime — compile and observe the array being built dynamically.</p>
+      <div id="compiler-ch18-malloc-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch18-malloc-2">
+      <div id="iq-ch18-malloc"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch18-malloc-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">The stack is automatic; the heap is manual — <code>malloc</code> gives you heap memory</h3>
+        <p>Every local variable goes on the <strong>stack</strong> — allocated when the function is called, freed when it returns. The <strong>heap</strong> is a separate memory pool: you request it with <code>malloc</code>, use it as long as you need, then release it with <code>free</code>. The key difference: the size can be a runtime value, not a compile-time constant.</p>
+        <p><code>malloc</code> returns a <code>void *</code> — a raw address to the allocated block — or <code>NULL</code> if allocation failed. Always check for <code>NULL</code> before using the pointer. Every <code>malloc</code> must be paired with exactly one <code>free</code>; forgetting to free is a <em>memory leak</em>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">malloc, calloc, free</span></div>
+        <div class="syntax-card__code">#include &lt;stdlib.h&gt;
+
+/* malloc — allocate n bytes, uninitialized */
+int *arr = (int *)malloc(5 * sizeof(int));
+if (arr == NULL) { /* allocation failed */ }
+
+/* calloc — allocate and zero-initialize */
+int *zeroed = (int *)calloc(5, sizeof(int));
+
+/* Use the memory */
+arr[0] = 42;
+
+/* free — release when done (mandatory) */
+free(arr);
+arr = NULL;   /* good practice: nullify after free */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Every <code>malloc</code> must have exactly one matching <code>free</code></div>
+          <div class="callout__body">Forgetting <code>free</code> is a memory leak — the process holds memory it will never use again. Calling <code>free</code> twice on the same pointer is undefined behavior and often crashes. Set the pointer to <code>NULL</code> immediately after freeing to prevent double-free bugs.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch18-malloc-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch18-malloc-4">
+      <div id="compiler-ch18-malloc-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch18-malloc-5">
+      <div id="compiler-ch18-malloc-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch18-malloc-6">
+      <div id="compiler-ch18-malloc-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch18-malloc-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Dynamic arrays — where the size is read from user input or a file at runtime — are one of the most common uses of <code>malloc</code>. Every database engine, web server, and game engine allocates memory this way.</p>
+        <pre>/* Read n from input, allocate exactly what's needed */
+int n = getInputSize();
+float *data = (float *)malloc(n * sizeof(float));
+if (!data) { fprintf(stderr, "Out of memory\n"); exit(1); }
+fillData(data, n);
+processData(data, n);
+free(data);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch18-malloc">📋 Start Assessment — Dynamic Memory</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch18-malloc" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch18-malloc">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch18-malloc">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch18-malloc">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch18-malloc">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch18-malloc"><div id="quiz-ch18-malloc-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch18-malloc"><div id="quiz-ch18-malloc-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch18-malloc"><div id="practice-ch18-malloc"></div></div>
+        <div class="assessment-section" id="tab-debug-ch18-malloc"><div id="compiler-ch18-malloc-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — FILE HANDLING (fopen, fclose, fprintf, fscanf)
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch18-files" id="topic-ch18-files">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">File Handling — <code>fopen</code>, <code>fprintf</code>, <code>fclose</code></h2>
+      <span class="topic__status-badge" id="badge-ch18-files">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch18-files-1">
+      <p class="step-label" data-step-num="1">Study this pattern. File I/O requires an OS filesystem — run this example locally with GCC to see it work. Compile here to study the syntax.</p>
+      <div class="callout callout--mistake" style="margin-bottom:var(--space-12)">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Browser limitation — file I/O runs locally only</div>
+          <div class="callout__body">The browser has no filesystem. The code below is correct C — it will not produce output here but will work when compiled with GCC. To run it: save as <code>main.c</code> → <code>gcc main.c -o main</code> → <code>./main</code>. All quiz questions below test your understanding of the syntax and patterns.</div>
+        </div>
+      </div>
+      <div id="compiler-ch18-files-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch18-files-2">
+      <div id="iq-ch18-files"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch18-files-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Files give programs persistent memory — data survives after the program exits</h3>
+        <p>A file in C is accessed through a <code>FILE *</code> pointer. <code>fopen(filename, mode)</code> opens the file and returns a pointer — or <code>NULL</code> if the file can't be opened. <strong>Always check for NULL</strong>. When done, <code>fclose</code> flushes buffers and releases the file handle — forgetting to close can corrupt the file.</p>
+        <p>File modes: <code>"r"</code> reads, <code>"w"</code> creates/overwrites, <code>"a"</code> appends, <code>"r+"</code> reads and writes. <code>fprintf</code> writes formatted text like <code>printf</code>. <code>fgets</code> reads a line safely (always bounds-checked, unlike <code>fscanf</code>).</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">File I/O Pattern</span></div>
+        <div class="syntax-card__code">FILE *fp = fopen("data.txt", "w");  /* open for writing */
+if (fp == NULL) {
+    printf("Cannot open file\n");
+    return 1;   /* exit with error */
+}
+fprintf(fp, "Score: %d\n", 100);   /* write to file */
+fclose(fp);                          /* always close */
+
+/* Reading */
+FILE *fr = fopen("data.txt", "r");
+char line[100];
+fgets(line, sizeof(line), fr);       /* read one line */
+printf("%s", line);
+fclose(fr);</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title"><code>fgets</code> is safer than <code>fscanf</code> for reading strings</div>
+          <div class="callout__body"><code>fscanf(fp, "%s", buf)</code> stops at whitespace and can overflow the buffer. <code>fgets(buf, sizeof(buf), fp)</code> reads the whole line up to the buffer size limit — it cannot overflow, and it handles spaces correctly.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch18-files-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch18-files-4">
+      <p class="step-label" data-step-num="4">Study this write pattern. The browser compiler will not produce file output — run it locally with GCC to verify. Focus on the syntax structure.</p>
+      <div id="compiler-ch18-files-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch18-files-5">
+      <div id="compiler-ch18-files-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch18-files-6">
+      <div id="compiler-ch18-files-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch18-files-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Game save systems, configuration loaders, log writers — all use this exact pattern. The file acts as a key-value store that outlives the program.</p>
+        <pre>/* Save game state */
+FILE *save = fopen("save.dat", "w");
+fprintf(save, "level=%d\n",    player.level);
+fprintf(save, "health=%d\n",   player.health);
+fprintf(save, "score=%d\n",    player.score);
+fclose(save);
+
+/* Load on restart */
+FILE *load = fopen("save.dat", "r");
+fscanf(load, "level=%d\n",  &amp;player.level);
+fclose(load);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch18-files">📋 Start Assessment — File Handling</button>
+      <p class="assessment-trigger-note">Multiple choice · Concept questions · Pattern recognition · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch18-files" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch18-files">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch18-files">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch18-files">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch18-files">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch18-files"><div id="quiz-ch18-files-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch18-files"><div id="quiz-ch18-files-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch18-files"><div id="practice-ch18-files"></div></div>
+        <div class="assessment-section" id="tab-debug-ch18-files"><div id="compiler-ch18-files-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — MACROS (#define constants and functions)
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch18-macros" id="topic-ch18-macros">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Macros — <code>#define</code> Constants and Function Macros</h2>
+      <span class="topic__status-badge" id="badge-ch18-macros">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch18-macros-1">
+      <p class="step-label" data-step-num="1">Run this. The preprocessor replaces every macro name before compilation — compile and see constants and function macros in action.</p>
+      <div id="compiler-ch18-macros-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch18-macros-2">
+      <div id="iq-ch18-macros"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch18-macros-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>#define</code> creates a text substitution — the preprocessor rewrites your code before compilation</h3>
+        <p>A <strong>constant macro</strong> like <code>#define MAX 100</code> causes the preprocessor to replace every occurrence of <code>MAX</code> with <code>100</code> before the compiler sees the code. No memory is used, no type is assigned. A <strong>function-like macro</strong> takes arguments: <code>#define SQUARE(x) ((x)*(x))</code> expands to inline code wherever it is called.</p>
+        <p>Function-like macros have one critical rule: <strong>always wrap every argument and the whole expression in parentheses</strong>. Without them, <code>SQUARE(a+b)</code> expands to <code>a+b*a+b</code> — mathematically wrong. With parentheses: <code>((a+b)*(a+b))</code> — correct.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">#define — Constants and Function Macros</span></div>
+        <div class="syntax-card__code">/* Constant macro — replaces name with value */
+#define PI        3.14159
+#define MAX_SIZE  100
+#define APP_NAME  "MyApp"
+
+printf("Pi: %.5f\n", PI);       /* → 3.14159 */
+printf("Max: %d\n", MAX_SIZE);  /* → 100     */
+
+/* Function-like macro — always double-parenthesise */
+#define SQUARE(x)  ((x) * (x))
+#define MAX(a,b)   ((a) &gt; (b) ? (a) : (b))
+
+printf("%d\n", SQUARE(5));      /* → 25  */
+printf("%d\n", MAX(3, 7));      /* → 7   */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Macros with <code>++</code> arguments are a classic bug</div>
+          <div class="callout__body"><code>SQUARE(x++)</code> expands to <code>((x++) * (x++))</code> — <code>x</code> is incremented twice. This is undefined behavior. Never pass an expression with side effects (like <code>++</code> or <code>--</code>) to a function-like macro. Use an inline function or a temporary variable instead.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch18-macros-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch18-macros-4">
+      <div id="compiler-ch18-macros-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch18-macros-5">
+      <div id="compiler-ch18-macros-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch18-macros-6">
+      <div id="compiler-ch18-macros-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch18-macros-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Constant macros are the standard way to define physical constants, buffer sizes, magic numbers, and configuration values that appear throughout a codebase. A single <code>#define</code> change updates every usage instantly.</p>
+        <pre>#define GRAVITY      9.81f
+#define BUFFER_SIZE  4096
+#define CLAMP(v,lo,hi)  ((v) &lt; (lo) ? (lo) : (v) &gt; (hi) ? (hi) : (v))
+
+float speed  = velocity + GRAVITY * time;
+char  buf[BUFFER_SIZE];
+int   val = CLAMP(input, 0, 255);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch18-macros">📋 Start Assessment — Macros</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch18-macros" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch18-macros">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch18-macros">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch18-macros">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch18-macros">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch18-macros"><div id="quiz-ch18-macros-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch18-macros"><div id="quiz-ch18-macros-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch18-macros"><div id="practice-ch18-macros"></div></div>
+        <div class="assessment-section" id="tab-debug-ch18-macros"><div id="compiler-ch18-macros-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — PREPROCESSOR DIRECTIVES (#ifdef, #ifndef, guards)
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch18-preprocessor" id="topic-ch18-preprocessor">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Preprocessor — <code>#ifdef</code>, <code>#ifndef</code>, Include Guards</h2>
+      <span class="topic__status-badge" id="badge-ch18-preprocessor">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch18-preprocessor-1">
+      <p class="step-label" data-step-num="1">Run this. The preprocessor chooses which code to compile based on what's defined — observe the conditional output.</p>
+      <div id="compiler-ch18-preprocessor-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch18-preprocessor-2">
+      <div id="iq-ch18-preprocessor"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch18-preprocessor-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Conditional compilation selects which code the compiler sees — the rest is erased before compilation</h3>
+        <p><code>#ifdef NAME</code> includes the block only if <code>NAME</code> has been <code>#define</code>d. <code>#ifndef NAME</code> is the opposite — includes if NOT defined. <code>#endif</code> closes the block. The compiler never sees the excluded code — it is completely removed by the preprocessor, not compiled to dead code.</p>
+        <p>The most important use of <code>#ifndef</code> is the <strong>include guard</strong>: a pattern every header file should use to prevent the same header from being included more than once, which causes duplicate declaration errors.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Conditional Compilation &amp; Include Guard</span></div>
+        <div class="syntax-card__code">/* Conditional compilation */
+#define DEBUG
+
+#ifdef DEBUG
+    printf("Debug: x = %d\n", x);
+#else
+    /* release build — logging removed */
+#endif
+
+/* Include guard (every header file needs this) */
+#ifndef MYHEADER_H
+#define MYHEADER_H
+
+void myFunction(int x);
+int  anotherFunction(void);
+
+#endif /* MYHEADER_H */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Debug logging with <code>#ifdef</code> is zero-cost in release builds</div>
+          <div class="callout__body">Define a <code>DEBUG_PRINT</code> macro that uses <code>printf</code> when <code>DEBUG</code> is defined, and expands to nothing in release. Compile with <code>gcc -DDEBUG program.c</code> to turn it on without changing any source code. Release builds have no printf overhead at all.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch18-preprocessor-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch18-preprocessor-4">
+      <div id="compiler-ch18-preprocessor-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch18-preprocessor-5">
+      <div id="compiler-ch18-preprocessor-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch18-preprocessor-6">
+      <div id="compiler-ch18-preprocessor-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch18-preprocessor-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world context</div>
+        <p class="realworld-card__text">Platform detection with preprocessor directives is universal in cross-platform C. The same source file compiles differently on Windows, Linux, and macOS — the preprocessor selects the right code for each target.</p>
+        <pre>#ifdef _WIN32
+    #include &lt;windows.h&gt;
+    void clearScreen() { system("cls"); }
+#elif defined(__linux__)
+    #include &lt;stdlib.h&gt;
+    void clearScreen() { system("clear"); }
+#else
+    void clearScreen() { printf("\n\n\n"); }
+#endif</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch18-preprocessor">📋 Start Assessment — Preprocessor</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch18-preprocessor" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch18-preprocessor">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch18-preprocessor">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch18-preprocessor">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch18-preprocessor">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch18-preprocessor"><div id="quiz-ch18-preprocessor-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch18-preprocessor"><div id="quiz-ch18-preprocessor-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch18-preprocessor"><div id="practice-ch18-preprocessor"></div></div>
+        <div class="assessment-section" id="tab-debug-ch18-preprocessor"><div id="compiler-ch18-preprocessor-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch18-mastery" id="topic-ch18-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 18 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply macros and preprocessor directives in one complete program — constants, function macros, and conditional compilation.</p>
+      <div id="compiler-ch18-mastery"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER COMPLETE -->
+  <div id="ch18-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 18 Complete</div>
+      <p class="chapter-complete__message">
+        You understand heap allocation with <code>malloc</code> and <code>free</code>, file I/O patterns
+        with <code>fopen</code>/<code>fclose</code>/<code>fprintf</code>, constant and function-like macros
+        with <code>#define</code>, and conditional compilation with <code>#ifdef</code>/<code>#ifndef</code>.
+        These are the tools that take C programs from classroom exercises to real software.
+        Chapter 19 puts everything together — three complete projects from scratch.
+      </p>
+      <button class="btn-continue" id="ch18-next-btn">Start Chapter 19 — Projects →</button>
+    </div>
+  </div>
+
+</div>

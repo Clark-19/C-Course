@@ -1,0 +1,388 @@
+/* =========================================================
+   C LEARNING PLATFORM — chapters/ch19-projects/ch19.css
+   Chapter 19: Projects — chapter-specific styles only
+   All shared component styles live in shared/shared.css
+   ========================================================= */
+
+/* ── Project brief card ──────────────────────────────────── */
+.project-brief {
+  margin: var(--space-20) 0 var(--space-24);
+  border: 1px solid rgba(0, 212, 170, 0.25);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.project-brief__eyebrow {
+  padding: var(--space-10) var(--space-20);
+  background: rgba(0, 212, 170, 0.07);
+  border-bottom: 1px solid rgba(0, 212, 170, 0.15);
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.project-brief__desc {
+  padding: var(--space-16) var(--space-20);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  line-height: var(--leading-relaxed);
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin: 0;
+}
+
+.project-brief__skills {
+  padding: var(--space-12) var(--space-20);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  background: var(--color-surface);
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-10);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+/* ── Project progress tracker ────────────────────────────── */
+.project-progress {
+  margin: var(--space-16) 0;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: var(--space-12) var(--space-16);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.project-progress__step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  position: relative;
+}
+
+.project-progress__step::after {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--color-border-subtle);
+  z-index: 0;
+}
+
+.project-progress__step:last-child::after {
+  display: none;
+}
+
+.project-progress__dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface-raised);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  color: var(--color-text-muted);
+  position: relative;
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+
+.project-progress__step--done .project-progress__dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.project-progress__step--active .project-progress__dot {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: rgba(0, 212, 170, 0.08);
+}
+
+.project-progress__label {
+  font-size: 9px;
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Architecture diagram ────────────────────────────────── */
+.arch-diagram {
+  margin: var(--space-16) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.arch-diagram__header {
+  padding: var(--space-10) var(--space-16);
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+}
+
+.arch-diagram__body {
+  padding: var(--space-16);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.arch-layer {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.arch-layer__label {
+  padding: var(--space-6) var(--space-14);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.arch-layer--data     .arch-layer__label { color: #79c0ff; }
+.arch-layer--logic    .arch-layer__label { color: var(--color-accent); }
+.arch-layer--display  .arch-layer__label { color: #f0a847; }
+
+.arch-layer__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  padding: var(--space-10) var(--space-14);
+  background: var(--color-bg);
+}
+
+.arch-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--space-10);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  border: 1px solid;
+}
+
+.arch-layer--data    .arch-item { border-color: rgba(121,192,255,0.25); background: rgba(121,192,255,0.06); color: #79c0ff; }
+.arch-layer--logic   .arch-item { border-color: rgba(0,212,170,0.25);  background: rgba(0,212,170,0.06);  color: var(--color-accent); }
+.arch-layer--display .arch-item { border-color: rgba(240,168,71,0.25); background: rgba(240,168,71,0.06); color: #f0a847; }
+
+/* ── Sample output preview ───────────────────────────────── */
+.output-preview {
+  margin: var(--space-16) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.output-preview__header {
+  padding: var(--space-8) var(--space-16);
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+}
+
+.output-preview__header-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.output-preview__body {
+  padding: var(--space-14) var(--space-16);
+  background: var(--color-bg);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  line-height: 1.9;
+  color: var(--color-text);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.output-preview__line--header  { color: var(--color-accent); font-weight: var(--weight-bold); }
+.output-preview__line--sep     { color: var(--color-border); }
+.output-preview__line--data    { color: var(--color-text); }
+.output-preview__line--total   { color: #f0a847; font-weight: var(--weight-semibold); }
+.output-preview__line--winner  { color: #79c0ff; }
+.output-preview__line--correct { color: var(--color-correct); font-weight: var(--weight-bold); }
+
+/* ── Game state tracker visual ───────────────────────────── */
+.game-trace {
+  margin: var(--space-16) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.game-trace__header {
+  padding: var(--space-10) var(--space-16);
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.game-trace__secret {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-accent);
+}
+
+.game-trace__body {
+  background: var(--color-bg);
+}
+
+.game-guess-row {
+  display: grid;
+  grid-template-columns: 60px 80px 1fr 90px;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.game-guess-row:last-child { border-bottom: none; }
+
+.game-guess-row__cell {
+  padding: var(--space-8) var(--space-14);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  display: flex;
+  align-items: center;
+  border-right: 1px solid var(--color-border-subtle);
+}
+
+.game-guess-row__cell:last-child { border-right: none; }
+
+.game-guess-row__cell--attempt { color: var(--color-text-muted); }
+.game-guess-row__cell--guess   { color: var(--color-text); font-weight: var(--weight-semibold); }
+.game-guess-row__cell--delta   { color: var(--color-text-muted); font-size: 11px; }
+
+.result-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-8);
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.result-badge--low     { background: rgba(121,192,255,0.1);  border: 1px solid rgba(121,192,255,0.3); color: #79c0ff; }
+.result-badge--high    { background: rgba(248,81,73,0.08);   border: 1px solid rgba(248,81,73,0.25); color: var(--color-incorrect); }
+.result-badge--correct { background: rgba(63,185,80,0.1);   border: 1px solid rgba(63,185,80,0.3);  color: var(--color-correct); }
+
+.game-trace__footer {
+  padding: var(--space-10) var(--space-16);
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-raised);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+}
+
+.game-trace__result {
+  font-weight: var(--weight-bold);
+  color: var(--color-correct);
+  font-family: var(--font-code);
+}
+
+/* ── Three-project progress overview ─────────────────────── */
+.chapter-projects-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-12);
+  margin: var(--space-20) 0;
+}
+
+.project-card-mini {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-16);
+  background: var(--color-surface);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.project-card-mini__icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.project-card-mini__title {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.project-card-mini__tag {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  font-family: var(--font-code);
+}
+
+/* ── Chapter complete ────────────────────────────────────── */
+#ch19-chapter-complete {
+  margin-top: var(--space-48);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .project-brief__skills        { gap: var(--space-6); }
+  .skill-tag                    { font-size: 10px; }
+  .arch-diagram__body           { gap: var(--space-8); }
+  .game-guess-row               { grid-template-columns: 50px 70px 1fr 80px; }
+  .chapter-projects-overview    { grid-template-columns: 1fr; }
+  .output-preview__body         { font-size: 10px; }
+}

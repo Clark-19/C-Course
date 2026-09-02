@@ -1,0 +1,583 @@
+/* =========================================================
+   C LEARNING PLATFORM — chapters/ch17-structs-enums/ch17.css
+   Chapter 17: Structs & Enums — chapter-specific styles only
+   All shared component styles live in shared/shared.css
+   ========================================================= */
+
+/* ── Struct member layout diagram ───────────────────────── */
+.struct-layout {
+  margin: var(--space-16) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.struct-layout__header {
+  padding: var(--space-10) var(--space-16);
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.struct-layout__type-name {
+  color: var(--color-accent);
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+}
+
+.struct-layout__body {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+.struct-member {
+  display: grid;
+  grid-template-columns: 90px 120px 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.struct-member:last-child {
+  border-bottom: none;
+}
+
+.struct-member__type {
+  padding: var(--space-10) var(--space-14);
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border-subtle);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--syntax-type, #b392f0);
+  font-weight: var(--weight-semibold);
+  display: flex;
+  align-items: center;
+}
+
+.struct-member__name {
+  padding: var(--space-10) var(--space-14);
+  background: var(--color-bg);
+  border-right: 1px solid var(--color-border-subtle);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--color-text);
+  font-weight: var(--weight-medium);
+  display: flex;
+  align-items: center;
+}
+
+.struct-member__info {
+  padding: var(--space-8) var(--space-14);
+  background: var(--color-bg);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.struct-member__size {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-6);
+  background: rgba(0, 212, 170, 0.08);
+  border: 1px solid rgba(0, 212, 170, 0.2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-code);
+  font-size: 10px;
+  color: var(--color-accent);
+  font-weight: var(--weight-bold);
+}
+
+/* ── Struct vs individual vars comparison ───────────────── */
+.struct-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  margin: var(--space-16) 0;
+}
+
+.struct-compare__panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.struct-compare__header {
+  padding: var(--space-8) var(--space-14);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.struct-compare__panel--without .struct-compare__header {
+  background: rgba(248, 81, 73, 0.06);
+  color: var(--color-incorrect);
+}
+
+.struct-compare__panel--with .struct-compare__header {
+  background: rgba(63, 185, 80, 0.06);
+  color: var(--color-correct);
+}
+
+.struct-compare__code {
+  padding: var(--space-12) var(--space-14);
+  background: var(--color-bg);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  line-height: 1.85;
+  color: var(--color-text);
+}
+
+.struct-compare__note {
+  padding: var(--space-8) var(--space-14);
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-surface-raised);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* ── Dot vs arrow operator cheat card ───────────────────── */
+.operator-card-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-10);
+  margin: var(--space-16) 0;
+}
+
+.operator-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.operator-card__top {
+  padding: var(--space-12) var(--space-14);
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.operator-card--dot  .operator-card__top { background: rgba(0, 212, 170, 0.06); }
+.operator-card--arrow .operator-card__top { background: rgba(121, 192, 255, 0.06); }
+
+.operator-card__symbol {
+  font-family: var(--font-code);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+
+.operator-card--dot   .operator-card__symbol { color: var(--color-accent); }
+.operator-card--arrow .operator-card__symbol { color: #79c0ff; }
+
+.operator-card__label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.operator-card__name {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.operator-card__when {
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.operator-card__body {
+  padding: var(--space-10) var(--space-14);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.operator-card__example {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.operator-card__comment {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ── Enum value table ────────────────────────────────────── */
+.enum-table {
+  margin: var(--space-16) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.enum-table__header {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.enum-table__th {
+  padding: var(--space-8) var(--space-14);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-text-muted);
+  border-right: 1px solid var(--color-border-subtle);
+}
+
+.enum-table__th:last-child { border-right: none; }
+
+.enum-table__row {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-bg);
+}
+
+.enum-table__row:last-child { border-bottom: none; }
+
+.enum-table__row:nth-child(even) { background: var(--color-surface); }
+
+.enum-table__cell {
+  padding: var(--space-10) var(--space-14);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--color-text);
+  border-right: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+}
+
+.enum-table__cell:last-child { border-right: none; }
+
+.enum-table__cell--name { color: var(--color-accent); font-weight: var(--weight-semibold); }
+.enum-table__cell--val  { color: #f0a847; font-weight: var(--weight-bold); justify-content: center; }
+.enum-table__cell--desc { color: var(--color-text-muted); font-family: var(--font-ui); font-size: 11px; }
+
+/* ── Union memory diagram ────────────────────────────────── */
+.union-diagram {
+  margin: var(--space-16) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.union-diagram__header {
+  padding: var(--space-10) var(--space-16);
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-muted);
+}
+
+.union-diagram__keyword {
+  color: var(--syntax-keyword, #f97583);
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+}
+
+.union-diagram__body {
+  padding: var(--space-16);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.union-mem-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.union-mem-row__label {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.union-mem-row__blocks {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+}
+
+.union-mem-block {
+  height: 28px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-code);
+  font-size: 9px;
+  font-weight: var(--weight-bold);
+  border: 1px solid;
+}
+
+.union-mem-block--byte {
+  flex: 1;
+  border-color: rgba(0, 212, 170, 0.25);
+  background: rgba(0, 212, 170, 0.06);
+  color: var(--color-accent);
+}
+
+.union-mem-block--unused {
+  flex: 1;
+  border-color: rgba(255, 255, 255, 0.05);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.union-mem-row__size {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  font-family: var(--font-code);
+  width: 50px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.union-diagram__footer {
+  padding: var(--space-10) var(--space-16);
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-surface);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.union-diagram__total {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+/* ── Tagged union pattern visual ─────────────────────────── */
+.tagged-union {
+  margin: var(--space-16) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.tagged-union__tag {
+  padding: var(--space-10) var(--space-16);
+  background: rgba(240, 168, 71, 0.08);
+  border-bottom: 1px solid rgba(240, 168, 71, 0.2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.tagged-union__tag-label {
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #f0a847;
+}
+
+.tagged-union__tag-value {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+  background: var(--color-surface-raised);
+  padding: var(--space-2) var(--space-8);
+  border-radius: var(--radius-sm);
+}
+
+.tagged-union__data {
+  padding: var(--space-12) var(--space-16);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.tagged-union__field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+}
+
+.tagged-union__field-name { color: var(--color-text-muted); width: 60px; flex-shrink: 0; }
+.tagged-union__field-val  { color: var(--color-text); font-weight: var(--weight-semibold); }
+.tagged-union__field-val--active { color: var(--color-accent); }
+.tagged-union__field-val--stale  { color: var(--color-text-muted); text-decoration: line-through; opacity: 0.5; }
+
+/* ── Nested struct chain visual ──────────────────────────── */
+.nested-chain {
+  margin: var(--space-16) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.nested-chain__item {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.nested-chain__depth {
+  width: 8px;
+  flex-shrink: 0;
+}
+
+.nested-chain__item--depth-0 .nested-chain__depth { background: var(--color-accent); }
+.nested-chain__item--depth-1 .nested-chain__depth { background: #79c0ff; }
+.nested-chain__item--depth-2 .nested-chain__depth { background: #f0a847; }
+
+.nested-chain__content {
+  flex: 1;
+  padding: var(--space-10) var(--space-14);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.nested-chain__type {
+  font-family: var(--font-code);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.nested-chain__access {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--color-text);
+}
+
+.nested-chain__access-part--struct { color: var(--color-accent); }
+.nested-chain__access-part--dot    { color: var(--color-text-muted); }
+.nested-chain__access-part--field  { color: #79c0ff; }
+
+/* ── State machine diagram ───────────────────────────────── */
+.state-machine {
+  margin: var(--space-16) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10);
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-20);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.state-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.state-node__circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.state-node--idle    .state-node__circle { border-color: var(--color-text-muted); background: var(--color-surface); color: var(--color-text-muted); }
+.state-node--running .state-node__circle { border-color: var(--color-accent);     background: rgba(0,212,170,0.08); color: var(--color-accent); }
+.state-node--paused  .state-node__circle { border-color: #f0a847;                background: rgba(240,168,71,0.08); color: #f0a847; }
+.state-node--stopped .state-node__circle { border-color: var(--color-incorrect); background: rgba(248,81,73,0.08);  color: var(--color-incorrect); }
+
+.state-node__label {
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+}
+
+.state-arrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-border);
+}
+
+.state-arrow__line {
+  width: 24px;
+  height: 2px;
+  background: var(--color-border);
+  position: relative;
+}
+
+.state-arrow__line::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: -4px;
+  border: 4px solid transparent;
+  border-left-color: var(--color-border);
+}
+
+/* ── Chapter complete ────────────────────────────────────── */
+#ch17-chapter-complete {
+  margin-top: var(--space-48);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .struct-member          { grid-template-columns: 70px 90px 1fr; }
+  .struct-compare         { grid-template-columns: 1fr; }
+  .operator-card-pair     { grid-template-columns: 1fr; }
+  .enum-table__header,
+  .enum-table__row        { grid-template-columns: 1fr 60px 1fr; }
+  .state-machine          { flex-direction: column; }
+  .state-arrow            { transform: rotate(90deg); }
+  .tagged-union__field    { flex-wrap: wrap; }
+  .nested-chain__item     { flex-direction: row; }
+}

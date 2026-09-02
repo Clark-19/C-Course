@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C Learning Platform</title>
+
+  <!-- Google Fonts -->
+  <!-- Fonts: Google Fonts with system-font fallback (works offline/blocked) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <!-- Global styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="shared/shared.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2300c9a7'/><text x='16' y='23' font-size='20' font-weight='bold' text-anchor='middle' fill='white' font-family='monospace'>C</text></svg>" type="image/svg+xml" />
+
+  <!-- JSCPP: bundled locally — no CDN, no CORS, no tracking issues -->
+  <script src="JSCPP.min.js"></script>
+</head>
+<body>
+
+<!-- Loading screen -->
+<div class="loading-screen" id="loading-screen" aria-live="polite">
+  <div class="loading-logo">C</div>
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- App Shell -->
+<div class="app-shell" id="app-shell" style="display:none">
+
+  <!-- ── Topbar ── -->
+  <header class="topbar" role="banner">
+    <div class="topbar__logo">
+      <div class="topbar__logo-icon">C</div>
+      <span>C Learning</span>
+    </div>
+
+    <div class="topbar__divider" aria-hidden="true"></div>
+
+    <span class="topbar__chapter-label" id="topbar-chapter-label">Introduction to C</span>
+
+    <div class="topbar__actions">
+      <!-- Overall progress ring -->
+      <div class="topbar__progress-ring" id="topbar-progress" aria-label="Course progress">
+        <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+          <circle cx="14" cy="14" r="11" fill="none" stroke="var(--color-border)" stroke-width="2.5"/>
+          <circle cx="14" cy="14" r="11" fill="none"
+            stroke="var(--color-accent)" stroke-width="2.5"
+            stroke-dasharray="69.1"
+            stroke-dashoffset="69.1"
+            stroke-linecap="round"
+            transform="rotate(-90 14 14)"
+            id="progress-ring-fill"/>
+        </svg>
+        <span id="topbar-progress-text">0%</span>
+      </div>
+
+      <!-- Mobile sidebar toggle -->
+      <button class="topbar__btn" id="sidebar-toggle-btn" aria-label="Toggle sidebar" aria-expanded="false">
+        ☰
+      </button>
+
+      <!-- Settings -->
+      <button class="topbar__btn" id="settings-btn" aria-label="Open settings" title="Settings">
+        ⚙
+      </button>
+
+      <!-- Dark mode -->
+      <button class="topbar__btn" id="theme-btn" aria-label="Toggle dark/light mode" title="Toggle theme">
+        🌙
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Sidebar ── -->
+  <nav class="sidebar" id="sidebar" role="navigation" aria-label="Course chapters">
+    <div class="sidebar__header">
+      <div class="sidebar__progress-label">Course progress</div>
+      <div class="sidebar__progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="sidebar__progress-fill" id="sidebar-progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="sidebar__chapters" id="sidebar-chapters">
+      <!-- Populated by app.js -->
+    </div>
+  </nav>
+
+  <!-- Mobile sidebar backdrop -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- ── Main Content ── -->
+  <main class="main-content" id="main-content" role="main" tabindex="-1">
+    <!-- Breadcrumb bar — sticky inside scroll container (Section 6B) -->
+    <div id="breadcrumb-bar" class="breadcrumb-bar" aria-label="Navigation breadcrumb">
+      <span id="breadcrumb-chapter" class="breadcrumb__chapter"></span>
+      <span class="breadcrumb__sep" aria-hidden="true">›</span>
+      <span id="breadcrumb-topic-title" class="breadcrumb__topic"></span>
+      <span id="breadcrumb-position" class="breadcrumb__pos"></span>
+    </div>
+    <div id="content-wrapper">
+      <!-- Chapter content loaded here by app.js -->
+      <div id="chapter-content"></div>
+    </div>
+  </main>
+
+</div>
+
+<!-- ── Settings Modal ── -->
+<div class="modal-overlay" id="settings-overlay" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+  <div class="modal">
+    <div class="modal__header">
+      <div class="modal__title" id="settings-title">⚙ Settings</div>
+      <button class="modal__close" id="settings-close" aria-label="Close settings">✕</button>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section__label">Appearance</div>
+
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Dark Mode</div>
+          <div class="settings-row__desc">Easy on the eyes during night coding sessions.</div>
+        </div>
+        <label class="toggle" aria-label="Toggle dark mode">
+          <input type="checkbox" id="dark-mode-toggle" checked />
+          <div class="toggle__track"><div class="toggle__thumb"></div></div>
+        </label>
+      </div>
+
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Font Size</div>
+          <div class="settings-row__desc">Affects the code editor text.</div>
+        </div>
+        <select id="font-size-select" class="btn btn--ghost btn--sm" style="padding:4px 8px;cursor:pointer">
+          <option value="12">12px</option>
+          <option value="13" selected>13px</option>
+          <option value="14">14px</option>
+          <option value="15">15px</option>
+          <option value="16">16px</option>
+        </select>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">🔒 Lock Topics in Order</div>
+          <div class="settings-row__desc">Must complete each topic before the next unlocks.</div>
+        </div>
+        <label class="toggle" aria-label="Toggle topic locking">
+          <input type="checkbox" id="lock-topics-toggle" checked />
+          <div class="toggle__track"><div class="toggle__thumb"></div></div>
+        </label>
+      </div>
+
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">🔒 Lock Chapters in Order</div>
+          <div class="settings-row__desc">Must complete all topics in a chapter before the next chapter unlocks.</div>
+        </div>
+        <label class="toggle" aria-label="Toggle chapter locking">
+          <input type="checkbox" id="lock-chapters-toggle" checked />
+          <div class="toggle__track"><div class="toggle__thumb"></div></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section__label">Progress</div>
+
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Export Progress</div>
+          <div class="settings-row__desc">Download your progress as a JSON file.</div>
+        </div>
+        <button class="btn btn--ghost btn--sm" id="export-btn">Export</button>
+      </div>
+
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Import Progress</div>
+          <div class="settings-row__desc">Restore from a previously exported JSON file.</div>
+        </div>
+        <button class="btn btn--ghost btn--sm" id="import-btn">Import</button>
+        <input type="file" id="import-file-input" accept=".json" style="display:none" />
+      </div>
+
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Reset Progress</div>
+          <div class="settings-row__desc">Start over from the beginning. This cannot be undone.</div>
+        </div>
+        <button class="btn btn--danger btn--sm" id="reset-btn">Reset</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-section__label">About</div>
+      <div style="font-size:var(--text-sm);color:var(--color-text-muted);line-height:var(--leading-normal)">
+        C Interactive Learning Platform · Browser-based · No login required.<br/>
+        Uses <strong>JSCPP</strong> for in-browser C execution.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Core Scripts ── -->
+<script src="shared/shared.js"></script>
+<script src="components/progress.js"></script>
+<script src="components/compiler.js"></script>
+<script src="components/quiz.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

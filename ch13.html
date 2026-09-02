@@ -1,0 +1,562 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch13-functions/ch13.html
+     Chapter 13: Functions
+     5 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 13</div>
+    <h1 class="chapter-header__title">Functions</h1>
+    <p class="chapter-header__subtitle">
+      Functions are how C programs are organized. Instead of one giant block of code,
+      you break logic into named, reusable pieces — each doing exactly one thing.
+      Write it once, call it anywhere. This chapter covers every function concept from
+      first definition through recursion.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">5 Topics</span>
+      <span class="chapter-badge">void · parameters · return · scope · recursion</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — INTRO: VOID FUNCTIONS AND CALLING
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch13-intro" id="topic-ch13-intro">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">Defining and Calling Functions — <code>void</code></h2>
+      <span class="topic__status-badge" id="badge-ch13-intro">In Progress</span>
+    </div>
+
+    <!-- Step 1: Explore -->
+    <div class="step step--visible" data-step="1" id="step-ch13-intro-1">
+      <p class="step-label" data-step-num="1">Run this. A function is called three times — the same code executes three times from just three calls.</p>
+      <div id="compiler-ch13-intro-explore"></div>
+    </div>
+
+    <!-- Step 2: Instant question -->
+    <div class="step step--visible" data-step="2" id="step-ch13-intro-2">
+      <div id="iq-ch13-intro"></div>
+    </div>
+
+    <!-- Step 3: Explanation -->
+    <div class="step step--visible" data-step="3" id="step-ch13-intro-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">A function is a named block of code you define once and call anywhere</h3>
+        <p>A <strong>function definition</strong> has four parts: a <em>return type</em> (<code>void</code> means no value returned), a <em>name</em>, an empty <em>parameter list</em> <code>()</code>, and a <em>body</em> in curly braces. The function does nothing until it is explicitly <strong>called</strong> — called by writing its name followed by <code>()</code> and a semicolon.</p>
+        <p>Every call runs the entire body from top to bottom, then returns to where it was called. Calling it 100 times runs the body 100 times. The code inside is written once; the behavior is repeated through calls.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">void Function — Define and Call</span></div>
+        <div class="syntax-card__code">/* Define: return_type name(parameters) { body } */
+void greet() {
+    printf("Hello!\n");
+}
+
+/* Call: name(); — runs the body once */
+greet();    /* → Hello! */
+greet();    /* → Hello! */
+greet();    /* → Hello! */
+
+/* Functions must be defined BEFORE they are called */
+/* (or declared with a prototype — see Topic 3) */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Define before calling — or the compiler does not know what it is</div>
+          <div class="callout__body">In C, the compiler reads top to bottom. If you call a function before its definition, the compiler has never seen it and will give an "implicit declaration" warning or error. Either define the function above where it is called, or use a <em>function prototype</em> (Topic 3) to forward-declare it.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch13-intro-3-continue">Got it — continue →</button>
+    </div>
+
+    <!-- Step 4: Modify -->
+    <div class="step step--visible" data-step="4" id="step-ch13-intro-4">
+      <div id="compiler-ch13-intro-modify"></div>
+    </div>
+    <!-- Step 5: Fill -->
+    <div class="step step--visible" data-step="5" id="step-ch13-intro-5">
+      <div id="compiler-ch13-intro-fill"></div>
+    </div>
+    <!-- Step 6: Build -->
+    <div class="step step--visible" data-step="6" id="step-ch13-intro-6">
+      <div id="compiler-ch13-intro-build"></div>
+    </div>
+    <!-- Step 7: Real-world -->
+    <div class="step step--visible" data-step="7" id="step-ch13-intro-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Printing formatted reports — reuse without repeating</div>
+        <p class="realworld-card__text">Any time the same output structure appears multiple times, it belongs in a function. One definition; called wherever it is needed — the output format changes in one place.</p>
+        <pre>void printSeparator() {
+    printf("================================\n");
+}
+
+void printReport(char *title) {
+    printSeparator();
+    printf("  REPORT: %s\n", title);
+    printSeparator();
+}
+
+/* Call it everywhere — the format is consistent */
+printReport("Monthly Sales");
+printReport("Inventory");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch13-intro">📋 Start Assessment — void Functions</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch13-intro" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch13-intro">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch13-intro">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch13-intro">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch13-intro">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch13-intro"><div id="quiz-ch13-intro-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch13-intro"><div id="quiz-ch13-intro-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch13-intro"><div id="practice-ch13-intro"></div></div>
+        <div class="assessment-section" id="tab-debug-ch13-intro"><div id="compiler-ch13-intro-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — PARAMETERS AND ARGUMENTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch13-params" id="topic-ch13-params">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Parameters and Arguments — Passing Data In</h2>
+      <span class="topic__status-badge" id="badge-ch13-params">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch13-params-1">
+      <p class="step-label" data-step-num="1">Run this. The same function prints different things each call — because it receives different values.</p>
+      <div id="compiler-ch13-params-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch13-params-2">
+      <div id="iq-ch13-params"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch13-params-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Parameters let a function receive data — arguments provide it at the call site</h3>
+        <p>A <strong>parameter</strong> is a variable declared in the function's parentheses. It acts as a local variable that gets its value from the caller. When you call the function, you provide an <strong>argument</strong> — the actual value that fills the parameter. Each call can pass a different argument, making the function work on different data.</p>
+        <p>Multiple parameters are separated by commas, each with its own type declaration. C requires every parameter to have an explicit type — <code>void add(int a, int b)</code> is correct; <code>void add(int a, b)</code> is a compile error.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Parameters and Multiple Arguments</span></div>
+        <div class="syntax-card__code">/* Parameter: type name in the definition */
+void printSquare(int n) {
+    printf("%d squared = %d\n", n, n * n);
+}
+printSquare(4);   /* argument: 4  → 4 squared = 16 */
+printSquare(7);   /* argument: 7  → 7 squared = 49 */
+
+/* Multiple parameters — each needs its own type */
+void printSum(int a, int b) {
+    printf("%d + %d = %d\n", a, b, a + b);
+}
+printSum(3, 5);   /* a=3, b=5 → 3 + 5 = 8 */
+printSum(10, 20); /* a=10, b=20 → 10 + 20 = 30 */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Parameters vs Arguments — the terminology</div>
+          <div class="callout__body"><strong>Parameter</strong> = the variable in the function definition (<code>int n</code> in the header). <strong>Argument</strong> = the actual value passed at the call site (<code>4</code> in <code>printSquare(4)</code>). In casual usage people say "parameter" for both — but the distinction matters in compiler error messages.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch13-params-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch13-params-4">
+      <div id="compiler-ch13-params-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch13-params-5">
+      <div id="compiler-ch13-params-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch13-params-6">
+      <div id="compiler-ch13-params-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch13-params-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Formatting output with a reusable label function</div>
+        <p class="realworld-card__text">Parameters make functions flexible — the same print-label function works for any key-value pair, keeping output formatting consistent across the entire program.</p>
+        <pre>void printLabel(char *key, int value) {
+    printf("  %-15s: %d\n", key, value);
+}
+
+printLabel("Score",     92);
+printLabel("Max score", 100);
+printLabel("Rank",      3);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch13-params">📋 Start Assessment — Parameters</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch13-params" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch13-params">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch13-params">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch13-params">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch13-params">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch13-params"><div id="quiz-ch13-params-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch13-params"><div id="quiz-ch13-params-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch13-params"><div id="practice-ch13-params"></div></div>
+        <div class="assessment-section" id="tab-debug-ch13-params"><div id="compiler-ch13-params-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — RETURN VALUES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch13-return" id="topic-ch13-return">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Return Values — Sending Data Back</h2>
+      <span class="topic__status-badge" id="badge-ch13-return">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch13-return-1">
+      <p class="step-label" data-step-num="1">Run this. The function computes a value and sends it back — the caller uses the result directly in printf.</p>
+      <div id="compiler-ch13-return-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch13-return-2">
+      <div id="iq-ch13-return"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch13-return-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>return</code> sends a value back to wherever the function was called</h3>
+        <p>When a function has a non-<code>void</code> return type, the <code>return</code> statement sends a value of that type back to the caller. The entire function call expression evaluates to that returned value — so <code>add(3, 4)</code> evaluates to <code>7</code> and can be used anywhere a number could go.</p>
+        <p><code>return</code> also exits the function immediately. Any code after a <code>return</code> in the same function never runs. A function with a non-<code>void</code> return type that does not return a value is a bug — the returned garbage value is undefined behavior.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Return Type, return Statement, Using the Value</span></div>
+        <div class="syntax-card__code">/* Return type replaces void */
+int add(int a, int b) {
+    return a + b;           /* sends the sum back */
+}
+
+float average(int x, int y) {
+    return (x + y) / 2.0;  /* float division */
+}
+
+int max(int a, int b) {
+    if (a > b) return a;    /* return exits immediately */
+    return b;               /* only runs if a <= b */
+}
+
+/* Using the return value */
+int result = add(3, 7);         /* result = 10 */
+printf("%d\n", add(5, 8));      /* prints 13 */
+int biggest = max(12, 9);       /* biggest = 12 */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Missing return statement in a non-void function</div>
+          <div class="callout__body">If a function declares a return type but reaches the end without a <code>return</code>, the compiler may warn but still compiles the code. The returned value is garbage — whatever happened to be in that memory location. Always ensure every code path in a non-<code>void</code> function reaches a <code>return</code> statement.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch13-return-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch13-return-4">
+      <div id="compiler-ch13-return-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch13-return-5">
+      <div id="compiler-ch13-return-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch13-return-6">
+      <div id="compiler-ch13-return-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch13-return-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Validation functions — return a status code</div>
+        <p class="realworld-card__text">Functions that return <code>int</code> are commonly used as validators — returning 1 for pass or 0 for fail, letting the caller decide what to do with the result.</p>
+        <pre>int isValidAge(int age) {
+    if (age >= 0 && age <= 120) return 1;
+    return 0;
+}
+
+int isEven(int n) {
+    return (n % 2 == 0);    /* expression evaluates to 1 or 0 */
+}
+
+/* Caller uses the result in an if */
+if (isValidAge(25)) printf("Valid age\n");
+if (isEven(44))     printf("Even\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch13-return">📋 Start Assessment — Return Values</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch13-return" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch13-return">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch13-return">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch13-return">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch13-return">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch13-return"><div id="quiz-ch13-return-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch13-return"><div id="quiz-ch13-return-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch13-return"><div id="practice-ch13-return"></div></div>
+        <div class="assessment-section" id="tab-debug-ch13-return"><div id="compiler-ch13-return-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — SCOPE: LOCAL VARIABLES AND LIFETIME
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch13-scope" id="topic-ch13-scope">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Function Scope — Local Variables and Pass-by-Value</h2>
+      <span class="topic__status-badge" id="badge-ch13-scope">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch13-scope-1">
+      <p class="step-label" data-step-num="1">Run this. The function modifies its own copy of the variable — the original in the caller is unchanged.</p>
+      <div id="compiler-ch13-scope-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch13-scope-2">
+      <div id="iq-ch13-scope"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch13-scope-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Local variables exist only inside their function — C passes arguments by value</h3>
+        <p>Every variable declared inside a function is a <strong>local variable</strong>. It is created when the function is called and destroyed when it returns. Two functions can both declare a variable named <code>x</code> — they are completely separate variables with no relationship. Local variables in one function cannot be accessed by any other function.</p>
+        <p>When you pass an argument to a function, C passes a <strong>copy</strong> of the value — not the original variable. Modifying the parameter inside the function changes only the local copy. The original variable in the caller is completely unaffected. This is called <em>pass-by-value</em> and it prevents functions from accidentally corrupting the caller's data.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Scope and Pass-by-Value</span></div>
+        <div class="syntax-card__code">void triple(int n) {
+    n = n * 3;              /* modifies the LOCAL copy */
+    printf("inside: %d\n", n);
+}
+
+int x = 5;
+triple(x);                  /* passes a copy of x */
+printf("outside: %d\n", x); /* x is STILL 5 */
+/* Output: inside: 15, outside: 5 */
+
+/* Two functions, same variable name — no conflict */
+void funcA() { int count = 0; count++; }
+void funcB() { int count = 99; /* different variable */ }
+
+/* Local variable lifetime */
+void example() {
+    int temp = 42;          /* created when example() is called */
+}   /* temp is destroyed here — gone after return */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Local variables do NOT keep their value between calls</div>
+          <div class="callout__body">Each call to a function creates a fresh set of local variables starting from their initial values. A local variable that increments inside the function will start over next call. To persist a value between calls, use a <code>static</code> variable (covered in Chapter 14) or store the value in a variable outside the function.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch13-scope-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch13-scope-4">
+      <div id="compiler-ch13-scope-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch13-scope-5">
+      <div id="compiler-ch13-scope-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch13-scope-6">
+      <div id="compiler-ch13-scope-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch13-scope-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Swap function — why it needs pointers (preview)</div>
+        <p class="realworld-card__text">Because C passes by value, a swap function that modifies local copies does nothing to the originals. This is why Chapter 16 teaches pointers — to actually modify the caller's variables from inside a function.</p>
+        <pre>void swapWrong(int a, int b) {
+    int temp = a;
+    a = b;
+    b = temp;       /* swaps local copies only */
+}
+
+int x = 3, y = 7;
+swapWrong(x, y);
+printf("%d %d\n", x, y);   /* still 3 7 — unchanged */
+
+/* Real swap requires pointers (Chapter 16):
+   void swap(int *a, int *b) { ... } */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch13-scope">📋 Start Assessment — Function Scope</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch13-scope" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch13-scope">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch13-scope">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch13-scope">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch13-scope">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch13-scope"><div id="quiz-ch13-scope-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch13-scope"><div id="quiz-ch13-scope-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch13-scope"><div id="practice-ch13-scope"></div></div>
+        <div class="assessment-section" id="tab-debug-ch13-scope"><div id="compiler-ch13-scope-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — RECURSION
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch13-recursion" id="topic-ch13-recursion">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">Recursion — A Function Calling Itself</h2>
+      <span class="topic__status-badge" id="badge-ch13-recursion">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch13-recursion-1">
+      <p class="step-label" data-step-num="1">Run this. The function calls itself — but it stops. Trace the numbers to see why it terminates.</p>
+      <div id="compiler-ch13-recursion-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch13-recursion-2">
+      <div id="iq-ch13-recursion"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch13-recursion-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Recursion: a function solves a small piece, then calls itself on a simpler version</h3>
+        <p>A <strong>recursive function</strong> calls itself. Every recursive function must have two components: a <strong>base case</strong> — the condition where it stops and returns directly — and a <strong>recursive case</strong> — where it does a small piece of work and calls itself with a simpler input. Without a base case, the function calls itself forever until the program crashes with a stack overflow.</p>
+        <p>Each recursive call creates a new stack frame with its own local variables. When the base case is hit, the frames "unwind" — each returning to the caller that created it. Factorial is the classic example: <code>factorial(5)</code> = <code>5 × factorial(4)</code> = <code>5 × 4 × factorial(3)</code> = ... = <code>5 × 4 × 3 × 2 × 1</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Recursion Template — Base Case + Recursive Case</span></div>
+        <div class="syntax-card__code">/* Factorial: n! = n × (n-1)! */
+int factorial(int n) {
+    if (n <= 1) return 1;         /* base case — stop here */
+    return n * factorial(n - 1);  /* recursive case */
+}
+/* factorial(4) → 4 × factorial(3)
+                → 4 × 3 × factorial(2)
+                → 4 × 3 × 2 × factorial(1)
+                → 4 × 3 × 2 × 1  =  24 */
+
+/* Countdown */
+void countdown(int n) {
+    if (n <= 0) { printf("Go!\n"); return; }  /* base case */
+    printf("%d\n", n);
+    countdown(n - 1);             /* recursive call with n-1 */
+}</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Infinite recursion crashes the program — always check the base case</div>
+          <div class="callout__body">Every recursive call must eventually reach the base case. If the input never reaches the base case (e.g. calling <code>factorial(-1)</code> when the base case is <code>n == 0</code>), the function calls itself forever until the call stack overflows and the program crashes. Test your base case with the smallest valid input first.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch13-recursion-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch13-recursion-4">
+      <div id="compiler-ch13-recursion-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch13-recursion-5">
+      <div id="compiler-ch13-recursion-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch13-recursion-6">
+      <div id="compiler-ch13-recursion-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch13-recursion-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Fibonacci — classic recursion that appears in nature</div>
+        <p class="realworld-card__text">Fibonacci numbers model growth in nature. Recursion expresses the definition directly: each number is the sum of the two before it. The recursive code reads like the mathematical definition.</p>
+        <pre>int fibonacci(int n) {
+    if (n <= 1) return n;          /* base cases: fib(0)=0, fib(1)=1 */
+    return fibonacci(n-1) + fibonacci(n-2);
+}
+
+for (int i = 0; i &lt; 8; i++) {
+    printf("%d ", fibonacci(i));
+}
+/* Output: 0 1 1 2 3 5 8 13 */
+
+/* Note: recursive Fibonacci is beautiful but slow for large n.
+   Iterative version with a loop is much faster. */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch13-recursion">📋 Start Assessment — Recursion</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch13-recursion" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch13-recursion">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch13-recursion">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch13-recursion">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch13-recursion">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch13-recursion"><div id="quiz-ch13-recursion-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch13-recursion"><div id="quiz-ch13-recursion-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch13-recursion"><div id="practice-ch13-recursion"></div></div>
+        <div class="assessment-section" id="tab-debug-ch13-recursion"><div id="compiler-ch13-recursion-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 13 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch13-mastery" id="topic-ch13-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 13 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply every Chapter 13 concept — void functions, parameters, return values, scope, and recursion — in one complete program.</p>
+      <div id="compiler-ch13-mastery"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER COMPLETE (hidden until mastery passes) -->
+  <div id="ch13-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 13 Complete</div>
+      <p class="chapter-complete__message">
+        You can define functions, pass arguments, return values, reason about scope, and write recursive solutions.
+        Functions are now a tool you own. Chapter 14 goes deeper into where variables live — scope, storage classes,
+        and the standard library functions that ship with C.
+      </p>
+      <button class="btn-continue" id="ch13-next-btn">Start Chapter 14 — Scope, Storage &amp; stdlib →</button>
+    </div>
+  </div>
+
+</div>

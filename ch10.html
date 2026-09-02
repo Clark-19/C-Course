@@ -1,0 +1,539 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch10-while-loops/ch10.html
+     Chapter 10: While Loops
+     5 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 10</div>
+    <h1 class="chapter-header__title">While Loops</h1>
+    <p class="chapter-header__subtitle">
+      Every useful program repeats something. Loops are how you tell C to run
+      the same code multiple times without copying and pasting it. This chapter
+      covers <code>while</code>, <code>do-while</code>, counter-driven iteration,
+      controlled stopping, and nested repetition.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">5 Topics</span>
+      <span class="chapter-badge">while · do-while · counter · break/continue · nested</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — THE WHILE LOOP
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch10-while" id="topic-ch10-while">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">The <code>while</code> Loop — Repeat Until False</h2>
+      <span class="topic__status-badge" id="badge-ch10-while">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch10-while-1">
+      <p class="step-label" data-step-num="1">Run this. The body repeats as long as the condition stays true.</p>
+      <div id="compiler-ch10-while-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch10-while-2">
+      <div id="iq-ch10-while"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch10-while-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">while checks the condition before each iteration</h3>
+        <p>A <code>while</code> loop tests its condition at the <strong>top</strong>, before executing the body. If the condition is already false before the first iteration, the body never runs at all.</p>
+        <p>The loop continues repeating as long as the condition remains non-zero (true). The moment the condition evaluates to zero, the loop exits and execution continues with the next statement after the closing brace.</p>
+        <p>The most important part: <strong>something inside the loop must change the condition</strong>, otherwise the loop runs forever.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">while Loop Structure</span></div>
+        <div class="syntax-card__code">while (condition) {
+    /* body: runs as long as condition is true */
+    /* MUST change something that affects condition */
+}
+/* execution continues here when condition is false */
+
+/* Typical counter pattern */
+int i = 0;
+while (i < 5) {
+    printf("%d\n", i);
+    i++;          /* changes condition — prevents infinite loop */
+}</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Infinite Loop — The Most Common While Bug</div>
+          <div class="callout__body">If the condition never becomes false, the loop never stops. Always verify that something inside the loop modifies the variable(s) the condition tests.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch10-while-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch10-while-4">
+      <div id="compiler-ch10-while-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch10-while-5">
+      <div id="compiler-ch10-while-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch10-while-6">
+      <div id="compiler-ch10-while-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch10-while-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Reading until a sentinel value</div>
+        <p class="realworld-card__text">while loops drive file reading, event loops, and input processing — anything that must keep going until a stopping condition is met.</p>
+        <pre>int sum = 0, n = 1;
+
+/* Add numbers until 0 is entered */
+while (n != 0) {
+    n = 5;         /* simulating input */
+    sum += n;
+    if (n == 5) n = 0;  /* simulate stop */
+}
+printf("Sum: %d\n", sum);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch10-while">📋 Start Assessment — The while Loop</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch10-while" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch10-while">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch10-while">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice"  data-topic="ch10-while">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch10-while">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch10-while"><div id="quiz-ch10-while-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch10-while"><div id="quiz-ch10-while-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch10-while"><div id="practice-ch10-while"></div></div>
+        <div class="assessment-section" id="tab-debug-ch10-while"><div id="compiler-ch10-while-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — DO-WHILE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch10-dowhile" id="topic-ch10-dowhile">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title"><code>do-while</code> — Run at Least Once</h2>
+      <span class="topic__status-badge" id="badge-ch10-dowhile">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch10-dowhile-1">
+      <p class="step-label" data-step-num="1">Run this. Compare the while and do-while when the condition starts false.</p>
+      <div id="compiler-ch10-dowhile-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch10-dowhile-2">
+      <div id="iq-ch10-dowhile"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch10-dowhile-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">do-while checks the condition at the bottom — body runs at least once</h3>
+        <p>A <code>do-while</code> loop places the condition check at the <strong>end</strong>, after the body executes. This guarantees the body runs at least one time, even if the condition is immediately false.</p>
+        <p>The most common use case is <strong>menu loops and input validation</strong>: you always want to show the menu or prompt at least once before checking if the user wants to exit.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">do-while Syntax</span></div>
+        <div class="syntax-card__code">do {
+    /* body always runs at least once */
+    /* then condition is checked */
+} while (condition);   /* semicolon required here! */
+
+/* while vs do-while when condition starts false */
+int x = 10;
+
+while (x < 5) {
+    printf("while runs\n");   /* never prints */
+}
+
+do {
+    printf("do-while runs\n"); /* prints once */
+} while (x < 5);              /* then checks: false, exits */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">The Semicolon After while (condition)</div>
+          <div class="callout__body">The do-while needs a semicolon after the closing <code>while (condition);</code>. Forgetting it is a common syntax error. Note: regular <code>while</code> loops have no semicolon after their condition.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch10-dowhile-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch10-dowhile-4">
+      <div id="compiler-ch10-dowhile-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch10-dowhile-5">
+      <div id="compiler-ch10-dowhile-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch10-dowhile-6">
+      <div id="compiler-ch10-dowhile-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch10-dowhile-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Input validation with do-while</div>
+        <p class="realworld-card__text">The "ask at least once" guarantee makes do-while the natural structure for input validation loops — prompt the user, check, repeat if invalid.</p>
+        <pre>int tries = 0;
+
+do {
+    tries++;
+    printf("Attempt %d: ", tries);
+    /* simulating user input */
+} while (tries < 3);
+
+printf("Done after %d tries.\n", tries);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch10-dowhile">📋 Start Assessment — do-while</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch10-dowhile" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch10-dowhile">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch10-dowhile">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice"  data-topic="ch10-dowhile">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch10-dowhile">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch10-dowhile"><div id="quiz-ch10-dowhile-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch10-dowhile"><div id="quiz-ch10-dowhile-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch10-dowhile"><div id="practice-ch10-dowhile"></div></div>
+        <div class="assessment-section" id="tab-debug-ch10-dowhile"><div id="compiler-ch10-dowhile-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — COUNTER-CONTROLLED LOOPS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch10-counter" id="topic-ch10-counter">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Counter-Controlled Loops — Counting Up, Down, and by Steps</h2>
+      <span class="topic__status-badge" id="badge-ch10-counter">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch10-counter-1">
+      <p class="step-label" data-step-num="1">Run this — the same structure, different counting patterns.</p>
+      <div id="compiler-ch10-counter-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch10-counter-2">
+      <div id="iq-ch10-counter"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch10-counter-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Counter-controlled loops use a variable to track iterations</h3>
+        <p>Every counter-controlled loop has the same three parts: an <strong>initializer</strong> (set counter before the loop), a <strong>condition</strong> (test counter in while), and an <strong>update</strong> (change counter inside the body). Missing any one of these causes bugs — usually infinite loops or loops that never run.</p>
+        <p>You are not limited to +1 increments. You can count by 2s, 5s, 10s, count down, or adjust non-linearly. The counter can be used inside the loop body for calculations that depend on the iteration number.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Counter Patterns</span></div>
+        <div class="syntax-card__code">/* Count up by 1 */
+int i = 0;
+while (i < 5) { printf("%d ", i); i++; }
+/* 0 1 2 3 4 */
+
+/* Count down */
+int n = 5;
+while (n > 0) { printf("%d ", n); n--; }
+/* 5 4 3 2 1 */
+
+/* Count by 2s */
+int k = 0;
+while (k <= 10) { printf("%d ", k); k += 2; }
+/* 0 2 4 6 8 10 */
+
+/* Use counter in calculation */
+int j = 1;
+while (j <= 5) { printf("%d^2=%d\n", j, j*j); j++; }</div>
+      </div>
+      <button class="btn-continue" id="step-ch10-counter-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch10-counter-4">
+      <div id="compiler-ch10-counter-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch10-counter-5">
+      <div id="compiler-ch10-counter-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch10-counter-6">
+      <div id="compiler-ch10-counter-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch10-counter-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Accumulating totals in loops</div>
+        <p class="realworld-card__text">Counter-driven loops accumulate results across iterations — summing, multiplying, or building values step by step.</p>
+        <pre>/* Sum of 1 to 100 */
+int total = 0, i = 1;
+while (i <= 100) {
+    total += i;
+    i++;
+}
+printf("Sum 1-100: %d\n", total);  /* 5050 */
+
+/* Factorial of 6 */
+int fact = 1, n = 6;
+while (n > 1) { fact *= n; n--; }
+printf("6! = %d\n", fact);  /* 720 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch10-counter">📋 Start Assessment — Counter Loops</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch10-counter" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch10-counter">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch10-counter">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice"  data-topic="ch10-counter">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch10-counter">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch10-counter"><div id="quiz-ch10-counter-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch10-counter"><div id="quiz-ch10-counter-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch10-counter"><div id="practice-ch10-counter"></div></div>
+        <div class="assessment-section" id="tab-debug-ch10-counter"><div id="compiler-ch10-counter-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — BREAK AND CONTINUE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch10-break" id="topic-ch10-break">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title"><code>break</code> and <code>continue</code> — Controlling the Loop Mid-Run</h2>
+      <span class="topic__status-badge" id="badge-ch10-break">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch10-break-1">
+      <p class="step-label" data-step-num="1">Run this — both keywords change what happens in the middle of an iteration.</p>
+      <div id="compiler-ch10-break-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch10-break-2">
+      <div id="iq-ch10-break"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch10-break-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">break exits the loop; continue skips to the next iteration</h3>
+        <p><code>break</code> immediately exits the entire loop. Execution jumps to the first statement after the closing brace. All remaining iterations are cancelled.</p>
+        <p><code>continue</code> skips the rest of the current iteration's body and jumps back to check the condition again for the next iteration. The loop does not exit — it just skips to the next cycle.</p>
+        <p>Both are typically used inside an <code>if</code> condition so they only trigger when a specific situation is met.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">break vs continue</span></div>
+        <div class="syntax-card__code">int i = 0;
+
+/* break — stop early */
+while (i < 10) {
+    if (i == 5) break;    /* exit when i hits 5 */
+    printf("%d ", i);     /* prints 0 1 2 3 4 */
+    i++;
+}
+
+/* continue — skip this iteration */
+i = 0;
+while (i < 6) {
+    i++;
+    if (i == 3) continue; /* skip printing 3 */
+    printf("%d ", i);     /* prints 1 2 4 5 6 */
+}</div>
+      </div>
+      <button class="btn-continue" id="step-ch10-break-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch10-break-4">
+      <div id="compiler-ch10-break-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch10-break-5">
+      <div id="compiler-ch10-break-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch10-break-6">
+      <div id="compiler-ch10-break-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch10-break-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Search with break, filter with continue</div>
+        <p class="realworld-card__text">break stops a search the moment a result is found. continue skips items that do not match a filter — two of the most common loop patterns in real programs.</p>
+        <pre>/* Search: stop at first match */
+int data[] = {4, 7, 2, 9, 1};
+int target = 9, found = 0, i = 0;
+while (i < 5) {
+    if (data[i] == target) { found = 1; break; }
+    i++;
+}
+printf("Found: %d\n", found);
+
+/* Filter: skip negatives, sum positives */
+int vals[] = {3, -1, 5, -2, 4};
+int sum = 0; i = 0;
+while (i < 5) {
+    if (vals[i] < 0) { i++; continue; }
+    sum += vals[i]; i++;
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch10-break">📋 Start Assessment — break and continue</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch10-break" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch10-break">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch10-break">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice"  data-topic="ch10-break">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch10-break">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch10-break"><div id="quiz-ch10-break-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch10-break"><div id="quiz-ch10-break-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch10-break"><div id="practice-ch10-break"></div></div>
+        <div class="assessment-section" id="tab-debug-ch10-break"><div id="compiler-ch10-break-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — NESTED WHILE LOOPS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch10-nested" id="topic-ch10-nested">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">Nested While Loops — Loops Inside Loops</h2>
+      <span class="topic__status-badge" id="badge-ch10-nested">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch10-nested-1">
+      <p class="step-label" data-step-num="1">Run this. For every outer iteration, the inner loop runs all the way through.</p>
+      <div id="compiler-ch10-nested-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch10-nested-2">
+      <div id="iq-ch10-nested"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch10-nested-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Nested loops: inner loop completes fully for each outer iteration</h3>
+        <p>When a <code>while</code> loop is inside another <code>while</code> loop, the <strong>inner loop runs completely</strong> for each single iteration of the outer loop. If the outer runs 3 times and the inner runs 4 times, the total body executions are 3 × 4 = 12.</p>
+        <p>A critical rule: <strong>the inner loop counter must be reset</strong> at the top of each outer iteration. If you initialize the inner counter outside the outer loop, it retains its final value from the previous outer iteration and the inner loop may not run at all after the first pass.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Nested Loop Pattern</span></div>
+        <div class="syntax-card__code">int outer = 1;
+while (outer <= 3) {
+    int inner = 1;        /* reset inner counter every outer pass */
+    while (inner <= 3) {
+        printf("(%d,%d) ", outer, inner);
+        inner++;
+    }
+    printf("\n");
+    outer++;
+}
+/* (1,1)(1,2)(1,3)
+   (2,1)(2,2)(2,3)
+   (3,1)(3,2)(3,3) */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Always Reset the Inner Counter Inside the Outer Loop</div>
+          <div class="callout__body">Declare and initialize the inner counter <em>inside</em> the outer loop body. If declared outside, the inner loop starts where the previous outer pass left it — usually causing the inner loop to run zero times after the first pass.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch10-nested-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch10-nested-4">
+      <div id="compiler-ch10-nested-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch10-nested-5">
+      <div id="compiler-ch10-nested-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch10-nested-6">
+      <div id="compiler-ch10-nested-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch10-nested-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Multiplication table with nested loops</div>
+        <p class="realworld-card__text">Nested loops generate grids, tables, and matrices — any output that has both rows and columns naturally requires two loops.</p>
+        <pre>int row = 1;
+while (row <= 4) {
+    int col = 1;
+    while (col <= 4) {
+        printf("%4d", row * col);
+        col++;
+    }
+    printf("\n");
+    row++;
+}
+/*    1   2   3   4
+      2   4   6   8
+      3   6   9  12
+      4   8  12  16 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch10-nested">📋 Start Assessment — Nested While Loops</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch10-nested" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch10-nested">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch10-nested">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice"  data-topic="ch10-nested">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch10-nested">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch10-nested"><div id="quiz-ch10-nested-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch10-nested"><div id="quiz-ch10-nested-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch10-nested"><div id="practice-ch10-nested"></div></div>
+        <div class="assessment-section" id="tab-debug-ch10-nested"><div id="compiler-ch10-nested-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 10 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch10-mastery" id="topic-ch10-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 10 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Combine every while loop concept in one program.</p>
+      <div id="compiler-ch10-mastery"></div>
+    </div>
+  </section>
+
+  <div id="ch10-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 10 Complete</div>
+      <p class="chapter-complete__message">You can now repeat code as many times as needed using while and do-while, count in any pattern, and control loops mid-run with break and continue. Chapter 11 introduces the for loop — a more compact syntax for when you know the exact number of iterations in advance.</p>
+      <button class="btn-continue" id="ch10-next-btn">Start Chapter 11 — For Loops →</button>
+    </div>
+  </div>
+
+</div>

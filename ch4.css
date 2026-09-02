@@ -1,0 +1,279 @@
+/* =========================================================
+   C LEARNING PLATFORM — chapters/ch4-comments/ch4.css
+   Chapter 4: Comments — chapter-specific styles
+   Inherits all component styles from shared/shared.css
+   ========================================================= */
+
+/* ── Comment type comparison cards ─────────────────────── */
+.comment-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  margin: var(--space-16) 0;
+}
+
+.comment-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.comment-card__header {
+  padding: var(--space-10) var(--space-16);
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.comment-card__symbol {
+  font-family: var(--font-code);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--syntax-comment);
+  background: var(--color-bg);
+  padding: var(--space-2) var(--space-8);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.comment-card__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+
+.comment-card__body {
+  padding: var(--space-14) var(--space-16);
+}
+
+.comment-card__example {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--syntax-comment);
+  line-height: 1.7;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  padding: var(--space-10) var(--space-12);
+  margin-bottom: var(--space-10);
+}
+
+.comment-card__facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.comment-card__facts li {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  padding: var(--space-4) 0;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  line-height: var(--leading-normal);
+}
+
+.comment-card__facts li::before {
+  content: '·';
+  color: var(--color-primary-light);
+  font-weight: var(--weight-bold);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Comment anatomy visual ─────────────────────────────── */
+.comment-anatomy {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  line-height: 2;
+  margin: var(--space-16) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.comment-anatomy__line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  position: relative;
+}
+
+.comment-anatomy__token {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.comment-anatomy__char {
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+}
+
+.comment-anatomy__char--open  { color: var(--color-primary-light); }
+.comment-anatomy__char--close { color: var(--color-accent); }
+.comment-anatomy__char--text  { color: var(--syntax-comment); font-style: italic; }
+.comment-anatomy__char--slash { color: #e3b341; }
+
+.comment-anatomy__label {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+/* ── Comment quality comparison ─────────────────────────── */
+.comment-quality {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  margin: var(--space-16) 0;
+}
+
+.comment-quality__row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.comment-quality__badge {
+  padding: var(--space-4) var(--space-10);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.comment-quality__badge--good {
+  background: var(--color-correct-bg);
+  color: var(--color-correct);
+  border: 1px solid var(--color-correct-border);
+}
+
+.comment-quality__badge--bad {
+  background: var(--color-incorrect-bg);
+  color: var(--color-incorrect);
+  border: 1px solid rgba(248, 81, 73, 0.3);
+}
+
+.comment-quality__code {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-8) var(--space-12);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.comment-quality__code .c-comment {
+  color: var(--syntax-comment);
+  font-style: italic;
+}
+
+.comment-quality__code .c-code {
+  color: var(--color-text);
+}
+
+/* ── Nested comment danger visual ───────────────────────── */
+.nesting-danger {
+  background: rgba(248, 81, 73, 0.06);
+  border: 1px solid rgba(248, 81, 73, 0.25);
+  border-radius: var(--radius-lg);
+  padding: var(--space-16) var(--space-20);
+  margin: var(--space-16) 0;
+}
+
+.nesting-danger__title {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-incorrect);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-10);
+}
+
+.nesting-danger__code {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  line-height: 1.8;
+}
+
+.nesting-danger__code .ok     { color: var(--syntax-comment); }
+.nesting-danger__code .broken { color: var(--color-incorrect); text-decoration: underline dotted; }
+.nesting-danger__code .normal { color: var(--color-text); }
+
+/* ── Comment-out technique cards ────────────────────────── */
+.technique-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  margin: var(--space-16) 0;
+}
+
+.technique-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+
+.technique-card:hover {
+  border-color: var(--color-primary);
+}
+
+.technique-card__header {
+  padding: var(--space-8) var(--space-14);
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.technique-card__code {
+  padding: var(--space-12) var(--space-14);
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+.technique-card__code .disabled { color: var(--syntax-comment); font-style: italic; }
+.technique-card__code .active   { color: var(--color-text); }
+
+.technique-card__use {
+  padding: var(--space-8) var(--space-14);
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border-subtle);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ── Chapter complete ───────────────────────────────────── */
+#ch4-chapter-complete { margin-top: var(--space-48); }
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .comment-compare  { grid-template-columns: 1fr; }
+  .comment-quality__row { grid-template-columns: 60px 1fr; }
+  .technique-grid   { grid-template-columns: 1fr; }
+}

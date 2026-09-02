@@ -1,0 +1,901 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch14-scope-storage-stdlib/ch14.html
+     Chapter 14: Scope, Storage Classes & stdlib
+     10 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 14</div>
+    <h1 class="chapter-header__title">Scope, Storage &amp; stdlib</h1>
+    <p class="chapter-header__subtitle">
+      This chapter answers two essential questions: <em>where does a variable exist?</em> and 
+      <em>what tools does C give you for free?</em> Understanding scope and storage classes prevents 
+      the most common class of bugs in C. The standard library gives you math, string, and utility 
+      functions without writing them yourself. The chapter closes with the full recursion toolkit.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">10 Topics</span>
+      <span class="chapter-badge">scope · storage · static · stdlib · math · recursion</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — LOCAL VS GLOBAL VARIABLES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-scope" id="topic-ch14-scope">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">Local vs Global Variables</h2>
+      <span class="topic__status-badge" id="badge-ch14-scope">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-scope-1">
+      <p class="step-label" data-step-num="1">Run this. One variable is global — accessible everywhere. The other is local — trapped inside one function.</p>
+      <div id="compiler-ch14-scope-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch14-scope-2">
+      <div id="iq-ch14-scope"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch14-scope-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Local variables belong to one function. Global variables belong to the entire program.</h3>
+        <p>A <strong>local variable</strong> is declared inside a function or block. It is created when that function is called and destroyed when it returns. No other function can see or touch it.</p>
+        <p>A <strong>global variable</strong> is declared outside all functions, at the top of the file. It lives for the entire program lifetime and can be read or modified by any function in the file. While convenient, uncontrolled global state is a common source of bugs — any function can change it at any time.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Local vs Global</span></div>
+        <div class="syntax-card__code">int globalCount = 0;   /* global — visible to all functions */
+
+void increment() {
+    globalCount++;         /* accesses the global */
+    int localTemp = 5;     /* local — only exists here */
+}
+
+void show() {
+    printf("%d\n", globalCount);   /* global is accessible */
+    /* printf("%d\n", localTemp);  ERROR — localTemp not visible here */
+}
+
+/* Best practice: prefer local variables, use globals sparingly.
+   Global state makes programs harder to reason about. */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Globals are not inherently wrong — but they are risky</div>
+          <div class="callout__body">Global variables seem convenient but any function anywhere can modify them, making bugs hard to trace. Prefer passing values as parameters and returning results. Reserve globals for constants or truly program-wide state.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch14-scope-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch14-scope-4"><div id="compiler-ch14-scope-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-scope-5"><div id="compiler-ch14-scope-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-scope-6"><div id="compiler-ch14-scope-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-scope-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Configuration values — one legitimate use of globals</div>
+        <p class="realworld-card__text">Constants and configuration values that the entire program needs are acceptable as globals — especially when declared <code>const</code> so nothing can accidentally modify them.</p>
+        <pre>const int MAX_USERS = 100;   /* global constant — read-only */
+const float TAX_RATE = 0.12;
+
+void printTax(float price) {
+    printf("Tax: %.2f\n", price * TAX_RATE);  /* reads global */
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-scope">📋 Start Assessment — Local vs Global</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-scope" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-scope">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-scope">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-scope">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-scope">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-scope"><div id="quiz-ch14-scope-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-scope"><div id="quiz-ch14-scope-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-scope"><div id="practice-ch14-scope"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-scope"><div id="compiler-ch14-scope-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — SCOPE RULES IN C
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-scoperules" id="topic-ch14-scoperules">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Scope Rules in C — Blocks, Nesting, Shadowing</h2>
+      <span class="topic__status-badge" id="badge-ch14-scoperules">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-scoperules-1">
+      <p class="step-label" data-step-num="1">Run this. A variable declared inside a block only lives in that block. Trace each x carefully.</p>
+      <div id="compiler-ch14-scoperules-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch14-scoperules-2"><div id="iq-ch14-scoperules"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch14-scoperules-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Every set of curly braces creates its own scope — inner scopes can shadow outer ones</h3>
+        <p>A <strong>block scope</strong> is created by any pair of curly braces <code>{ }</code> — a function body, an if statement, a for loop, even a standalone block. Variables declared inside a block are inaccessible once the block ends.</p>
+        <p><strong>Shadowing</strong> occurs when an inner block declares a variable with the same name as an outer one. Inside the inner block, the name refers to the inner variable — the outer one is hidden. This compiles without errors but is a common source of confusion. Most style guides forbid it.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Block Scope and Shadowing</span></div>
+        <div class="syntax-card__code">int x = 10;            /* outer x */
+{
+    int x = 20;        /* inner x — SHADOWS outer */
+    printf("%d\n", x); /* 20 — inner x */
+}
+printf("%d\n", x);     /* 10 — outer x is back */
+
+/* for loop variable scoped to the loop */
+for (int i = 0; i &lt; 3; i++) { /* i lives here */ }
+/* i does not exist here */
+
+/* Shadowing in if blocks */
+if (1) {
+    int result = 42;   /* only inside this if */
+    printf("%d\n", result);
+}
+/* result does not exist here */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Avoid shadowing — use different names</div>
+          <div class="callout__body">Shadowing is valid C but confusing to read. When an inner variable shares a name with an outer one, readers must carefully track which one each reference means. Use distinct names across scopes to make code unambiguous.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch14-scoperules-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch14-scoperules-4"><div id="compiler-ch14-scoperules-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-scoperules-5"><div id="compiler-ch14-scoperules-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-scoperules-6"><div id="compiler-ch14-scoperules-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-scoperules-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Loop-local variables — prevent accidental reuse</div>
+        <p class="realworld-card__text">Declaring variables as close to their use as possible — inside the block that needs them — prevents accidental reuse across loop iterations and keeps intent clear.</p>
+        <pre>for (int i = 0; i &lt; 5; i++) {
+    int doubled = i * 2;   /* fresh each iteration */
+    printf("%d\n", doubled);
+}
+/* doubled and i do not pollute the outer scope */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-scoperules">📋 Start Assessment — Scope Rules</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-scoperules" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-scoperules">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-scoperules">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-scoperules">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-scoperules">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-scoperules"><div id="quiz-ch14-scoperules-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-scoperules"><div id="quiz-ch14-scoperules-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-scoperules"><div id="practice-ch14-scoperules"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-scoperules"><div id="compiler-ch14-scoperules-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — STORAGE CLASSES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-storage" id="topic-ch14-storage">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Storage Classes — auto, extern, register, const</h2>
+      <span class="topic__status-badge" id="badge-ch14-storage">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-storage-1">
+      <p class="step-label" data-step-num="1">Run this. const prevents modification. Observe the different storage class behaviors.</p>
+      <div id="compiler-ch14-storage-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch14-storage-2"><div id="iq-ch14-storage"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch14-storage-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Storage classes control where a variable lives in memory and how long it lives</h3>
+        <p>Every variable in C has a <strong>storage class</strong> that determines its lifetime, scope, and memory location. The most common are: <code>auto</code> (default for locals — stack, function lifetime), <code>static</code> (persists between calls — covered in Topic 4), <code>extern</code> (declared elsewhere, used here), and <code>const</code> (read-only value).</p>
+        <p>In modern C, <code>auto</code> is implicit and never written explicitly. <code>const</code> is important — it tells the compiler and future readers that this value must not change. Using <code>const</code> for fixed values prevents accidental modification and enables compiler optimizations.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Storage Class Keywords</span></div>
+        <div class="syntax-card__code">/* auto — implicit default, never written */
+int x = 5;   /* same as: auto int x = 5; */
+
+/* const — read-only, value cannot change */
+const int MAX = 100;
+const float PI = 3.14159;
+/* MAX = 200; → COMPILE ERROR */
+
+/* extern — variable defined in another file */
+/* extern int sharedCount; */
+
+/* register — hint to store in CPU register (advisory) */
+/* register int fast = 0; */
+
+/* const parameters — protect what is passed in */
+void printValue(const int n) {
+    printf("%d\n", n);
+    /* n = 99; → COMPILE ERROR inside function */
+}</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Use const for any value that should not change</div>
+          <div class="callout__body">Declare magic numbers and fixed values as <code>const</code> variables rather than raw literals. <code>const int DAYS_IN_WEEK = 7;</code> is better than using <code>7</code> throughout your code — it names the intent and prevents accidental modification.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch14-storage-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch14-storage-4"><div id="compiler-ch14-storage-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-storage-5"><div id="compiler-ch14-storage-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-storage-6"><div id="compiler-ch14-storage-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-storage-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Named constants replace magic numbers</div>
+        <p class="realworld-card__text">Every program has fixed values — screen sizes, limits, rates. Naming them with <code>const</code> makes the code self-documenting and changes propagate everywhere automatically.</p>
+        <pre>const int BOARD_SIZE  = 8;
+const int MAX_PLAYERS = 4;
+const float WIN_RATE  = 0.75;
+
+for (int r = 0; r &lt; BOARD_SIZE; r++) {
+    for (int c = 0; c &lt; BOARD_SIZE; c++) {
+        /* process board[r][c] */
+    }
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-storage">📋 Start Assessment — Storage Classes</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-storage" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-storage">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-storage">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-storage">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-storage">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-storage"><div id="quiz-ch14-storage-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-storage"><div id="quiz-ch14-storage-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-storage"><div id="practice-ch14-storage"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-storage"><div id="compiler-ch14-storage-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — STATIC INSIDE FUNCTIONS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-static" id="topic-ch14-static">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title"><code>static</code> Variables — Memory That Persists Between Calls</h2>
+      <span class="topic__status-badge" id="badge-ch14-static">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-static-1">
+      <p class="step-label" data-step-num="1">Run this. A static variable inside a function keeps its value between calls — unlike a normal local.</p>
+      <div id="compiler-ch14-static-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch14-static-2"><div id="iq-ch14-static"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch14-static-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>static</code> locals are initialized once and keep their value forever</h3>
+        <p>A <code>static</code> local variable is different from a normal local in two key ways: it is <strong>initialized only once</strong> (the first time the function runs, not on every call), and its value <strong>persists between calls</strong> — the variable is not destroyed when the function returns.</p>
+        <p>This makes <code>static</code> locals perfect for <strong>call counters</strong>, <strong>memoization</strong>, and <strong>state machines</strong> — any case where a function needs memory of previous invocations without the risk of a global variable.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">static Local — Persists Between Calls</span></div>
+        <div class="syntax-card__code">void callCounter() {
+    static int count = 0;  /* initialized ONCE, persists */
+    count++;
+    printf("Called %d time(s)\n", count);
+}
+
+callCounter();  /* Called 1 time(s) */
+callCounter();  /* Called 2 time(s) */
+callCounter();  /* Called 3 time(s) */
+
+/* Compare to normal local: */
+void normalCounter() {
+    int count = 0;  /* reset to 0 EVERY call */
+    count++;
+    printf("Count: %d\n", count);  /* always prints 1 */
+}
+
+/* static variables are scoped to their function
+   but have program lifetime (like globals). */</div>
+      </div>
+      <button class="btn-continue" id="step-ch14-static-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch14-static-4"><div id="compiler-ch14-static-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-static-5"><div id="compiler-ch14-static-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-static-6"><div id="compiler-ch14-static-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-static-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Generating unique IDs without a global</div>
+        <p class="realworld-card__text">A static counter inside a function gives each call a unique number without exposing global state — the counter is private to the function but persists across all calls.</p>
+        <pre>int nextId() {
+    static int id = 0;
+    return ++id;
+}
+
+printf("ID: %d\n", nextId());   /* ID: 1 */
+printf("ID: %d\n", nextId());   /* ID: 2 */
+printf("ID: %d\n", nextId());   /* ID: 3 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-static">📋 Start Assessment — static Variables</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-static" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-static">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-static">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-static">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-static">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-static"><div id="quiz-ch14-static-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-static"><div id="quiz-ch14-static-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-static"><div id="practice-ch14-static"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-static"><div id="compiler-ch14-static-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — STANDARD LIBRARY OVERVIEW
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-stdlib" id="topic-ch14-stdlib">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">The Standard Library — What C Gives You for Free</h2>
+      <span class="topic__status-badge" id="badge-ch14-stdlib">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-stdlib-1">
+      <p class="step-label" data-step-num="1">Run this. These functions come from stdlib.h and string.h — no code needed to write them.</p>
+      <div id="compiler-ch14-stdlib-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch14-stdlib-2"><div id="iq-ch14-stdlib"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch14-stdlib-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">The C standard library provides tested, portable functions via header files</h3>
+        <p>C ships with a standard library — a collection of pre-written functions grouped by purpose into header files. You include the header to access its functions. The most used headers are: <code>stdio.h</code> (input/output — printf, scanf), <code>stdlib.h</code> (general utilities — abs, rand, malloc), <code>string.h</code> (string operations — strlen, strcpy, strcmp), <code>math.h</code> (mathematics — sqrt, pow, floor), and <code>ctype.h</code> (character testing — isdigit, isalpha, toupper).</p>
+        <p>These functions are implemented by your C runtime environment and are as fast as anything you could write manually. Always check if the standard library has what you need before writing it from scratch.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Key stdlib Functions</span></div>
+        <div class="syntax-card__code">/* stdlib.h */
+#include &lt;stdlib.h&gt;
+abs(-7)             /* → 7 — absolute value of int */
+rand()              /* → random int 0 to RAND_MAX */
+rand() % 6 + 1      /* → random 1–6 (dice) */
+
+/* string.h */
+#include &lt;string.h&gt;
+strlen("hello")     /* → 5 — number of chars */
+strcmp("a","b")     /* → negative (a &lt; b alphabetically) */
+strcmp("a","a")     /* → 0 (equal) */
+
+/* ctype.h */
+#include &lt;ctype.h&gt;
+isdigit('5')        /* → non-zero (true) */
+isalpha('A')        /* → non-zero (true) */
+toupper('a')        /* → 'A' */
+tolower('Z')        /* → 'z' */</div>
+      </div>
+      <button class="btn-continue" id="step-ch14-stdlib-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch14-stdlib-4"><div id="compiler-ch14-stdlib-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-stdlib-5"><div id="compiler-ch14-stdlib-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-stdlib-6"><div id="compiler-ch14-stdlib-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-stdlib-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Classifying characters from user input</div>
+        <p class="realworld-card__text">Parsing input character-by-character is common in C — <code>ctype.h</code> functions classify each character cleanly without manual ASCII range checks.</p>
+        <pre>#include &lt;ctype.h&gt;
+char ch = 'A';
+if (isalpha(ch))  printf("letter\n");
+if (isupper(ch))  printf("uppercase\n");
+if (isdigit(ch))  printf("digit\n");
+printf("%c\n", tolower(ch));   /* a */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-stdlib">📋 Start Assessment — Standard Library</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-stdlib" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-stdlib">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-stdlib">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-stdlib">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-stdlib">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-stdlib"><div id="quiz-ch14-stdlib-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-stdlib"><div id="quiz-ch14-stdlib-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-stdlib"><div id="practice-ch14-stdlib"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-stdlib"><div id="compiler-ch14-stdlib-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — MATH.H FUNCTIONS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-math" id="topic-ch14-math">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title"><code>math.h</code> — Square Roots, Powers, Rounding</h2>
+      <span class="topic__status-badge" id="badge-ch14-math">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-math-1">
+      <p class="step-label" data-step-num="1">Run this. math.h gives you every mathematical operation C's arithmetic operators cannot express.</p>
+      <div id="compiler-ch14-math-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch14-math-2"><div id="iq-ch14-math"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch14-math-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">math.h provides the mathematical operations that C operators cannot express</h3>
+        <p>C's built-in operators (<code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code>) cover basic arithmetic. <code>math.h</code> adds everything else: <code>sqrt(x)</code> for square root, <code>pow(x, y)</code> for x to the power y, <code>floor(x)</code>/<code>ceil(x)</code>/<code>round(x)</code> for rounding, <code>fabs(x)</code> for absolute value of doubles, and the trigonometric family.</p>
+        <p>All <code>math.h</code> functions work with <code>double</code> (not <code>int</code>). Passing an integer is fine — C promotes it automatically. But the return value is always <code>double</code> — store results in a <code>double</code> variable or cast explicitly if you need an integer.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">math.h — Essential Functions</span></div>
+        <div class="syntax-card__code">#include &lt;math.h&gt;
+
+sqrt(25.0)          /* → 5.0  — square root */
+pow(2.0, 10.0)      /* → 1024.0 — 2 to the power 10 */
+fabs(-3.7)          /* → 3.7  — absolute value (double) */
+floor(4.9)          /* → 4.0  — round DOWN */
+ceil(4.1)           /* → 5.0  — round UP */
+round(4.5)          /* → 5.0  — round to nearest */
+
+/* Common use: distance formula — sqrt(dx²+dy²) */
+double dx = 3.0, dy = 4.0;
+double dist = sqrt(dx*dx + dy*dy);  /* 5.0 */
+
+/* Primality: only check divisors up to sqrt(n) */
+for (int d = 2; d &lt;= (int)sqrt(n); d++) { ... }</div>
+      </div>
+      <button class="btn-continue" id="step-ch14-math-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch14-math-4"><div id="compiler-ch14-math-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-math-5"><div id="compiler-ch14-math-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-math-6"><div id="compiler-ch14-math-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-math-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Hypotenuse and distance calculations</div>
+        <p class="realworld-card__text">The Pythagorean theorem appears in game physics, mapping, and graphics. <code>sqrt</code> and <code>pow</code> from <code>math.h</code> compute distances cleanly and correctly for floating-point coordinates.</p>
+        <pre>#include &lt;math.h&gt;
+double distance(double x1,double y1,double x2,double y2){
+    double dx = x2 - x1;
+    double dy = y2 - y1;
+    return sqrt(dx*dx + dy*dy);
+}
+printf("%.2f\n", distance(0,0,3,4));  /* 5.00 */
+printf("%.2f\n", distance(1,1,4,5));  /* 5.00 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-math">📋 Start Assessment — math.h</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-math" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-math">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-math">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-math">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-math">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-math"><div id="quiz-ch14-math-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-math"><div id="quiz-ch14-math-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-math"><div id="practice-ch14-math"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-math"><div id="compiler-ch14-math-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 7 — RECURSION FOUNDATIONS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-recursion" id="topic-ch14-recursion">
+    <div class="topic__header">
+      <span class="topic__number">Topic 7</span>
+      <h2 class="topic__title">Recursion — The Call Stack in Depth</h2>
+      <span class="topic__status-badge" id="badge-ch14-recursion">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-recursion-1">
+      <p class="step-label" data-step-num="1">Run this. Watch how recursive calls stack up and then unwind in reverse.</p>
+      <div id="compiler-ch14-recursion-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch14-recursion-2"><div id="iq-ch14-recursion"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch14-recursion-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Each recursive call creates a new stack frame — frames unwind in reverse on return</h3>
+        <p>Every function call — including recursive ones — pushes a new <strong>stack frame</strong> onto the call stack. This frame holds the function's local variables and parameters independently of other frames. Recursive calls stack up frames; when the base case returns, frames unwind one by one, each returning to its caller.</p>
+        <p>Code before the recursive call runs on the way <em>down</em> (as frames are created). Code after the recursive call runs on the way <em>back up</em> (as frames unwind). This is why placing <code>printf</code> before or after the recursive call produces reversed outputs.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Down vs Up — Call Order vs Return Order</span></div>
+        <div class="syntax-card__code">void down(int n) {
+    if (n == 0) return;
+    printf("%d ", n);    /* runs going DOWN — before recursive call */
+    down(n - 1);
+}
+down(3);   /* prints: 3 2 1 */
+
+void up(int n) {
+    if (n == 0) return;
+    up(n - 1);
+    printf("%d ", n);    /* runs going UP — after recursive call returns */
+}
+up(3);     /* prints: 1 2 3 */
+
+/* Same function, same calls — order of printf vs recursion
+   determines whether you print on the way down or up */</div>
+      </div>
+      <button class="btn-continue" id="step-ch14-recursion-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch14-recursion-4"><div id="compiler-ch14-recursion-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-recursion-5"><div id="compiler-ch14-recursion-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-recursion-6"><div id="compiler-ch14-recursion-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-recursion-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Reversing a number with the call stack</div>
+        <p class="realworld-card__text">The call stack naturally reverses sequences. Printing digits after the recursive call uses the stack's LIFO (last-in, first-out) order to print digits from least-significant to most-significant — reversing the number.</p>
+        <pre>void reverseDigits(int n) {
+    if (n == 0) return;
+    printf("%d", n % 10);   /* print this digit on the way UP */
+    reverseDigits(n / 10);  /* recurse on remaining digits */
+}
+reverseDigits(1234);  /* prints: 4321 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-recursion">📋 Start Assessment — Recursion and the Call Stack</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-recursion" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-recursion">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-recursion">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-recursion">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-recursion">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-recursion"><div id="quiz-ch14-recursion-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-recursion"><div id="quiz-ch14-recursion-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-recursion"><div id="practice-ch14-recursion"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-recursion"><div id="compiler-ch14-recursion-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 8 — BASE CASE AND RECURSIVE CASE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-recbase" id="topic-ch14-recbase">
+    <div class="topic__header">
+      <span class="topic__number">Topic 8</span>
+      <h2 class="topic__title">Base Case &amp; Recursive Case — Writing Correct Recursion</h2>
+      <span class="topic__status-badge" id="badge-ch14-recbase">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-recbase-1">
+      <p class="step-label" data-step-num="1">Run this. The function has two clear sections — the stop and the continue. Identify both.</p>
+      <div id="compiler-ch14-recbase-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch14-recbase-2"><div id="iq-ch14-recbase"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch14-recbase-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Design recursion by defining the base case first, then the recursive step</h3>
+        <p>When writing a recursive function, always start with: <strong>what is the simplest possible input and what should the answer be?</strong> That is your base case. Then ask: <strong>given a larger input, how can I reduce it to a simpler sub-problem?</strong> That is your recursive case. The reduction must always move toward the base case — otherwise you get infinite recursion.</p>
+        <p>Multiple base cases are common. <code>fibonacci(0) = 0</code> and <code>fibonacci(1) = 1</code> are both base cases. For defensive programming, also guard against invalid inputs (negative numbers, null pointers) at the top of the function.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Template for Writing Recursive Functions</span></div>
+        <div class="syntax-card__code">int solve(int n) {
+    /* Step 1: guard against invalid input */
+    if (n &lt; 0) return -1;
+
+    /* Step 2: base case(s) — stop here, return directly */
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+
+    /* Step 3: recursive case — reduce and combine */
+    return solve(n - 1) + solve(n - 2);
+}
+
+/* Key checklist:
+   ✓ Does every path hit a base case eventually?
+   ✓ Does the recursive call use a SMALLER/SIMPLER input?
+   ✓ Are ALL base cases handled?
+   ✓ Is the combination step (+ - * etc.) correct? */</div>
+      </div>
+      <button class="btn-continue" id="step-ch14-recbase-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch14-recbase-4"><div id="compiler-ch14-recbase-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-recbase-5"><div id="compiler-ch14-recbase-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-recbase-6"><div id="compiler-ch14-recbase-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-recbase-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Binary search — recursion naturally maps to divide-and-conquer</div>
+        <p class="realworld-card__text">Binary search on a sorted array cuts the search space in half each call — a textbook recursive reduction. The base case is when the search space is empty or the element is found.</p>
+        <pre>int bsearch(int arr[], int lo, int hi, int target) {
+    if (lo > hi) return -1;          /* base: not found */
+    int mid = (lo + hi) / 2;
+    if (arr[mid] == target) return mid; /* base: found */
+    if (arr[mid] &lt; target)
+        return bsearch(arr, mid+1, hi, target); /* right half */
+    return bsearch(arr, lo, mid-1, target);     /* left half */
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-recbase">📋 Start Assessment — Base Case Design</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-recbase" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-recbase">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-recbase">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-recbase">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-recbase">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-recbase"><div id="quiz-ch14-recbase-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-recbase"><div id="quiz-ch14-recbase-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-recbase"><div id="practice-ch14-recbase"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-recbase"><div id="compiler-ch14-recbase-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 9 — FACTORIAL AND FIBONACCI
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-factorial" id="topic-ch14-factorial">
+    <div class="topic__header">
+      <span class="topic__number">Topic 9</span>
+      <h2 class="topic__title">Factorial &amp; Fibonacci — Classic Recursive Algorithms</h2>
+      <span class="topic__status-badge" id="badge-ch14-factorial">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-factorial-1">
+      <p class="step-label" data-step-num="1">Run both. They are the two most studied recursive algorithms — understand how each works.</p>
+      <div id="compiler-ch14-factorial-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch14-factorial-2"><div id="iq-ch14-factorial"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch14-factorial-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Factorial is a clean single recursion — Fibonacci has two, making it exponentially slow</h3>
+        <p><strong>Factorial</strong>: <code>n! = n × (n-1)!</code> — one recursive call per step, so it takes exactly n calls. Simple, elegant, and efficient recursively.</p>
+        <p><strong>Fibonacci</strong>: <code>fib(n) = fib(n-1) + fib(n-2)</code> — two recursive calls per step. Each of those makes two more. The total calls grow exponentially: <code>fib(30)</code> makes over a million recursive calls. This is why recursive Fibonacci is a teaching example but never used in production — the iterative version (or memoized version) is vastly faster.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Factorial vs Fibonacci — Recursive Cost</span></div>
+        <div class="syntax-card__code">/* Factorial — O(n) calls, fine recursively */
+int factorial(int n) {
+    if (n &lt;= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+/* Fibonacci recursive — O(2^n) calls, SLOW */
+int fib_slow(int n) {
+    if (n &lt;= 1) return n;
+    return fib_slow(n-1) + fib_slow(n-2);
+}
+
+/* Fibonacci iterative — O(n), always prefer this */
+int fib_fast(int n) {
+    if (n &lt;= 1) return n;
+    int a = 0, b = 1;
+    for (int i = 2; i &lt;= n; i++) {
+        int t = a + b; a = b; b = t;
+    }
+    return b;
+}</div>
+      </div>
+      <button class="btn-continue" id="step-ch14-factorial-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch14-factorial-4"><div id="compiler-ch14-factorial-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-factorial-5"><div id="compiler-ch14-factorial-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-factorial-6"><div id="compiler-ch14-factorial-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-factorial-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Combinations in statistics — uses factorial</div>
+        <p class="realworld-card__text">Combinations (choosing k from n) are defined using factorials. Calling factorial() three times gives the answer directly — readable code that matches the mathematical formula exactly.</p>
+        <pre>int factorial(int n) {
+    if (n &lt;= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+int choose(int n, int k) {
+    return factorial(n) / (factorial(k) * factorial(n - k));
+}
+
+printf("C(5,2) = %d\n", choose(5, 2));   /* 10 */
+printf("C(6,3) = %d\n", choose(6, 3));   /* 20 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-factorial">📋 Start Assessment — Factorial &amp; Fibonacci</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-factorial" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-factorial">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-factorial">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-factorial">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-factorial">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-factorial"><div id="quiz-ch14-factorial-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-factorial"><div id="quiz-ch14-factorial-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-factorial"><div id="practice-ch14-factorial"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-factorial"><div id="compiler-ch14-factorial-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 10 — RECURSION VS ITERATION
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-recviter" id="topic-ch14-recviter">
+    <div class="topic__header">
+      <span class="topic__number">Topic 10</span>
+      <h2 class="topic__title">Recursion vs Iteration — When to Use Each</h2>
+      <span class="topic__status-badge" id="badge-ch14-recviter">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch14-recviter-1">
+      <p class="step-label" data-step-num="1">Run both versions — same output, different approaches. Compare the code structure.</p>
+      <div id="compiler-ch14-recviter-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch14-recviter-2"><div id="iq-ch14-recviter"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch14-recviter-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Prefer iteration for performance — prefer recursion when the problem is naturally recursive</h3>
+        <p><strong>Iteration</strong> (loops) is generally faster: no stack frame overhead, no risk of stack overflow, and the compiler can optimize loops aggressively. For problems with a simple counter — summing, searching, processing arrays — iteration is the right choice.</p>
+        <p><strong>Recursion</strong> shines when the problem <em>is</em> recursive by nature: tree traversal, divide-and-conquer algorithms, parsing nested structures. The code mirrors the problem definition directly. Forcing iteration on these problems produces complex, harder-to-understand code. The rule: use recursion when the recursive solution is clearer, and the depth is bounded and reasonable.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Recursion vs Iteration — Decision Guide</span></div>
+        <div class="syntax-card__code">/* Use iteration: simple count, known range */
+int sumIter(int n) {
+    int total = 0;
+    for (int i = 1; i &lt;= n; i++) total += i;
+    return total;
+}
+
+/* Use recursion: naturally recursive structure */
+int sumRec(int n) {
+    if (n &lt;= 0) return 0;
+    return n + sumRec(n - 1);
+}
+
+/* Both give the same result but:
+   Iteration: O(n) time, O(1) space — no stack frames
+   Recursion: O(n) time, O(n) space — n stack frames
+
+   For n=1000, iteration is safer.
+   For tree/nested structures, recursion is clearer. */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Every recursion can be converted to iteration — and vice versa</div>
+          <div class="callout__body">The two approaches are always interchangeable in theory. Recursion uses the implicit call stack; iteration uses an explicit stack or counter. Choose based on clarity and safety — if recursion depth could be large (thousands of levels), use iteration instead to prevent stack overflow.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch14-recviter-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch14-recviter-4"><div id="compiler-ch14-recviter-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch14-recviter-5"><div id="compiler-ch14-recviter-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch14-recviter-6"><div id="compiler-ch14-recviter-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch14-recviter-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Power function — both versions, one clear winner</div>
+        <p class="realworld-card__text">Computing a^n iteratively is more efficient for large exponents — no stack overhead. But the recursive version reads like the mathematical definition exactly. Know both; choose based on context.</p>
+        <pre>/* Iterative — O(n), O(1) space */
+int powerIter(int base, int exp) {
+    int result = 1;
+    for (int i = 0; i &lt; exp; i++) result *= base;
+    return result;
+}
+
+/* Recursive — O(n), O(n) stack */
+int powerRec(int base, int exp) {
+    if (exp == 0) return 1;
+    return base * powerRec(base, exp - 1);
+}
+
+printf("%d %d\n", powerIter(2,8), powerRec(2,8)); /* 256 256 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch14-recviter">📋 Start Assessment — Recursion vs Iteration</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch14-recviter" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch14-recviter">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch14-recviter">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch14-recviter">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch14-recviter">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch14-recviter"><div id="quiz-ch14-recviter-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch14-recviter"><div id="quiz-ch14-recviter-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch14-recviter"><div id="practice-ch14-recviter"></div></div>
+        <div class="assessment-section" id="tab-debug-ch14-recviter"><div id="compiler-ch14-recviter-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 14 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch14-mastery" id="topic-ch14-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 14 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply every Chapter 14 concept — scope, static, stdlib, math.h, and recursion — in one complete program.</p>
+      <div id="compiler-ch14-mastery"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER COMPLETE -->
+  <div id="ch14-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 14 Complete</div>
+      <p class="chapter-complete__message">
+        You now understand where variables live, how storage classes change their behavior, what the standard library offers, 
+        and how to write and analyze recursive algorithms. Chapter 15 moves into arrays and strings — the first 
+        data structures you will work with directly in C memory.
+      </p>
+      <button class="btn-continue" id="ch14-next-btn">Start Chapter 15 — Arrays &amp; Strings →</button>
+    </div>
+  </div>
+
+</div>

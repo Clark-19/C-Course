@@ -1,0 +1,719 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch1-variables-constants/ch1.html
+     Chapter 1: Variables and Constants
+     8 topics · Full 7-step active learning structure per topic
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 1</div>
+    <h1 class="chapter-header__title">Variables &amp; Constants</h1>
+    <p class="chapter-header__subtitle">
+      Variables are named containers for data. You declare them, assign values, and use
+      those values throughout your program. This chapter covers every variable type in C —
+      by writing code, not by reading definitions.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">8 Topics</span>
+      <span class="chapter-badge">int · float · double · char · const · #define</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — WHAT IS A VARIABLE?
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch1-variable" id="topic-ch1-variable">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">What is a Variable?</h2>
+      <span class="topic__status-badge" id="badge-ch1-variable">✅ Complete</span>
+    </div>
+
+    <!-- Step 1: Code First -->
+    <div class="step step--visible" data-step="1" id="step-ch1-variable-1">
+      <p class="step-label" data-step-num="1">Compile and run this — a variable stores a number.</p>
+      <div id="compiler-ch1-variable-explore"></div>
+    </div>
+
+    <!-- Step 2: Instant Question -->
+    <div class="step step--visible" data-step="2" id="step-ch1-variable-2">
+      <div id="iq-ch1-variable"></div>
+    </div>
+
+    <!-- Step 3: Micro-Explanation -->
+    <div class="step step--visible" data-step="3" id="step-ch1-variable-3">
+      <div class="explanation-card">
+        <p>A <strong>variable</strong> is a named storage location in memory. You declare it with a type and a name, then assign it a value with <code>=</code>.</p>
+        <p><code>int score = 95;</code> creates a box named <code>score</code>, tells C it holds a whole number (<code>int</code>), and puts 95 inside it.</p>
+        <p><code>%d</code> inside <code>printf()</code> is a placeholder — it tells C to print the integer value of whatever variable you list after the comma.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Syntax — Variable Declaration</span></div>
+        <div class="syntax-card__code">type  variable_name = value;
+// ────────────────────────────
+int   score         = 95;
+float temperature   = 36.6;
+char  grade         = 'A';
+// ↑ type   ↑ name    ↑ value</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Remember</div>
+          <div class="callout__body">Every variable must be <strong>declared</strong> before it is used. C does not let you use a name that has never been defined — the compiler will error: <code>undeclared identifier</code>.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="ch1-variable-step3-continue">Got it — continue →</button>
+    </div>
+
+    <!-- Step 4: Guided Practice -->
+    <div class="step step--visible" data-step="4" id="step-ch1-variable-4">
+      <div id="compiler-ch1-variable-modify"></div>
+    </div>
+
+    <!-- Step 5: Fill-in-the-Blank -->
+    <div class="step step--visible" data-step="5" id="step-ch1-variable-5">
+      <div id="compiler-ch1-variable-fill"></div>
+    </div>
+
+    <!-- Step 6: Mini Challenge -->
+    <div class="step step--visible" data-step="6" id="step-ch1-variable-6">
+      <div id="compiler-ch1-variable-build"></div>
+    </div>
+
+    <!-- Step 7: Real-World Snap -->
+    <div class="step step--visible" data-step="7" id="step-ch1-variable-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Variables in real programs</div>
+        <p class="realworld-card__text">Every game, app, and operating system tracks data with variables — player health, sensor readings, file sizes. The pattern is always the same: declare, assign, use.</p>
+        <pre>int player_health = 100;
+int enemy_damage  = 15;
+player_health = player_health - enemy_damage;
+printf("Health: %d\n", player_health); /* prints 85 */</pre>
+      </div>
+    </div>
+
+    <!-- Assessment -->
+    <div class="assessment-block" data-topic="ch1-variable">
+      <div class="assessment-block__header">
+        <div>
+          <div class="assessment-block__title">Assessment — Variables</div>
+          <div class="assessment-block__subtitle">Predict · Multiple Choice · Identify · Debug</div>
+        </div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch1-variable">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"     data-topic="ch1-variable">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch1-variable">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch1-variable">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch1-variable">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch1-variable"><div id="quiz-ch1-variable-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch1-variable"><div id="quiz-ch1-variable-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch1-variable"><div id="practice-ch1-variable"></div></div>
+        <div class="assessment-section" id="tab-identify-ch1-variable"><div id="quiz-ch1-variable-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch1-variable"><div id="compiler-ch1-variable-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — VARIABLE NAMING RULES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch1-naming" id="topic-ch1-naming">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Variable Naming Rules — Identifiers</h2>
+      <span class="topic__status-badge" id="badge-ch1-naming">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch1-naming-1">
+      <p class="step-label" data-step-num="1">Run this — only the valid declarations compile. See which names work.</p>
+      <div id="compiler-ch1-naming-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch1-naming-2">
+      <div id="iq-ch1-naming"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch1-naming-3">
+      <div class="explanation-card">
+        <p>In C, variable names are called <em>identifiers</em>. An identifier must follow exactly these rules — break any one of them and the compiler errors.</p>
+        <ul>
+          <li>May only contain <strong>letters</strong>, <strong>digits</strong>, and <strong>underscores</strong> (<code>_</code>)</li>
+          <li>Must <strong>not start with a digit</strong> — <code>1score</code> is invalid, <code>score1</code> is valid</li>
+          <li><strong>Case-sensitive</strong> — <code>score</code> and <code>Score</code> are two different variables</li>
+          <li>Must <strong>not be a C keyword</strong> — you cannot name a variable <code>int</code>, <code>return</code>, or <code>for</code></li>
+          <li>Must <strong>not contain spaces</strong> — <code>my score</code> is two tokens, not one name</li>
+        </ul>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Valid vs Invalid Names</span></div>
+        <div class="syntax-card__code">/* ✓ VALID */        /* ✗ INVALID — why */
+score              1score        ← starts with digit
+player_health      my score      ← contains space
+_temp              int           ← C keyword
+totalCount         first-name    ← hyphen not allowed
+x                  for           ← C keyword</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Common Mistake</div>
+          <div class="callout__body"><code>float</code>, <code>char</code>, <code>int</code>, <code>return</code> — these are keywords. You cannot use them as variable names. The compiler will give a confusing error if you try. Name your variables after what they represent: <code>temperature</code>, <code>grade</code>, <code>count</code>.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="ch1-naming-step3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch1-naming-4">
+      <div id="compiler-ch1-naming-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch1-naming-5">
+      <div id="compiler-ch1-naming-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch1-naming-6">
+      <div id="compiler-ch1-naming-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch1-naming-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Names matter in real code</div>
+        <p class="realworld-card__text">Professional C code uses names that describe what the variable holds — not single letters (except loop counters). Readable names make code maintainable.</p>
+        <pre>/* ✗ Hard to read */
+int x = 86400;
+/* ✓ Self-documenting */
+int seconds_per_day = 86400;</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch1-naming">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Naming Rules</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"     data-topic="ch1-naming">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch1-naming">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch1-naming">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch1-naming"><div id="quiz-ch1-naming-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch1-naming"><div id="quiz-ch1-naming-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch1-naming"><div id="compiler-ch1-naming-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — int VARIABLES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch1-int" id="topic-ch1-int">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title"><code>int</code> Variables — Whole Numbers</h2>
+      <span class="topic__status-badge" id="badge-ch1-int">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch1-int-1">
+      <p class="step-label" data-step-num="1">Run this — int stores whole numbers. Watch what happens with arithmetic.</p>
+      <div id="compiler-ch1-int-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch1-int-2">
+      <div id="iq-ch1-int"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch1-int-3">
+      <div class="explanation-card">
+        <p><strong>int</strong> stores whole numbers — positive, negative, or zero. It takes <strong>4 bytes</strong> of memory and holds values from roughly −2 billion to +2 billion.</p>
+        <p>Declare multiple int variables in one line by separating them with commas: <code>int a, b, c;</code></p>
+        <p>Use <code>%d</code> as the format specifier when printing an int with <code>printf()</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">int — Declaration Forms</span></div>
+        <div class="syntax-card__code">int count;             /* declare only — value is garbage */
+int score = 0;         /* declare and initialize */
+int a, b, c;           /* declare multiple on one line */
+int x = 10, y = 20;   /* declare and initialize multiple */
+
+printf("%d\n", score); /* %d is the int format specifier */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Common Mistake — Uninitialised int</div>
+          <div class="callout__body">Writing <code>int count;</code> and then using <code>count</code> without assigning a value first is <strong>undefined behavior</strong>. C does not automatically set variables to 0 — the memory may contain garbage from a previous program. Always initialise: <code>int count = 0;</code></div>
+        </div>
+      </div>
+      <button class="btn-continue" id="ch1-int-step3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch1-int-4">
+      <div id="compiler-ch1-int-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch1-int-5">
+      <div id="compiler-ch1-int-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch1-int-6">
+      <div id="compiler-ch1-int-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch1-int-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 int in real programs</div>
+        <p class="realworld-card__text">int is used for anything that is counted or indexed — loop counters, array sizes, user IDs, scores. When you need bigger numbers, use <code>long</code> or <code>long long</code>.</p>
+        <pre>int total_students = 42;
+int passed = 0;
+int failed  = 0;
+/* program logic goes here */
+printf("Passed: %d  Failed: %d\n", passed, failed);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch1-int">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — int Variables</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch1-int">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch1-int">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch1-int">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch1-int">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch1-int"><div id="quiz-ch1-int-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch1-int"><div id="quiz-ch1-int-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch1-int"><div id="practice-ch1-int"></div></div>
+        <div class="assessment-section" id="tab-debug-ch1-int"><div id="compiler-ch1-int-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — float & double
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch1-float" id="topic-ch1-float">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title"><code>float</code> &amp; <code>double</code> — Decimal Numbers</h2>
+      <span class="topic__status-badge" id="badge-ch1-float">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch1-float-1">
+      <p class="step-label" data-step-num="1">Run this — observe how float and double handle decimal numbers differently.</p>
+      <div id="compiler-ch1-float-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch1-float-2">
+      <div id="iq-ch1-float"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch1-float-3">
+      <div class="explanation-card">
+        <p><strong>float</strong> stores decimal (floating-point) numbers in 4 bytes with about 6–7 digits of precision. <strong>double</strong> uses 8 bytes and gives 15–16 digits of precision.</p>
+        <p>Use <code>%f</code> for both float and double in <code>printf()</code>. Control decimal places with <code>%.2f</code> (2 places), <code>%.4f</code> (4 places), etc.</p>
+        <p>Prefer <code>double</code> over <code>float</code> for most calculations — the extra precision prevents subtle rounding errors.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">float and double</span></div>
+        <div class="syntax-card__code">float  price     = 9.99;      /* 4 bytes — ~6 digits precision  */
+double pi        = 3.14159265358979; /* 8 bytes — ~15 digits */
+
+printf("%f\n",   price);     /* 9.990000   (default 6 decimal places) */
+printf("%.2f\n", price);     /* 9.99       (2 decimal places) */
+printf("%.4f\n", pi);        /* 3.1416     (4 decimal places) */</div>
+      </div>
+      <div class="callout callout--diff">
+        <span class="callout__icon">↔</span>
+        <div class="callout__content">
+          <div class="callout__title">float vs double</div>
+          <div class="callout__body"><code>float price = 9.99;</code> — 4 bytes, ~6 significant digits. Use when memory is very tight.<br><code>double pi = 3.14159;</code> — 8 bytes, ~15 significant digits. Use for all scientific, financial, or precise calculations. In modern C, <strong>prefer double</strong>.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="ch1-float-step3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch1-float-4">
+      <div id="compiler-ch1-float-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch1-float-5">
+      <div id="compiler-ch1-float-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch1-float-6">
+      <div id="compiler-ch1-float-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch1-float-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 float &amp; double in real programs</div>
+        <p class="realworld-card__text">Temperature sensors, GPS coordinates, financial calculations, physics simulations — anything measured with a decimal value uses float or double.</p>
+        <pre>double latitude  = 10.3157;   /* Manolo Fortich, Bukidnon */
+double longitude = 125.0000;
+double temperature_celsius = 28.5;
+printf("Temp: %.1f C\n", temperature_celsius); /* 28.5 C */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch1-float">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — float &amp; double</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch1-float">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch1-float">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch1-float">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch1-float">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch1-float"><div id="quiz-ch1-float-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch1-float"><div id="quiz-ch1-float-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch1-float"><div id="practice-ch1-float"></div></div>
+        <div class="assessment-section" id="tab-debug-ch1-float"><div id="compiler-ch1-float-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — char VARIABLES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch1-char" id="topic-ch1-char">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title"><code>char</code> Variables — Single Characters</h2>
+      <span class="topic__status-badge" id="badge-ch1-char">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch1-char-1">
+      <p class="step-label" data-step-num="1">Run this — char stores one character. Notice the single quotes and %c.</p>
+      <div id="compiler-ch1-char-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch1-char-2">
+      <div id="iq-ch1-char"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch1-char-3">
+      <div class="explanation-card">
+        <p><strong>char</strong> holds a single character — a letter, digit, or symbol — stored as its <em>ASCII code</em> (a number from 0–127). It takes only <strong>1 byte</strong> of memory.</p>
+        <p>Character values are always wrapped in <strong>single quotes</strong>: <code>'A'</code>, <code>'z'</code>, <code>'5'</code>, <code>'!'</code>. Double quotes are for strings — a completely different type.</p>
+        <p>Use <code>%c</code> in <code>printf()</code> to print the character. Use <code>%d</code> on a char to see its ASCII number.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">char — Declaration and Use</span></div>
+        <div class="syntax-card__code">char grade  = 'A';     /* single quotes — always */
+char symbol = '!';
+char digit  = '7';     /* the character 7, not the number 7 */
+
+printf("%c\n",  grade);  /* prints: A */
+printf("%d\n",  grade);  /* prints: 65  (ASCII code of 'A') */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Single vs Double Quotes</div>
+          <div class="callout__body"><code>'A'</code> — single quotes — is a char (one character).<br><code>"A"</code> — double quotes — is a string (a char array, completely different type).<br>Using <code>char grade = "A";</code> is a type error the compiler will catch.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="ch1-char-step3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch1-char-4">
+      <div id="compiler-ch1-char-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch1-char-5">
+      <div id="compiler-ch1-char-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch1-char-6">
+      <div id="compiler-ch1-char-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch1-char-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 char in real programs</div>
+        <p class="realworld-card__text">char is the building block of all text in C — strings are arrays of char. A single char often represents a menu choice, a yes/no flag, or a single letter grade.</p>
+        <pre>char menu_choice = 'A';
+char pass_fail   = 'P';
+char first_initial = 'M';
+printf("Choice: %c  Result: %c\n", menu_choice, pass_fail);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch1-char">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — char Variables</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch1-char">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch1-char">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch1-char">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch1-char">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch1-char"><div id="quiz-ch1-char-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch1-char"><div id="quiz-ch1-char-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch1-char"><div id="practice-ch1-char"></div></div>
+        <div class="assessment-section" id="tab-debug-ch1-char"><div id="compiler-ch1-char-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — CONSTANTS — const
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch1-const" id="topic-ch1-const">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title">Constants — the <code>const</code> Keyword</h2>
+      <span class="topic__status-badge" id="badge-ch1-const">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch1-const-1">
+      <p class="step-label" data-step-num="1">Run this — const creates a value that cannot change. Try the second program to see the error.</p>
+      <div id="compiler-ch1-const-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch1-const-2">
+      <div id="iq-ch1-const"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch1-const-3">
+      <div class="explanation-card">
+        <p>Add <code>const</code> before a variable declaration to make it a <strong>constant</strong> — a value that is set once and can never be changed. If you try to assign a new value, the compiler errors.</p>
+        <p>By convention, constant names are written in <strong>UPPER_CASE</strong> with underscores. This signals to anyone reading the code that this value is fixed.</p>
+        <p>Constants are ideal for values that should never change: mathematical constants, array sizes, tax rates, speed of light.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">const — Declaration</span></div>
+        <div class="syntax-card__code">const int    MAX_STUDENTS = 30;
+const double PI           = 3.14159265358979;
+const char   PASS_GRADE   = 'P';
+
+/* Using the constant */
+printf("Max class size: %d\n", MAX_STUDENTS);
+
+/* This would be a compile error: */
+/* MAX_STUDENTS = 50; */   /* ✗ error: assignment to const */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Why Use Constants?</div>
+          <div class="callout__body">If your program uses the number 3.14159 in 20 places and you need to change the precision, you would have to find and change all 20. With <code>const double PI = 3.14159;</code>, you change it in one place. Constants also prevent accidental modification.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="ch1-const-step3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch1-const-4">
+      <div id="compiler-ch1-const-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch1-const-5">
+      <div id="compiler-ch1-const-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch1-const-6">
+      <div id="compiler-ch1-const-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch1-const-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 const in real programs</div>
+        <p class="realworld-card__text">Constants define the fixed properties of a system — buffer sizes, physical constants, port numbers, error codes. Every professional C codebase uses them to prevent magic numbers.</p>
+        <pre>const int    MAX_BUFFER    = 1024;
+const double GRAVITY       = 9.81;
+const int    HTTP_OK       = 200;
+const int    HTTP_NOT_FOUND = 404;</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch1-const">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — const Keyword</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"     data-topic="ch1-const">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch1-const">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch1-const">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch1-const"><div id="quiz-ch1-const-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch1-const"><div id="practice-ch1-const"></div></div>
+        <div class="assessment-section" id="tab-debug-ch1-const"><div id="compiler-ch1-const-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 7 — #define CONSTANTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch1-define" id="topic-ch1-define">
+    <div class="topic__header">
+      <span class="topic__number">Topic 7</span>
+      <h2 class="topic__title"><code>#define</code> — Preprocessor Constants</h2>
+      <span class="topic__status-badge" id="badge-ch1-define">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch1-define-1">
+      <p class="step-label" data-step-num="1">Run this — #define creates a constant before the compiler even runs.</p>
+      <div id="compiler-ch1-define-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch1-define-2">
+      <div id="iq-ch1-define"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch1-define-3">
+      <div class="explanation-card">
+        <p><code>#define</code> is a <em>preprocessor directive</em> — it runs before the compiler and does a simple text substitution. Every time the preprocessor sees <code>MAX</code> in your code, it replaces it with <code>100</code> before compilation begins.</p>
+        <p><code>#define</code> has <strong>no type</strong> and <strong>no semicolon</strong>. It is just a name-to-text replacement rule.</p>
+        <p>Like <code>const</code>, convention is UPPER_CASE for #define constants.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">#define vs const</span></div>
+        <div class="syntax-card__code">/* #define — preprocessor, no type, no semicolon, no = */
+#define MAX_STUDENTS  30
+#define PI            3.14159
+#define PASS_GRADE    'P'
+
+/* const — typed, has a value, lives in memory */
+const int    MAX = 30;
+const double PI2 = 3.14159;
+
+/* Both work the same way in usage: */
+printf("Max: %d\n", MAX_STUDENTS);
+printf("Max: %d\n", MAX);</div>
+      </div>
+      <div class="callout callout--diff">
+        <span class="callout__icon">↔</span>
+        <div class="callout__content">
+          <div class="callout__title">#define vs const — Key Differences</div>
+          <div class="callout__body">
+            <strong>#define</strong> — no type checking, no memory allocation, replaced by text before compile. Older style, common in legacy C code.<br>
+            <strong>const</strong> — has a type, stored in memory, type-checked by compiler. Safer and preferred in modern C (C99 and later).
+          </div>
+        </div>
+      </div>
+      <button class="btn-continue" id="ch1-define-step3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch1-define-4">
+      <div id="compiler-ch1-define-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch1-define-5">
+      <div id="compiler-ch1-define-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch1-define-6">
+      <div id="compiler-ch1-define-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch1-define-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 #define in real C code</div>
+        <p class="realworld-card__text">#define is everywhere in C headers and legacy code — it predates const by decades and is still heavily used for feature flags and configuration.</p>
+        <pre>#define SCREEN_WIDTH   1920
+#define SCREEN_HEIGHT  1080
+#define VERSION_MAJOR  2
+#define VERSION_MINOR  4
+
+printf("Version %d.%d\n", VERSION_MAJOR, VERSION_MINOR);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch1-define">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — #define</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"     data-topic="ch1-define">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch1-define">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch1-define">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch1-define"><div id="quiz-ch1-define-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch1-define"><div id="quiz-ch1-define-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch1-define"><div id="compiler-ch1-define-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 8 — NAMING CONVENTIONS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch1-naming2" id="topic-ch1-naming2">
+    <div class="topic__header">
+      <span class="topic__number">Topic 8</span>
+      <h2 class="topic__title">Naming Conventions in C</h2>
+      <span class="topic__status-badge" id="badge-ch1-naming2">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch1-naming2-1">
+      <p class="step-label" data-step-num="1">Run this — all three styles compile, but only one is standard C convention.</p>
+      <div id="compiler-ch1-naming2-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch1-naming2-2">
+      <div id="iq-ch1-naming2"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch1-naming2-3">
+      <div class="explanation-card">
+        <p>C has no enforced naming style — but the <strong>community convention</strong> is clear and nearly universal.</p>
+        <p>Use <code>snake_case</code> (all lowercase with underscores) for variables and functions. Use <code>UPPER_SNAKE_CASE</code> for constants (<code>const</code> and <code>#define</code>). Use short names like <code>i</code>, <code>j</code>, <code>k</code> only for loop counters.</p>
+        <p>Consistent naming makes code readable months later — by you and by anyone else who reads it.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">C Naming Convention Summary</span></div>
+        <div class="syntax-card__code">/* Variables and functions: snake_case */
+int student_count = 0;
+double account_balance = 1500.00;
+void calculate_grade(int score) { /* ... */ }
+
+/* Constants: UPPER_SNAKE_CASE */
+const int    MAX_STUDENTS   = 30;
+#define      TAX_RATE       0.12
+
+/* Loop counters: single letters are OK */
+for (int i = 0; i < 10; i++) { /* ... */ }
+
+/* ✗ Avoid: camelCase, PascalCase in C */
+int studentCount = 0;    /* JavaScript/Java style — avoid in C */
+int StudentCount = 0;    /* C++ class style — avoid in C */</div>
+      </div>
+      <button class="btn-continue" id="ch1-naming2-step3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch1-naming2-4">
+      <div id="compiler-ch1-naming2-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch1-naming2-5">
+      <div id="compiler-ch1-naming2-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch1-naming2-6">
+      <div id="compiler-ch1-naming2-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch1-naming2-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Naming in the Linux kernel</div>
+        <p class="realworld-text">The Linux kernel — millions of lines of C — uses snake_case throughout. Consistent naming is enforced by code review, not the compiler.</p>
+        <pre>static int total_bytes_read = 0;
+const unsigned int MAX_SOCKET_BACKLOG = 128;
+void update_socket_state(int fd, int new_state) {
+    /* function name: snake_case */
+}</pre>
+      </div>
+    </div>
+
+    <!-- Chapter 1 Mastery Challenge -->
+    <div class="assessment-block" data-topic="ch1-naming2">
+      <div class="assessment-block__header">
+        <div>
+          <div class="assessment-block__title">Assessment — Naming Conventions</div>
+        </div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"     data-topic="ch1-naming2">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch1-naming2">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch1-naming2">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch1-naming2"><div id="quiz-ch1-naming2-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch1-naming2"><div id="quiz-ch1-naming2-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch1-naming2"><div id="compiler-ch1-naming2-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 1 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch1-mastery" id="topic-ch1-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 1 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1" id="step-ch1-mastery-1">
+      <p class="step-label" data-step-num="1">Build this from scratch — no hints until you try.</p>
+      <div id="compiler-ch1-mastery"></div>
+    </div>
+  </section>
+
+  <!-- Chapter complete -->
+  <div id="ch1-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 1 Complete</div>
+      <p class="chapter-complete__message">You can declare, name, and use int, float, double, and char variables. You know the difference between const and #define. Chapter 2 covers data types in depth — sizes, ranges, and when to use each.</p>
+      <button class="btn-continue" id="ch1-next-btn">Start Chapter 2 — Data Types →</button>
+    </div>
+  </div>
+
+</div>

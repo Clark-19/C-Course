@@ -1,0 +1,549 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch9-switch/ch9.html
+     Chapter 9: Switch Statement
+     5 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 9</div>
+    <h1 class="chapter-header__title">Switch Statement</h1>
+    <p class="chapter-header__subtitle">
+      When you need to branch on many exact values of one variable,
+      <code>switch</code> is cleaner than a long <code>else if</code> chain.
+      This chapter covers every part of switch — cases, break, fallthrough,
+      default, and when to use it over if/else.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">5 Topics</span>
+      <span class="chapter-badge">switch · case · break · fallthrough · default</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — SWITCH SYNTAX BASICS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch9-intro" id="topic-ch9-intro">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">Switch Syntax — Structure and How It Works</h2>
+      <span class="topic__status-badge" id="badge-ch9-intro">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch9-intro-1">
+      <p class="step-label" data-step-num="1">Run this. Switch jumps directly to the matching case label — no comparison chain needed.</p>
+      <div id="compiler-ch9-intro-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch9-intro-2">
+      <div id="iq-ch9-intro"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch9-intro-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">switch jumps to the matching case label like a table lookup</h3>
+        <p>The <code>switch</code> statement evaluates one expression (which must produce an integer), then jumps directly to the <code>case</code> label that matches its value. If no label matches, it jumps to <code>default</code> (if one exists) or skips the block entirely.</p>
+        <p>This is not a series of comparisons — it is a <strong>direct jump</strong>. That is why switch is often faster than an equivalent else-if chain for many cases, and why the syntax looks different: you are labeling destinations, not writing sequential conditions.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Switch Structure</span></div>
+        <div class="syntax-card__code">switch (expression) {
+    case value_1:
+        /* code for value_1 */
+        break;
+    case value_2:
+        /* code for value_2 */
+        break;
+    default:
+        /* runs if no case matched */
+        break;
+}
+
+/* expression must be integer type: int, char, enum */
+/* case values must be compile-time integer constants */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">switch only works with integers</div>
+          <div class="callout__body">switch works with <code>int</code>, <code>char</code>, and enum — any integer type. It cannot be used with <code>float</code>, <code>double</code>, or strings. For those, use if/else.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch9-intro-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch9-intro-4">
+      <div id="compiler-ch9-intro-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch9-intro-5">
+      <div id="compiler-ch9-intro-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch9-intro-6">
+      <div id="compiler-ch9-intro-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch9-intro-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Menu dispatch with switch</div>
+        <p class="realworld-card__text">Switch is the natural structure for command dispatching — mapping a menu selection or event code to an action.</p>
+        <pre>int choice = 2;
+
+switch (choice) {
+    case 1: printf("New file\n");    break;
+    case 2: printf("Open file\n");  break;
+    case 3: printf("Save file\n");  break;
+    case 4: printf("Quit\n");       break;
+    default: printf("Unknown\n");   break;
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch9-intro">📋 Start Assessment — Switch Syntax</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch9-intro" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch9-intro">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch9-intro">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice"  data-topic="ch9-intro">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch9-intro">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch9-intro"><div id="quiz-ch9-intro-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch9-intro"><div id="quiz-ch9-intro-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch9-intro"><div id="practice-ch9-intro"></div></div>
+        <div class="assessment-section" id="tab-debug-ch9-intro"><div id="compiler-ch9-intro-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — CASE AND BREAK
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch9-break" id="topic-ch9-break">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title"><code>break</code> — Why It Is Required in Every Case</h2>
+      <span class="topic__status-badge" id="badge-ch9-break">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch9-break-1">
+      <p class="step-label" data-step-num="1">Run this first WITHOUT understanding it. Then look at what case 2 prints — it may be more than you expected.</p>
+      <div id="compiler-ch9-break-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch9-break-2">
+      <div id="iq-ch9-break"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch9-break-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Without break, execution falls through into the next case</h3>
+        <p>After matching a <code>case</code> label, C starts executing code there and <strong>keeps going</strong> through all subsequent cases until it hits a <code>break</code> or the end of the switch block. This is called <strong>fallthrough</strong>.</p>
+        <p><code>break</code> immediately exits the switch block. Without it, the code from the matched case and every case below it all execute — regardless of whether they matched. This is the most common switch bug for beginners.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">With vs Without break</span></div>
+        <div class="syntax-card__code">int x = 2;
+
+/* WITHOUT break — falls through */
+switch (x) {
+    case 1: printf("one\n");   /* skipped */
+    case 2: printf("two\n");   /* matched */
+    case 3: printf("three\n"); /* also runs! */
+    case 4: printf("four\n");  /* also runs! */
+}
+/* prints: two, three, four */
+
+/* WITH break — correct */
+switch (x) {
+    case 1: printf("one\n");   break;
+    case 2: printf("two\n");   break; /* matched, then exits */
+    case 3: printf("three\n"); break;
+    case 4: printf("four\n");  break;
+}
+/* prints: two */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Missing break is the #1 switch bug</div>
+          <div class="callout__body">Forgetting <code>break</code> compiles without error — the fallthrough is intentional C behavior. Always add <code>break</code> at the end of each case unless you explicitly want fallthrough.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch9-break-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch9-break-4">
+      <div id="compiler-ch9-break-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch9-break-5">
+      <div id="compiler-ch9-break-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch9-break-6">
+      <div id="compiler-ch9-break-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch9-break-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 break in practice</div>
+        <p class="realworld-card__text">Every case in a properly-written switch ends with break, except intentional fallthrough (covered next) and the last case/default which can omit it.</p>
+        <pre>int day = 3;
+switch (day) {
+    case 1: printf("Monday\n");    break;
+    case 2: printf("Tuesday\n");   break;
+    case 3: printf("Wednesday\n"); break;  /* prints this */
+    case 4: printf("Thursday\n");  break;
+    case 5: printf("Friday\n");    break;
+    default: printf("Weekend\n");  break;
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch9-break">📋 Start Assessment — case and break</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch9-break" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch9-break">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch9-break">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice"  data-topic="ch9-break">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch9-break">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch9-break"><div id="quiz-ch9-break-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch9-break"><div id="quiz-ch9-break-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch9-break"><div id="practice-ch9-break"></div></div>
+        <div class="assessment-section" id="tab-debug-ch9-break"><div id="compiler-ch9-break-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — INTENTIONAL FALLTHROUGH
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch9-fallthrough" id="topic-ch9-fallthrough">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Intentional Fallthrough — When No break Is the Right Choice</h2>
+      <span class="topic__status-badge" id="badge-ch9-fallthrough">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch9-fallthrough-1">
+      <p class="step-label" data-step-num="1">Run this. Multiple cases share one action intentionally — no break between them.</p>
+      <div id="compiler-ch9-fallthrough-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch9-fallthrough-2">
+      <div id="iq-ch9-fallthrough"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch9-fallthrough-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Fallthrough lets multiple case values share the same code</h3>
+        <p>Omitting <code>break</code> between cases is sometimes deliberate. The most common use is <strong>grouping</strong>: stacking multiple case labels above one block of code so that any of those values trigger the same behavior. Each label has no code — it falls through immediately to the next case that does have code.</p>
+        <p>Always add a comment when doing this intentionally (<code>/* fallthrough */</code>) so that anyone reading the code knows it is deliberate, not a bug.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Intentional Fallthrough — Grouping Cases</span></div>
+        <div class="syntax-card__code">int month = 4;
+int days;
+
+switch (month) {
+    case 1:
+    case 3:
+    case 5:
+    case 7:
+    case 8:
+    case 10:
+    case 12:
+        days = 31;  /* all long months share this */
+        break;
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+        days = 30;  /* all short months share this */
+        break;
+    case 2:
+        days = 28;
+        break;
+}
+printf("%d days\n", days); /* 30 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch9-fallthrough-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch9-fallthrough-4">
+      <div id="compiler-ch9-fallthrough-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch9-fallthrough-5">
+      <div id="compiler-ch9-fallthrough-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch9-fallthrough-6">
+      <div id="compiler-ch9-fallthrough-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch9-fallthrough-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Grouping weekdays and weekend days</div>
+        <p class="realworld-card__text">Intentional fallthrough is clean for mapping several values to the same category — like classifying day numbers into types.</p>
+        <pre>int day = 6;  /* Saturday */
+switch (day) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+        printf("Weekday\n");   break;
+    case 6:
+    case 7:
+        printf("Weekend\n");   break;  /* prints this */
+    default:
+        printf("Invalid\n");   break;
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch9-fallthrough">📋 Start Assessment — Intentional Fallthrough</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch9-fallthrough" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch9-fallthrough">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch9-fallthrough">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice"  data-topic="ch9-fallthrough">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch9-fallthrough">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch9-fallthrough"><div id="quiz-ch9-fallthrough-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch9-fallthrough"><div id="quiz-ch9-fallthrough-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch9-fallthrough"><div id="practice-ch9-fallthrough"></div></div>
+        <div class="assessment-section" id="tab-debug-ch9-fallthrough"><div id="compiler-ch9-fallthrough-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — THE DEFAULT CASE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch9-default" id="topic-ch9-default">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title"><code>default</code> — Handling Unmatched Values</h2>
+      <span class="topic__status-badge" id="badge-ch9-default">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch9-default-1">
+      <p class="step-label" data-step-num="1">Run this with different values and observe what happens when no case matches.</p>
+      <div id="compiler-ch9-default-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch9-default-2">
+      <div id="iq-ch9-default"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch9-default-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">default catches everything that did not match any case</h3>
+        <p><code>default</code> is the switch equivalent of the final <code>else</code>. It runs when no other <code>case</code> label matches. It is optional — without it, unmatched values silently skip the entire switch block.</p>
+        <p>You should almost always include a <code>default</code> case. It catches unexpected values and gives you a place to handle errors or invalid input, rather than silently doing nothing.</p>
+        <p><code>default</code> can be placed anywhere in the switch, but convention puts it last. It does not need a break unless you place it before other cases (rare).</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">default — Placement and Behavior</span></div>
+        <div class="syntax-card__code">int code = 99;
+
+switch (code) {
+    case 1:
+        printf("Code 1\n");
+        break;
+    case 2:
+        printf("Code 2\n");
+        break;
+    default:
+        /* runs for any value not matched above */
+        printf("Unknown code: %d\n", code);
+        break;
+}
+
+/* Without default: code=99 silently does nothing.
+   With default: you handle it explicitly. */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Always include default</div>
+          <div class="callout__body">Even if you think you have covered every possible value, add a <code>default</code> that prints an error. Values you did not expect will come up during debugging, and a silent skip is much harder to trace than an explicit message.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch9-default-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch9-default-4">
+      <div id="compiler-ch9-default-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch9-default-5">
+      <div id="compiler-ch9-default-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch9-default-6">
+      <div id="compiler-ch9-default-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch9-default-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Default as an error handler</div>
+        <p class="realworld-card__text">In production code, the default case is where you log unexpected states, print diagnostics, or set error flags — it is never just filler.</p>
+        <pre>int status_code = 418;
+
+switch (status_code) {
+    case 200: printf("OK\n");           break;
+    case 404: printf("Not Found\n");    break;
+    case 500: printf("Server Error\n"); break;
+    default:
+        printf("Unhandled status: %d\n", status_code);
+        break;
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch9-default">📋 Start Assessment — The default Case</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch9-default" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch9-default">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch9-default">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice"  data-topic="ch9-default">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch9-default">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch9-default"><div id="quiz-ch9-default-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch9-default"><div id="quiz-ch9-default-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch9-default"><div id="practice-ch9-default"></div></div>
+        <div class="assessment-section" id="tab-debug-ch9-default"><div id="compiler-ch9-default-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — SWITCH VS ELSE IF
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch9-vs-ifelse" id="topic-ch9-vs-ifelse">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">Switch vs <code>else if</code> — Choosing the Right Tool</h2>
+      <span class="topic__status-badge" id="badge-ch9-vs-ifelse">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch9-vs-ifelse-1">
+      <p class="step-label" data-step-num="1">Run this — the same logic written two ways. Both produce identical output.</p>
+      <div id="compiler-ch9-vs-ifelse-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch9-vs-ifelse-2">
+      <div id="iq-ch9-vs-ifelse"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch9-vs-ifelse-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Use switch for exact integer values, else if for ranges and complex conditions</h3>
+        <p><strong>Use switch when:</strong> you are testing one variable against many exact constant values (<code>case 1:</code>, <code>case 'A':</code>). The code is cleaner and the intent is clearer than a long else if chain.</p>
+        <p><strong>Use else if when:</strong> you need range checks (<code>score &gt;= 80</code>), comparisons between multiple variables, or float/string conditions. switch cannot express any of these.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Decision Guide</span></div>
+        <div class="syntax-card__code">/* Use SWITCH — exact integer/char values */
+switch (error_code) { ... }
+switch (menu_choice) { ... }
+switch (letter_grade) { ... }
+
+/* Use ELSE IF — ranges, floats, complex logic */
+if (score >= 90)  ...    /* range — switch cannot do this */
+if (x > y)        ...    /* two-variable comparison */
+if (price > 9.99) ...    /* float — switch cannot use floats */
+
+/* CANNOT use switch on: */
+float f;  switch (f)  { }  /* error: float not allowed */
+char *s;  switch (*s) { }  /* comparing strings needs strcmp */</div>
+      </div>
+      <button class="btn-continue" id="step-ch9-vs-ifelse-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch9-vs-ifelse-4">
+      <div id="compiler-ch9-vs-ifelse-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch9-vs-ifelse-5">
+      <div id="compiler-ch9-vs-ifelse-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch9-vs-ifelse-6">
+      <div id="compiler-ch9-vs-ifelse-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch9-vs-ifelse-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Mix both in one program</div>
+        <p class="realworld-card__text">Real programs use switch and else if side by side — each for what it does best.</p>
+        <pre>int command = 2;
+int value   = 150;
+
+switch (command) {           /* exact values — switch */
+    case 1: printf("Set\n");    break;
+    case 2: printf("Read\n");   break;
+    default: printf("Bad\n");   break;
+}
+
+if (value >= 100) {          /* range check — else if */
+    printf("High\n");
+} else if (value >= 50) {
+    printf("Medium\n");
+} else {
+    printf("Low\n");
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch9-vs-ifelse">📋 Start Assessment — Switch vs else if</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Identification · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch9-vs-ifelse" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch9-vs-ifelse">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"       data-topic="ch9-vs-ifelse">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify"  data-topic="ch9-vs-ifelse">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"     data-topic="ch9-vs-ifelse">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch9-vs-ifelse"><div id="quiz-ch9-vs-ifelse-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch9-vs-ifelse"><div id="quiz-ch9-vs-ifelse-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch9-vs-ifelse"><div id="quiz-ch9-vs-ifelse-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch9-vs-ifelse"><div id="compiler-ch9-vs-ifelse-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 9 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch9-mastery" id="topic-ch9-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 9 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply everything from Chapter 9 in one program.</p>
+      <div id="compiler-ch9-mastery"></div>
+    </div>
+  </section>
+
+  <div id="ch9-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 9 Complete</div>
+      <p class="chapter-complete__message">You now know how to use switch for clean multi-way dispatch on exact values, how break controls fallthrough, and when to choose switch over else if. Chapter 10 introduces while loops — repeating code until a condition changes.</p>
+      <button class="btn-continue" id="ch9-next-btn">Start Chapter 10 — While Loops →</button>
+    </div>
+  </div>
+
+</div>

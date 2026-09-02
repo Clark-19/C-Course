@@ -1,0 +1,548 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch8-if-else/ch8.html
+     Chapter 8: If / Else
+     5 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 8</div>
+    <h1 class="chapter-header__title">If / Else</h1>
+    <p class="chapter-header__subtitle">
+      Every program that makes decisions uses <code>if</code> and <code>else</code>.
+      This chapter covers how to write single conditions, two-way branches, multi-way
+      chains, nested decisions, and the compact ternary shorthand — the full toolkit
+      for controlling which code runs and when.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">5 Topics</span>
+      <span class="chapter-badge">if · if-else · else if · nested · ternary</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — THE IF STATEMENT
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch8-if" id="topic-ch8-if">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">The <code>if</code> Statement — Running Code Conditionally</h2>
+      <span class="topic__status-badge" id="badge-ch8-if">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch8-if-1">
+      <p class="step-label" data-step-num="1">Run this. The if block only executes when the condition is non-zero.</p>
+      <div id="compiler-ch8-if-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch8-if-2">
+      <div id="iq-ch8-if"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch8-if-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">if runs the block only when the condition is true (non-zero)</h3>
+        <p>The condition inside <code>if (...)</code> is evaluated. If it is non-zero (true), the body runs. If it is zero (false), the body is skipped entirely. Execution then continues with whatever comes after the <code>if</code> block regardless.</p>
+        <p>The body can be a <strong>single statement</strong> (no braces needed) or a <strong>block of multiple statements</strong> (curly braces required). Always use braces — it prevents a common bug where adding a second statement accidentally falls outside the <code>if</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">if — Two Forms</span></div>
+        <div class="syntax-card__code">/* Single statement — braces optional but risky */
+if (condition)
+    single_statement;
+
+/* Block — braces always recommended */
+if (condition) {
+    statement_one;
+    statement_two;
+    /* ... */
+}
+
+/* Inline — valid but hard to read */
+if (x > 0) printf("positive\n");</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Always Use Braces</div>
+          <div class="callout__body">Without braces, only the very next statement belongs to the <code>if</code>. Adding a second line later will not be conditional — it always runs, silently. Use <code>{ }</code> every time, even for single statements.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch8-if-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch8-if-4">
+      <div id="compiler-ch8-if-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch8-if-5">
+      <div id="compiler-ch8-if-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch8-if-6">
+      <div id="compiler-ch8-if-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch8-if-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Input validation in every program</div>
+        <p class="realworld-card__text">Every application that accepts user input uses <code>if</code> to validate it before processing. Unconditional code that never checks its inputs is unsafe.</p>
+        <pre>int quantity = 5;
+float price   = 29.99;
+
+if (quantity <= 0) {
+    printf("Error: quantity must be positive\n");
+}
+if (price <= 0.0) {
+    printf("Error: price must be positive\n");
+}
+if (quantity > 0 && price > 0.0) {
+    printf("Total: %.2f\n", quantity * price);
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch8-if">📋 Start Assessment — The if Statement</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch8-if" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch8-if">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"     data-topic="ch8-if">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch8-if">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch8-if">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch8-if"><div id="quiz-ch8-if-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch8-if"><div id="quiz-ch8-if-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch8-if"><div id="practice-ch8-if"></div></div>
+        <div class="assessment-section" id="tab-debug-ch8-if"><div id="compiler-ch8-if-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — IF / ELSE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch8-ifelse" id="topic-ch8-ifelse">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title"><code>if / else</code> — Two-Way Branching</h2>
+      <span class="topic__status-badge" id="badge-ch8-ifelse">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch8-ifelse-1">
+      <p class="step-label" data-step-num="1">Run this. Exactly one of the two branches runs — never both, never neither.</p>
+      <div id="compiler-ch8-ifelse-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch8-ifelse-2">
+      <div id="iq-ch8-ifelse"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch8-ifelse-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">if/else guarantees exactly one branch runs</h3>
+        <p>Adding <code>else</code> creates a two-way branch. <strong>Exactly one</strong> of the two bodies will execute on every run — the <code>if</code> body when the condition is true, the <code>else</code> body when it is false. There is no case where both run or neither runs.</p>
+        <p>This is fundamentally different from two separate <code>if</code> statements. With separate <code>if</code>s, both could run if both conditions are true, or neither could run if both are false. <code>if/else</code> forces a guaranteed choice.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">if / else Syntax</span></div>
+        <div class="syntax-card__code">if (condition) {
+    /* runs when condition is TRUE */
+    statement_a;
+} else {
+    /* runs when condition is FALSE */
+    statement_b;
+}
+/* exactly one of the above always runs */
+
+/* Real example */
+int score = 72;
+if (score >= 60) {
+    printf("Pass\n");
+} else {
+    printf("Fail\n");
+}</div>
+      </div>
+      <button class="btn-continue" id="step-ch8-ifelse-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch8-ifelse-4">
+      <div id="compiler-ch8-ifelse-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch8-ifelse-5">
+      <div id="compiler-ch8-ifelse-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch8-ifelse-6">
+      <div id="compiler-ch8-ifelse-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch8-ifelse-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Two-way decisions in real programs</div>
+        <p class="realworld-card__text">Any toggle, binary state, or on/off decision is naturally a two-way branch. if/else maps directly to these situations.</p>
+        <pre>int is_authenticated = 1;
+
+if (is_authenticated) {
+    printf("Welcome! Loading your dashboard.\n");
+} else {
+    printf("Please log in to continue.\n");
+}
+
+int temperature = 15;
+printf("It is %s outside.\n",
+       (temperature >= 20) ? "warm" : "cool");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch8-ifelse">📋 Start Assessment — if / else</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch8-ifelse" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch8-ifelse">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch8-ifelse">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch8-ifelse">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch8-ifelse">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch8-ifelse"><div id="quiz-ch8-ifelse-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch8-ifelse"><div id="quiz-ch8-ifelse-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch8-ifelse"><div id="practice-ch8-ifelse"></div></div>
+        <div class="assessment-section" id="tab-debug-ch8-ifelse"><div id="compiler-ch8-ifelse-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — ELSE IF CHAINS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch8-elseif" id="topic-ch8-elseif">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title"><code>else if</code> — Multi-Way Branching</h2>
+      <span class="topic__status-badge" id="badge-ch8-elseif">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch8-elseif-1">
+      <p class="step-label" data-step-num="1">Run this. Only the first matching condition runs — the rest are skipped.</p>
+      <div id="compiler-ch8-elseif-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch8-elseif-2">
+      <div id="iq-ch8-elseif"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch8-elseif-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">else if chains test conditions in order — first match wins</h3>
+        <p>An <code>else if</code> chain tests conditions one by one from top to bottom. The moment one condition is true, that body runs and all remaining <code>else if</code> and <code>else</code> blocks are skipped — even if later conditions would also be true.</p>
+        <p>This is why <strong>order matters</strong> in an <code>else if</code> chain. If you check <code>score &gt;= 60</code> before <code>score &gt;= 90</code>, a score of 95 would match the first condition and never reach the A-grade check.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">else if Chain — First Match Wins</span></div>
+        <div class="syntax-card__code">if (condition_1) {
+    /* runs if condition_1 is true */
+} else if (condition_2) {
+    /* runs if condition_1 false AND condition_2 true */
+} else if (condition_3) {
+    /* runs if 1 and 2 false AND condition_3 true */
+} else {
+    /* runs if ALL conditions above were false */
+}
+
+/* Grade example — order matters: high to low */
+int score = 85;
+if      (score >= 90) printf("A\n");
+else if (score >= 80) printf("B\n");   /* matches here */
+else if (score >= 70) printf("C\n");   /* skipped */
+else                  printf("F\n");   /* skipped */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Order of Conditions Matters</div>
+          <div class="callout__body">Put more specific conditions before broader ones. Check for the highest range first in a grade classifier, the most restrictive case first in validation. Once a match fires, the rest of the chain is skipped.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch8-elseif-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch8-elseif-4">
+      <div id="compiler-ch8-elseif-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch8-elseif-5">
+      <div id="compiler-ch8-elseif-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch8-elseif-6">
+      <div id="compiler-ch8-elseif-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch8-elseif-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 HTTP status codes via else if</div>
+        <p class="realworld-card__text">Classifying status codes, error levels, or response types is a natural else if chain — each range maps to one category.</p>
+        <pre>int status = 404;
+
+if      (status >= 500) printf("Server error\n");
+else if (status >= 400) printf("Client error\n");   /* matches */
+else if (status >= 300) printf("Redirect\n");
+else if (status >= 200) printf("Success\n");
+else                    printf("Informational\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch8-elseif">📋 Start Assessment — else if Chains</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch8-elseif" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch8-elseif">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch8-elseif">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch8-elseif">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch8-elseif">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch8-elseif"><div id="quiz-ch8-elseif-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch8-elseif"><div id="quiz-ch8-elseif-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch8-elseif"><div id="practice-ch8-elseif"></div></div>
+        <div class="assessment-section" id="tab-debug-ch8-elseif"><div id="compiler-ch8-elseif-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — NESTED IF
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch8-nested" id="topic-ch8-nested">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Nested <code>if</code> — Decisions Inside Decisions</h2>
+      <span class="topic__status-badge" id="badge-ch8-nested">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch8-nested-1">
+      <p class="step-label" data-step-num="1">Run this. The inner if only runs when the outer if already passed.</p>
+      <div id="compiler-ch8-nested-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch8-nested-2">
+      <div id="iq-ch8-nested"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch8-nested-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Nested if — a second decision inside the first</h3>
+        <p>Any <code>if</code> body can itself contain another <code>if</code>. This is called <strong>nesting</strong>. The inner <code>if</code> is only reached if the outer condition was already true, which implicitly gates all inner logic.</p>
+        <p>Nesting is powerful but can get hard to read. Deeper than 2–3 levels is usually a sign to refactor using <code>&amp;&amp;</code> conditions or helper logic. The <strong>dangling else</strong> problem — where it is ambiguous which <code>if</code> an <code>else</code> belongs to — is also introduced here. Braces resolve it.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Nested if — Structure</span></div>
+        <div class="syntax-card__code">if (outer_condition) {
+    /* only here if outer is true */
+    if (inner_condition) {
+        /* only here if BOTH are true */
+        statement_a;
+    } else {
+        /* outer true, inner false */
+        statement_b;
+    }
+} else {
+    /* outer was false — inner never tested */
+    statement_c;
+}
+
+/* Dangling else — always use braces to avoid ambiguity */
+if (a)
+    if (b)
+        printf("both\n");
+else        /* which if does this belong to? */
+    printf("???\n");</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Dangling else rule</div>
+          <div class="callout__body">In C, an <code>else</code> always belongs to the nearest preceding <code>if</code> that does not yet have an <code>else</code>. Always use braces to make the association explicit and avoid silent bugs.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch8-nested-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch8-nested-4">
+      <div id="compiler-ch8-nested-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch8-nested-5">
+      <div id="compiler-ch8-nested-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch8-nested-6">
+      <div id="compiler-ch8-nested-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch8-nested-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Multi-level access control</div>
+        <p class="realworld-card__text">Nested if naturally models layered conditions — you must pass the outer gate before the inner gate is even checked.</p>
+        <pre>int logged_in   = 1;
+int is_admin    = 1;
+int account_ok  = 1;
+
+if (logged_in) {
+    if (account_ok) {
+        if (is_admin) {
+            printf("Admin panel\n");
+        } else {
+            printf("User dashboard\n");
+        }
+    } else {
+        printf("Account suspended\n");
+    }
+} else {
+    printf("Please log in\n");
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch8-nested">📋 Start Assessment — Nested if</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch8-nested" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch8-nested">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch8-nested">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch8-nested">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch8-nested">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch8-nested"><div id="quiz-ch8-nested-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch8-nested"><div id="quiz-ch8-nested-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch8-nested"><div id="practice-ch8-nested"></div></div>
+        <div class="assessment-section" id="tab-debug-ch8-nested"><div id="compiler-ch8-nested-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — TERNARY OPERATOR
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch8-ternary" id="topic-ch8-ternary">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">The Ternary Operator — <code>condition ? a : b</code></h2>
+      <span class="topic__status-badge" id="badge-ch8-ternary">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch8-ternary-1">
+      <p class="step-label" data-step-num="1">Run this. The ternary is a compact if/else that evaluates to a value.</p>
+      <div id="compiler-ch8-ternary-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch8-ternary-2">
+      <div id="iq-ch8-ternary"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch8-ternary-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Ternary — an expression, not just a statement</h3>
+        <p>The ternary operator (<code>?:</code>) is the only C operator that takes three operands. It evaluates a condition and produces one of two values: <code>condition ? value_if_true : value_if_false</code>.</p>
+        <p>Because it is an <em>expression</em> (it produces a value), you can use it inside <code>printf</code>, assignments, function calls, or anywhere a value is expected. An <code>if/else</code> statement cannot be used that way — it is a statement, not an expression.</p>
+        <p>Best used for simple, two-way value selections. Avoid nesting ternaries — it produces unreadable code. For complex logic, use <code>if/else</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Ternary Syntax</span></div>
+        <div class="syntax-card__code">condition ? value_if_true : value_if_false
+
+/* Assign the result */
+int max = (a > b) ? a : b;
+
+/* Use directly in printf */
+printf("%s\n", (score >= 60) ? "Pass" : "Fail");
+
+/* Equivalent if/else */
+if (score >= 60)
+    printf("Pass\n");
+else
+    printf("Fail\n");
+
+/* Avoid nesting — unreadable */
+/* int r = a > b ? a > c ? a : c : b > c ? b : c; */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">When to use ternary</div>
+          <div class="callout__body">Use ternary when selecting between two simple values inline. Use <code>if/else</code> when there is more than one statement per branch or when logic gets complex.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch8-ternary-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch8-ternary-4">
+      <div id="compiler-ch8-ternary-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch8-ternary-5">
+      <div id="compiler-ch8-ternary-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch8-ternary-6">
+      <div id="compiler-ch8-ternary-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch8-ternary-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Ternary for concise value selection</div>
+        <p class="realworld-card__text">Ternary shines when you need to pick a label, message, or value inline — it keeps code short without sacrificing clarity.</p>
+        <pre>int items = 1;
+printf("You have %d item%s\n",
+       items,
+       (items == 1) ? "" : "s");   /* pluralize */
+
+float discount = 0.0;
+int is_member  = 1;
+discount = is_member ? 0.10 : 0.0;
+printf("Discount: %.0f%%\n", discount * 100);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch8-ternary">📋 Start Assessment — Ternary Operator</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch8-ternary" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch8-ternary">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch8-ternary">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch8-ternary">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch8-ternary">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch8-ternary"><div id="quiz-ch8-ternary-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch8-ternary"><div id="quiz-ch8-ternary-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch8-ternary"><div id="practice-ch8-ternary"></div></div>
+        <div class="assessment-section" id="tab-debug-ch8-ternary"><div id="compiler-ch8-ternary-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 8 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch8-mastery" id="topic-ch8-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 8 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply every if/else pattern from Chapter 8 in one program.</p>
+      <div id="compiler-ch8-mastery"></div>
+    </div>
+  </section>
+
+  <div id="ch8-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 8 Complete</div>
+      <p class="chapter-complete__message">You can now control which code runs under any condition — single if, two-way branches, multi-way chains, nested decisions, and ternary expressions. Chapter 9 introduces the switch statement: a cleaner alternative to long else-if chains when testing a single variable against many exact values.</p>
+      <button class="btn-continue" id="ch8-next-btn">Start Chapter 9 — Switch →</button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,307 @@
+/* =========================================================
+   C LEARNING PLATFORM — chapters/ch0-intro/ch0.css
+   Chapter 0: Introduction to C — chapter-specific styles
+   Inherits all component styles from shared/shared.css
+   ========================================================= */
+
+/* VS Code setup guide card */
+.setup-guide {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin-bottom: var(--space-16);
+}
+
+.setup-guide__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-16) var(--space-20);
+  background: linear-gradient(135deg,
+    rgba(26, 127, 127, 0.1) 0%,
+    rgba(0, 212, 170, 0.05) 100%);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.setup-guide__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+}
+
+.setup-guide__tab {
+  padding: var(--space-10) var(--space-20);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all var(--transition-fast);
+}
+
+.setup-guide__tab:hover { color: var(--color-text); }
+
+.setup-guide__tab--active {
+  color: var(--color-primary-light);
+  border-bottom-color: var(--color-primary);
+  background: var(--color-primary-subtle);
+}
+
+.setup-guide__content {
+  padding: var(--space-20) var(--space-24);
+}
+
+.setup-guide__panel { display: none; }
+.setup-guide__panel--active { display: block; }
+
+/* Setup steps list */
+.setup-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.setup-step {
+  display: flex;
+  gap: var(--space-16);
+  align-items: flex-start;
+}
+
+.setup-step__num {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.setup-step__body {
+  flex: 1;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+}
+
+.setup-step__body strong { color: var(--color-text); font-weight: var(--weight-semibold); }
+.setup-step__body code  {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+  color: var(--syntax-string);
+}
+
+/* Command block */
+.cmd-block {
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+  margin-top: var(--space-8);
+  padding: var(--space-10) var(--space-14);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  word-break: break-all;
+}
+
+.cmd-block__copy {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: var(--space-4) var(--space-8);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cmd-block__copy:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+/* History / Why C card */
+.history-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  margin-top: var(--space-16);
+}
+
+.history-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-16);
+}
+
+.history-card__year {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-primary-light);
+  margin-bottom: var(--space-6);
+}
+
+.history-card__title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.history-card__desc {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+}
+
+/* Compile cycle diagram */
+.cycle-diagram {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-20);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-16);
+  overflow-x: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cycle-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  min-width: 80px;
+}
+
+.cycle-node__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-raised);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xl);
+  transition: border-color var(--transition-base);
+}
+
+.cycle-node__icon--active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  box-shadow: 0 0 0 4px rgba(26,127,127,0.1);
+}
+
+.cycle-node__label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: var(--leading-tight);
+}
+
+.cycle-arrow {
+  color: var(--color-primary-light);
+  font-size: var(--text-xl);
+  flex-shrink: 0;
+}
+
+/* Boilerplate annotation diagram */
+.annotation-code {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  margin-bottom: var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.annotation-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  padding: var(--space-6) var(--space-8);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.annotation-line:hover { background: var(--color-surface-hover); }
+
+.annotation-line__num {
+  font-family: var(--font-code);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  width: 20px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.annotation-line__code {
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  flex: 1;
+  white-space: pre;
+}
+
+.annotation-line__code--dim { color: var(--syntax-boilerplate); }
+
+.annotation-line__label {
+  font-size: var(--text-xs);
+  color: var(--color-primary-light);
+  background: var(--color-primary-subtle);
+  border: 1px solid rgba(26,127,127,0.2);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: help;
+}
+
+/* Chapter 0 chapter-complete banner */
+#ch0-chapter-complete {
+  margin-top: var(--space-48);
+}
+
+@media (max-width: 640px) {
+  .history-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cycle-diagram {
+    gap: var(--space-6);
+  }
+
+  .cycle-node { min-width: 60px; }
+  .cycle-node__icon { width: 44px; height: 44px; font-size: var(--text-lg); }
+}

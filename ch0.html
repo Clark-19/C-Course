@@ -1,0 +1,366 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch0-intro/ch0.html
+     Chapter 0: Introduction to C
+     No redundant printf exercises — those belong to Ch1+
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">
+      <span>Chapter 0</span>
+    </div>
+    <h1 class="chapter-header__title">Introduction to C</h1>
+    <p class="chapter-header__subtitle">
+      Before writing a single line of code, you need to understand what you're working with.
+      C is old. C is fast. C is everywhere — and this chapter shows you exactly why that matters.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">7 Topics</span>
+      <span class="chapter-badge">No prior knowledge needed</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — WHAT IS C?
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch0-whatisC" id="topic-ch0-whatisC">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">What is C?</h2>
+      <span class="topic__status-badge" id="badge-ch0-whatisC">✅ Complete</span>
+    </div>
+
+    <!-- Step 1: Explore — run Hello World immediately -->
+    <div class="step step--visible" data-step="1" id="step-ch0-whatisC-1">
+      <p class="step-label" data-step-num="1">Compile and run this first — see what happens.</p>
+      <div id="compiler-ch0-whatisC-explore"></div>
+    </div>
+
+    <!-- Step 2: Instant Question -->
+    <div class="step step--visible" data-step="2" id="step-ch0-whatisC-2">
+      <div id="iq-ch0-whatisC"></div>
+    </div>
+
+    <!-- Step 3: Micro-Explanation -->
+    <div class="step step--visible" data-step="3" id="step-ch0-whatisC-3">
+      <div class="explanation-card">
+        <p><strong>C</strong> is a <em>compiled, general-purpose programming language</em> created in 1972. You write source code in a <code>.c</code> file, a compiler translates it into machine instructions, and the machine runs those instructions directly.</p>
+        <p>That compilation step is what makes C programs extremely fast — the computer runs native instructions, not interpreted code. It also means mistakes are caught <strong>before</strong> the program runs, not during.</p>
+        <p>The program you just ran is a complete C program. Every piece of it has a specific job — you will understand each line by the end of this chapter.</p>
+      </div>
+
+      <div class="syntax-card">
+        <div class="syntax-card__header">
+          <span class="syntax-card__label">The Compile → Run Cycle</span>
+        </div>
+        <div class="syntax-card__code">Write code (.c file)  →  Compiler translates  →  Program runs
+         main.c           →     gcc / clang      →   ./a.out</div>
+      </div>
+
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Remember</div>
+          <div class="callout__body">C does <strong>not</strong> run line by line like Python. The compiler reads the entire file, checks everything, and either produces a runnable program or gives you a list of errors to fix.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Guided — modify the string -->
+    <div class="step step--visible" data-step="4" id="step-ch0-whatisC-4">
+      <div id="compiler-ch0-whatisC-modify"></div>
+    </div>
+
+    <!-- Step 5: Fill-in-the-blank -->
+    <div class="step step--visible" data-step="5" id="step-ch0-whatisC-5">
+      <div id="compiler-ch0-whatisC-fill"></div>
+    </div>
+
+    <!-- Step 6: Mini challenge -->
+    <div class="step step--visible" data-step="6" id="step-ch0-whatisC-6">
+      <div id="compiler-ch0-whatisC-build"></div>
+    </div>
+
+    <!-- Step 7: Real-world snap -->
+    <div class="step step--visible" data-step="7" id="step-ch0-whatisC-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Where C is used right now</div>
+        <p class="realworld-card__text">The Linux kernel, Python's interpreter, MySQL, and the firmware in your keyboard are all written in C. When performance is critical and control over hardware is required, C is the language of choice.</p>
+        <pre>/* From the Linux kernel — real C code, 2024 */
+static int process_packet(struct sk_buff *skb)
+{
+    if (!skb || skb->len < ETH_HLEN)
+        return -EINVAL;
+    return forward_to_bridge(skb);
+}</pre>
+      </div>
+    </div>
+
+    <!-- Assessment Block -->
+    <div class="assessment-block" data-topic="ch0-whatisC">
+      <div class="assessment-block__header">
+        <div>
+          <div class="assessment-block__title">Assessment — What is C?</div>
+          <div class="assessment-block__subtitle">Multiple choice · Identification · Debugging</div>
+        </div>
+        <div class="assessment-block__score" id="score-ch0-whatisC">—</div>
+      </div>
+
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq" data-topic="ch0-whatisC">
+          Multiple Choice <span class="assessment-tab__check">✓</span>
+        </button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch0-whatisC">
+          Identification <span class="assessment-tab__check">✓</span>
+        </button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch0-whatisC">
+          Debug Challenge <span class="assessment-tab__check">✓</span>
+        </button>
+      </div>
+
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch0-whatisC">
+          <div id="quiz-ch0-whatisC-mcq"></div>
+        </div>
+        <div class="assessment-section" id="tab-identify-ch0-whatisC">
+          <div id="quiz-ch0-whatisC-identify"></div>
+        </div>
+        <div class="assessment-section" id="tab-debug-ch0-whatisC">
+          <div id="compiler-ch0-whatisC-debug"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — HOW C WORKS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch0-howCworks" id="topic-ch0-howCworks">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">How C Works — The Compile Cycle</h2>
+      <span class="topic__status-badge" id="badge-ch0-howCworks">✅ Complete</span>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step step--visible" data-step="1" id="step-ch0-howCworks-1">
+      <p class="step-label" data-step-num="1">This code has a deliberate error. Run it. Read what the compiler says.</p>
+      <div id="compiler-ch0-howCworks-debug1"></div>
+    </div>
+
+    <!-- Step 2: Question -->
+    <div class="step step--visible" data-step="2" id="step-ch0-howCworks-2">
+      <div id="iq-ch0-howCworks"></div>
+    </div>
+
+    <!-- Step 3: Explanation -->
+    <div class="step step--visible" data-step="3" id="step-ch0-howCworks-3">
+      <div class="explanation-card">
+        <p>The C compiler reads your entire source file, checks every line for mistakes, and <strong>refuses to produce a program if anything is wrong</strong>. This is different from languages that run line by line and crash mid-execution.</p>
+        <p>A compiler error is not failure — it is the compiler doing its job. The error message tells you exactly which line the problem is on and what is wrong. <strong>Read the error. Fix the line. Run again.</strong> That cycle is how every C programmer works.</p>
+        <p>Warnings are different from errors. A warning compiles but flags a potential problem — you should still fix them.</p>
+      </div>
+
+      <div class="syntax-card">
+        <div class="syntax-card__header">
+          <span class="syntax-card__label">The Compile → Error → Fix Cycle</span>
+        </div>
+        <div class="syntax-card__code">1. Write code
+2. Compiler finds an error → tells you: file, line, what's wrong
+3. Fix the line the error points to
+4. Compile again
+5. Either: more errors to fix, or program runs ✓</div>
+      </div>
+
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Common Mistake</div>
+          <div class="callout__body">Beginners read the first error, panic, and start changing random things. <strong>Read the error message</strong>. It tells you the line number. Go to that line. Fix that specific thing.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Fix the broken program -->
+    <div class="step step--visible" data-step="4" id="step-ch0-howCworks-4">
+      <div id="compiler-ch0-howCworks-fix"></div>
+    </div>
+
+    <!-- Step 5: Fill -->
+    <div class="step step--visible" data-step="5" id="step-ch0-howCworks-5">
+      <div id="compiler-ch0-howCworks-fill"></div>
+    </div>
+
+    <!-- Step 6: Build -->
+    <div class="step step--visible" data-step="6" id="step-ch0-howCworks-6">
+      <div id="compiler-ch0-howCworks-build"></div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step step--visible" data-step="7" id="step-ch0-howCworks-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Real-world practice</div>
+        <p class="realworld-card__text">Professional C developers compile code dozens of times per hour. The feedback loop — compile, read error, fix, compile — becomes second nature. The platform gives you that same loop in every exercise.</p>
+        <pre>/* Terminal output after a compile error */
+main.c:4:5: error: expected ';' before 'return'
+    printf("Hello\n")
+    ^
+Fix: add ; after the printf line.</pre>
+      </div>
+    </div>
+
+    <div class="assessment-block" data-topic="ch0-howCworks">
+      <div class="assessment-block__header">
+        <div>
+          <div class="assessment-block__title">Assessment — The Compile Cycle</div>
+          <div class="assessment-block__subtitle">Multiple choice · Debug challenge</div>
+        </div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq" data-topic="ch0-howCworks">
+          Multiple Choice <span class="assessment-tab__check">✓</span>
+        </button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch0-howCworks">
+          Debug Challenge <span class="assessment-tab__check">✓</span>
+        </button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch0-howCworks">
+          <div id="quiz-ch0-howCworks-mcq"></div>
+        </div>
+        <div class="assessment-section" id="tab-debug-ch0-howCworks">
+          <div id="compiler-ch0-howCworks-debug2"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — UNDERSTANDING BOILERPLATE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch0-boilerplate" id="topic-ch0-boilerplate">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Understanding <code>#include</code>, <code>main()</code>, <code>return 0</code></h2>
+      <span class="topic__status-badge" id="badge-ch0-boilerplate">✅ Complete</span>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step step--visible" data-step="1" id="step-ch0-boilerplate-1">
+      <p class="step-label" data-step-num="1">Run this. Every line does something specific — observe the output first.</p>
+      <div id="compiler-ch0-boilerplate-explore"></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step step--visible" data-step="2" id="step-ch0-boilerplate-2">
+      <div id="iq-ch0-boilerplate"></div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step step--visible" data-step="3" id="step-ch0-boilerplate-3">
+      <div class="explanation-card">
+        <p><code>#include &lt;stdio.h&gt;</code> tells the compiler to include the <strong>Standard Input/Output</strong> library. Without it, <code>printf()</code> doesn't exist — you'd get a compile error. Think of it as importing a toolbox before using the tools.</p>
+        <p><code>int main()</code> is the <strong>entry point</strong> of every C program. Execution always starts here, no matter what else is in the file.</p>
+        <p><code>return 0;</code> signals to the operating system that the program finished successfully. A non-zero return value conventionally means an error occurred.</p>
+      </div>
+
+      <div class="syntax-card">
+        <div class="syntax-card__header">
+          <span class="syntax-card__label">Every C Program — Line by Line</span>
+        </div>
+        <div class="syntax-card__code">#include &lt;stdio.h&gt;   ← import the stdio library (gives you printf, scanf)
+
+int main() {         ← entry point — execution starts here
+                     ← your code goes inside the braces
+    return 0;        ← tell the OS: "program finished cleanly"
+}</div>
+      </div>
+
+      <div class="callout callout--diff">
+        <span class="callout__icon">↔</span>
+        <div class="callout__content">
+          <div class="callout__title">Difference — #include vs import</div>
+          <div class="callout__body">
+            Python uses <code>import</code>. C uses <code>#include</code>. Both bring in external functionality, but <code>#include</code> is processed by the <strong>preprocessor</strong> before compilation even begins — it literally pastes the header file contents into your code.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step step--visible" data-step="4" id="step-ch0-boilerplate-4">
+      <div id="compiler-ch0-boilerplate-modify"></div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step step--visible" data-step="5" id="step-ch0-boilerplate-5">
+      <div id="compiler-ch0-boilerplate-fill"></div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step step--visible" data-step="6" id="step-ch0-boilerplate-6">
+      <div id="compiler-ch0-boilerplate-build"></div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step step--visible" data-step="7" id="step-ch0-boilerplate-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Multiple headers in a real program</div>
+        <p class="realworld-card__text">Real C programs often include several headers. Each one unlocks a set of functions:</p>
+        <pre>#include &lt;stdio.h&gt;    /* printf, scanf, fopen, fclose */
+#include &lt;stdlib.h&gt;   /* malloc, free, rand, exit */
+#include &lt;string.h&gt;   /* strlen, strcpy, strcmp */
+#include &lt;math.h&gt;     /* sqrt, pow, sin, cos */
+
+int main() {
+    /* now all those functions are available */
+    return 0;
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-block" data-topic="ch0-boilerplate">
+      <div class="assessment-block__header">
+        <div>
+          <div class="assessment-block__title">Assessment — Boilerplate</div>
+          <div class="assessment-block__subtitle">Multiple choice · Identification · Debug</div>
+        </div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq" data-topic="ch0-boilerplate">
+          Multiple Choice <span class="assessment-tab__check">✓</span>
+        </button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch0-boilerplate">
+          Identification <span class="assessment-tab__check">✓</span>
+        </button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch0-boilerplate">
+          Debug Challenge <span class="assessment-tab__check">✓</span>
+        </button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch0-boilerplate">
+          <div id="quiz-ch0-boilerplate-mcq"></div>
+        </div>
+        <div class="assessment-section" id="tab-identify-ch0-boilerplate">
+          <div id="quiz-ch0-boilerplate-identify"></div>
+        </div>
+        <div class="assessment-section" id="tab-debug-ch0-boilerplate">
+          <div id="compiler-ch0-boilerplate-debug"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter complete check -->
+  <div id="ch0-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 0 Complete</div>
+      <p class="chapter-complete__message">You understand what C is, how the compile cycle works, and what every line of a C program does. Chapter 1 covers variables — the first real building block.</p>
+      <button class="btn-continue" id="ch0-next-btn">Start Chapter 1 — Variables →</button>
+    </div>
+  </div>
+
+</div>

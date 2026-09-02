@@ -1,0 +1,684 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch7-booleans-comparison/ch7.html
+     Chapter 7: Booleans & Comparison Operators
+     7 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 7</div>
+    <h1 class="chapter-header__title">Booleans &amp; Comparison Operators</h1>
+    <p class="chapter-header__subtitle">
+      Every decision in a program — every <code>if</code>, every loop, every branch — 
+      reduces to one question: is this true or false? This chapter covers how C 
+      represents truth, how to compare values, and how to combine conditions.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">7 Topics</span>
+      <span class="chapter-badge">true/false · == != &lt; &gt; · &amp;&amp; || ! · combining</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — BOOLEANS IN C: 0 AND NOT-0
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch7-booleans" id="topic-ch7-booleans">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">Booleans in C — Zero and Non-Zero</h2>
+      <span class="topic__status-badge" id="badge-ch7-booleans">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch7-booleans-1">
+      <p class="step-label" data-step-num="1">Run this first. C has no built-in true or false keyword — watch what it uses instead.</p>
+      <div id="compiler-ch7-booleans-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch7-booleans-2">
+      <div id="iq-ch7-booleans"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch7-booleans-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">C has no true/false — it uses integers</h3>
+        <p>In C, <strong>any integer that is 0 means false</strong>. <strong>Any non-zero integer means true</strong> — including negative numbers. There is no boolean type built into classic C (C89/C90). When you write <code>if (x)</code>, C checks if x is non-zero.</p>
+        <p>This matters because comparison operators (<code>==</code>, <code>&lt;</code>, etc.) return <strong>1 for true and 0 for false</strong> — plain integers. Knowing this helps you understand why <code>if (5 &gt; 3)</code> works: <code>5 &gt; 3</code> evaluates to the integer <code>1</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Boolean Values in C</span></div>
+        <div class="syntax-card__code">/* FALSE: only zero */
+0    /* false */
+
+/* TRUE: anything non-zero */
+1     /* true */
+-1    /* also true */
+42    /* also true */
+0.1   /* also true (non-zero) */
+
+/* Comparison operators always return 0 or 1 */
+int r = (5 > 3);   /* r = 1 */
+int s = (5 < 3);   /* s = 0 */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">C99 stdbool.h</div>
+          <div class="callout__body">C99 added <code>#include &lt;stdbool.h&gt;</code> which gives you <code>bool</code>, <code>true</code>, and <code>false</code> — but they are just macros for <code>int</code>, <code>1</code>, and <code>0</code>. The underlying mechanics are identical.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch7-booleans-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch7-booleans-4">
+      <div id="compiler-ch7-booleans-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch7-booleans-5">
+      <div id="compiler-ch7-booleans-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch7-booleans-6">
+      <div id="compiler-ch7-booleans-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch7-booleans-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Booleans in conditional logic</div>
+        <p class="realworld-card__text">Every if-statement in C evaluates to an integer under the hood. Understanding that lets you write compact, clear conditions.</p>
+        <pre>int logged_in = 1;   /* acts as true */
+int is_admin  = 0;   /* acts as false */
+
+if (logged_in)     printf("Welcome back!\n");
+if (!is_admin)     printf("Standard access.\n");
+if (0)             printf("Never prints.\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch7-booleans">📋 Start Assessment — Booleans in C</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Debug challenge</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch7-booleans" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch7-booleans">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch7-booleans">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch7-booleans">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch7-booleans"><div id="quiz-ch7-booleans-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch7-booleans"><div id="quiz-ch7-booleans-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch7-booleans"><div id="compiler-ch7-booleans-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — == VERSUS =
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch7-equalsequals" id="topic-ch7-equalsequals">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">The Most Common Bug in C — <code>==</code> vs <code>=</code></h2>
+      <span class="topic__status-badge" id="badge-ch7-equalsequals">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch7-equalsequals-1">
+      <p class="step-label" data-step-num="1">Run this. The output may surprise you. Look closely at line 4.</p>
+      <div id="compiler-ch7-equalsequals-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch7-equalsequals-2">
+      <div id="iq-ch7-equalsequals"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch7-equalsequals-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>=</code> assigns. <code>==</code> compares. They are completely different.</h3>
+        <p><code>x = 5</code> stores the value 5 into x. It is an assignment — it changes a variable.</p>
+        <p><code>x == 5</code> checks whether x equals 5 and evaluates to <code>1</code> (true) or <code>0</code> (false). It never changes x.</p>
+        <p>Writing <code>if (x = 5)</code> instead of <code>if (x == 5)</code> assigns 5 to x and then evaluates the result (5, which is non-zero — true). The condition will <em>always</em> be true, which is rarely what you want.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">= vs ==</span></div>
+        <div class="syntax-card__code">int x = 10;
+
+/* ASSIGNMENT: stores 5 in x */
+x = 5;
+printf("%d\n", x);    /* 5 */
+
+/* COMPARISON: checks equality, x is unchanged */
+int result = (x == 5);
+printf("%d\n", result);  /* 1 (true) */
+printf("%d\n", x);       /* 5, still 5 */
+
+/* THE BUG: assignment inside if */
+if (x = 0)            /* assigns 0 to x, then tests 0 → false! */
+    printf("never\n");
+printf("%d\n", x);    /* x is now 0 — silently changed! */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Most Common C Bug</div>
+          <div class="callout__body">Using <code>=</code> instead of <code>==</code> in an <code>if</code> condition. The compiler may not warn you. The program runs but gives wrong answers. Always double-check comparisons use <code>==</code>.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch7-equalsequals-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch7-equalsequals-4">
+      <div id="compiler-ch7-equalsequals-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch7-equalsequals-5">
+      <div id="compiler-ch7-equalsequals-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch7-equalsequals-6">
+      <div id="compiler-ch7-equalsequals-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch7-equalsequals-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Yoda conditions — a defensive technique</div>
+        <p class="realworld-card__text">Some programmers flip the comparison to put the literal on the left: <code>if (5 == x)</code>. If you accidentally type <code>=</code> instead of <code>==</code>, the compiler errors immediately because you can't assign to a literal.</p>
+        <pre>if (x = 5)    /* compiles, silent bug */
+if (5 = x)    /* COMPILE ERROR — catches the typo */
+if (5 == x)   /* correct defensive style */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch7-equalsequals">📋 Start Assessment — <code>==</code> vs <code>=</code></button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Debug challenge</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch7-equalsequals" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch7-equalsequals">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch7-equalsequals">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch7-equalsequals">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch7-equalsequals"><div id="quiz-ch7-equalsequals-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch7-equalsequals"><div id="quiz-ch7-equalsequals-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch7-equalsequals"><div id="compiler-ch7-equalsequals-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — COMPARISON OPERATORS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch7-comparison" id="topic-ch7-comparison">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Comparison Operators — <code>== != &lt; &gt; &lt;= &gt;=</code></h2>
+      <span class="topic__status-badge" id="badge-ch7-comparison">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch7-comparison-1">
+      <p class="step-label" data-step-num="1">Run this. Every comparison operator returns exactly 1 (true) or 0 (false).</p>
+      <div id="compiler-ch7-comparison-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch7-comparison-2">
+      <div id="iq-ch7-comparison"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch7-comparison-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Six comparison operators, all return 0 or 1</h3>
+        <p>C has six comparison operators. All of them evaluate to the integer <code>1</code> when the comparison is true and <code>0</code> when false. This means you can store, print, or use them in arithmetic like any other integer.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">All Six Comparison Operators</span></div>
+        <div class="syntax-card__code">int a = 5, b = 3;
+
+a == b   →  0   /* equal to */
+a != b   →  1   /* not equal to */
+a >  b   →  1   /* greater than */
+a <  b   →  0   /* less than */
+a >= b   →  1   /* greater than or equal to */
+a <= b   →  0   /* less than or equal to */
+
+/* Return value is always 0 or 1 */
+printf("%d\n", 10 >= 10);   /* 1 — equal satisfies >= */
+printf("%d\n", 3 != 3);     /* 0 — they ARE equal */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">No chaining comparisons</div>
+          <div class="callout__body"><code>1 &lt; x &lt; 10</code> does NOT check if x is between 1 and 10. C evaluates left to right: <code>(1 &lt; x)</code> gives 0 or 1, then it compares that against 10 — always true. Use <code>x &gt; 1 &amp;&amp; x &lt; 10</code> instead.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch7-comparison-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch7-comparison-4">
+      <div id="compiler-ch7-comparison-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch7-comparison-5">
+      <div id="compiler-ch7-comparison-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch7-comparison-6">
+      <div id="compiler-ch7-comparison-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch7-comparison-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Comparisons drive every decision</div>
+        <p class="realworld-card__text">Every validation, threshold check, and boundary test in real programs reduces to one of these six operators.</p>
+        <pre>int temperature = 38;
+int heart_rate  = 110;
+
+if (temperature >= 38)   printf("Fever detected.\n");
+if (heart_rate  > 100)   printf("Elevated heart rate.\n");
+if (temperature == 37)   printf("Normal temp.\n");
+if (heart_rate  != 72)   printf("Not resting rate.\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch7-comparison">📋 Start Assessment — Comparison Operators</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch7-comparison" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch7-comparison">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch7-comparison">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch7-comparison">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch7-comparison">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch7-comparison"><div id="quiz-ch7-comparison-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch7-comparison"><div id="quiz-ch7-comparison-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch7-comparison"><div id="practice-ch7-comparison"></div></div>
+        <div class="assessment-section" id="tab-debug-ch7-comparison"><div id="compiler-ch7-comparison-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — LOGICAL OPERATORS && || !
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch7-logical" id="topic-ch7-logical">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Logical Operators — <code>&amp;&amp;</code> <code>||</code> <code>!</code></h2>
+      <span class="topic__status-badge" id="badge-ch7-logical">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch7-logical-1">
+      <p class="step-label" data-step-num="1">Run this. Three operators that combine or flip boolean values.</p>
+      <div id="compiler-ch7-logical-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch7-logical-2">
+      <div id="iq-ch7-logical"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch7-logical-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">AND, OR, NOT — combining conditions</h3>
+        <p><code>&amp;&amp;</code> (AND) — both conditions must be true. If the left side is false, C does not evaluate the right side at all — this is called <strong>short-circuit evaluation</strong>.</p>
+        <p><code>||</code> (OR) — at least one condition must be true. If the left side is already true, the right side is skipped.</p>
+        <p><code>!</code> (NOT) — flips true to false and false to true. <code>!0</code> gives <code>1</code>. <code>!1</code> gives <code>0</code>. <code>!42</code> gives <code>0</code> (any non-zero becomes 0).</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Logical Operators</span></div>
+        <div class="syntax-card__code">int a = 1, b = 0;
+
+a && b   →  0   /* AND: both must be true */
+a || b   →  1   /* OR:  at least one true */
+!a       →  0   /* NOT: flips the value */
+!b       →  1
+
+/* Short-circuit examples */
+0 && (x/0)   /* right side never evaluates */
+1 || (x/0)   /* right side never evaluates */
+
+/* Combining */
+int age = 25, has_id = 1;
+if (age >= 18 && has_id)
+    printf("Entry allowed\n");</div>
+      </div>
+      <button class="btn-continue" id="step-ch7-logical-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch7-logical-4">
+      <div id="compiler-ch7-logical-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch7-logical-5">
+      <div id="compiler-ch7-logical-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch7-logical-6">
+      <div id="compiler-ch7-logical-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch7-logical-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Login validation with logical operators</div>
+        <p class="realworld-card__text">Real authentication logic always combines multiple conditions using logical operators.</p>
+        <pre>int username_ok = 1, password_ok = 1, account_active = 1;
+
+if (username_ok && password_ok && account_active)
+    printf("Login successful\n");
+else if (!account_active)
+    printf("Account suspended\n");
+else
+    printf("Invalid credentials\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch7-logical">📋 Start Assessment — Logical Operators</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch7-logical" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch7-logical">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch7-logical">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch7-logical">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch7-logical">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch7-logical"><div id="quiz-ch7-logical-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch7-logical"><div id="quiz-ch7-logical-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch7-logical"><div id="practice-ch7-logical"></div></div>
+        <div class="assessment-section" id="tab-debug-ch7-logical"><div id="compiler-ch7-logical-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — TRUE AND FALSE VALUES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch7-truefalse" id="topic-ch7-truefalse">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">What Counts as True and False — Edge Cases</h2>
+      <span class="topic__status-badge" id="badge-ch7-truefalse">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch7-truefalse-1">
+      <p class="step-label" data-step-num="1">Run this. Some of these results may be counterintuitive.</p>
+      <div id="compiler-ch7-truefalse-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch7-truefalse-2">
+      <div id="iq-ch7-truefalse"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch7-truefalse-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">False is only zero. Everything else is true.</h3>
+        <p>The rule is strict and simple: <strong>exactly zero is false</strong>. Every other integer value — negative, large, small — is true. This includes <code>-1</code>, <code>100</code>, <code>0.1</code> (if stored as non-zero int), and even results of expressions like <code>(5 &gt; 3)</code> which equals 1.</p>
+        <p>Beginners sometimes expect <code>-1</code> to be false (like some other languages). In C it is not. Only <code>0</code> is false.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Truthiness in C</span></div>
+        <div class="syntax-card__code">/* FALSE — only these */
+if (0)      /* never runs */
+if (0.0)    /* never runs */
+
+/* TRUE — all of these */
+if (1)      /* runs */
+if (-1)     /* runs */
+if (100)    /* runs */
+if (-0.1)   /* runs (non-zero float) */
+if (0+1)    /* runs (evaluates to 1) */
+
+/* Comparison returns 0 or 1 — both usable */
+int pass = (score >= 60);   /* 1 if passed, 0 if not */
+if (pass) printf("Passed!\n");</div>
+      </div>
+      <button class="btn-continue" id="step-ch7-truefalse-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch7-truefalse-4">
+      <div id="compiler-ch7-truefalse-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch7-truefalse-5">
+      <div id="compiler-ch7-truefalse-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch7-truefalse-6">
+      <div id="compiler-ch7-truefalse-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch7-truefalse-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Return values as true/false</div>
+        <p class="realworld-card__text">Many C functions return 0 for success and non-zero for error — or vice versa. Knowing that non-zero means true lets you test them directly.</p>
+        <pre>int items_in_cart = 3;
+int payment_confirmed = 1;
+
+/* Use the value directly as a boolean */
+if (items_in_cart)
+    printf("Cart has items: %d\n", items_in_cart);
+if (payment_confirmed)
+    printf("Payment confirmed.\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch7-truefalse">📋 Start Assessment — True and False Values</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch7-truefalse" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch7-truefalse">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch7-truefalse">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch7-truefalse">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch7-truefalse"><div id="quiz-ch7-truefalse-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch7-truefalse"><div id="quiz-ch7-truefalse-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch7-truefalse"><div id="compiler-ch7-truefalse-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — COMBINING CONDITIONS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch7-combining" id="topic-ch7-combining">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title">Combining Conditions — Ranges and Multi-Part Tests</h2>
+      <span class="topic__status-badge" id="badge-ch7-combining">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch7-combining-1">
+      <p class="step-label" data-step-num="1">Run this. Multiple conditions combined into one test using <code>&amp;&amp;</code> and <code>||</code>.</p>
+      <div id="compiler-ch7-combining-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch7-combining-2">
+      <div id="iq-ch7-combining"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch7-combining-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Range checks and multi-part conditions</h3>
+        <p>The most common use of <code>&amp;&amp;</code> is a <strong>range check</strong>: testing that a value falls between two boundaries. You cannot write <code>1 &lt; x &lt; 10</code> in C — instead you write <code>x &gt; 1 &amp;&amp; x &lt; 10</code>.</p>
+        <p>Parentheses matter. <code>&amp;&amp;</code> has higher precedence than <code>||</code>, so <code>a || b &amp;&amp; c</code> means <code>a || (b &amp;&amp; c)</code>. When combining both, always add parentheses to make intent explicit.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Combining Conditions Correctly</span></div>
+        <div class="syntax-card__code">int x = 15;
+
+/* Range check — correct C way */
+if (x > 10 && x < 20)
+    printf("In range\n");         /* prints */
+
+/* WRONG: chaining doesn't work in C */
+/* if (10 < x < 20) — always true! */
+
+/* Multiple OR conditions */
+if (x == 5 || x == 10 || x == 15)
+    printf("Exact match\n");      /* prints */
+
+/* Precedence: && before || */
+if (x > 0 || x < -5 && x != 3)  /* && runs first */
+    printf("Complex condition\n");
+
+/* Better: explicit parentheses */
+if ((x > 0) || (x < -5 && x != 3))
+    printf("Clear intent\n");</div>
+      </div>
+      <button class="btn-continue" id="step-ch7-combining-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch7-combining-4">
+      <div id="compiler-ch7-combining-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch7-combining-5">
+      <div id="compiler-ch7-combining-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch7-combining-6">
+      <div id="compiler-ch7-combining-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch7-combining-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Grade classification with combined conditions</div>
+        <p class="realworld-card__text">Range checks with <code>&amp;&amp;</code> are the standard pattern for classifying values into bands.</p>
+        <pre>int score = 82;
+
+if      (score >= 90)              printf("A\n");
+else if (score >= 80 && score < 90) printf("B\n");
+else if (score >= 70 && score < 80) printf("C\n");
+else if (score >= 60 && score < 70) printf("D\n");
+else                                printf("F\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch7-combining">📋 Start Assessment — Combining Conditions</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch7-combining" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch7-combining">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch7-combining">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch7-combining">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch7-combining">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch7-combining"><div id="quiz-ch7-combining-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch7-combining"><div id="quiz-ch7-combining-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch7-combining"><div id="practice-ch7-combining"></div></div>
+        <div class="assessment-section" id="tab-debug-ch7-combining"><div id="compiler-ch7-combining-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 7 — TRUTH TABLES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch7-truth" id="topic-ch7-truth">
+    <div class="topic__header">
+      <span class="topic__number">Topic 7</span>
+      <h2 class="topic__title">Truth Tables — Predicting Logical Expressions</h2>
+      <span class="topic__status-badge" id="badge-ch7-truth">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch7-truth-1">
+      <p class="step-label" data-step-num="1">Run this — all 4 combinations of two boolean inputs, through AND and OR.</p>
+      <div id="compiler-ch7-truth-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch7-truth-2">
+      <div id="iq-ch7-truth"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch7-truth-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Truth tables let you predict any logical expression</h3>
+        <p>A truth table maps every possible combination of inputs to the output. With two inputs (A and B), there are always exactly 4 rows: FF, FT, TF, TT.</p>
+        <p>The pattern to memorize: <strong>AND</strong> is strict — both must be true. <strong>OR</strong> is lenient — either one is enough. <strong>NOT</strong> is simple — one input, opposite output.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Truth Table — AND, OR, NOT</span></div>
+        <div class="syntax-card__code">/*  A    B  |  A&&B  |  A||B  |  !A  */
+/*  0    0  |   0    |   0    |   1  */
+/*  0    1  |   0    |   1    |   1  */
+/*  1    0  |   0    |   1    |   0  */
+/*  1    1  |   1    |   1    |   0  */
+
+/* AND: only 1 row is true (bottom row) */
+/* OR:  only 1 row is false (top row) */
+/* NOT: output opposite to input */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Memory trick</div>
+          <div class="callout__body">AND is strict — only 1 true row out of 4. OR is lenient — only 1 false row out of 4.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch7-truth-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch7-truth-4">
+      <div id="compiler-ch7-truth-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch7-truth-5">
+      <div id="compiler-ch7-truth-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch7-truth-6">
+      <div id="compiler-ch7-truth-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch7-truth-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Access control from first principles</div>
+        <p class="realworld-card__text">Every access control system — file permissions, feature flags, subscription tiers — is just a truth table applied to real conditions.</p>
+        <pre>int premium = 1, verified = 0;
+
+/* Only premium AND verified can access */
+if (premium && verified)     printf("Full access\n");
+
+/* Premium OR verified gets partial access */
+if (premium || verified)     printf("Partial access\n");
+
+/* NOT premium = free tier */
+if (!premium)                printf("Free tier\n");</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch7-truth">📋 Start Assessment — Truth Tables</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Identification · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch7-truth" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch7-truth">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch7-truth">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch7-truth">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch7-truth">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch7-truth"><div id="quiz-ch7-truth-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch7-truth"><div id="quiz-ch7-truth-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch7-truth"><div id="quiz-ch7-truth-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch7-truth"><div id="compiler-ch7-truth-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 7 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch7-mastery" id="topic-ch7-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 7 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply everything from Chapter 7 in one program.</p>
+      <div id="compiler-ch7-mastery"></div>
+    </div>
+  </section>
+
+  <div id="ch7-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 7 Complete</div>
+      <p class="chapter-complete__message">You now understand how C represents true and false, how to compare values, and how to combine conditions. These are the exact tools that power every decision-making structure in C. Chapter 8 puts them to work inside <code>if</code>, <code>else if</code>, and <code>else</code>.</p>
+      <button class="btn-continue" id="ch7-next-btn">Start Chapter 8 — If / Else →</button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,528 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch5-operators/ch5.html
+     Chapter 5: Operators
+     6 topics · Full 7-step active learning structure per topic
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 5</div>
+    <h1 class="chapter-header__title">Operators</h1>
+    <p class="chapter-header__subtitle">
+      Operators are the symbols that perform actions on values. Every calculation, every comparison,
+      every assignment in C uses operators. This chapter covers the ones you will use in every program you write.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">6 Topics</span>
+      <span class="chapter-badge">+ - * / % · += ++ · precedence · type mixing</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — ARITHMETIC OPERATORS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch5-arithmetic" id="topic-ch5-arithmetic">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">Arithmetic Operators — <code>+ - * / %</code></h2>
+      <span class="topic__status-badge" id="badge-ch5-arithmetic">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch5-arithmetic-1">
+      <p class="step-label" data-step-num="1">Compile and run this — five operators, five results. Look at line 5 (division) and line 6 (modulo) closely.</p>
+      <div id="compiler-ch5-arithmetic-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch5-arithmetic-2">
+      <div id="iq-ch5-arithmetic"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch5-arithmetic-3">
+      <div class="explanation-card">
+        <p>C has five arithmetic operators: <code>+</code> (add), <code>-</code> (subtract), <code>*</code> (multiply), <code>/</code> (divide), <code>%</code> (modulo — remainder).</p>
+        <p><strong>Integer division</strong> truncates: <code>10 / 3</code> gives <code>3</code>, not <code>3.33</code>. The decimal part is dropped. This is one of the most common sources of bugs in beginner C programs.</p>
+        <p>The <strong>modulo operator</strong> (<code>%</code>) gives the remainder: <code>10 % 3</code> gives <code>1</code> because 10 ÷ 3 = 3 remainder 1. Modulo only works with integers.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Arithmetic Operators</span></div>
+        <div class="syntax-card__code">int a = 10, b = 3;
+a + b   →  13   // addition
+a - b   →   7   // subtraction
+a * b   →  30   // multiplication
+a / b   →   3   // integer division (truncates!)
+a % b   →   1   // modulo: remainder of 10 ÷ 3</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Integer Division Drops the Decimal</div>
+          <div class="callout__body"><code>int result = 7 / 2;</code> → result is <code>3</code>, not <code>3.5</code>. If you need the decimal, at least one operand must be a float: <code>7.0 / 2</code> or <code>(float)7 / 2</code>.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch5-arithmetic-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch5-arithmetic-4">
+      <div id="compiler-ch5-arithmetic-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch5-arithmetic-5">
+      <div id="compiler-ch5-arithmetic-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch5-arithmetic-6">
+      <div id="compiler-ch5-arithmetic-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch5-arithmetic-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Modulo in real programs</div>
+        <p class="realworld-card__text">Modulo is used for wrapping (keep a value within a range), even/odd checks, and cycle detection — essential in games, clocks, and data processing.</p>
+        <pre>/* Is this number even or odd? */
+if (number % 2 == 0) printf("even\n");
+else                  printf("odd\n");
+
+/* Wrap angle: 365 % 360 = 5 degrees */
+angle = (angle + degrees) % 360;</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch5-arithmetic">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Arithmetic Operators</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch5-arithmetic">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch5-arithmetic">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch5-arithmetic">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch5-arithmetic">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch5-arithmetic"><div id="quiz-ch5-arithmetic-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch5-arithmetic"><div id="quiz-ch5-arithmetic-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch5-arithmetic"><div id="practice-ch5-arithmetic"></div></div>
+        <div class="assessment-section" id="tab-debug-ch5-arithmetic"><div id="compiler-ch5-arithmetic-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — INTEGER VS FLOAT DIVISION
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch5-division" id="topic-ch5-division">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Integer Division vs Float Division — A Critical Distinction</h2>
+      <span class="topic__status-badge" id="badge-ch5-division">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch5-division-1">
+      <p class="step-label" data-step-num="1">Run this — the same numbers, divided three different ways. All three produce different results.</p>
+      <div id="compiler-ch5-division-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch5-division-2">
+      <div id="iq-ch5-division"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch5-division-3">
+      <div class="explanation-card">
+        <p>When <em>both</em> operands are integers, C performs integer division — no decimal, truncated toward zero. To get a float result, at least one operand must be a float or double.</p>
+        <p>Three ways to force float division: use a <code>float</code> variable, use a literal decimal (<code>7.0</code> instead of <code>7</code>), or cast with <code>(float)</code> or <code>(double)</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Division — Three Patterns</span></div>
+        <div class="syntax-card__code">int a = 7, b = 2;
+
+int   result1 = a / b;          // 3  — integer division
+float result2 = a / b;          // 3.0 — still integer division!
+float result3 = (float)a / b;   // 3.5 — cast forces float division
+float result4 = 7.0 / 2;        // 3.5 — literal forces float division</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">float result = a / b still does integer division!</div>
+          <div class="callout__body">The type of the <em>result variable</em> does not change how the division is calculated. The calculation happens first (integer ÷ integer = integer), then it gets stored as float. You get 3.0, not 3.5.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch5-division-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch5-division-4">
+      <div id="compiler-ch5-division-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch5-division-5">
+      <div id="compiler-ch5-division-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch5-division-6">
+      <div id="compiler-ch5-division-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch5-division-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 The classic average bug</div>
+        <p class="realworld-card__text">The most common beginner bug in C is computing averages with integer division. Always cast when you need a decimal result.</p>
+        <pre>int total = 85 + 92 + 78;  /* = 255 */
+int count = 3;
+
+/* BUG: integer division gives 85, not 85.0 */
+float avg_wrong = total / count;
+
+/* CORRECT: cast one operand to float first */
+float avg_right = (float)total / count;  /* 85.0 */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch5-division">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Integer vs Float Division</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch5-division">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch5-division">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch5-division">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch5-division"><div id="quiz-ch5-division-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch5-division"><div id="quiz-ch5-division-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch5-division"><div id="compiler-ch5-division-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — ASSIGNMENT OPERATORS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch5-assignment" id="topic-ch5-assignment">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Assignment Operators — <code>= += -= *= /= %=</code></h2>
+      <span class="topic__status-badge" id="badge-ch5-assignment">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch5-assignment-1">
+      <p class="step-label" data-step-num="1">Run this — the shorthand operators modify a variable in place. Predict each value before running.</p>
+      <div id="compiler-ch5-assignment-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch5-assignment-2">
+      <div id="iq-ch5-assignment"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch5-assignment-3">
+      <div class="explanation-card">
+        <p>Compound assignment operators combine arithmetic with assignment in one step. <code>x += 5</code> means exactly the same as <code>x = x + 5</code> — it adds 5 to x and stores the result back in x.</p>
+        <p>They work for all five arithmetic operators: <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>%=</code>. They are shorter, clearer, and are used constantly in real C code.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Compound Assignment</span></div>
+        <div class="syntax-card__code">int x = 10;
+x += 5;   // x = x + 5  → x is now 15
+x -= 3;   // x = x - 3  → x is now 12
+x *= 2;   // x = x * 2  → x is now 24
+x /= 4;   // x = x / 4  → x is now  6
+x %= 4;   // x = x % 4  → x is now  2</div>
+      </div>
+      <button class="btn-continue" id="step-ch5-assignment-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch5-assignment-4">
+      <div id="compiler-ch5-assignment-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch5-assignment-5">
+      <div id="compiler-ch5-assignment-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch5-assignment-6">
+      <div id="compiler-ch5-assignment-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch5-assignment-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Compound assignment in loops</div>
+        <p class="realworld-card__text">Compound operators appear constantly in loops — accumulating totals, adjusting counters, and building values incrementally.</p>
+        <pre>int total = 0;
+int prices[] = {12, 35, 8, 22};
+int i;
+for (i = 0; i < 4; i++) {
+    total += prices[i];  /* accumulate sum */
+}
+printf("Total: %d\n", total); /* 77 */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch5-assignment">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Assignment Operators</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch5-assignment">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch5-assignment">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch5-assignment">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch5-assignment"><div id="quiz-ch5-assignment-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch5-assignment"><div id="quiz-ch5-assignment-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch5-assignment"><div id="compiler-ch5-assignment-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — INCREMENT AND DECREMENT
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch5-increment" id="topic-ch5-increment">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Increment &amp; Decrement — <code>++ --</code> Prefix vs Postfix</h2>
+      <span class="topic__status-badge" id="badge-ch5-increment">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch5-increment-1">
+      <p class="step-label" data-step-num="1">Run this — prefix and postfix look similar but produce different values in expressions. Watch line 4 vs line 7.</p>
+      <div id="compiler-ch5-increment-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch5-increment-2">
+      <div id="iq-ch5-increment"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch5-increment-3">
+      <div class="explanation-card">
+        <p><code>++</code> adds 1 to a variable. <code>--</code> subtracts 1. Both have two forms: <strong>prefix</strong> (<code>++x</code>) increments first, then uses the new value. <strong>Postfix</strong> (<code>x++</code>) uses the current value first, then increments.</p>
+        <p>On a line alone, <code>x++</code> and <code>++x</code> are identical — both add 1. The difference only matters when used inside an expression: <code>y = x++</code> stores old value; <code>y = ++x</code> stores new value.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Prefix vs Postfix</span></div>
+        <div class="syntax-card__code">int x = 5;
+
+/* Prefix — increment THEN use */
+int a = ++x;   // x becomes 6, a = 6
+
+/* Postfix — use THEN increment */
+x = 5;         // reset
+int b = x++;   // b = 5 (old), x becomes 6
+
+/* On its own line, both are identical */
+x++;   // same as
+++x;   // both add 1 to x</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Best Practice</div>
+          <div class="callout__body">Use <code>x++</code> or <code>++x</code> on their own lines to avoid confusion. Mix them into expressions only when the difference is intentional and clear.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch5-increment-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch5-increment-4">
+      <div id="compiler-ch5-increment-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch5-increment-5">
+      <div id="compiler-ch5-increment-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch5-increment-6">
+      <div id="compiler-ch5-increment-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch5-increment-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Increment in for loops</div>
+        <p class="realworld-card__text"><code>i++</code> in a <code>for</code> loop is the most common use. It appears in virtually every C loop ever written.</p>
+        <pre>/* i++ advances the counter each iteration */
+for (int i = 0; i < 10; i++) {
+    printf("Step %d\n", i);
+}
+
+/* Countdown with decrement */
+for (int i = 5; i > 0; i--) {
+    printf("%d...\n", i);
+}</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch5-increment">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Increment &amp; Decrement</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch5-increment">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch5-increment">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch5-increment">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch5-increment">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch5-increment"><div id="quiz-ch5-increment-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch5-increment"><div id="quiz-ch5-increment-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch5-increment"><div id="quiz-ch5-increment-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch5-increment"><div id="compiler-ch5-increment-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — OPERATOR PRECEDENCE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch5-precedence" id="topic-ch5-precedence">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">Operator Precedence — Order of Evaluation</h2>
+      <span class="topic__status-badge" id="badge-ch5-precedence">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch5-precedence-1">
+      <p class="step-label" data-step-num="1">Run this — predict what each expression evaluates to before running.</p>
+      <div id="compiler-ch5-precedence-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch5-precedence-2">
+      <div id="iq-ch5-precedence"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch5-precedence-3">
+      <div class="explanation-card">
+        <p>C follows the same precedence rules as mathematics: <code>*</code>, <code>/</code>, <code>%</code> evaluate before <code>+</code> and <code>-</code>. When operators have equal precedence, they evaluate left to right.</p>
+        <p>Parentheses <code>()</code> override everything — they always evaluate first. When in doubt, add parentheses. Explicit is better than relying on precedence rules you might misremember.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Precedence Rules</span></div>
+        <div class="syntax-card__code">/* High precedence: ++ -- (postfix) then * / % then + - */
+
+2 + 3 * 4   →  14   // * before +
+(2 + 3) * 4 →  20   // () override
+
+10 - 2 + 3  →  11   // left to right
+10 / 2 * 3  →  15   // left to right: (10/2)*3
+
+/* Parentheses are free — use them liberally */
+int result = ((a + b) * c) - (d / e);</div>
+      </div>
+      <button class="btn-continue" id="step-ch5-precedence-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch5-precedence-4">
+      <div id="compiler-ch5-precedence-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch5-precedence-5">
+      <div id="compiler-ch5-precedence-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch5-precedence-6">
+      <div id="compiler-ch5-precedence-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch5-precedence-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Parentheses prevent precedence bugs</div>
+        <p class="realworld-card__text">In financial and scientific code, precedence bugs cause expensive errors. Parentheses remove all ambiguity.</p>
+        <pre>/* Simple interest formula: P * r * t */
+float interest = principal * rate * time;
+
+/* Compound interest — parentheses required */
+float compound = principal * (1.0 + rate / 12.0);
+
+/* Average of two values — parentheses required! */
+int mid = (a + b) / 2;   /* NOT: a + b / 2 — that is a + (b/2) */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch5-precedence">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Operator Precedence</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch5-precedence">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch5-precedence">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch5-precedence">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch5-precedence"><div id="quiz-ch5-precedence-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch5-precedence"><div id="quiz-ch5-precedence-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch5-precedence"><div id="compiler-ch5-precedence-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — ARITHMETIC WITH DIFFERENT TYPES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch5-mixing" id="topic-ch5-mixing">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title">Arithmetic with Different Types — Type Mixing</h2>
+      <span class="topic__status-badge" id="badge-ch5-mixing">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch5-mixing-1">
+      <p class="step-label" data-step-num="1">Run this — when int meets float, something has to give. See which type wins.</p>
+      <div id="compiler-ch5-mixing-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch5-mixing-2">
+      <div id="iq-ch5-mixing"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch5-mixing-3">
+      <div class="explanation-card">
+        <p>When you mix int and float in an expression, C automatically <em>promotes</em> the int to float before computing. This is called <strong>implicit type conversion</strong>. The result is always float when float is involved.</p>
+        <p>The rule is: the less precise type gets promoted to the more precise type. <code>int</code> → <code>float</code> → <code>double</code>. This happens automatically — you do not write anything extra.</p>
+        <p>When you store a float result in an int variable, the decimal is truncated (not rounded). <code>int x = 3.9</code> gives <code>x = 3</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Type Promotion Rules</span></div>
+        <div class="syntax-card__code">int   a = 5;
+float b = 2.0;
+
+float c = a + b;    // int promoted to float → 7.0
+float d = a * b;    // int promoted to float → 10.0
+float e = a / b;    // int promoted to float → 2.5
+
+/* Storing float into int truncates (drops decimal) */
+int   f = a + b;    // 7.0 stored as 7 (truncated)
+int   g = 3.9;      // → 3, NOT 4 (no rounding!)</div>
+      </div>
+      <button class="btn-continue" id="step-ch5-mixing-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch5-mixing-4">
+      <div id="compiler-ch5-mixing-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch5-mixing-5">
+      <div id="compiler-ch5-mixing-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch5-mixing-6">
+      <div id="compiler-ch5-mixing-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch5-mixing-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Type mixing in calculations</div>
+        <p class="realworld-card__text">Understanding promotion prevents subtle bugs in calculations. Mix deliberately and always verify the type of the result.</p>
+        <pre>int students = 30;
+int passed = 24;
+
+/* Percentage: need float result */
+float pct = (float)passed / students * 100.0;
+printf("Pass rate: %.1f%%\n", pct); /* 80.0% */
+
+/* Without cast: 24/30 = 0 (integer division!) */</pre>
+      </div>
+    </div>
+
+    <!-- Assessment + Mastery -->
+    <div class="assessment-block" data-topic="ch5-mixing">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Type Mixing</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch5-mixing">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch5-mixing">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch5-mixing">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch5-mixing">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch5-mixing"><div id="quiz-ch5-mixing-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch5-mixing"><div id="quiz-ch5-mixing-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch5-mixing"><div id="practice-ch5-mixing"></div></div>
+        <div class="assessment-section" id="tab-debug-ch5-mixing"><div id="compiler-ch5-mixing-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 5 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch5-mastery" id="topic-ch5-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 5 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply all Chapter 5 operators in one program.</p>
+      <div id="compiler-ch5-mastery"></div>
+    </div>
+  </section>
+
+  <!-- Chapter complete -->
+  <div id="ch5-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 5 Complete</div>
+      <p class="chapter-complete__message">You now control how C computes. Integer division, float promotion, precedence, and shorthand operators — these are in every C program. Chapter 6 covers explicit type conversion: how to cast between types intentionally.</p>
+      <button class="btn-continue" id="ch5-next-btn">Start Chapter 6 — Type Conversion →</button>
+    </div>
+  </div>
+
+</div>

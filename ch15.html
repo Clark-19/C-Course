@@ -1,0 +1,1152 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch15-arrays-strings/ch15.html
+     Chapter 15: Arrays & Strings
+     13 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 15</div>
+    <h1 class="chapter-header__title">Arrays &amp; Strings</h1>
+    <p class="chapter-header__subtitle">
+      Arrays let one variable name refer to many values stored in consecutive memory.
+      Strings in C are simply arrays of characters with a special null terminator marking the end.
+      Together they unlock every data processing pattern — searching, sorting, parsing, formatting —
+      that makes C programs genuinely useful.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">13 Topics</span>
+      <span class="chapter-badge">arrays · 2D · strings · null terminator · string.h</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — WHAT IS AN ARRAY?
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-array" id="topic-ch15-array">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">What is an Array?</h2>
+      <span class="topic__status-badge" id="badge-ch15-array">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-array-1">
+      <p class="step-label" data-step-num="1">Run this. Five separate variables vs five slots in one array — same data, very different access.</p>
+      <div id="compiler-ch15-array-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-array-2"><div id="iq-ch15-array"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-array-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">An array stores multiple values of the same type in consecutive memory under one name</h3>
+        <p>An <strong>array</strong> is a fixed-size, ordered collection of elements of the same type. All elements are stored in consecutive memory locations. A single name refers to the whole collection; individual elements are accessed by their <strong>index</strong> — an integer starting at <strong>0</strong>. The last valid index is always <strong>size − 1</strong>.</p>
+        <p>The key advantage: you can use a loop variable as an index to process all elements without writing each access explicitly. What would take 100 separate lines of code becomes a single loop over an array of 100 elements.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Array Basics</span></div>
+        <div class="syntax-card__code">/* Declaration: type name[size]; */
+int scores[5];       /* 5 ints, indices 0 to 4 */
+float prices[100];   /* 100 floats */
+char letters[26];    /* 26 chars */
+
+/* Memory layout (int scores[5]): */
+/* [0] [1] [2] [3] [4]           */
+/* |   |   |   |   |             */
+/* 88  72  95  61  84            */
+
+/* Total size in bytes: sizeof(type) × count */
+/* sizeof(int scores[5]) = 4 × 5 = 20 bytes  */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Array size must be known at compile time (in standard C)</div>
+          <div class="callout__body">In standard C (C99+), you can use a constant or literal for array size. The size cannot be changed after declaration — arrays have fixed size. Variable-length arrays (VLAs) exist in C99 but are optional in C11 and beyond, so prefer fixed sizes.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch15-array-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-array-4"><div id="compiler-ch15-array-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-array-5"><div id="compiler-ch15-array-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-array-6"><div id="compiler-ch15-array-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-array-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Weekly sales tracking</div>
+        <p class="realworld-card__text">Instead of seven separate variables (mon, tue, wed...), one array holds all days. The loop processes all seven without seven separate printf lines.</p>
+        <pre>int sales[7] = {120, 85, 200, 155, 178, 300, 90};
+int total = 0;
+for (int d = 0; d &lt; 7; d++) total += sales[d];
+printf("Weekly total: %d\n", total);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-array">📋 Start Assessment — What is an Array?</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-array" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-array">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-array">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-array">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-array">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-array"><div id="quiz-ch15-array-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-array"><div id="quiz-ch15-array-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-array"><div id="practice-ch15-array"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-array"><div id="compiler-ch15-array-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — DECLARING & INITIALIZING
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-declare" id="topic-ch15-declare">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Declaring &amp; Initializing Arrays</h2>
+      <span class="topic__status-badge" id="badge-ch15-declare">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-declare-1">
+      <p class="step-label" data-step-num="1">Run this. Several initialization patterns — choose the right one for your situation.</p>
+      <div id="compiler-ch15-declare-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-declare-2"><div id="iq-ch15-declare"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-declare-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Initialize at declaration, use a loop, or let the compiler count — all three have their place</h3>
+        <p>An array declared without initialization holds garbage values. Always initialize before reading. Three common patterns: <strong>inline literal</strong> (best for small, known data), <strong>loop initialization</strong> (best for computed or large data), and <strong>partial initialization</strong> (remaining elements become zero in C).</p>
+        <p>When you provide a literal list, the compiler can count the elements automatically: <code>int arr[] = {1,2,3}</code> creates a 3-element array. This is safer than writing the size manually — if you add or remove values, the size updates automatically.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Array Initialization Patterns</span></div>
+        <div class="syntax-card__code">/* 1. Explicit literal — best for small known data */
+int scores[5] = {88, 72, 95, 61, 84};
+
+/* 2. Let compiler count */
+int primes[] = {2, 3, 5, 7, 11};  /* size = 5 automatically */
+
+/* 3. Zero-initialize entire array */
+int counts[100] = {0};  /* all 100 elements become 0 */
+
+/* 4. Partial — remaining slots become 0 */
+int data[5] = {1, 2};   /* {1, 2, 0, 0, 0} */
+
+/* 5. Loop — for computed or large arrays */
+int squares[10];
+for (int i = 0; i &lt; 10; i++) squares[i] = i * i;
+
+/* 6. sizeof trick to get element count */
+int arr[] = {10,20,30,40,50};
+int size = sizeof(arr) / sizeof(arr[0]);  /* → 5 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-declare-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-declare-4"><div id="compiler-ch15-declare-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-declare-5"><div id="compiler-ch15-declare-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-declare-6"><div id="compiler-ch15-declare-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-declare-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 sizeof for portable array sizes</div>
+        <p class="realworld-card__text">Hard-coding array sizes in loop conditions is fragile — if you add an element to the literal, the loop condition lags behind. The sizeof trick keeps the loop bound in sync automatically.</p>
+        <pre>int temps[] = {22, 18, 25, 30, 19};
+int n = sizeof(temps) / sizeof(temps[0]);  /* always correct */
+
+for (int i = 0; i &lt; n; i++)
+    printf("%d\n", temps[i]);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-declare">📋 Start Assessment — Declaring Arrays</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-declare" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-declare">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-declare">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-declare">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-declare">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-declare"><div id="quiz-ch15-declare-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-declare"><div id="quiz-ch15-declare-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-declare"><div id="practice-ch15-declare"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-declare"><div id="compiler-ch15-declare-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — ACCESSING ELEMENTS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-access" id="topic-ch15-access">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Accessing Elements — Reading and Writing by Index</h2>
+      <span class="topic__status-badge" id="badge-ch15-access">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-access-1">
+      <p class="step-label" data-step-num="1">Run this. Read and write individual elements — both use the same bracket syntax.</p>
+      <div id="compiler-ch15-access-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-access-2"><div id="iq-ch15-access"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-access-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">arr[i] reads or writes element i — the index is just an integer expression</h3>
+        <p>Array element access uses square bracket notation: <code>arr[i]</code>. Reading: <code>int x = arr[3];</code> copies the value at index 3 into x. Writing: <code>arr[3] = 99;</code> stores 99 at index 3. Both use the same syntax — the context (left or right of <code>=</code>) determines whether it is a read or write.</p>
+        <p>The index can be any integer expression — a literal, a variable, an arithmetic expression, or a function call. <code>arr[i+1]</code>, <code>arr[n/2]</code>, and <code>arr[f()]</code> are all valid. The expression is evaluated first, then the resulting integer is used as the index.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Read, Write, and Dynamic Index</span></div>
+        <div class="syntax-card__code">int data[5] = {10, 20, 30, 40, 50};
+
+/* Read — value at index */
+int x = data[2];          /* x = 30 */
+printf("%d\n", data[4]);  /* prints 50 */
+
+/* Write — assign to index */
+data[0] = 99;             /* now: {99, 20, 30, 40, 50} */
+data[3] = data[1] + 5;   /* data[3] = 25 */
+
+/* Dynamic index — variable or expression */
+int i = 2;
+printf("%d\n", data[i]);      /* data[2] = 30 */
+printf("%d\n", data[i + 1]);  /* data[3] = 25 */
+
+/* First and last elements */
+int first = data[0];               /* always index 0 */
+int last  = data[5 - 1];          /* last valid: size-1 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-access-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-access-4"><div id="compiler-ch15-access-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-access-5"><div id="compiler-ch15-access-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-access-6"><div id="compiler-ch15-access-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-access-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Swap two elements in-place</div>
+        <p class="realworld-card__text">Swapping two array elements requires a temp variable — direct assignment overwrites before you can save the original value. This pattern appears in every sorting algorithm.</p>
+        <pre>int arr[5] = {3, 1, 4, 1, 5};
+
+/* Swap arr[0] and arr[2] */
+int temp = arr[0];
+arr[0]   = arr[2];
+arr[2]   = temp;
+/* arr is now: {4, 1, 3, 1, 5} */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-access">📋 Start Assessment — Accessing Elements</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-access" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-access">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-access">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-access">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-access">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-access"><div id="quiz-ch15-access-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-access"><div id="quiz-ch15-access-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-access"><div id="practice-ch15-access"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-access"><div id="compiler-ch15-access-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — ITERATING ARRAYS WITH LOOPS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-iterate" id="topic-ch15-iterate">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Iterating Arrays with Loops</h2>
+      <span class="topic__status-badge" id="badge-ch15-iterate">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-iterate-1">
+      <p class="step-label" data-step-num="1">Run this. A for loop counter doubles as the array index — this is the core pattern.</p>
+      <div id="compiler-ch15-iterate-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-iterate-2"><div id="iq-ch15-iterate"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-iterate-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">The for loop counter IS the array index — iterate from 0 to size-1</h3>
+        <p>The standard array traversal pattern uses <code>for (int i = 0; i &lt; SIZE; i++)</code> where <code>i</code> serves dual purpose — it is both the loop counter and the current array index. Each iteration processes <code>arr[i]</code>. The condition <code>i &lt; SIZE</code> (strictly less than, not ≤) ensures the last access is <code>arr[SIZE-1]</code>, which is the last valid index.</p>
+        <p>This pattern scales — the exact same loop structure processes 5 elements or 5 million. Only SIZE changes.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Array Iteration Patterns</span></div>
+        <div class="syntax-card__code">int nums[6] = {4, 8, 15, 16, 23, 42};
+int n = 6;
+
+/* Print all */
+for (int i = 0; i &lt; n; i++) printf("%d ", nums[i]);
+printf("\n");
+
+/* Sum */
+int sum = 0;
+for (int i = 0; i &lt; n; i++) sum += nums[i];
+printf("Sum: %d\n", sum);  /* 108 */
+
+/* Find max */
+int max = nums[0];
+for (int i = 1; i &lt; n; i++)
+    if (nums[i] > max) max = nums[i];
+printf("Max: %d\n", max);  /* 42 */
+
+/* Count condition */
+int count = 0;
+for (int i = 0; i &lt; n; i++)
+    if (nums[i] > 10) count++;
+printf("Over 10: %d\n", count);  /* 4 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-iterate-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-iterate-4"><div id="compiler-ch15-iterate-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-iterate-5"><div id="compiler-ch15-iterate-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-iterate-6"><div id="compiler-ch15-iterate-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-iterate-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Grade statistics — all in one pass</div>
+        <p class="realworld-card__text">A single loop pass can compute sum, min, max, and pass count simultaneously — more efficient than four separate loops over the same data.</p>
+        <pre>int grades[] = {78,92,55,88,73,61,95,44};
+int n = sizeof(grades)/sizeof(grades[0]);
+int sum=0, min=grades[0], max=grades[0], pass=0;
+
+for (int i = 0; i &lt; n; i++) {
+    sum += grades[i];
+    if (grades[i] &lt; min) min = grades[i];
+    if (grades[i] > max) max = grades[i];
+    if (grades[i] >= 75) pass++;
+}
+printf("Avg:%d Min:%d Max:%d Pass:%d\n",sum/n,min,max,pass);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-iterate">📋 Start Assessment — Iterating Arrays</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-iterate" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-iterate">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-iterate">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-iterate">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-iterate">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-iterate"><div id="quiz-ch15-iterate-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-iterate"><div id="quiz-ch15-iterate-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-iterate"><div id="practice-ch15-iterate"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-iterate"><div id="compiler-ch15-iterate-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — ARRAY BOUNDS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-bounds" id="topic-ch15-bounds">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">Array Bounds — The Danger Zone</h2>
+      <span class="topic__status-badge" id="badge-ch15-bounds">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-bounds-1">
+      <p class="step-label" data-step-num="1">Run this. These loops all access the same array differently — only one is correct. Study each condition.</p>
+      <div id="compiler-ch15-bounds-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-bounds-2"><div id="iq-ch15-bounds"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-bounds-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">C never checks array bounds — out-of-bounds access is silent undefined behavior</h3>
+        <p>C does not check whether an index is within bounds at runtime. Accessing <code>arr[-1]</code> or <code>arr[size]</code> is legal C syntax that the compiler accepts — but the behavior is <strong>undefined</strong>. The program may crash, silently read garbage, or silently corrupt other variables. The same "working" program may behave differently tomorrow, on a different machine, or after changing one unrelated line of code.</p>
+        <p>This is one of the most common sources of security vulnerabilities in C programs. Buffer overflows — writing past the end of an array — are the exploit mechanism behind many historical and modern attacks. Your defense: always use <code>i &lt; size</code> (not <code>i &lt;= size</code>) and never use a negative index.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Bounds Checklist</span></div>
+        <div class="syntax-card__code">int arr[5] = {1,2,3,4,5};  /* valid: [0] to [4] */
+
+/* CORRECT */
+for (int i = 0; i &lt; 5; i++)  printf("%d ", arr[i]);
+
+/* WRONG — accesses arr[5] (out of bounds) */
+for (int i = 0; i &lt;= 5; i++) printf("%d ", arr[i]);
+
+/* WRONG — starts at index 1, misses arr[0] */
+for (int i = 1; i &lt; 5; i++)  printf("%d ", arr[i]);
+
+/* WRONG — negative index */
+printf("%d\n", arr[-1]);
+
+/* Rule: for array[N], valid indices are 0 to N-1
+   Loop condition must be: i &lt; N (strictly less than) */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Out-of-bounds: C will NOT warn you at runtime</div>
+          <div class="callout__body">Unlike Java or Python which throw an exception, C silently reads or writes invalid memory. Your program may seem to work until a specific input triggers a crash — weeks later in production. Always verify your loop bounds before running array code.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch15-bounds-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-bounds-4"><div id="compiler-ch15-bounds-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-bounds-5"><div id="compiler-ch15-bounds-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-bounds-6"><div id="compiler-ch15-bounds-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-bounds-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Safe index access — always validate before using</div>
+        <p class="realworld-card__text">When an index comes from user input or calculation, validate it before using it as an array index. A simple range check prevents out-of-bounds access.</p>
+        <pre>int data[10] = {5,8,2,9,1,7,3,6,4,0};
+int idx = 7;  /* imagine this came from user input */
+
+if (idx >= 0 && idx &lt; 10) {
+    printf("data[%d] = %d\n", idx, data[idx]);
+} else {
+    printf("Index %d is out of bounds\n", idx);
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-bounds">📋 Start Assessment — Array Bounds</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-bounds" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-bounds">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-bounds">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-bounds">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-bounds">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-bounds"><div id="quiz-ch15-bounds-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-bounds"><div id="quiz-ch15-bounds-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-bounds"><div id="practice-ch15-bounds"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-bounds"><div id="compiler-ch15-bounds-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — 2D ARRAYS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-2d" id="topic-ch15-2d">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title">2D Arrays — Rows and Columns</h2>
+      <span class="topic__status-badge" id="badge-ch15-2d">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-2d-1">
+      <p class="step-label" data-step-num="1">Run this. A 2D array is declared with two size values and accessed with two indices.</p>
+      <div id="compiler-ch15-2d-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-2d-2"><div id="iq-ch15-2d"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-2d-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">A 2D array is rows × columns — an array of arrays stored in row-major order</h3>
+        <p>A 2D array is declared as <code>type name[ROWS][COLS]</code>. Element <code>arr[r][c]</code> is at row r, column c. Under the hood, the 2D array is stored in <strong>row-major order</strong> — all columns of row 0 first, then row 1, and so on — in a single contiguous block of memory.</p>
+        <p>Initialization uses nested braces: <code>{{row0}, {row1}}</code>. Access uses two bracket pairs: <code>arr[row][col]</code>. Both indices are zero-based. Two nested for loops — one for rows, one for columns — process every element.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">2D Array Declaration and Access</span></div>
+        <div class="syntax-card__code">/* Declaration: type name[ROWS][COLS]; */
+int matrix[3][4];        /* 3 rows, 4 columns — 12 elements */
+
+/* Initialization with nested braces */
+int grid[2][3] = {
+    {1, 2, 3},   /* row 0 */
+    {4, 5, 6}    /* row 1 */
+};
+
+/* Access: arr[row][col] */
+printf("%d\n", grid[0][2]);  /* row 0, col 2 → 3 */
+printf("%d\n", grid[1][0]);  /* row 1, col 0 → 4 */
+
+/* Write */
+grid[1][2] = 99;  /* changes row 1, col 2 to 99 */
+
+/* Total elements: ROWS × COLS */
+/* Memory: laid out row by row (row-major order) */</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-2d-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-2d-4"><div id="compiler-ch15-2d-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-2d-5"><div id="compiler-ch15-2d-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-2d-6"><div id="compiler-ch15-2d-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-2d-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Class grade book — students × subjects</div>
+        <p class="realworld-card__text">A 2D array naturally models a grade book: rows are students, columns are subjects. One array holds all grades; one nested loop computes all averages.</p>
+        <pre>int grades[3][4] = {
+    {88, 72, 95, 61},   /* student 0 */
+    {74, 83, 67, 91},   /* student 1 */
+    {55, 68, 79, 82}    /* student 2 */
+};
+
+for (int s = 0; s &lt; 3; s++) {
+    int sum = 0;
+    for (int sub = 0; sub &lt; 4; sub++) sum += grades[s][sub];
+    printf("Student %d avg: %d\n", s, sum / 4);
+}</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-2d">📋 Start Assessment — 2D Arrays</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-2d" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-2d">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-2d">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-2d">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-2d">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-2d"><div id="quiz-ch15-2d-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-2d"><div id="quiz-ch15-2d-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-2d"><div id="practice-ch15-2d"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-2d"><div id="compiler-ch15-2d-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 7 — 2D ARRAY ITERATION
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-2diterate" id="topic-ch15-2diterate">
+    <div class="topic__header">
+      <span class="topic__number">Topic 7</span>
+      <h2 class="topic__title">2D Array Iteration — Nested Loops for Grids</h2>
+      <span class="topic__status-badge" id="badge-ch15-2diterate">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-2diterate-1">
+      <p class="step-label" data-step-num="1">Run this. Nested loops — outer for rows, inner for columns — process every cell in order.</p>
+      <div id="compiler-ch15-2diterate-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-2diterate-2"><div id="iq-ch15-2diterate"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-2diterate-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Nested loops: outer iterates rows, inner iterates columns within each row</h3>
+        <p>The standard 2D traversal uses two nested for loops. The <strong>outer loop</strong> iterates rows (0 to ROWS-1). The <strong>inner loop</strong> iterates columns (0 to COLS-1) for the current row. Together they visit every cell exactly once in row-major order. A <code>printf("\n")</code> after the inner loop moves to a new display line after each row.</p>
+        <p>The total number of iterations is always ROWS × COLS — the product of both loop bounds.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">2D Traversal — All Patterns</span></div>
+        <div class="syntax-card__code">int m[3][4] = {{1,2,3,4},{5,6,7,8},{9,10,11,12}};
+
+/* Print entire grid */
+for (int r = 0; r &lt; 3; r++) {
+    for (int c = 0; c &lt; 4; c++)
+        printf("%4d", m[r][c]);
+    printf("\n");
+}
+
+/* Sum entire grid */
+int total = 0;
+for (int r = 0; r &lt; 3; r++)
+    for (int c = 0; c &lt; 4; c++)
+        total += m[r][c];
+
+/* Row sums */
+for (int r = 0; r &lt; 3; r++) {
+    int rowsum = 0;
+    for (int c = 0; c &lt; 4; c++) rowsum += m[r][c];
+    printf("Row %d sum: %d\n", r, rowsum);
+}
+
+/* Column sums */
+for (int c = 0; c &lt; 4; c++) {
+    int colsum = 0;
+    for (int r = 0; r &lt; 3; r++) colsum += m[r][c];
+    printf("Col %d sum: %d\n", c, colsum);
+}</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-2diterate-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-2diterate-4"><div id="compiler-ch15-2diterate-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-2diterate-5"><div id="compiler-ch15-2diterate-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-2diterate-6"><div id="compiler-ch15-2diterate-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-2diterate-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Matrix diagonal — only when row == column</div>
+        <p class="realworld-card__text">Extracting the main diagonal of a matrix uses one loop (not two) since the diagonal elements are exactly where row index equals column index.</p>
+        <pre>int m[4][4] = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+int diag_sum = 0;
+
+for (int i = 0; i &lt; 4; i++) {
+    printf("m[%d][%d] = %d\n", i, i, m[i][i]);
+    diag_sum += m[i][i];
+}
+printf("Diagonal sum: %d\n", diag_sum);  /* 1+6+11+16 = 34 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-2diterate">📋 Start Assessment — 2D Iteration</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-2diterate" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-2diterate">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-2diterate">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-2diterate">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-2diterate">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-2diterate"><div id="quiz-ch15-2diterate-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-2diterate"><div id="quiz-ch15-2diterate-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-2diterate"><div id="practice-ch15-2diterate"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-2diterate"><div id="compiler-ch15-2diterate-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 8 — STRINGS IN C
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-strings" id="topic-ch15-strings">
+    <div class="topic__header">
+      <span class="topic__number">Topic 8</span>
+      <h2 class="topic__title">Strings in C — char Arrays with a Special Ending</h2>
+      <span class="topic__status-badge" id="badge-ch15-strings">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-strings-1">
+      <p class="step-label" data-step-num="1">Run this. A C string is a char array. Print it with %s or character by character — both work.</p>
+      <div id="compiler-ch15-strings-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-strings-2"><div id="iq-ch15-strings"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-strings-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">A C string is a char array ending in a null terminator '\0' — size must include it</h3>
+        <p>In C, there is no built-in string type. A string is simply a <code>char</code> array where the last element is the <strong>null terminator</strong> <code>'\0'</code> (the character with ASCII value 0). Every standard string function — <code>printf("%s")</code>, <code>strlen</code>, <code>strcpy</code> — finds the end of the string by scanning for this zero byte.</p>
+        <p>When declaring a string literal, the compiler automatically appends <code>'\0'</code>: <code>"hello"</code> is actually 6 bytes (h, e, l, l, o, \0). When sizing a char array to hold a string, you must add 1 for the terminator: a string of 5 characters needs a <code>char arr[6]</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">String Declaration and Access</span></div>
+        <div class="syntax-card__code">/* Two ways to declare a string */
+char name[] = "Alice";        /* compiler sets size = 6 (5 + '\0') */
+char city[10] = "Paris";     /* fixed buffer — 10 chars, 5 used + '\0' */
+
+/* Print the whole string */
+printf("%s\n", name);         /* Alice */
+
+/* Access individual characters */
+printf("%c\n", name[0]);      /* A */
+printf("%c\n", name[4]);      /* e */
+
+/* The null terminator */
+printf("%d\n", name[5]);      /* 0 — the '\0' byte */
+
+/* String literal — stored in read-only memory */
+char *msg = "Hello";          /* pointer to literal — cannot modify */
+char buf[] = "Hello";         /* writable copy — can modify buf[0] */</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-strings-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-strings-4"><div id="compiler-ch15-strings-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-strings-5"><div id="compiler-ch15-strings-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-strings-6"><div id="compiler-ch15-strings-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-strings-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Capitalizing the first letter of a name</div>
+        <p class="realworld-card__text">Because strings are char arrays, individual characters are directly modifiable — you can process them character-by-character with the same index syntax as any array.</p>
+        <pre>#include &lt;ctype.h&gt;
+char name[] = "alice johnson";
+name[0] = toupper(name[0]);  /* Capitalize first letter */
+
+/* Find and capitalize letter after a space */
+for (int i = 1; name[i] != '\0'; i++) {
+    if (name[i-1] == ' ') name[i] = toupper(name[i]);
+}
+printf("%s\n", name);  /* Alice Johnson */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-strings">📋 Start Assessment — Strings in C</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-strings" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-strings">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-strings">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-strings">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-strings">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-strings"><div id="quiz-ch15-strings-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-strings"><div id="quiz-ch15-strings-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-strings"><div id="practice-ch15-strings"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-strings"><div id="compiler-ch15-strings-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 9 — NULL TERMINATOR
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-null" id="topic-ch15-null">
+    <div class="topic__header">
+      <span class="topic__number">Topic 9</span>
+      <h2 class="topic__title">The <code>\0</code> Null Terminator — How C Knows Where Strings End</h2>
+      <span class="topic__status-badge" id="badge-ch15-null">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-null-1">
+      <p class="step-label" data-step-num="1">Run this. Loop until '\0' — that is exactly how every string function works internally.</p>
+      <div id="compiler-ch15-null-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-null-2"><div id="iq-ch15-null"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-null-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>'\0'</code> is byte value 0 — every string function relies on it to know where the string ends</h3>
+        <p>The null terminator <code>'\0'</code> is a char with integer value 0. It is not a printable character — it is a sentinel value that marks the end of a string. Because <code>'\0'</code> evaluates to false in a boolean context, the common string traversal loop is <code>while (str[i])</code> or equivalently <code>while (str[i] != '\0')</code>.</p>
+        <p>If <code>'\0'</code> is missing, every string function runs past the end of the buffer — reading memory it does not own until it happens to find a zero byte somewhere. This is an extremely common bug. Always ensure your char arrays are properly null-terminated.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Manual strlen — how it works</span></div>
+        <div class="syntax-card__code">char s[] = "Hello";
+/*  s[0]='H'  s[1]='e'  s[2]='l'  s[3]='l'  s[4]='o'  s[5]='\0' */
+
+/* Count characters until '\0' */
+int len = 0;
+while (s[len] != '\0') len++;
+printf("Length: %d\n", len);   /* 5 */
+
+/* Equivalent: while (s[len]) len++; */
+/* '\0' is 0 which is false — loop exits on it */
+
+/* Write your own toupper-all */
+for (int i = 0; s[i] != '\0'; i++) {
+    if (s[i] >= 'a' && s[i] &lt;= 'z')
+        s[i] -= 32;  /* ASCII: lowercase - 32 = uppercase */
+}
+printf("%s\n", s);  /* HELLO */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Forgetting '\0' turns a char array into unreadable bytes</div>
+          <div class="callout__body">If you manually fill a char array character by character without setting the terminator, printf("%s") will run past the array printing random bytes. Always set the null terminator: <code>buf[len] = '\0';</code> after manual character-by-character construction.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch15-null-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-null-4"><div id="compiler-ch15-null-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-null-5"><div id="compiler-ch15-null-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-null-6"><div id="compiler-ch15-null-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-null-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Truncating a string — set '\0' at the desired length</div>
+        <p class="realworld-card__text">You can shorten a string in-place simply by placing a '\0' at the desired cut point — everything after it becomes invisible to string functions.</p>
+        <pre>char text[] = "Hello, World!";
+printf("Before: %s\n", text);   /* Hello, World! */
+
+text[5] = '\0';                  /* cut at index 5 */
+printf("After:  %s\n", text);   /* Hello */
+
+/* The bytes are still there in memory — just hidden
+   by the new null terminator. */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-null">📋 Start Assessment — Null Terminator</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-null" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-null">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-null">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-null">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-null">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-null"><div id="quiz-ch15-null-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-null"><div id="quiz-ch15-null-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-null"><div id="practice-ch15-null"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-null"><div id="compiler-ch15-null-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 10 — STRING INPUT
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-strinput" id="topic-ch15-strinput">
+    <div class="topic__header">
+      <span class="topic__number">Topic 10</span>
+      <h2 class="topic__title">String Input — Reading Strings from the User</h2>
+      <span class="topic__status-badge" id="badge-ch15-strinput">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-strinput-1">
+      <p class="step-label" data-step-num="1">Run this. In the browser compiler, strings are pre-set. Observe how they are declared for safe input.</p>
+      <div id="compiler-ch15-strinput-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-strinput-2"><div id="iq-ch15-strinput"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-strinput-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">scanf reads one word; fgets reads a full line — always limit the size</h3>
+        <p><code>scanf("%s", buf)</code> reads characters until whitespace — it stops at a space, so it cannot read multi-word input. It also has no built-in length limit, making it a buffer overflow risk. The safer form <code>scanf("%9s", buf)</code> limits to 9 characters (leaving room for <code>'\0'</code>).</p>
+        <p><code>fgets(buf, sizeof(buf), stdin)</code> reads an entire line including spaces, up to <code>sizeof(buf)-1</code> characters, and always adds <code>'\0'</code>. The tradeoff: it may include the newline <code>'\n'</code> at the end — strip it manually if needed. In production C, fgets is the safer choice.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">scanf vs fgets for Strings</span></div>
+        <div class="syntax-card__code">char name[50];
+
+/* scanf — stops at whitespace, risky without width limit */
+/* scanf("%s", name);       — dangerous, no length check */
+/* scanf("%49s", name);     — safer: max 49 chars + '\0' */
+
+/* fgets — reads full line, always size-limited */
+/* fgets(name, sizeof(name), stdin);  */
+/* — reads up to 49 chars + '\0', may include '\n' */
+
+/* Strip trailing newline from fgets result */
+int len = strlen(name);
+if (len > 0 && name[len-1] == '\n')
+    name[len-1] = '\0';
+
+/* In the browser environment: use a pre-set string */
+char input[] = "Hello World";   /* simulate user input */
+printf("Got: %s\n", input);
+printf("Length: %zu\n", strlen(input));</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-strinput-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-strinput-4"><div id="compiler-ch15-strinput-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-strinput-5"><div id="compiler-ch15-strinput-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-strinput-6"><div id="compiler-ch15-strinput-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-strinput-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Safe string buffer pattern</div>
+        <p class="realworld-card__text">A fixed-size buffer with a width-limited scanf is the minimum safe input pattern. Always size the buffer generously and limit the width specifier to size-1.</p>
+        <pre>#define MAX_NAME 64
+
+char name[MAX_NAME];
+/* Real program: scanf("%63s", name); */
+/* Simulated:  */ char name2[] = "JohnDoe";
+
+printf("Hello, %s!\n", name2);
+printf("Name has %zu characters\n", strlen(name2));</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-strinput">📋 Start Assessment — String Input</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-strinput" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-strinput">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-strinput">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-strinput">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-strinput">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-strinput"><div id="quiz-ch15-strinput-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-strinput"><div id="quiz-ch15-strinput-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-strinput"><div id="practice-ch15-strinput"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-strinput"><div id="compiler-ch15-strinput-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 11 — STRING FUNCTIONS (string.h)
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-strfn" id="topic-ch15-strfn">
+    <div class="topic__header">
+      <span class="topic__number">Topic 11</span>
+      <h2 class="topic__title">String Functions — <code>string.h</code></h2>
+      <span class="topic__status-badge" id="badge-ch15-strfn">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-strfn-1">
+      <p class="step-label" data-step-num="1">Run this. string.h provides the functions you use every time you work with strings in C.</p>
+      <div id="compiler-ch15-strfn-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-strfn-2"><div id="iq-ch15-strfn"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-strfn-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">string.h gives you length, copy, concatenate, and compare — all null-terminator aware</h3>
+        <p>The six most essential string functions: <code>strlen</code> (count chars before \0), <code>strcpy</code> (copy one string into another buffer), <code>strcat</code> (append to end), <code>strcmp</code> (compare lexicographically — returns 0 for equal), <code>strncpy</code>/<code>strncat</code> (length-limited safer versions). All of these scan for '\0' internally and expect properly null-terminated strings.</p>
+        <p>The <strong>n-variants</strong> (<code>strncpy</code>, <code>strncat</code>, <code>strncmp</code>) are safer: they accept a maximum length argument to prevent buffer overflows. Prefer them in production code, especially when working with user-supplied strings.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">string.h — Essential Functions</span></div>
+        <div class="syntax-card__code">#include &lt;string.h&gt;
+
+char a[] = "Hello";
+char b[20];
+
+strlen(a)              /* → 5  — character count, not including '\0' */
+strcpy(b, a)           /* b = "Hello" — copy a into b */
+strcat(b, " World")   /* b = "Hello World" — append */
+
+strcmp("abc","abc")    /* → 0   (equal) */
+strcmp("abc","abd")    /* → negative (a &lt; b) */
+strcmp("abd","abc")    /* → positive (a > b) */
+
+/* Safer n-variants — limit operations */
+strncpy(b, a, sizeof(b)-1);  /* copy at most sizeof(b)-1 chars */
+b[sizeof(b)-1] = '\0';        /* always null-terminate manually */
+
+strncat(b, a, 5);    /* append at most 5 chars */
+strncmp(a, b, 3)     /* compare first 3 chars only */</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-strfn-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-strfn-4"><div id="compiler-ch15-strfn-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-strfn-5"><div id="compiler-ch15-strfn-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-strfn-6"><div id="compiler-ch15-strfn-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-strfn-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Password validator using strcmp</div>
+        <p class="realworld-card__text"><code>strcmp</code> returning 0 means exact equality — the correct way to compare strings in C. Using <code>==</code> on char arrays compares pointers, not content.</p>
+        <pre>#include &lt;string.h&gt;
+char stored[]  = "Secret123";
+char attempt[] = "Secret123";
+
+if (strcmp(stored, attempt) == 0) {
+    printf("Access granted\n");
+} else {
+    printf("Wrong password\n");
+}
+/* NEVER use: if (stored == attempt) — compares addresses */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-strfn">📋 Start Assessment — string.h Functions</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-strfn" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-strfn">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-strfn">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-strfn">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-strfn">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-strfn"><div id="quiz-ch15-strfn-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-strfn"><div id="quiz-ch15-strfn-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-strfn"><div id="practice-ch15-strfn"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-strfn"><div id="compiler-ch15-strfn-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 12 — ARRAYS OF STRINGS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-strarr" id="topic-ch15-strarr">
+    <div class="topic__header">
+      <span class="topic__number">Topic 12</span>
+      <h2 class="topic__title">Arrays of Strings — 2D char Arrays and Pointer Arrays</h2>
+      <span class="topic__status-badge" id="badge-ch15-strarr">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-strarr-1">
+      <p class="step-label" data-step-num="1">Run this. Two patterns for holding multiple strings — a 2D char array and an array of pointers.</p>
+      <div id="compiler-ch15-strarr-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-strarr-2"><div id="iq-ch15-strarr"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-strarr-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Use a 2D char array for mutable strings; use a char* array for read-only literals</h3>
+        <p>A <strong>2D char array</strong> (<code>char names[4][20]</code>) stores up to 4 strings, each up to 19 characters + null terminator. All slots are the same size — wasted space if strings vary in length. Strings can be modified.</p>
+        <p>An <strong>array of char pointers</strong> (<code>char *days[] = {"Mon","Tue",...}</code>) stores pointers to string literals. No wasted space — each string is exactly the right size. But the strings point to read-only memory and cannot be modified in-place. Use the 2D array when you need to modify strings; use the pointer array for fixed lists.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Two Ways to Store Multiple Strings</span></div>
+        <div class="syntax-card__code">/* 2D char array — writable, fixed slot size */
+char names[4][20] = {"Alice","Bob","Carol","Dave"};
+names[0][0] = 'a';            /* writable — OK */
+printf("%s\n", names[2]);     /* Carol */
+
+/* Array of pointers — compact, read-only */
+char *days[] = {"Mon","Tue","Wed","Thu","Fri","Sat","Sun"};
+int ndays = 7;
+for (int i = 0; i &lt; ndays; i++) printf("%s\n", days[i]);
+/* days[0][0] = 'm';  — UNDEFINED: points to read-only memory */
+
+/* Access: arr[row] is the string, arr[row][col] is the char */
+printf("%c\n", names[1][0]);  /* B — first char of "Bob" */
+printf("%c\n", days[4][0]);   /* F — first char of "Fri" */</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-strarr-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-strarr-4"><div id="compiler-ch15-strarr-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-strarr-5"><div id="compiler-ch15-strarr-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-strarr-6"><div id="compiler-ch15-strarr-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-strarr-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Menu system with a string array</div>
+        <p class="realworld-card__text">A char* array of menu options is one of the most common uses of string arrays — iterate with a for loop, display with an index, and select with a comparison.</p>
+        <pre>char *menu[] = {"New Game","Load","Settings","Quit"};
+int count = 4;
+
+for (int i = 0; i &lt; count; i++)
+    printf("%d. %s\n", i+1, menu[i]);
+
+/* Output:
+   1. New Game
+   2. Load
+   3. Settings
+   4. Quit   */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-strarr">📋 Start Assessment — Arrays of Strings</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-strarr" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-strarr">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-strarr">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-strarr">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-strarr">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-strarr"><div id="quiz-ch15-strarr-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-strarr"><div id="quiz-ch15-strarr-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-strarr"><div id="practice-ch15-strarr"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-strarr"><div id="compiler-ch15-strarr-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 13 — COMMON STRING MISTAKES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-mistakes" id="topic-ch15-mistakes">
+    <div class="topic__header">
+      <span class="topic__number">Topic 13</span>
+      <h2 class="topic__title">Common String Mistakes — The Bugs Every C Programmer Makes</h2>
+      <span class="topic__status-badge" id="badge-ch15-mistakes">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch15-mistakes-1">
+      <p class="step-label" data-step-num="1">Run this. Four bugs — some crash, some silently corrupt. See which produce wrong output.</p>
+      <div id="compiler-ch15-mistakes-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch15-mistakes-2"><div id="iq-ch15-mistakes"></div></div>
+    <div class="step step--visible" data-step="3" id="step-ch15-mistakes-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">The four most common string bugs — every C programmer encounters these</h3>
+        <p><strong>1. Using == to compare strings</strong> — <code>str1 == str2</code> compares memory addresses, not content. Use <code>strcmp(str1, str2) == 0</code>.</p>
+        <p><strong>2. Buffer too small</strong> — allocating a char array one byte too short to hold the null terminator causes stack corruption. Always add 1 to the string length when sizing the buffer.</p>
+        <p><strong>3. Missing null terminator</strong> — manually filling a char array character by character without setting <code>arr[n] = '\0'</code> causes printf to run past the array.</p>
+        <p><strong>4. Copying without bounds check</strong> — <code>strcpy(dest, src)</code> with a src longer than dest overflows the buffer. Use <code>strncpy(dest, src, sizeof(dest)-1)</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Four Bugs and Their Fixes</span></div>
+        <div class="syntax-card__code">/* BUG 1: == on strings compares addresses */
+if (name == "Alice")          /* WRONG */
+if (strcmp(name,"Alice")==0)  /* CORRECT */
+
+/* BUG 2: buffer too small for null terminator */
+char s[5] = "Hello";          /* WRONG — "Hello" needs 6 bytes */
+char s[6] = "Hello";          /* CORRECT */
+
+/* BUG 3: no null terminator */
+char buf[5];
+buf[0]='H'; buf[1]='i';
+printf("%s\n", buf);          /* WRONG — no '\0' */
+buf[2] = '\0';
+printf("%s\n", buf);          /* CORRECT */
+
+/* BUG 4: unsafe strcpy */
+char small[5];
+strcpy(small, "This is too long"); /* WRONG — overflow */
+strncpy(small, "This is too long", sizeof(small)-1);
+small[sizeof(small)-1] = '\0';    /* CORRECT */</div>
+      </div>
+      <button class="btn-continue" id="step-ch15-mistakes-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch15-mistakes-4"><div id="compiler-ch15-mistakes-modify"></div></div>
+    <div class="step step--visible" data-step="5" id="step-ch15-mistakes-5"><div id="compiler-ch15-mistakes-fill"></div></div>
+    <div class="step step--visible" data-step="6" id="step-ch15-mistakes-6"><div id="compiler-ch15-mistakes-build"></div></div>
+    <div class="step step--visible" data-step="7" id="step-ch15-mistakes-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Safe string copy helper pattern</div>
+        <p class="realworld-card__text">A wrapper around strncpy that always guarantees null-termination is a standard defensive pattern in C codebases — write it once, use everywhere.</p>
+        <pre>void safeCopy(char *dest, const char *src, int destSize) {
+    strncpy(dest, src, destSize - 1);
+    dest[destSize - 1] = '\0';   /* always terminate */
+}
+
+char buf[10];
+safeCopy(buf, "This is very long", sizeof(buf));
+printf("%s\n", buf);  /* "This is " — truncated safely */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch15-mistakes">📋 Start Assessment — Common String Mistakes</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch15-mistakes" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch15-mistakes">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch15-mistakes">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch15-mistakes">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch15-mistakes">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch15-mistakes"><div id="quiz-ch15-mistakes-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch15-mistakes"><div id="quiz-ch15-mistakes-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch15-mistakes"><div id="practice-ch15-mistakes"></div></div>
+        <div class="assessment-section" id="tab-debug-ch15-mistakes"><div id="compiler-ch15-mistakes-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 15 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch15-mastery" id="topic-ch15-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 15 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply every Chapter 15 concept — arrays, 2D arrays, strings, and string functions — in one complete program.</p>
+      <div id="compiler-ch15-mastery"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER COMPLETE -->
+  <div id="ch15-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 15 Complete</div>
+      <p class="chapter-complete__message">
+        You can declare, initialize, iterate, and process both integer arrays and char strings —
+        including 2D arrays and arrays of strings. You know where the null terminator lives and
+        which string functions depend on it. Chapter 16 unlocks pointers — the mechanism that
+        makes all of C's power available to you directly.
+      </p>
+      <button class="btn-continue" id="ch15-next-btn">Start Chapter 16 — Pointers →</button>
+    </div>
+  </div>
+
+</div>

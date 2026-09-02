@@ -1,0 +1,637 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch2-data-types/ch2.html
+     Chapter 2: Data Types
+     8 topics · Full 7-step active learning structure per topic
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <!-- Chapter Header -->
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 2</div>
+    <h1 class="chapter-header__title">Data Types</h1>
+    <p class="chapter-header__subtitle">
+      Every variable in C has a type that determines how much memory it uses and what values it can hold.
+      This chapter teaches you to choose the right type — and understand what the compiler is actually doing with your data.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">8 Topics</span>
+      <span class="chapter-badge">short · int · long · float · double · char · sizeof</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — PRIMITIVE DATA TYPES OVERVIEW
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch2-overview" id="topic-ch2-overview">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">Primitive Data Types Overview</h2>
+      <span class="topic__status-badge" id="badge-ch2-overview">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch2-overview-1">
+      <p class="step-label" data-step-num="1">Compile and run this — every primitive type in one program.</p>
+      <div id="compiler-ch2-overview-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch2-overview-2">
+      <div id="iq-ch2-overview"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch2-overview-3">
+      <div class="explanation-card">
+        <p>C has four <em>primitive data types</em> that store values directly: <strong>int</strong> (whole numbers), <strong>float</strong> (decimal, ~7 digits precision), <strong>double</strong> (decimal, ~15 digits precision), and <strong>char</strong> (single character or ASCII code).</p>
+        <p>There is also <strong>void</strong> — not a variable type, but a keyword meaning "no type." It is used for functions that return nothing.</p>
+        <p>Every other type in C is built from these four primitives. Choosing the right one is a skill you will develop over time.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">The Four Primitive Types</span></div>
+        <div class="syntax-card__code">int    count    = 42;      /* whole number     — 4 bytes  */
+float  price    = 9.99;    /* decimal ~7 sig digits       */
+double latitude = 10.3157; /* decimal ~15 sig digits      */
+char   grade    = 'A';     /* single character — 1 byte   */</div>
+      </div>
+      <button class="btn-continue" id="step-ch2-overview-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch2-overview-4">
+      <div id="compiler-ch2-overview-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch2-overview-5">
+      <div id="compiler-ch2-overview-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch2-overview-6">
+      <div id="compiler-ch2-overview-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch2-overview-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Mixed types in real programs</div>
+        <p class="realworld-card__text">Real programs mix types constantly. A student record might use int for ID, double for GPA, and char for a grade category.</p>
+        <pre>int    student_id  = 20241001;
+double gpa         = 3.75;
+char   honor_level = 'L';   /* L = Latin honors */
+printf("ID: %d  GPA: %.2f  Level: %c\n", student_id, gpa, honor_level);</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch2-overview">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Data Types Overview</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"     data-topic="ch2-overview">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch2-overview">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch2-overview">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch2-overview"><div id="quiz-ch2-overview-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch2-overview"><div id="quiz-ch2-overview-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch2-overview"><div id="compiler-ch2-overview-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — INTEGER TYPES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch2-integers" id="topic-ch2-integers">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Integer Types — <code>short</code>, <code>int</code>, <code>long</code>, <code>long long</code></h2>
+      <span class="topic__status-badge" id="badge-ch2-integers">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch2-integers-1">
+      <p class="step-label" data-step-num="1">Run this — all four integer types. Note the different sizes and ranges.</p>
+      <div id="compiler-ch2-integers-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch2-integers-2">
+      <div id="iq-ch2-integers"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch2-integers-3">
+      <div class="explanation-card">
+        <p>C has four integer types, all storing whole numbers but with different memory sizes and ranges. <strong>short</strong> uses 2 bytes (±32,767). <strong>int</strong> uses 4 bytes (~±2 billion). <strong>long</strong> uses 4 or 8 bytes depending on platform. <strong>long long</strong> always uses 8 bytes (~±9.2 × 10¹⁸).</p>
+        <p>Use the type that fits your data — no bigger than necessary, no smaller than the value requires. For most everyday counting and indexing, <code>int</code> is the right choice.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Integer Type Summary</span></div>
+        <div class="syntax-card__code">short  s  = 32000;          /* 2 bytes  — up to ±32,767      */
+int    i  = 2000000000;     /* 4 bytes  — up to ~±2 billion  */
+long   l  = 2000000000L;    /* 4-8 bytes — use L suffix      */
+long long ll = 9000000000LL; /* 8 bytes — use LL suffix       */
+
+printf("%hd  %d  %ld  %lld\n", s, i, l, ll);</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Format Specifiers for Integer Types</div>
+          <div class="callout__body"><code>%hd</code> for short · <code>%d</code> for int · <code>%ld</code> for long · <code>%lld</code> for long long. Using the wrong specifier for the type may produce incorrect output.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch2-integers-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch2-integers-4">
+      <div id="compiler-ch2-integers-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch2-integers-5">
+      <div id="compiler-ch2-integers-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch2-integers-6">
+      <div id="compiler-ch2-integers-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch2-integers-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Integer types in real systems</div>
+        <p class="realworld-card__text">File sizes need long long. Loop counters need int. Network port numbers fit in short (0–65535). Timestamps since 1970 need long long.</p>
+        <pre>short  port_number = 8080;
+int    loop_count  = 0;
+long long file_size  = 4294967296LL; /* 4 GB in bytes */
+long long timestamp  = 1704067200LL; /* Jan 1, 2024 UTC */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch2-integers">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Integer Types</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict"  data-topic="ch2-integers">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"      data-topic="ch2-integers">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch2-integers">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch2-integers"><div id="quiz-ch2-integers-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch2-integers"><div id="quiz-ch2-integers-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch2-integers"><div id="compiler-ch2-integers-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — FLOATING POINT TYPES
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch2-floats" id="topic-ch2-floats">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Floating Point Types — Precision Matters</h2>
+      <span class="topic__status-badge" id="badge-ch2-floats">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch2-floats-1">
+      <p class="step-label" data-step-num="1">Run this — float and double differ in precision. The difference shows in long decimals.</p>
+      <div id="compiler-ch2-floats-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch2-floats-2">
+      <div id="iq-ch2-floats"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch2-floats-3">
+      <div class="explanation-card">
+        <p><strong>float</strong> stores decimal numbers in 4 bytes with about 6–7 significant digits. <strong>double</strong> stores in 8 bytes with about 15–17 digits. <strong>long double</strong> provides even more precision on some platforms.</p>
+        <p>The issue is floating-point representation — not all decimal numbers can be stored exactly in binary. <code>0.1 + 0.2</code> does not equal exactly <code>0.3</code> in any floating-point type. This is a fundamental property of how computers store decimals.</p>
+        <p>Prefer <code>double</code> for almost everything. Use <code>float</code> only when memory is a concern.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">float vs double</span></div>
+        <div class="syntax-card__code">float  f = 3.14159265358979f;  /* f suffix = float literal */
+double d = 3.14159265358979;   /* no suffix = double literal */
+
+printf("float:  %.10f\n", f); /* ~7 digits accurate  */
+printf("double: %.10f\n", d); /* ~15 digits accurate */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Common Mistake — Comparing Floats with ==</div>
+          <div class="callout__body">Never write <code>if (x == 0.1)</code> for a float or double. Floating-point numbers are approximations. <code>0.1</code> stored in binary is never exactly <code>0.1</code>. Instead, check if two values are close: <code>if (fabs(x - 0.1) &lt; 0.0001)</code>.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch2-floats-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch2-floats-4">
+      <div id="compiler-ch2-floats-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch2-floats-5">
+      <div id="compiler-ch2-floats-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch2-floats-6">
+      <div id="compiler-ch2-floats-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch2-floats-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 double in financial and scientific code</div>
+        <p class="realworld-card__text">GPS coordinates need double precision. A difference of 1 in the 8th decimal place of latitude is about 1 millimeter on the ground.</p>
+        <pre>double latitude  = 10.31574800;  /* Manolo Fortich */
+double longitude = 124.98765432;
+double altitude  = 704.5;        /* meters above sea level */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch2-floats">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Floating Point Types</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch2-floats">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"     data-topic="ch2-floats">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch2-floats">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch2-floats"><div id="quiz-ch2-floats-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch2-floats"><div id="quiz-ch2-floats-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch2-floats"><div id="compiler-ch2-floats-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — char TYPE AND ASCII
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch2-char" id="topic-ch2-char">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title"><code>char</code> Type — Characters and ASCII Values</h2>
+      <span class="topic__status-badge" id="badge-ch2-char">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch2-char-1">
+      <p class="step-label" data-step-num="1">Run this — char stores a number. The ASCII table maps numbers to characters.</p>
+      <div id="compiler-ch2-char-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch2-char-2">
+      <div id="iq-ch2-char"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch2-char-3">
+      <div class="explanation-card">
+        <p>A <strong>char</strong> is just a 1-byte integer. C stores 'A' as the number 65, 'B' as 66, 'a' as 97, '0' as 48. This mapping is the <em>ASCII table</em> — 128 standard character codes.</p>
+        <p>Because char is an integer, you can do arithmetic on it. <code>'A' + 1</code> gives <code>'B'</code> (66). <code>'a' - 'A'</code> gives 32 — the difference between upper and lowercase letters.</p>
+        <p>Use <code>%c</code> to print the character, <code>%d</code> to print its ASCII number.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">ASCII Key Values to Know</span></div>
+        <div class="syntax-card__code">'A' = 65   'Z' = 90     (uppercase: 65–90)
+'a' = 97   'z' = 122    (lowercase: 97–122)
+'0' = 48   '9' = 57     (digit chars: 48–57)
+' ' = 32                 (space)
+'\n'= 10                 (newline)
+
+/* Arithmetic works on chars: */
+char upper = 'A';
+char lower = upper + 32;   /* 'A' + 32 = 'a' */
+printf("%c\n", lower);     /* prints: a */</div>
+      </div>
+      <button class="btn-continue" id="step-ch2-char-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch2-char-4">
+      <div id="compiler-ch2-char-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch2-char-5">
+      <div id="compiler-ch2-char-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch2-char-6">
+      <div id="compiler-ch2-char-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch2-char-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 char arithmetic in real code</div>
+        <p class="realworld-card__text">Converting between uppercase and lowercase uses ASCII arithmetic. Checking if a character is a digit or letter uses range comparisons.</p>
+        <pre>char c = 'H';
+char lower = c + 32;     /* 'H' → 'h' */
+int is_upper = (c >= 'A' && c <= 'Z');  /* 1 if uppercase */
+int digit_val = '7' - '0';  /* converts char '7' to int 7 */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch2-char">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — char &amp; ASCII</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch2-char">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"     data-topic="ch2-char">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch2-char">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch2-char">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch2-char"><div id="quiz-ch2-char-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch2-char"><div id="quiz-ch2-char-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch2-char"><div id="practice-ch2-char"></div></div>
+        <div class="assessment-section" id="tab-debug-ch2-char"><div id="compiler-ch2-char-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — sizeof() OPERATOR
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch2-sizeof" id="topic-ch2-sizeof">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">The <code>sizeof()</code> Operator</h2>
+      <span class="topic__status-badge" id="badge-ch2-sizeof">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch2-sizeof-1">
+      <p class="step-label" data-step-num="1">Run this — sizeof() tells you exactly how many bytes each type uses on your system.</p>
+      <div id="compiler-ch2-sizeof-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch2-sizeof-2">
+      <div id="iq-ch2-sizeof"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch2-sizeof-3">
+      <div class="explanation-card">
+        <p><code>sizeof()</code> returns the size in <em>bytes</em> of a type or variable at compile time. It is not a function — it is a built-in operator, like <code>+</code> or <code>*</code>. You can pass it a type name or a variable.</p>
+        <p>The result type is <code>size_t</code>, an unsigned integer. Use <code>%zu</code> to print it correctly, or cast to int with <code>%d</code>.</p>
+        <p><code>sizeof()</code> is useful when allocating memory, writing to binary files, or verifying assumptions about platform-specific type sizes.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">sizeof() Usage</span></div>
+        <div class="syntax-card__code">sizeof(int)     /* size of the int type   */
+sizeof(double)  /* size of the double type */
+sizeof(x)       /* size of variable x      */
+
+/* Print with %zu (correct) or cast to int */
+printf("int: %zu bytes\n", sizeof(int));
+printf("int: %d bytes\n", (int)sizeof(int));</div>
+      </div>
+      <button class="btn-continue" id="step-ch2-sizeof-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch2-sizeof-4">
+      <div id="compiler-ch2-sizeof-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch2-sizeof-5">
+      <div id="compiler-ch2-sizeof-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch2-sizeof-6">
+      <div id="compiler-ch2-sizeof-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch2-sizeof-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 sizeof() in memory allocation</div>
+        <p class="realworld-card__text">When allocating arrays dynamically, sizeof() ensures you allocate the right amount regardless of platform. This is how professional C code avoids hard-coding byte sizes.</p>
+        <pre>/* Allocate space for 100 ints — works on any platform */
+int *arr = malloc(100 * sizeof(int));
+/* Not: malloc(100 * 4) — that hardcodes 4 bytes */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch2-sizeof">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — sizeof()</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch2-sizeof">Output Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq"     data-topic="ch2-sizeof">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch2-sizeof">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch2-sizeof"><div id="quiz-ch2-sizeof-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch2-sizeof"><div id="quiz-ch2-sizeof-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch2-sizeof"><div id="compiler-ch2-sizeof-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 6 — SIGNED vs UNSIGNED
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch2-signedness" id="topic-ch2-signedness">
+    <div class="topic__header">
+      <span class="topic__number">Topic 6</span>
+      <h2 class="topic__title">Signed vs Unsigned Types</h2>
+      <span class="topic__status-badge" id="badge-ch2-signedness">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch2-signedness-1">
+      <p class="step-label" data-step-num="1">Run this — unsigned int can hold twice the positive range but cannot go negative.</p>
+      <div id="compiler-ch2-signedness-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch2-signedness-2">
+      <div id="iq-ch2-signedness"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch2-signedness-3">
+      <div class="explanation-card">
+        <p>Every integer type can be <strong>signed</strong> (default — can be negative) or <strong>unsigned</strong> (can only be 0 or positive, but twice the max value).</p>
+        <p>A signed int holds −2,147,483,648 to +2,147,483,647. An unsigned int holds 0 to 4,294,967,295 — double the positive range, because the bit used for the sign is now used for magnitude.</p>
+        <p>Use <code>unsigned</code> for values that are logically never negative: counts, sizes, memory addresses. Use <code>%u</code> to print unsigned int.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Signed vs Unsigned</span></div>
+        <div class="syntax-card__code">int           x = -500;      /* signed  — can be negative */
+unsigned int  y = 4000000000U; /* unsigned — U suffix      */
+
+signed char   sc = -128;     /* −128 to 127               */
+unsigned char uc = 255;      /* 0 to 255                  */
+
+printf("%d  %u\n", x, y);
+printf("%d  %u\n", sc, uc);</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Common Mistake — Unsigned Wrap-Around</div>
+          <div class="callout__body">If you subtract from an unsigned and go below 0, it <strong>wraps around</strong> to a huge positive number. <code>unsigned int x = 0; x = x - 1;</code> gives 4,294,967,295, not −1. Never compare an unsigned value against a negative number.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch2-signedness-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch2-signedness-4">
+      <div id="compiler-ch2-signedness-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch2-signedness-5">
+      <div id="compiler-ch2-signedness-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch2-signedness-6">
+      <div id="compiler-ch2-signedness-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch2-signedness-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 unsigned in systems programming</div>
+        <p class="realworld-card__text">File sizes, memory addresses, array indices, pixel values, and byte counts are all logically non-negative — use unsigned for them.</p>
+        <pre>unsigned int  pixel_count = 1920 * 1080;  /* 2,073,600 */
+unsigned char red   = 255;
+unsigned char green = 128;
+unsigned char blue  = 0;
+/* RGB: no color component is ever negative */</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch2-signedness">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Signed vs Unsigned</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"   data-topic="ch2-signedness">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch2-signedness">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch2-signedness">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch2-signedness"><div id="quiz-ch2-signedness-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch2-signedness"><div id="quiz-ch2-signedness-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch2-signedness"><div id="compiler-ch2-signedness-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 7 — TYPE LIMITS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch2-limits" id="topic-ch2-limits">
+    <div class="topic__header">
+      <span class="topic__number">Topic 7</span>
+      <h2 class="topic__title">Type Limits — <code>&lt;limits.h&gt;</code></h2>
+      <span class="topic__status-badge" id="badge-ch2-limits">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch2-limits-1">
+      <p class="step-label" data-step-num="1">Run this — limits.h gives you the exact max and min values for every integer type.</p>
+      <div id="compiler-ch2-limits-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch2-limits-2">
+      <div id="iq-ch2-limits"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch2-limits-3">
+      <div class="explanation-card">
+        <p>The header <code>&lt;limits.h&gt;</code> defines constants for the minimum and maximum values of all integer types. <strong>INT_MAX</strong>, <strong>INT_MIN</strong>, <strong>UINT_MAX</strong>, <strong>SHRT_MAX</strong>, <strong>LLONG_MAX</strong> — these let you write portable code that never hardcodes platform-specific values.</p>
+        <p>What happens when you exceed the maximum? <em>Integer overflow</em> — the value wraps around. For signed int, going past INT_MAX gives INT_MIN. This is undefined behavior in C and the source of serious bugs.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Key Constants from limits.h</span></div>
+        <div class="syntax-card__code">#include &lt;limits.h&gt;
+
+INT_MAX   =  2147483647    /* max signed int   */
+INT_MIN   = -2147483648    /* min signed int   */
+UINT_MAX  =  4294967295    /* max unsigned int */
+SHRT_MAX  =  32767         /* max short        */
+LLONG_MAX =  9223372036854775807  /* max long long */
+CHAR_MAX  =  127           /* max signed char  */</div>
+      </div>
+      <button class="btn-continue" id="step-ch2-limits-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch2-limits-4">
+      <div id="compiler-ch2-limits-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch2-limits-5">
+      <div id="compiler-ch2-limits-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch2-limits-6">
+      <div id="compiler-ch2-limits-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch2-limits-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 limits.h prevents overflow bugs</div>
+        <p class="realworld-card__text">Before adding two ints, production code checks if the result would overflow — a critical safety pattern in financial and embedded systems.</p>
+        <pre>#include &lt;limits.h&gt;
+int safe_add(int a, int b) {
+    if (a > 0 && b > INT_MAX - a) return INT_MAX; /* overflow */
+    if (a < 0 && b < INT_MIN - a) return INT_MIN; /* underflow */
+    return a + b;
+}</pre>
+      </div>
+    </div>
+    <div class="assessment-block" data-topic="ch2-limits">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Type Limits</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"     data-topic="ch2-limits">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch2-limits">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"   data-topic="ch2-limits">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch2-limits"><div id="quiz-ch2-limits-mcq"></div></div>
+        <div class="assessment-section" id="tab-identify-ch2-limits"><div id="quiz-ch2-limits-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch2-limits"><div id="compiler-ch2-limits-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 8 — PRACTICAL TYPE SELECTION
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch2-selection" id="topic-ch2-selection">
+    <div class="topic__header">
+      <span class="topic__number">Topic 8</span>
+      <h2 class="topic__title">Practical Type Selection — Choosing the Right Type</h2>
+      <span class="topic__status-badge" id="badge-ch2-selection">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch2-selection-1">
+      <p class="step-label" data-step-num="1">Run this — a program that stores real-world data. See which types match which data.</p>
+      <div id="compiler-ch2-selection-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch2-selection-2">
+      <div id="iq-ch2-selection"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch2-selection-3">
+      <div class="explanation-card">
+        <p>Type selection comes down to three questions: <strong>Does the value have a decimal part?</strong> (use double) <strong>Can it be negative?</strong> (use signed) <strong>How large can it get?</strong> (choose int vs long long).</p>
+        <p>Default rules: use <code>int</code> for counting and indexing, <code>double</code> for all math with decimals, <code>char</code> for single characters, <code>unsigned</code> only when the value is logically non-negative.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Type Selection Quick Reference</span></div>
+        <div class="syntax-card__code">/* Data                    → Best type       */
+int    student_count  = 45;     /* count/index  */
+double average_score  = 87.5;   /* math result  */
+char   letter_grade   = 'B';    /* single char  */
+long long population  = 8000000000LL; /* huge num */
+unsigned int  bytes   = 4096U;  /* never negative */</div>
+      </div>
+      <button class="btn-continue" id="step-ch2-selection-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch2-selection-4">
+      <div id="compiler-ch2-selection-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch2-selection-5">
+      <div id="compiler-ch2-selection-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch2-selection-6">
+      <div id="compiler-ch2-selection-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch2-selection-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Type selection in a student system</div>
+        <p class="realworld-card__text">A complete student record shows all type choices in context. Each type is chosen for a reason — never arbitrarily.</p>
+        <pre>int          student_id    = 20241001;  /* count       */
+char         last_initial  = 'D';       /* one char    */
+double       gpa           = 3.875;     /* decimal     */
+unsigned int credits_earned = 120;      /* non-negative */
+char         academic_stand = 'G';      /* Good standing */</pre>
+      </div>
+    </div>
+
+    <!-- Chapter 2 Mastery Challenge -->
+    <div class="assessment-block" data-topic="ch2-selection">
+      <div class="assessment-block__header">
+        <div><div class="assessment-block__title">Assessment — Type Selection</div></div>
+      </div>
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq"     data-topic="ch2-selection">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch2-selection">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug"    data-topic="ch2-selection">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch2-selection"><div id="quiz-ch2-selection-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch2-selection"><div id="practice-ch2-selection"></div></div>
+        <div class="assessment-section" id="tab-debug-ch2-selection"><div id="compiler-ch2-selection-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 2 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch2-mastery" id="topic-ch2-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 2 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply everything from Chapter 2 in one program.</p>
+      <div id="compiler-ch2-mastery"></div>
+    </div>
+  </section>
+
+  <!-- Chapter complete -->
+  <div id="ch2-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 2 Complete</div>
+      <p class="chapter-complete__message">You know all primitive types, their sizes, their limits, and how to choose between them. Chapter 3 covers input and output — you'll learn printf() deeply and read user input with scanf().</p>
+      <button class="btn-continue" id="ch2-next-btn">Start Chapter 3 — Input &amp; Output →</button>
+    </div>
+  </div>
+
+</div>

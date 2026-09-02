@@ -1,0 +1,570 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch12-break-continue/ch12.html
+     Chapter 12: Break & Continue
+     5 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 12</div>
+    <h1 class="chapter-header__title">Break &amp; Continue</h1>
+    <p class="chapter-header__subtitle">
+      <code>break</code> and <code>continue</code> give you fine-grained control over what a loop does on any given iteration.
+      Instead of waiting for the condition to expire naturally, you decide exactly when to exit early or skip ahead —
+      two tools that turn rigid loops into precise, programmable logic.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">5 Topics</span>
+      <span class="chapter-badge">break · continue · nested · filtering · patterns</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 1 — BREAK
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch12-break" id="topic-ch12-break">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">The <code>break</code> Statement — Exit Immediately</h2>
+      <span class="topic__status-badge" id="badge-ch12-break">In Progress</span>
+    </div>
+
+    <!-- Step 1: Explore -->
+    <div class="step step--visible" data-step="1" id="step-ch12-break-1">
+      <p class="step-label" data-step-num="1">Run this. The loop was set for 10 iterations — watch how many actually run.</p>
+      <div id="compiler-ch12-break-explore"></div>
+    </div>
+
+    <!-- Step 2: Instant question -->
+    <div class="step step--visible" data-step="2" id="step-ch12-break-2">
+      <div id="iq-ch12-break"></div>
+    </div>
+
+    <!-- Step 3: Explanation -->
+    <div class="step step--visible" data-step="3" id="step-ch12-break-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>break</code> exits the loop immediately — no remaining iterations run</h3>
+        <p>When C encounters <code>break</code> inside a loop body, it immediately jumps to the first statement <em>after</em> the loop's closing brace. The condition is never checked again. The update expression never runs. The remaining iterations are cancelled completely.</p>
+        <p><code>break</code> is most useful for <strong>search loops</strong> — when you find what you are looking for, there is no reason to keep checking. It is also the mechanism that exits <code>switch</code> cases and <code>while(1)</code> infinite loops.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">break — Exit Pattern</span></div>
+        <div class="syntax-card__code">for (int i = 0; i &lt; 100; i++) {
+    if (/* found what we need */) {
+        break;          /* exit loop immediately */
+    }
+    /* this only runs if break was not hit */
+}
+/* execution resumes here after break */
+
+/* Common use: search */
+int found = -1;
+for (int i = 0; i &lt; size; i++) {
+    if (arr[i] == target) {
+        found = i;
+        break;          /* no point checking further */
+    }
+}</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">break only exits one loop</div>
+          <div class="callout__body">If you are in a nested loop, <code>break</code> only exits the innermost one. The outer loop continues normally. To exit multiple levels at once, you need a flag variable or a different approach — Topic 4 covers this in detail.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch12-break-3-continue">Got it — continue →</button>
+    </div>
+
+    <!-- Step 4: Modify -->
+    <div class="step step--visible" data-step="4" id="step-ch12-break-4">
+      <div id="compiler-ch12-break-modify"></div>
+    </div>
+
+    <!-- Step 5: Fill -->
+    <div class="step step--visible" data-step="5" id="step-ch12-break-5">
+      <div id="compiler-ch12-break-fill"></div>
+    </div>
+
+    <!-- Step 6: Build -->
+    <div class="step step--visible" data-step="6" id="step-ch12-break-6">
+      <div id="compiler-ch12-break-build"></div>
+    </div>
+
+    <!-- Step 7: Real-world -->
+    <div class="step step--visible" data-step="7" id="step-ch12-break-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Input validation — stop processing on bad data</div>
+        <p class="realworld-card__text">In data processing, <code>break</code> lets a loop stop as soon as it encounters an invalid value, preventing further computation on corrupted input.</p>
+        <pre>int data[8] = {12, 45, -1, 33, 7, 99, 4, 22};
+int valid_count = 0;
+
+for (int i = 0; i &lt; 8; i++) {
+    if (data[i] &lt; 0) {
+        printf("Invalid value at index %d\n", i);
+        break;          /* stop processing */
+    }
+    valid_count++;
+}
+
+printf("Valid entries: %d\n", valid_count);</pre>
+      </div>
+    </div>
+
+    <!-- Assessment -->
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch12-break">📋 Start Assessment — break</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch12-break" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch12-break">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch12-break">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch12-break">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch12-break">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch12-break"><div id="quiz-ch12-break-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch12-break"><div id="quiz-ch12-break-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch12-break"><div id="practice-ch12-break"></div></div>
+        <div class="assessment-section" id="tab-debug-ch12-break"><div id="compiler-ch12-break-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 2 — CONTINUE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch12-continue" id="topic-ch12-continue">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">The <code>continue</code> Statement — Skip This Iteration</h2>
+      <span class="topic__status-badge" id="badge-ch12-continue">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch12-continue-1">
+      <p class="step-label" data-step-num="1">Run this. The loop runs 10 times but some iterations are silent. Observe which ones print.</p>
+      <div id="compiler-ch12-continue-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch12-continue-2">
+      <div id="iq-ch12-continue"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch12-continue-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>continue</code> skips the rest of this iteration — the loop still runs</h3>
+        <p>When C encounters <code>continue</code> inside a loop body, it skips all remaining statements in that iteration and jumps directly to the update expression (in a <code>for</code> loop) or back to the condition check (in a <code>while</code> loop). The loop <em>does not exit</em> — it just skips the current pass and continues with the next.</p>
+        <p>This makes <code>continue</code> ideal for <strong>filtering</strong> — processing only elements that meet a condition while ignoring the rest, without breaking the loop's structure.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">continue — Skip Pattern</span></div>
+        <div class="syntax-card__code">for (int i = 0; i &lt; 10; i++) {
+    if (/* skip this one */) {
+        continue;       /* jumps to i++ then condition check */
+    }
+    /* only runs when continue was NOT hit */
+    printf("%d\n", i);
+}
+
+/* Filter pattern — process only qualifying elements */
+for (int i = 1; i &lt;= 20; i++) {
+    if (i % 2 == 0) continue;  /* skip evens */
+    printf("%d is odd\n", i);  /* only runs for odds */
+}</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">continue in while loops — update must come before continue</div>
+          <div class="callout__body">In a <code>while</code> loop, the update (e.g. <code>i++</code>) is inside the body. If <code>continue</code> fires before the update, the counter never increments — causing an infinite loop. Always write the update <em>before</em> calling <code>continue</code> in a while loop body.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch12-continue-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch12-continue-4">
+      <div id="compiler-ch12-continue-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch12-continue-5">
+      <div id="compiler-ch12-continue-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch12-continue-6">
+      <div id="compiler-ch12-continue-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch12-continue-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Skipping invalid records in a dataset</div>
+        <p class="realworld-card__text"><code>continue</code> is how data pipelines skip corrupted or out-of-range entries without stopping the entire batch — the processing continues on the remaining valid records.</p>
+        <pre>int readings[10] = {22, -99, 18, 255, 31, -1, 27, 19, 14, 300};
+int valid_sum = 0, valid_count = 0;
+
+for (int i = 0; i &lt; 10; i++) {
+    if (readings[i] &lt; 0 || readings[i] &gt; 100) {
+        continue;       /* skip invalid sensor readings */
+    }
+    valid_sum += readings[i];
+    valid_count++;
+}
+
+printf("Average: %d\n", valid_sum / valid_count);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch12-continue">📋 Start Assessment — continue</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch12-continue" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch12-continue">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch12-continue">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch12-continue">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch12-continue">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch12-continue"><div id="quiz-ch12-continue-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch12-continue"><div id="quiz-ch12-continue-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch12-continue"><div id="practice-ch12-continue"></div></div>
+        <div class="assessment-section" id="tab-debug-ch12-continue"><div id="compiler-ch12-continue-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 3 — BREAK AND CONTINUE TOGETHER
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch12-together" id="topic-ch12-together">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title"><code>break</code> and <code>continue</code> Together</h2>
+      <span class="topic__status-badge" id="badge-ch12-together">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch12-together-1">
+      <p class="step-label" data-step-num="1">Run this. Both keywords appear in the same loop — trace exactly what each one does.</p>
+      <div id="compiler-ch12-together-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch12-together-2">
+      <div id="iq-ch12-together"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch12-together-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">break stops — continue skips. They are opposites with different scopes</h3>
+        <p><code>continue</code> affects only the <em>current iteration</em> — it skips the rest of this pass, then the loop continues normally. <code>break</code> affects the <em>entire loop</em> — it terminates all remaining iterations permanently. Both apply to the innermost enclosing loop only.</p>
+        <p>Used together: <code>continue</code> filters which elements you process, while <code>break</code> determines when you stop. A common pattern is: skip certain values with <code>continue</code>, and <code>break</code> when a stopping condition is met.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">break vs continue — Side by Side</span></div>
+        <div class="syntax-card__code">/* Using both: skip evens, stop at first multiple of 9 */
+for (int i = 1; i &lt;= 20; i++) {
+
+    if (i % 2 == 0) continue;  /* skip even numbers entirely */
+
+    if (i % 9 == 0) {
+        printf("Multiple of 9 found: %d\n", i);
+        break;                  /* done — stop the loop */
+    }
+
+    printf("%d\n", i);          /* prints odd non-multiples of 9 */
+}
+
+/* continue → loop goes on, just skips remaining body for this i */
+/* break    → loop ends, nothing after this executes               */</div>
+      </div>
+      <button class="btn-continue" id="step-ch12-together-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch12-together-4">
+      <div id="compiler-ch12-together-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch12-together-5">
+      <div id="compiler-ch12-together-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch12-together-6">
+      <div id="compiler-ch12-together-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch12-together-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Scanning a list — skip irrelevant, stop on match</div>
+        <p class="realworld-card__text">Many search routines combine both: <code>continue</code> to bypass entries that cannot be the answer, and <code>break</code> once the target is confirmed — minimizing wasted work.</p>
+        <pre>int prices[8] = {50, 0, 120, 0, 85, 200, 0, 99};
+int budget = 100, best = -1;
+
+for (int i = 0; i &lt; 8; i++) {
+    if (prices[i] == 0) continue;    /* skip unavailable */
+    if (prices[i] &gt; budget) continue; /* skip over budget */
+    best = prices[i];
+    break;                            /* first match is enough */
+}
+
+printf("Best price found: %d\n", best);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch12-together">📋 Start Assessment — break &amp; continue Together</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch12-together" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch12-together">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch12-together">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch12-together">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch12-together">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch12-together"><div id="quiz-ch12-together-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch12-together"><div id="quiz-ch12-together-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch12-together"><div id="practice-ch12-together"></div></div>
+        <div class="assessment-section" id="tab-debug-ch12-together"><div id="compiler-ch12-together-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 4 — BREAK IN NESTED LOOPS
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch12-nested" id="topic-ch12-nested">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title"><code>break</code> in Nested Loops — Only the Innermost</h2>
+      <span class="topic__status-badge" id="badge-ch12-nested">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch12-nested-1">
+      <p class="step-label" data-step-num="1">Run this nested loop with break. Count which rows complete and which terminate early.</p>
+      <div id="compiler-ch12-nested-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch12-nested-2">
+      <div id="iq-ch12-nested"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch12-nested-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title"><code>break</code> only exits one loop — the innermost one that contains it</h3>
+        <p>In nested loops, <code>break</code> only exits the loop whose body directly contains the <code>break</code> statement. The outer loop does not know <code>break</code> fired — it continues its next iteration normally, which re-enters the inner loop fresh.</p>
+        <p>To exit multiple levels at once, use a <strong>flag variable</strong>: set a boolean flag inside the inner loop, check it in the outer loop's condition, and break both. This is the standard C pattern for multi-level exits since C has no labeled break.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Breaking Multiple Levels — Flag Pattern</span></div>
+        <div class="syntax-card__code">/* break only exits inner loop */
+for (int r = 0; r &lt; 3; r++) {
+    for (int c = 0; c &lt; 5; c++) {
+        if (c == 2) break;   /* only inner exits — outer keeps running */
+    }
+    printf("Row %d still runs\n", r);  /* prints 3 times */
+}
+
+/* Flag pattern to exit both loops */
+int done = 0;
+for (int r = 0; r &lt; 3 &amp;&amp; !done; r++) {
+    for (int c = 0; c &lt; 5; c++) {
+        if (r == 1 &amp;&amp; c == 2) { done = 1; break; }
+    }
+}
+printf("Stopped at row 1, col 2\n");</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">C has no labeled break — use a flag variable</div>
+          <div class="callout__body">Some languages like Java have <code>break label;</code> to exit specific outer loops. C does not. The idiomatic C solution is a flag: <code>int found = 0;</code> set inside the inner loop, then check <code>&amp;&amp; !found</code> in the outer loop condition. Clean and readable.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch12-nested-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch12-nested-4">
+      <div id="compiler-ch12-nested-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch12-nested-5">
+      <div id="compiler-ch12-nested-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch12-nested-6">
+      <div id="compiler-ch12-nested-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch12-nested-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 2D grid search — finding a target cell</div>
+        <p class="realworld-card__text">Searching a 2D array for a specific value uses a flag to break both loops once the cell is found — the row/column indices survive for use after the loop.</p>
+        <pre>int grid[3][4] = {
+    {2,  7, 14,  1},
+    {9, 99,  3, 11},
+    {6,  4, 18,  5}
+};
+int target = 99, tr = -1, tc = -1, found = 0;
+
+for (int r = 0; r &lt; 3 &amp;&amp; !found; r++) {
+    for (int c = 0; c &lt; 4; c++) {
+        if (grid[r][c] == target) {
+            tr = r; tc = c; found = 1; break;
+        }
+    }
+}
+printf("Found at [%d][%d]\n", tr, tc);  /* [1][1] */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch12-nested">📋 Start Assessment — break in Nested Loops</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch12-nested" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch12-nested">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch12-nested">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch12-nested">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch12-nested">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch12-nested"><div id="quiz-ch12-nested-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch12-nested"><div id="quiz-ch12-nested-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch12-nested"><div id="practice-ch12-nested"></div></div>
+        <div class="assessment-section" id="tab-debug-ch12-nested"><div id="compiler-ch12-nested-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       TOPIC 5 — PATTERNS AND FILTERING
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch12-patterns" id="topic-ch12-patterns">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">Filtering Patterns — Real Uses of break &amp; continue</h2>
+      <span class="topic__status-badge" id="badge-ch12-patterns">In Progress</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch12-patterns-1">
+      <p class="step-label" data-step-num="1">Run this. It uses both break and continue to process a list — notice how few iterations actually do the main work.</p>
+      <div id="compiler-ch12-patterns-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch12-patterns-2">
+      <div id="iq-ch12-patterns"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch12-patterns-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Filtering is about deciding per-iteration: skip, process, or stop</h3>
+        <p>Every loop that uses <code>break</code> or <code>continue</code> implements a decision at each iteration. These are not complicated concepts — they are simple two-branch decisions: "should I skip this?" (continue) and "should I stop now?" (break). The power comes from combining them with conditions.</p>
+        <p>Think in terms of a filter funnel: each element enters the loop, gets checked against guard conditions (<code>continue</code> to skip), does the main work, then optionally stops (<code>break</code>). This pattern appears in every non-trivial C program that processes data.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">The Filter Funnel Pattern</span></div>
+        <div class="syntax-card__code">for (int i = 0; i &lt; n; i++) {
+    /* Guard 1: skip invalid entries */
+    if (data[i] == INVALID) continue;
+
+    /* Guard 2: skip out-of-range */
+    if (data[i] &lt; MIN || data[i] &gt; MAX) continue;
+
+    /* Main work — only runs for valid, in-range items */
+    process(data[i]);
+
+    /* Stopping condition */
+    if (result_found) break;
+}
+
+/* Every guard condition uses the same structure:
+   - if (reject condition) continue;
+   - if (stop condition)   break;
+   - main logic at the bottom (least indented = clearest) */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Guard conditions first — main logic at the bottom</div>
+          <div class="callout__body">Putting <code>continue</code> guards at the top of a loop body reduces nesting and makes the main logic easy to find. The alternative — wrapping the main logic in a large <code>if</code> block — leads to deeply nested, hard-to-read code. Guards first, work last.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch12-patterns-3-continue">Got it — continue →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch12-patterns-4">
+      <div id="compiler-ch12-patterns-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch12-patterns-5">
+      <div id="compiler-ch12-patterns-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch12-patterns-6">
+      <div id="compiler-ch12-patterns-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch12-patterns-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Number analysis — classify and collect</div>
+        <p class="realworld-card__text">Statistical routines use <code>continue</code> to filter bad data and <code>break</code> to cap collection size — making them robust against both corrupted inputs and oversized datasets.</p>
+        <pre>int raw[12] = {14, -5, 8, 0, 23, 7, -1, 11, 0, 6, 17, 4};
+int primes[5], count = 0;
+
+for (int i = 0; i &lt; 12 &amp;&amp; count &lt; 5; i++) {
+    if (raw[i] &lt;= 1) continue;       /* skip non-positive */
+
+    /* Simple primality check */
+    int is_prime = 1;
+    for (int d = 2; d * d &lt;= raw[i]; d++) {
+        if (raw[i] % d == 0) { is_prime = 0; break; }
+    }
+
+    if (!is_prime) continue;          /* skip composites */
+    primes[count++] = raw[i];
+}
+
+for (int i = 0; i &lt; count; i++) printf("%d ", primes[i]);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch12-patterns">📋 Start Assessment — Filtering Patterns</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Coding practice · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch12-patterns" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch12-patterns">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch12-patterns">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch12-patterns">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch12-patterns">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch12-patterns"><div id="quiz-ch12-patterns-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch12-patterns"><div id="quiz-ch12-patterns-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch12-patterns"><div id="practice-ch12-patterns"></div></div>
+        <div class="assessment-section" id="tab-debug-ch12-patterns"><div id="compiler-ch12-patterns-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CHAPTER 12 MASTERY CHALLENGE
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch12-mastery" id="topic-ch12-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 12 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply every Chapter 12 concept in one complete program.</p>
+      <div id="compiler-ch12-mastery"></div>
+    </div>
+  </section>
+
+  <!-- CHAPTER COMPLETE (hidden until mastery passes) -->
+  <div id="ch12-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 12 Complete</div>
+      <p class="chapter-complete__message">
+        You can now control every loop with precision — exiting early with <code>break</code>, 
+        filtering iterations with <code>continue</code>, and escaping nested loops using the flag pattern. 
+        Chapter 13 builds on this with functions — the biggest structural tool in C programming.
+      </p>
+      <button class="btn-continue" id="ch12-next-btn">Start Chapter 13 — Functions →</button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,394 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch19-projects/ch19.html
+     Chapter 19: Projects — 3 complete programs
+     GPA Calculator · Inventory System · Number Guessing Game
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 19</div>
+    <h1 class="chapter-header__title">Projects</h1>
+    <p class="chapter-header__subtitle">
+      Everything you have learned — variables, control flow, functions, arrays, pointers, structs,
+      enums, and macros — comes together here. Three complete programs, built from scratch,
+      one step at a time. Each project uses real C patterns the way professional code does.
+      Read the brief, run the starter, then build toward the full solution.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">3 Projects</span>
+      <span class="chapter-badge">GPA Calculator · Inventory System · Guessing Game</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJECT 1 — GPA CALCULATOR
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch19-gpa" id="topic-ch19-gpa">
+    <div class="topic__header">
+      <span class="topic__number">Project 1</span>
+      <h2 class="topic__title">GPA Calculator</h2>
+      <span class="topic__status-badge" id="badge-ch19-gpa">In Progress</span>
+    </div>
+
+    <!-- Project Brief -->
+    <div class="project-brief">
+      <div class="project-brief__eyebrow">📋 Project Brief</div>
+      <p class="project-brief__desc">
+        Build a student GPA calculator. The program stores a fixed roster of students,
+        each with a name, ID, and set of subject grades. It computes each student's
+        GPA (average of their grades on a 5.0 scale), prints a formatted report,
+        and identifies the top performer.
+      </p>
+      <div class="project-brief__skills">
+        <span class="skill-tag">typedef struct</span>
+        <span class="skill-tag">arrays of structs</span>
+        <span class="skill-tag">functions</span>
+        <span class="skill-tag">loops</span>
+        <span class="skill-tag">float averaging</span>
+      </div>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch19-gpa-1">
+      <p class="step-label" data-step-num="1">Run this first. This is a minimal version — one student, hardcoded grades. Understand the core calculation before building the full system.</p>
+      <div id="compiler-ch19-gpa-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch19-gpa-2">
+      <div id="iq-ch19-gpa"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch19-gpa-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Full design: typedef struct Student with grades array, computeGPA function, formatted report</h3>
+        <p>The complete GPA calculator needs a <strong>Student struct</strong> with name (char array), id (int), grades array (float[5]), and computed gpa (float). A <strong>computeGPA</strong> function receives a pointer to a Student and fills in the gpa field by averaging the grades. A <strong>printStudent</strong> function outputs a formatted row. The main block loops over an array of students.</p>
+        <p>Separating computation from display is a key software design principle — the function that calculates GPA doesn't need to know how to print. The function that prints doesn't need to know how GPA is calculated.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Project Structure</span></div>
+        <div class="syntax-card__code">typedef struct {
+    char  name[30];
+    int   id;
+    float grades[5];
+    float gpa;
+} Student;
+
+void computeGPA(Student *s) {
+    float sum = 0;
+    int i;
+    for (i = 0; i &lt; 5; i++) sum += s-&gt;grades[i];
+    s-&gt;gpa = sum / 5.0f;
+}
+
+void printStudent(Student s) {
+    printf("%-12s ID:%d  GPA:%.2f\n", s.name, s.id, s.gpa);
+}</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Pass a pointer to modify; pass a value to read-only display</div>
+          <div class="callout__body"><code>computeGPA(Student *s)</code> takes a pointer because it writes the gpa field. <code>printStudent(Student s)</code> takes a copy because it only reads — and for a small struct, the copy cost is fine. This pattern keeps the intent of each function clear.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch19-gpa-3-continue">Got it — start building →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch19-gpa-4">
+      <p class="step-label" data-step-num="4">Build the data structure. Define the Student typedef struct with all 4 fields. Declare an array of 3 students with hardcoded data. Loop and print each student's name and id to confirm the struct works.</p>
+      <div id="compiler-ch19-gpa-struct"></div>
+    </div>
+
+    <div class="step step--visible" data-step="5" id="step-ch19-gpa-5">
+      <p class="step-label" data-step-num="5">Add the <code>computeGPA</code> function. Call it for each student, then print name + computed GPA in a loop.</p>
+      <div id="compiler-ch19-gpa-compute"></div>
+    </div>
+
+    <div class="step step--visible" data-step="6" id="step-ch19-gpa-6">
+      <p class="step-label" data-step-num="6">Complete the project. Add a loop to find the top GPA. Print the full formatted report with all students, then announce the top performer.</p>
+      <div id="compiler-ch19-gpa-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch19-gpa-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 This is real software</div>
+        <p class="realworld-card__text">School management systems, grade portals, and LMS platforms all implement this exact pattern at their core — a roster of records, per-record computation, sorted reporting. Your GPA calculator is a miniature version of software used by millions of students.</p>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch19-gpa">📋 Start Assessment — GPA Calculator</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Extend the project · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch19-gpa" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch19-gpa">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch19-gpa">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch19-gpa">Extend Project <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch19-gpa">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch19-gpa"><div id="quiz-ch19-gpa-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch19-gpa"><div id="quiz-ch19-gpa-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch19-gpa"><div id="practice-ch19-gpa"></div></div>
+        <div class="assessment-section" id="tab-debug-ch19-gpa"><div id="compiler-ch19-gpa-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJECT 2 — INVENTORY SYSTEM
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch19-inventory" id="topic-ch19-inventory">
+    <div class="topic__header">
+      <span class="topic__number">Project 2</span>
+      <h2 class="topic__title">Inventory System</h2>
+      <span class="topic__status-badge" id="badge-ch19-inventory">In Progress</span>
+    </div>
+
+    <!-- Project Brief -->
+    <div class="project-brief">
+      <div class="project-brief__eyebrow">📋 Project Brief</div>
+      <p class="project-brief__desc">
+        Build a product inventory manager. The system stores a fixed catalogue of products,
+        each with an id, name, quantity, and price. It prints the full inventory table,
+        calculates each product's total stock value (qty × price), computes the total
+        inventory value, and finds the most expensive item.
+      </p>
+      <div class="project-brief__skills">
+        <span class="skill-tag">typedef struct</span>
+        <span class="skill-tag">arrays of structs</span>
+        <span class="skill-tag">#define constants</span>
+        <span class="skill-tag">formatted printf</span>
+        <span class="skill-tag">search loop</span>
+      </div>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch19-inventory-1">
+      <p class="step-label" data-step-num="1">Run this. A single product struct — see how data is stored and displayed before expanding to a full inventory.</p>
+      <div id="compiler-ch19-inventory-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch19-inventory-2">
+      <div id="iq-ch19-inventory"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch19-inventory-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Full design: Product struct, catalogue array, formatted table, totals, search</h3>
+        <p>The complete inventory needs a <strong>Product typedef struct</strong> with id (int), name (char[30]), qty (int), and price (float). A <code>#define MAX_PRODUCTS</code> constant controls the catalogue size. Functions handle display and search separately. The total value is computed as a running sum through the loop; the most expensive item is found by tracking the max price index.</p>
+        <p>Formatted column output uses <code>printf</code> width specifiers: <code>%-20s</code> left-aligns a string in a 20-character column, <code>%8.2f</code> right-aligns a float with 2 decimal places. This produces the clean tabular output typical of inventory reports.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Project Structure</span></div>
+        <div class="syntax-card__code">#define MAX_PRODUCTS 5
+
+typedef struct {
+    int   id;
+    char  name[30];
+    int   qty;
+    float price;
+} Product;
+
+void printHeader() {
+    printf("%-4s %-20s %6s %10s %12s\n",
+           "ID", "Name", "Qty", "Price", "Total Value");
+    printf("%-4s %-20s %6s %10s %12s\n",
+           "----","--------------------","------","----------","------------");
+}
+
+void printProduct(Product p) {
+    printf("%-4d %-20s %6d %10.2f %12.2f\n",
+           p.id, p.name, p.qty, p.price, p.qty * p.price);
+}</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">printf width specifiers produce aligned tabular output</div>
+          <div class="callout__body"><code>%-20s</code> = left-align in 20 chars. <code>%6d</code> = right-align int in 6 chars. <code>%10.2f</code> = right-align float in 10 chars with 2 decimal places. The negative sign means left-align; positive (default) means right-align. Consistent widths across every row produce a clean table.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch19-inventory-3-continue">Got it — start building →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch19-inventory-4">
+      <p class="step-label" data-step-num="4">Build the data layer. Define the Product struct and create a catalogue array of 4 products. Print each product's id and name in a loop to confirm the data is stored correctly.</p>
+      <div id="compiler-ch19-inventory-struct"></div>
+    </div>
+
+    <div class="step step--visible" data-step="5" id="step-ch19-inventory-5">
+      <p class="step-label" data-step-num="5">Add the formatted table. Print a header row, then loop and print each product with qty × price total value per row.</p>
+      <div id="compiler-ch19-inventory-table"></div>
+    </div>
+
+    <div class="step step--visible" data-step="6" id="step-ch19-inventory-6">
+      <p class="step-label" data-step-num="6">Complete the system. Add a second pass: sum all total values into a grand total. Find the most expensive item (highest unit price). Print both results below the table.</p>
+      <div id="compiler-ch19-inventory-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch19-inventory-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 This is real software</div>
+        <p class="realworld-card__text">POS systems, warehouse management software, and e-commerce backends all have this same core: a product record, a catalogue, and functions to query and report on it. The difference between your version and a production system is persistence (database) and scale (millions of records) — the logic is identical.</p>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch19-inventory">📋 Start Assessment — Inventory System</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Extend the project · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch19-inventory" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch19-inventory">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch19-inventory">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch19-inventory">Extend Project <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch19-inventory">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch19-inventory"><div id="quiz-ch19-inventory-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch19-inventory"><div id="quiz-ch19-inventory-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch19-inventory"><div id="practice-ch19-inventory"></div></div>
+        <div class="assessment-section" id="tab-debug-ch19-inventory"><div id="compiler-ch19-inventory-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROJECT 3 — NUMBER GUESSING GAME
+       ═══════════════════════════════════════════════════════ -->
+  <section class="topic" data-topic="ch19-game" id="topic-ch19-game">
+    <div class="topic__header">
+      <span class="topic__number">Project 3</span>
+      <h2 class="topic__title">Number Guessing Game</h2>
+      <span class="topic__status-badge" id="badge-ch19-game">In Progress</span>
+    </div>
+
+    <!-- Project Brief -->
+    <div class="project-brief">
+      <div class="project-brief__eyebrow">📋 Project Brief</div>
+      <p class="project-brief__desc">
+        Build a number-guessing game simulator. Since the browser has no keyboard input,
+        the guesses come from a pre-set array — letting you control the full sequence
+        and test every branch. The program: picks a secret number, processes each guess
+        in turn (printing "Too low", "Too high", or "Correct!"), counts attempts, and
+        reports the result.
+      </p>
+      <div class="project-brief__skills">
+        <span class="skill-tag">arrays as input</span>
+        <span class="skill-tag">if / else if</span>
+        <span class="skill-tag">for loop</span>
+        <span class="skill-tag">break</span>
+        <span class="skill-tag">counters &amp; flags</span>
+        <span class="skill-tag">enum GameState</span>
+      </div>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch19-game-1">
+      <p class="step-label" data-step-num="1">Run this minimal version. A secret number and one guess — see the core comparison logic before adding the full game loop.</p>
+      <div id="compiler-ch19-game-explore"></div>
+    </div>
+
+    <div class="step step--visible" data-step="2" id="step-ch19-game-2">
+      <div id="iq-ch19-game"></div>
+    </div>
+
+    <div class="step step--visible" data-step="3" id="step-ch19-game-3">
+      <div class="explanation-card">
+        <h3 class="explanation-card__title">Full design: guess array as simulated input, loop with break, attempt counter, win/lose tracking</h3>
+        <p>The full game replaces keyboard input with a <code>guesses[]</code> array. A <code>for</code> loop processes each guess: print "Too low", "Too high", or "Correct!" and break. An <code>int attempts</code> counter tracks how many guesses were processed. A <code>won</code> flag (set to 1 on correct) determines the final message after the loop.</p>
+        <p>An <code>enum GameState { PLAYING, WON, LOST }</code> makes the state tracking readable. The secret number can be any constant — change it to test all branches of your logic without modifying the guess array.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Project Structure</span></div>
+        <div class="syntax-card__code">int secret   = 42;
+int guesses[] = {20, 60, 35, 45, 42};
+int n = sizeof(guesses) / sizeof(guesses[0]);
+int attempts = 0;
+int won = 0;
+int i;
+
+for (i = 0; i &lt; n; i++) {
+    attempts++;
+    printf("Guess %d: %d — ", attempts, guesses[i]);
+    if (guesses[i] &lt; secret)       printf("Too low\n");
+    else if (guesses[i] &gt; secret)  printf("Too high\n");
+    else {
+        printf("Correct!\n");
+        won = 1;
+        break;
+    }
+}
+
+if (won) printf("Won in %d attempts!\n", attempts);
+else     printf("No more guesses. Secret was %d\n", secret);</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Test every branch by changing the guesses array</div>
+          <div class="callout__body">To test the "no more guesses" branch: make all guesses wrong. To test "correct on first try": put the secret number first. Because the input is a simple array, you have complete control over every scenario — this is the key advantage of the simulated input design for browser-based programs.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch19-game-3-continue">Got it — start building →</button>
+    </div>
+
+    <div class="step step--visible" data-step="4" id="step-ch19-game-4">
+      <p class="step-label" data-step-num="4">Build the game loop. Set secret=42, create the guesses array {20, 60, 35, 45, 42}. Loop, print each guess and its result (Too low / Too high / Correct!). Break on correct. Count attempts.</p>
+      <div id="compiler-ch19-game-loop"></div>
+    </div>
+
+    <div class="step step--visible" data-step="5" id="step-ch19-game-5">
+      <p class="step-label" data-step-num="5">Add the win/lose outcome. After the loop, print the result: "Won in N attempts!" if the correct guess was found, or "Out of guesses! Secret was N." if the loop exhausted all guesses.</p>
+      <div id="compiler-ch19-game-outcome"></div>
+    </div>
+
+    <div class="step step--visible" data-step="6" id="step-ch19-game-6">
+      <p class="step-label" data-step-num="6">Complete the game. Add an enum GameState for PLAYING / WON / LOST. Print a difficulty rating based on attempts: 1-2 guesses = "Excellent", 3-4 = "Good", 5+ = "Keep practicing".</p>
+      <div id="compiler-ch19-game-build"></div>
+    </div>
+
+    <div class="step step--visible" data-step="7" id="step-ch19-game-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 This is real software</div>
+        <p class="realworld-card__text">The guessing game logic — a target, a comparison, a feedback message, an attempt counter — is exactly the pattern behind binary search, spell checkers, and feedback systems. Binary search is just an optimal guessing strategy: always guess the middle. Your game engine is a direct ancestor of those algorithms.</p>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch19-game">📋 Start Assessment — Guessing Game</button>
+      <p class="assessment-trigger-note">Predict outputs · Multiple choice · Extend the project · Debug</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch19-game" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch19-game">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch19-game">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch19-game">Extend Project <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch19-game">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch19-game"><div id="quiz-ch19-game-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch19-game"><div id="quiz-ch19-game-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch19-game"><div id="practice-ch19-game"></div></div>
+        <div class="assessment-section" id="tab-debug-ch19-game"><div id="compiler-ch19-game-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER COMPLETE -->
+  <div id="ch19-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🏆</div>
+      <div class="chapter-complete__title">Chapter 19 Complete — All Projects Built</div>
+      <p class="chapter-complete__message">
+        You built three complete programs from scratch: a GPA calculator with structs and
+        averaging functions, a formatted inventory system with search and totals, and a
+        game engine with state tracking and result reporting. These are not exercises —
+        they are programs. Everything you have learned is working together.
+        One chapter remains: the finish line.
+      </p>
+      <button class="btn-continue" id="ch19-next-btn">Finish Line — Chapter 20 →</button>
+    </div>
+  </div>
+
+</div>

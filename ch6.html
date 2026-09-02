@@ -1,0 +1,413 @@
+<!-- =========================================================
+     C LEARNING PLATFORM — chapters/ch6-type-conversion/ch6.html
+     Chapter 6: Type Conversion
+     5 topics · 7-step structure · Assessment opens as popup modal
+     ========================================================= -->
+
+<div class="content-wrapper">
+
+  <header class="chapter-header">
+    <div class="chapter-header__eyebrow">Chapter 6</div>
+    <h1 class="chapter-header__title">Type Conversion</h1>
+    <p class="chapter-header__subtitle">
+      C sometimes converts types for you automatically. Other times, you must convert them yourself with a cast.
+      Knowing which is happening — and controlling it — fixes the most common calculation bugs in C.
+    </p>
+    <div class="chapter-header__meta">
+      <span class="chapter-badge">5 Topics</span>
+      <span class="chapter-badge">implicit · (type) cast · truncation</span>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ TOPIC 1 — IMPLICIT CONVERSION ═══════════════════ -->
+  <section class="topic" data-topic="ch6-implicit" id="topic-ch6-implicit">
+    <div class="topic__header">
+      <span class="topic__number">Topic 1</span>
+      <h2 class="topic__title">Implicit Type Conversion — What C Does Automatically</h2>
+      <span class="topic__status-badge" id="badge-ch6-implicit">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch6-implicit-1">
+      <p class="step-label" data-step-num="1">Run this. Nobody told C to convert anything — but it did.</p>
+      <div id="compiler-ch6-implicit-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch6-implicit-2">
+      <div id="iq-ch6-implicit"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch6-implicit-3">
+      <div class="explanation-card">
+        <p><strong>Implicit conversion</strong> happens automatically when C combines two different types in one expression. The compiler converts the less precise type to the more precise one before computing — you do not write anything extra.</p>
+        <p>The conversion ladder, from least to most precise: <code>char</code> → <code>int</code> → <code>float</code> → <code>double</code>. Whenever two different types meet, the lower one is *promoted* up before the operation runs.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Implicit Conversion — No Syntax Needed</span></div>
+        <div class="syntax-card__code">int   i = 5;
+float f = 2.5;
+
+float r = i + f;   /* i silently becomes 5.0, then 5.0+2.5 = 7.5 */
+double d = i + 1.0; /* i becomes 5.0, both become double: 6.0 */</div>
+      </div>
+      <button class="btn-continue" id="step-ch6-implicit-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch6-implicit-4">
+      <div id="compiler-ch6-implicit-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch6-implicit-5">
+      <div id="compiler-ch6-implicit-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch6-implicit-6">
+      <div id="compiler-ch6-implicit-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch6-implicit-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Implicit conversion in sensor data</div>
+        <p class="realworld-card__text">Mixing an int reading with a float calibration factor relies on implicit conversion constantly in embedded and sensor code.</p>
+        <pre>int raw_reading = 512;
+float calibration = 0.0048;
+float voltage = raw_reading * calibration; /* int promoted to float */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch6-implicit">📋 Start Assessment — Implicit Conversion</button>
+      <p class="assessment-trigger-note">Opens in a popup. 3 prediction · 5 multiple choice · 1 debug challenge.</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch6-implicit" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch6-implicit">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch6-implicit">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch6-implicit">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch6-implicit"><div id="quiz-ch6-implicit-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch6-implicit"><div id="quiz-ch6-implicit-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch6-implicit"><div id="compiler-ch6-implicit-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TOPIC 2 — EXPLICIT CASTING ═══════════════════ -->
+  <section class="topic" data-topic="ch6-explicit" id="topic-ch6-explicit">
+    <div class="topic__header">
+      <span class="topic__number">Topic 2</span>
+      <h2 class="topic__title">Explicit Type Casting — <code>(type)</code> Syntax</h2>
+      <span class="topic__status-badge" id="badge-ch6-explicit">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch6-explicit-1">
+      <p class="step-label" data-step-num="1">Run this. The cast forces a conversion the compiler would not do on its own.</p>
+      <div id="compiler-ch6-explicit-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch6-explicit-2">
+      <div id="iq-ch6-explicit"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch6-explicit-3">
+      <div class="explanation-card">
+        <p>An <strong>explicit cast</strong> is you telling C exactly what type to convert a value to, right now. The syntax is the target type in parentheses placed directly before the value: <code>(float)x</code>, <code>(int)y</code>.</p>
+        <p>Casts happen instantly, at that exact spot in the expression — useful for forcing float division, or deliberately truncating a value when you know that is what you want.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Cast Syntax</span></div>
+        <div class="syntax-card__code">(int)3.9      /* → 3 (drops decimal) */
+(float)7      /* → 7.0 */
+(double)x     /* widens x to double precision */
+
+int a = 10, b = 3;
+float r = (float)a / b;   /* forces float division: 3.333... */</div>
+      </div>
+      <div class="callout callout--tip">
+        <span class="callout__icon">💡</span>
+        <div class="callout__content">
+          <div class="callout__title">Remember</div>
+          <div class="callout__body">The cast applies only to the value immediately after it. <code>(float)a / b</code> casts only <code>a</code> — but that's enough, because <code>b</code> then gets promoted automatically.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch6-explicit-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch6-explicit-4">
+      <div id="compiler-ch6-explicit-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch6-explicit-5">
+      <div id="compiler-ch6-explicit-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch6-explicit-6">
+      <div id="compiler-ch6-explicit-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch6-explicit-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Casting in financial calculations</div>
+        <p class="realworld-card__text">Percentage calculations always need an explicit cast to avoid the integer-division trap.</p>
+        <pre>int budget_used = 340, budget_total = 500;
+float pct = (float)budget_used / budget_total * 100;
+printf("%.1f%% used\n", pct);</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch6-explicit">📋 Start Assessment — Explicit Casting</button>
+      <p class="assessment-trigger-note">Opens in a popup. 3 prediction · 5 multiple choice · 5 coding tasks · 1 debug challenge.</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch6-explicit" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch6-explicit">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch6-explicit">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch6-explicit">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch6-explicit">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch6-explicit"><div id="quiz-ch6-explicit-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch6-explicit"><div id="quiz-ch6-explicit-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch6-explicit"><div id="practice-ch6-explicit"></div></div>
+        <div class="assessment-section" id="tab-debug-ch6-explicit"><div id="compiler-ch6-explicit-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TOPIC 3 — INT TO FLOAT CASTING ═══════════════════ -->
+  <section class="topic" data-topic="ch6-int2float" id="topic-ch6-int2float">
+    <div class="topic__header">
+      <span class="topic__number">Topic 3</span>
+      <h2 class="topic__title">Integer to Float Casting — Fixing Division Problems</h2>
+      <span class="topic__status-badge" id="badge-ch6-int2float">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch6-int2float-1">
+      <p class="step-label" data-step-num="1">Run this. Compare the three average calculations.</p>
+      <div id="compiler-ch6-int2float-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch6-int2float-2">
+      <div id="iq-ch6-int2float"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch6-int2float-3">
+      <div class="explanation-card">
+        <p>The classic bug: <code>int total = 17; int count = 3; float avg = total/count;</code> gives <code>5.0</code>, not <code>5.666...</code>. The division happens as integer math <em>first</em>, before the result is ever stored as float.</p>
+        <p>The fix is always the same: cast one operand to float <em>before</em> the division operator runs. <code>(float)total / count</code> — not after.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">The Standard Fix Pattern</span></div>
+        <div class="syntax-card__code">int total = 17, count = 3;
+
+float avg_wrong = total / count;          /* 5.0 — integer division */
+float avg_right = (float)total / count;   /* 5.67 — correct! */</div>
+      </div>
+      <button class="btn-continue" id="step-ch6-int2float-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch6-int2float-4">
+      <div id="compiler-ch6-int2float-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch6-int2float-5">
+      <div id="compiler-ch6-int2float-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch6-int2float-6">
+      <div id="compiler-ch6-int2float-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch6-int2float-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Grade averages depend on this fix</div>
+        <p class="realworld-card__text">Every grading system, statistics tool, and analytics dashboard relies on this exact cast pattern to avoid silently wrong averages.</p>
+        <pre>int scores_sum = 268, num_tests = 3;
+float average = (float)scores_sum / num_tests;
+printf("Average: %.2f\n", average); /* 89.33 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch6-int2float">📋 Start Assessment — Int to Float Casting</button>
+      <p class="assessment-trigger-note">Opens in a popup. 3 prediction · 5 multiple choice · 1 debug challenge.</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch6-int2float" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch6-int2float">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch6-int2float">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch6-int2float">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch6-int2float"><div id="quiz-ch6-int2float-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch6-int2float"><div id="quiz-ch6-int2float-mcq"></div></div>
+        <div class="assessment-section" id="tab-debug-ch6-int2float"><div id="compiler-ch6-int2float-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TOPIC 4 — FLOAT TO INT CASTING ═══════════════════ -->
+  <section class="topic" data-topic="ch6-float2int" id="topic-ch6-float2int">
+    <div class="topic__header">
+      <span class="topic__number">Topic 4</span>
+      <h2 class="topic__title">Float to Integer Casting — Truncation Behavior</h2>
+      <span class="topic__status-badge" id="badge-ch6-float2int">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch6-float2int-1">
+      <p class="step-label" data-step-num="1">Run this. Watch what happens to 9.99 and -9.99 when cast to int.</p>
+      <div id="compiler-ch6-float2int-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch6-float2int-2">
+      <div id="iq-ch6-float2int"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch6-float2int-3">
+      <div class="explanation-card">
+        <p>Casting float to int does not round — it <strong>truncates</strong>, chopping off everything after the decimal point. <code>(int)9.99</code> gives <code>9</code>, not <code>10</code>.</p>
+        <p>Truncation always moves toward zero: <code>(int)-9.99</code> gives <code>-9</code> (not -10). This is different from "round down" — it rounds <em>toward zero</em> regardless of sign.</p>
+        <p>To round to the nearest integer instead of truncating, add <code>0.5</code> before casting a positive number: <code>(int)(x + 0.5)</code>.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Truncation vs Rounding</span></div>
+        <div class="syntax-card__code">(int)9.99    →  9     /* truncates, not rounds */
+(int)9.01    →  9
+(int)-9.99   → -9     /* toward zero, not down */
+
+/* Manual rounding for positive numbers */
+float x = 9.6;
+int rounded = (int)(x + 0.5);   /* → 10 */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Common Mistake — Assuming Casts Round</div>
+          <div class="callout__body">Beginners often expect <code>(int)4.9</code> to give 5. It gives 4. C never rounds during a cast — it always truncates.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch6-float2int-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch6-float2int-4">
+      <div id="compiler-ch6-float2int-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch6-float2int-5">
+      <div id="compiler-ch6-float2int-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch6-float2int-6">
+      <div id="compiler-ch6-float2int-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch6-float2int-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Truncation in pagination</div>
+        <p class="realworld-card__text">Calculating how many full pages are needed for a set of items relies on intentional truncation, then adding 1 if there's a remainder.</p>
+        <pre>int items = 47, per_page = 10;
+int full_pages = items / per_page;       /* truncates: 4 */
+int extra = (items % per_page != 0) ? 1 : 0;
+int total_pages = full_pages + extra;    /* 5 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch6-float2int">📋 Start Assessment — Float to Int Casting</button>
+      <p class="assessment-trigger-note">Opens in a popup. 3 prediction · 5 multiple choice · 5 coding tasks · 1 debug challenge.</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch6-float2int" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="predict" data-topic="ch6-float2int">Predict <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="mcq" data-topic="ch6-float2int">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch6-float2int">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch6-float2int">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-predict-ch6-float2int"><div id="quiz-ch6-float2int-predict"></div></div>
+        <div class="assessment-section" id="tab-mcq-ch6-float2int"><div id="quiz-ch6-float2int-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch6-float2int"><div id="practice-ch6-float2int"></div></div>
+        <div class="assessment-section" id="tab-debug-ch6-float2int"><div id="compiler-ch6-float2int-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TOPIC 5 — COMMON CASTING MISTAKES ═══════════════════ -->
+  <section class="topic" data-topic="ch6-mistakes" id="topic-ch6-mistakes">
+    <div class="topic__header">
+      <span class="topic__number">Topic 5</span>
+      <h2 class="topic__title">Common Casting Mistakes — and How to Avoid Them</h2>
+      <span class="topic__status-badge" id="badge-ch6-mistakes">✅ Complete</span>
+    </div>
+
+    <div class="step step--visible" data-step="1" id="step-ch6-mistakes-1">
+      <p class="step-label" data-step-num="1">Run this. It looks like it should give a decimal — but it does not.</p>
+      <div id="compiler-ch6-mistakes-explore"></div>
+    </div>
+    <div class="step step--visible" data-step="2" id="step-ch6-mistakes-2">
+      <div id="iq-ch6-mistakes"></div>
+    </div>
+    <div class="step step--visible" data-step="3" id="step-ch6-mistakes-3">
+      <div class="explanation-card">
+        <p>The most common casting mistake: casting the <em>result</em> instead of an <em>operand</em>. <code>(float)(a/b)</code> casts <em>after</em> the integer division already happened — too late. <code>(float)a/b</code> casts <em>before</em> — correct.</p>
+        <p>Second mistake: forgetting that storing a float into an int variable is itself a truncating cast, even without writing <code>(int)</code> explicitly. <code>int x = 7.9;</code> silently truncates to 7.</p>
+      </div>
+      <div class="syntax-card">
+        <div class="syntax-card__header"><span class="syntax-card__label">Wrong vs Right Placement</span></div>
+        <div class="syntax-card__code">int a = 7, b = 2;
+
+float wrong = (float)(a / b);  /* a/b=3 first (int), THEN cast → 3.0 */
+float right = (float)a / b;    /* a cast to float FIRST → 3.5 */
+
+/* Implicit truncation — no (int) written but it still truncates */
+int x = 7.9;   /* x = 7, silently */</div>
+      </div>
+      <div class="callout callout--mistake">
+        <span class="callout__icon">⚠</span>
+        <div class="callout__content">
+          <div class="callout__title">Common Mistake — Casting Too Late</div>
+          <div class="callout__body">Always ask: "has the integer math already happened by the time I cast?" If yes, the cast is too late to fix anything.</div>
+        </div>
+      </div>
+      <button class="btn-continue" id="step-ch6-mistakes-3-continue">Got it — continue →</button>
+    </div>
+    <div class="step step--visible" data-step="4" id="step-ch6-mistakes-4">
+      <div id="compiler-ch6-mistakes-modify"></div>
+    </div>
+    <div class="step step--visible" data-step="5" id="step-ch6-mistakes-5">
+      <div id="compiler-ch6-mistakes-fill"></div>
+    </div>
+    <div class="step step--visible" data-step="6" id="step-ch6-mistakes-6">
+      <div id="compiler-ch6-mistakes-build"></div>
+    </div>
+    <div class="step step--visible" data-step="7" id="step-ch6-mistakes-7">
+      <div class="realworld-card">
+        <div class="realworld-card__eyebrow">🌍 Cast placement bugs in production</div>
+        <p class="realworld-card__text">Misplaced casts are a classic code-review finding — they compile fine and look correct, but silently produce wrong numbers.</p>
+        <pre>/* Found in a real bug report: discount showed as 0% */
+int saved = 0, original = 50;       /* item is free: saved=0 */
+float pct = (float)(saved/original); /* 0/50=0 first, then cast: 0.0 */
+/* fix: */
+float pct_fixed = (float)saved/original; /* still 0.0 here, but pattern matters when saved>0 */</pre>
+      </div>
+    </div>
+
+    <div class="assessment-trigger-wrap">
+      <button class="btn-assessment" data-topic="ch6-mistakes">📋 Start Assessment — Casting Mistakes</button>
+      <p class="assessment-trigger-note">Opens in a popup. 5 multiple choice · 5 coding tasks · 2 identification · 1 debug challenge.</p>
+    </div>
+    <div class="assessment-modal-content" id="modal-content-ch6-mistakes" style="display:none">
+      <div class="assessment-tabs">
+        <button class="assessment-tab assessment-tab--active" data-tab="mcq" data-topic="ch6-mistakes">Multiple Choice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="practice" data-topic="ch6-mistakes">Coding Practice <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="identify" data-topic="ch6-mistakes">Identification <span class="assessment-tab__check">✓</span></button>
+        <button class="assessment-tab" data-tab="debug" data-topic="ch6-mistakes">Debug <span class="assessment-tab__check">✓</span></button>
+      </div>
+      <div class="assessment-content">
+        <div class="assessment-section assessment-section--active" id="tab-mcq-ch6-mistakes"><div id="quiz-ch6-mistakes-mcq"></div></div>
+        <div class="assessment-section" id="tab-practice-ch6-mistakes"><div id="practice-ch6-mistakes"></div></div>
+        <div class="assessment-section" id="tab-identify-ch6-mistakes"><div id="quiz-ch6-mistakes-identify"></div></div>
+        <div class="assessment-section" id="tab-debug-ch6-mistakes"><div id="compiler-ch6-mistakes-debug"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CHAPTER 6 MASTERY CHALLENGE ═══════════════════ -->
+  <section class="topic" data-topic="ch6-mastery" id="topic-ch6-mastery">
+    <div class="topic__header">
+      <span class="topic__number">🏆</span>
+      <h2 class="topic__title">Chapter 6 Mastery Challenge</h2>
+    </div>
+    <div class="step step--visible" data-step="1">
+      <p class="step-label" data-step-num="1">Apply implicit conversion, explicit casts, and truncation together.</p>
+      <div id="compiler-ch6-mastery"></div>
+    </div>
+  </section>
+
+  <div id="ch6-chapter-complete" style="display:none">
+    <div class="chapter-complete">
+      <div class="chapter-complete__icon">🎉</div>
+      <div class="chapter-complete__title">Chapter 6 Complete</div>
+      <p class="chapter-complete__message">You now control exactly when and how C converts between types — one of the most common sources of subtle bugs is now something you can spot and fix. Chapter 7 covers booleans and comparison operators: how C represents true and false.</p>
+      <button class="btn-continue" id="ch6-next-btn">Start Chapter 7 — Booleans &amp; Comparisons →</button>
+    </div>
+  </div>
+
+</div>
